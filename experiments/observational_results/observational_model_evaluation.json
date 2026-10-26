@@ -1,0 +1,34 @@
+{
+  "Naive_Historical_Mean": {
+    "model_name": "Naive Historical Mean Baseline",
+    "mae": 0.6222,
+    "rmse": 0.9022,
+    "r2": -0.1727
+  },
+  "Linear_Regression_Ridge": {
+    "model_name": "Linear Regression (Ridge)",
+    "mae": 0.3502,
+    "rmse": 0.4771,
+    "r2": 0.672
+  },
+  "Random_Forest": {
+    "model_name": "Random Forest Regressor",
+    "mae": 0.3932,
+    "rmse": 0.5559,
+    "r2": 0.5548
+  },
+  "XGBoost": {
+    "model_name": "XGBoost Regressor (Observational)",
+    "mae": 0.3699,
+    "rmse": 0.5332,
+    "r2": 0.5904
+  },
+  "ClimateRice_FusionNet": {
+    "model_name": "ClimateRice-FusionNet (Observational)",
+    "mae": 0.3366,
+    "rmse": 0.4711,
+    "r2": 0.6803,
+    "mc_dropout_empirical_coverage_pct": 44.44,
+    "n_covered": "16/36"
+  }
+}

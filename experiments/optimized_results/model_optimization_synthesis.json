@@ -1,0 +1,281 @@
+{
+  "execution_timestamp": "2026-10-11 22:07:34",
+  "hardware_device": "cuda",
+  "benchmark_summary": {
+    "dataset": "Calibrated Semi-Synthetic Benchmark",
+    "sample_counts": {
+      "total": 504,
+      "train": 360,
+      "val": 48,
+      "test": 96
+    },
+    "baseline_xgboost_metrics": {
+      "mae": 0.2185,
+      "rmse": 0.2944,
+      "nrmse_pct": 6.1,
+      "r2": 0.9438,
+      "mape_pct": 4.96,
+      "max_error": 0.8926,
+      "n_samples": 96
+    },
+    "optimized_xgboost": {
+      "config": {
+        "max_depth": 3,
+        "learning_rate": 0.05,
+        "n_estimators": 300,
+        "subsample": 0.75,
+        "colsample_bytree": 0.75,
+        "reg_alpha": 0.2,
+        "reg_lambda": 5.0
+      },
+      "val_rmse": 0.2646,
+      "test_summary": {
+        "mae_mean": 0.2136,
+        "mae_std": 0.0038,
+        "rmse_mean": 0.2766,
+        "rmse_std": 0.0053,
+        "r2_mean": 0.9504,
+        "r2_std": 0.0019,
+        "runs": [
+          {
+            "mae": 0.218,
+            "rmse": 0.2829,
+            "nrmse_pct": 5.86,
+            "r2": 0.9482,
+            "mape_pct": 4.99,
+            "max_error": 0.6051,
+            "n_samples": 96
+          },
+          {
+            "mae": 0.2087,
+            "rmse": 0.2699,
+            "nrmse_pct": 5.59,
+            "r2": 0.9528,
+            "mape_pct": 4.77,
+            "max_error": 0.637,
+            "n_samples": 96
+          },
+          {
+            "mae": 0.2142,
+            "rmse": 0.2769,
+            "nrmse_pct": 5.74,
+            "r2": 0.9503,
+            "mape_pct": 4.89,
+            "max_error": 0.6701,
+            "n_samples": 96
+          }
+        ]
+      },
+      "latency_ms_per_sample": 0.2911
+    },
+    "baseline_fusionnet_metrics": {
+      "mae": 0.2774,
+      "rmse": 0.3217,
+      "r2": 0.9329
+    },
+    "optimized_fusionnet": {
+      "config": {
+        "name": "FN_Config_3_Batch16_Decay1e3",
+        "embed_dim": 24,
+        "dense_hidden": [
+          48,
+          24
+        ],
+        "dropout": 0.15,
+        "lr": 0.0015,
+        "batch_size": 16,
+        "weight_decay": 0.001,
+        "scheduler": "cosine"
+      },
+      "val_rmse": 0.2121,
+      "test_summary": {
+        "mae_mean": 0.2197,
+        "mae_std": 0.0136,
+        "rmse_mean": 0.275,
+        "rmse_std": 0.0159,
+        "r2_mean": 0.9508,
+        "r2_std": 0.0056,
+        "runs": [
+          {
+            "mae": 0.2377,
+            "rmse": 0.2938,
+            "nrmse_pct": 6.09,
+            "r2": 0.9441,
+            "mape_pct": 5.33,
+            "max_error": 0.679,
+            "n_samples": 96
+          },
+          {
+            "mae": 0.2047,
+            "rmse": 0.2549,
+            "nrmse_pct": 5.28,
+            "r2": 0.9579,
+            "mape_pct": 4.67,
+            "max_error": 0.5879,
+            "n_samples": 96
+          },
+          {
+            "mae": 0.2168,
+            "rmse": 0.2764,
+            "nrmse_pct": 5.73,
+            "r2": 0.9505,
+            "mape_pct": 4.79,
+            "max_error": 0.7071,
+            "n_samples": 96
+          }
+        ]
+      },
+      "latency": {
+        "deterministic_latency_ms_per_sample": 1.342,
+        "mc_dropout_40samples_latency_ms": 55.679
+      }
+    }
+  },
+  "observational_summary": {
+    "dataset": "Genuine Observational Agricultural Dataset",
+    "sample_counts": {
+      "total": 303,
+      "train": 228,
+      "val": 39,
+      "test": 36
+    },
+    "tuned_ridge_metrics": {
+      "mae": 0.3722,
+      "rmse": 0.4907,
+      "nrmse_pct": 18.4,
+      "r2": 0.6531,
+      "mape_pct": 13.46,
+      "max_error": 1.5912,
+      "n_samples": 36
+    },
+    "baseline_xgboost_metrics": {
+      "mae": 0.3699,
+      "rmse": 0.5332,
+      "nrmse_pct": 19.99,
+      "r2": 0.5904,
+      "mape_pct": 12.9,
+      "max_error": 1.9502,
+      "n_samples": 36
+    },
+    "optimized_xgboost": {
+      "config": {
+        "max_depth": 4,
+        "learning_rate": 0.05,
+        "n_estimators": 150,
+        "subsample": 0.85,
+        "colsample_bytree": 0.85,
+        "reg_alpha": 0.0,
+        "reg_lambda": 1.0
+      },
+      "val_rmse": 0.5069,
+      "test_summary": {
+        "mae_mean": 0.3762,
+        "mae_std": 0.0023,
+        "rmse_mean": 0.5643,
+        "rmse_std": 0.0121,
+        "r2_mean": 0.5411,
+        "r2_std": 0.0196,
+        "coverage_pct_mean": 0.0,
+        "runs": [
+          {
+            "mae": 0.373,
+            "rmse": 0.5481,
+            "nrmse_pct": 20.55,
+            "r2": 0.5672,
+            "mape_pct": 12.83,
+            "max_error": 1.9945,
+            "n_samples": 36
+          },
+          {
+            "mae": 0.3782,
+            "rmse": 0.5676,
+            "nrmse_pct": 21.28,
+            "r2": 0.5359,
+            "mape_pct": 12.87,
+            "max_error": 2.0516,
+            "n_samples": 36
+          },
+          {
+            "mae": 0.3775,
+            "rmse": 0.5771,
+            "nrmse_pct": 21.64,
+            "r2": 0.5201,
+            "mape_pct": 12.67,
+            "max_error": 2.1184,
+            "n_samples": 36
+          }
+        ]
+      },
+      "latency_ms_per_sample": 0.7963
+    },
+    "baseline_fusionnet_metrics": {
+      "mae": 0.3366,
+      "rmse": 0.4711,
+      "r2": 0.6803
+    },
+    "optimized_fusionnet": {
+      "config": {
+        "name": "ObsFN_Compact12_Cosine",
+        "embed_dim": 12,
+        "dense_hidden": [
+          24,
+          12
+        ],
+        "dropout": 0.2,
+        "lr": 0.003,
+        "batch_size": 16,
+        "weight_decay": 0.001,
+        "scheduler": "cosine"
+      },
+      "val_rmse": 0.5221,
+      "test_summary": {
+        "mae_mean": 0.4055,
+        "mae_std": 0.0059,
+        "rmse_mean": 0.5286,
+        "rmse_std": 0.0071,
+        "r2_mean": 0.5973,
+        "r2_std": 0.0108,
+        "coverage_pct_mean": 25.0,
+        "runs": [
+          {
+            "mae": 0.4021,
+            "rmse": 0.5186,
+            "nrmse_pct": 19.45,
+            "r2": 0.6125,
+            "mape_pct": 14.95,
+            "max_error": 1.685,
+            "n_samples": 36,
+            "coverage_pct": 25.0,
+            "n_covered": "9/36"
+          },
+          {
+            "mae": 0.4139,
+            "rmse": 0.5324,
+            "nrmse_pct": 19.96,
+            "r2": 0.5916,
+            "mape_pct": 15.45,
+            "max_error": 1.8204,
+            "n_samples": 36,
+            "coverage_pct": 25.0,
+            "n_covered": "9/36"
+          },
+          {
+            "mae": 0.4006,
+            "rmse": 0.5348,
+            "nrmse_pct": 20.05,
+            "r2": 0.5879,
+            "mape_pct": 14.64,
+            "max_error": 2.0004,
+            "n_samples": 36,
+            "coverage_pct": 25.0,
+            "n_covered": "9/36"
+          }
+        ]
+      },
+      "latency": {
+        "deterministic_latency_ms_per_sample": 1.14,
+        "mc_dropout_40samples_latency_ms": 50.214
+      }
+    }
+  }
+}

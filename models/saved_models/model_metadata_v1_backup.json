@@ -1,0 +1,25 @@
+{
+  "model_name": "ClimateRice-FusionNet",
+  "version": "1.0.0",
+  "training_date": "2026-10-11",
+  "num_parameters": 13866,
+  "modalities": [
+    "satellite",
+    "weather",
+    "soil",
+    "historical"
+  ],
+  "total_features": 26,
+  "test_mae": 0.2774,
+  "test_rmse": 0.3217,
+  "test_r2": 0.9329,
+  "test_nrmse_pct": 6.67,
+  "best_baseline": "XGBoost",
+  "best_baseline_mae": 0.2073,
+  "best_baseline_r2": 0.9516,
+  "best_numerical_model": "Full-feature XGBoost",
+  "best_numerical_mae": 0.2014,
+  "best_numerical_r2": 0.9548,
+  "benchmark_status": "Calibrated Semi-Synthetic Multimodal Agricultural Benchmark",
+  "multimodal_feature_integration_accepted": true
+}

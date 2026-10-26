@@ -1,0 +1,50 @@
+{
+  "vs_xgboost": {
+    "model_a": "ClimateRice-FusionNet",
+    "model_b": "XGBoost_Baseline",
+    "n_test_samples": 96,
+    "mean_absolute_error_a": 0.27744468125000005,
+    "mean_absolute_error_b": 0.20725085312500002,
+    "mean_error_reduction": -0.0702,
+    "std_error_difference": 0.215,
+    "paired_t_statistic": 3.1988,
+    "paired_t_pvalue": 0.0018759125480754318,
+    "wilcoxon_statistic": 1469.0,
+    "wilcoxon_pvalue": 0.0016949479672608582,
+    "alpha_threshold": 0.05,
+    "statistically_significant": false,
+    "conclusion": "Alternative outcome: XGBoost_Baseline shows a statistically significant error reduction over ClimateRice-FusionNet (p=1.8759e-03 < 0.05, mean difference: 0.0702 t/ha)."
+  },
+  "vs_single_modality": {
+    "model_a": "ClimateRice-FusionNet",
+    "model_b": "Single_Modality_Satellite",
+    "n_test_samples": 96,
+    "mean_absolute_error_a": 0.27744460105895996,
+    "mean_absolute_error_b": 0.5426545739173889,
+    "mean_error_reduction": 0.2652,
+    "std_error_difference": 0.4679,
+    "paired_t_statistic": -5.5533,
+    "paired_t_pvalue": 2.540865642351997e-07,
+    "wilcoxon_statistic": 1080.0,
+    "wilcoxon_pvalue": 5.101254907098843e-06,
+    "alpha_threshold": 0.05,
+    "statistically_significant": true,
+    "conclusion": "Hypothesis H1 ACCEPTED: ClimateRice-FusionNet shows a statistically significant error reduction over Single_Modality_Satellite (p=2.5409e-07 < 0.05, mean error reduction: 0.2652 t/ha)."
+  },
+  "vs_biophysical_only": {
+    "model_a": "ClimateRice-FusionNet",
+    "model_b": "Biophysical_Without_History",
+    "n_test_samples": 96,
+    "mean_absolute_error_a": 0.27744460105895996,
+    "mean_absolute_error_b": 0.355667382478714,
+    "mean_error_reduction": 0.0782,
+    "std_error_difference": 0.3172,
+    "paired_t_statistic": -2.416,
+    "paired_t_pvalue": 0.017602630672540934,
+    "wilcoxon_statistic": 1896.0,
+    "wilcoxon_pvalue": 0.11441354333719596,
+    "alpha_threshold": 0.05,
+    "statistically_significant": true,
+    "conclusion": "Hypothesis H1 ACCEPTED: ClimateRice-FusionNet shows a statistically significant error reduction over Biophysical_Without_History (p=1.7603e-02 < 0.05, mean error reduction: 0.0782 t/ha)."
+  }
+}

@@ -1,0 +1,35 @@
+experiments:
+  - id: "exp_a_weather"
+    name: "Experiment A: Weather Only"
+    modalities: ["weather"]
+    description: "Evaluates predictive capability using meteorological variables and climate anomaly indices alone."
+  
+  - id: "exp_b_satellite"
+    name: "Experiment B: Satellite Only"
+    modalities: ["satellite"]
+    description: "Evaluates predictive capability of optical vegetation indices (NDVI, EVI, NDWI) and vegetative vigor anomalies."
+  
+  - id: "exp_c_soil"
+    name: "Experiment C: Soil Only"
+    modalities: ["soil"]
+    description: "Evaluates baseline physical edaphic and nutrient fertility constraints (pH, SOC, Nitrogen, CEC)."
+  
+  - id: "exp_d_weather_soil"
+    name: "Experiment D: Weather + Soil"
+    modalities: ["weather", "soil"]
+    description: "Examines atmospheric water/temperature supply combined with edaphic water and nutrient holding capacities."
+  
+  - id: "exp_e_satellite_weather"
+    name: "Experiment E: Satellite + Weather"
+    modalities: ["satellite", "weather"]
+    description: "Examines satellite observed canopy reflectance dynamics alongside meteorological forcing."
+  
+  - id: "exp_f_biophysical"
+    name: "Experiment F: Satellite + Weather + Soil"
+    modalities: ["satellite", "weather", "soil"]
+    description: "Complete environmental biophysical representation without historical management autoregression."
+  
+  - id: "exp_g_full_multimodal"
+    name: "Experiment G: Full Multimodal"
+    modalities: ["satellite", "weather", "soil", "historical"]
+    description: "Complete system combining biophysical environmental observations with historical agricultural momentum."

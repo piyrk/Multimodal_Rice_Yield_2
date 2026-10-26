@@ -1,0 +1,122 @@
+[
+  {
+    "model": "Naive_District_Mean",
+    "metric": "MAE",
+    "reported_value": 0.4043,
+    "recomputed_value": 0.4043,
+    "absolute_difference": 8e-06,
+    "status": "PASS"
+  },
+  {
+    "model": "Naive_District_Mean",
+    "metric": "RMSE",
+    "reported_value": 0.5015,
+    "recomputed_value": 0.5015,
+    "absolute_difference": 5e-05,
+    "status": "PASS"
+  },
+  {
+    "model": "Naive_District_Mean",
+    "metric": "R2",
+    "reported_value": 0.8371,
+    "recomputed_value": 0.8371,
+    "absolute_difference": 4.2e-05,
+    "status": "PASS"
+  },
+  {
+    "model": "Ridge_Regression",
+    "metric": "MAE",
+    "reported_value": 0.2303,
+    "recomputed_value": 0.2303,
+    "absolute_difference": 3e-06,
+    "status": "PASS"
+  },
+  {
+    "model": "Ridge_Regression",
+    "metric": "RMSE",
+    "reported_value": 0.2921,
+    "recomputed_value": 0.2921,
+    "absolute_difference": 1e-05,
+    "status": "PASS"
+  },
+  {
+    "model": "Ridge_Regression",
+    "metric": "R2",
+    "reported_value": 0.9447,
+    "recomputed_value": 0.9447,
+    "absolute_difference": 7e-06,
+    "status": "PASS"
+  },
+  {
+    "model": "Random_Forest",
+    "metric": "MAE",
+    "reported_value": 0.2134,
+    "recomputed_value": 0.2134,
+    "absolute_difference": 1.5e-05,
+    "status": "PASS"
+  },
+  {
+    "model": "Random_Forest",
+    "metric": "RMSE",
+    "reported_value": 0.2878,
+    "recomputed_value": 0.2878,
+    "absolute_difference": 3.5e-05,
+    "status": "PASS"
+  },
+  {
+    "model": "Random_Forest",
+    "metric": "R2",
+    "reported_value": 0.9463,
+    "recomputed_value": 0.9463,
+    "absolute_difference": 4e-05,
+    "status": "PASS"
+  },
+  {
+    "model": "XGBoost",
+    "metric": "MAE",
+    "reported_value": 0.2073,
+    "recomputed_value": 0.2073,
+    "absolute_difference": 4.9e-05,
+    "status": "PASS"
+  },
+  {
+    "model": "XGBoost",
+    "metric": "RMSE",
+    "reported_value": 0.2733,
+    "recomputed_value": 0.2733,
+    "absolute_difference": 3.7e-05,
+    "status": "PASS"
+  },
+  {
+    "model": "XGBoost",
+    "metric": "R2",
+    "reported_value": 0.9516,
+    "recomputed_value": 0.9516,
+    "absolute_difference": 1.4e-05,
+    "status": "PASS"
+  },
+  {
+    "model": "ClimateRice_FusionNet",
+    "metric": "MAE",
+    "reported_value": 0.2774,
+    "recomputed_value": 0.2774,
+    "absolute_difference": 4.5e-05,
+    "status": "PASS"
+  },
+  {
+    "model": "ClimateRice_FusionNet",
+    "metric": "RMSE",
+    "reported_value": 0.3217,
+    "recomputed_value": 0.3217,
+    "absolute_difference": 3e-05,
+    "status": "PASS"
+  },
+  {
+    "model": "ClimateRice_FusionNet",
+    "metric": "R2",
+    "reported_value": 0.9329,
+    "recomputed_value": 0.9329,
+    "absolute_difference": 2.5e-05,
+    "status": "PASS"
+  }
+]

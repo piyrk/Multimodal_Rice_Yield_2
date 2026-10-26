@@ -1,0 +1,218 @@
+{
+  "feature_modality_ablation_xgboost": {
+    "description": "Controlled feature-modality ablation using XGBoost regressor (evaluating feature combination predictive value for tabular ML)",
+    "experiments": {
+      "Exp_A_Weather_Only": {
+        "name": "Weather Only",
+        "model": "XGBoost",
+        "modalities": ["weather"],
+        "num_features": 10,
+        "mae": 0.9132,
+        "rmse": 1.1055,
+        "r2": 0.2081,
+        "nrmse_pct": 22.91
+      },
+      "Exp_B_Satellite_Only": {
+        "name": "Satellite Only",
+        "model": "XGBoost",
+        "modalities": ["satellite"],
+        "num_features": 5,
+        "mae": 0.5335,
+        "rmse": 0.7025,
+        "r2": 0.6802,
+        "nrmse_pct": 14.56
+      },
+      "Exp_C_Soil_Only": {
+        "name": "Soil Only",
+        "model": "XGBoost",
+        "modalities": ["soil"],
+        "num_features": 7,
+        "mae": 0.4073,
+        "rmse": 0.5045,
+        "r2": 0.8351,
+        "nrmse_pct": 10.45
+      },
+      "Exp_D_Weather_Soil": {
+        "name": "Weather + Soil",
+        "model": "XGBoost",
+        "modalities": ["weather", "soil"],
+        "num_features": 17,
+        "mae": 0.3368,
+        "rmse": 0.4214,
+        "r2": 0.8849,
+        "nrmse_pct": 8.73
+      },
+      "Exp_E_Satellite_Weather": {
+        "name": "Satellite + Weather",
+        "model": "XGBoost",
+        "modalities": ["satellite", "weather"],
+        "num_features": 15,
+        "mae": 0.5022,
+        "rmse": 0.6579,
+        "r2": 0.7195,
+        "nrmse_pct": 13.63
+      },
+      "Exp_F_Biophysical_All": {
+        "name": "Satellite + Weather + Soil",
+        "model": "XGBoost",
+        "modalities": ["satellite", "weather", "soil"],
+        "num_features": 22,
+        "mae": 0.3632,
+        "rmse": 0.4696,
+        "r2": 0.8571,
+        "nrmse_pct": 9.73
+      },
+      "Exp_G_Full_Multimodal": {
+        "name": "Full-feature XGBoost (+History)",
+        "model": "XGBoost",
+        "modalities": ["satellite", "weather", "soil", "historical"],
+        "num_features": 26,
+        "mae": 0.2014,
+        "rmse": 0.2641,
+        "r2": 0.9548,
+        "nrmse_pct": 5.47
+      }
+    }
+  },
+  "neural_modality_ablation_fusionnet": {
+    "description": "Controlled modality ablation using ClimateRice-FusionNet (evaluating deep cross-modal neural attention as modalities are added)",
+    "experiments": {
+      "Exp_FN_Weather_Only": {
+        "name": "FusionNet Weather Only",
+        "model": "ClimateRice-FusionNet",
+        "modalities": ["weather"],
+        "num_features": 10,
+        "mae": 1.2050,
+        "rmse": 1.4140,
+        "r2": -0.2957,
+        "nrmse_pct": 29.31
+      },
+      "Exp_FN_Satellite_Only": {
+        "name": "FusionNet Satellite Only",
+        "model": "ClimateRice-FusionNet",
+        "modalities": ["satellite"],
+        "num_features": 5,
+        "mae": 0.5793,
+        "rmse": 0.6971,
+        "r2": 0.6851,
+        "nrmse_pct": 14.45
+      },
+      "Exp_FN_Soil_Only": {
+        "name": "FusionNet Soil Only",
+        "model": "ClimateRice-FusionNet",
+        "modalities": ["soil"],
+        "num_features": 7,
+        "mae": 0.5578,
+        "rmse": 0.6361,
+        "r2": 0.7378,
+        "nrmse_pct": 13.18
+      },
+      "Exp_FN_Weather_Soil": {
+        "name": "FusionNet Weather + Soil",
+        "model": "ClimateRice-FusionNet",
+        "modalities": ["weather", "soil"],
+        "num_features": 17,
+        "mae": 0.3941,
+        "rmse": 0.4521,
+        "r2": 0.8676,
+        "nrmse_pct": 9.37
+      },
+      "Exp_FN_Satellite_Weather": {
+        "name": "FusionNet Satellite + Weather",
+        "model": "ClimateRice-FusionNet",
+        "modalities": ["satellite", "weather"],
+        "num_features": 15,
+        "mae": 0.4456,
+        "rmse": 0.5351,
+        "r2": 0.8145,
+        "nrmse_pct": 11.09
+      },
+      "Exp_FN_Biophysical_All": {
+        "name": "FusionNet Satellite + Weather + Soil",
+        "model": "ClimateRice-FusionNet",
+        "modalities": ["satellite", "weather", "soil"],
+        "num_features": 22,
+        "mae": 0.3532,
+        "rmse": 0.4191,
+        "r2": 0.8862,
+        "nrmse_pct": 8.69
+      },
+      "Exp_FN_Full_Multimodal": {
+        "name": "ClimateRice-FusionNet Full (+History)",
+        "model": "ClimateRice-FusionNet",
+        "modalities": ["satellite", "weather", "soil", "historical"],
+        "num_features": 26,
+        "mae": 0.2774,
+        "rmse": 0.3217,
+        "r2": 0.9329,
+        "nrmse_pct": 6.67
+      }
+    }
+  },
+  "Exp_A_Weather_Only": {
+    "name": "Weather Only (XGBoost)",
+    "modalities": ["weather"],
+    "num_features": 10,
+    "mae": 0.9132,
+    "rmse": 1.1055,
+    "r2": 0.2081,
+    "nrmse_pct": 22.91
+  },
+  "Exp_B_Satellite_Only": {
+    "name": "Satellite Only (XGBoost)",
+    "modalities": ["satellite"],
+    "num_features": 5,
+    "mae": 0.5335,
+    "rmse": 0.7025,
+    "r2": 0.6802,
+    "nrmse_pct": 14.56
+  },
+  "Exp_C_Soil_Only": {
+    "name": "Soil Only (XGBoost)",
+    "modalities": ["soil"],
+    "num_features": 7,
+    "mae": 0.4073,
+    "rmse": 0.5045,
+    "r2": 0.8351,
+    "nrmse_pct": 10.45
+  },
+  "Exp_D_Weather_Soil": {
+    "name": "Weather + Soil (XGBoost)",
+    "modalities": ["weather", "soil"],
+    "num_features": 17,
+    "mae": 0.3368,
+    "rmse": 0.4214,
+    "r2": 0.8849,
+    "nrmse_pct": 8.73
+  },
+  "Exp_E_Satellite_Weather": {
+    "name": "Satellite + Weather (XGBoost)",
+    "modalities": ["satellite", "weather"],
+    "num_features": 15,
+    "mae": 0.5022,
+    "rmse": 0.6579,
+    "r2": 0.7195,
+    "nrmse_pct": 13.63
+  },
+  "Exp_F_Biophysical_All": {
+    "name": "Satellite + Weather + Soil (XGBoost)",
+    "modalities": ["satellite", "weather", "soil"],
+    "num_features": 22,
+    "mae": 0.3632,
+    "rmse": 0.4696,
+    "r2": 0.8571,
+    "nrmse_pct": 9.73
+  },
+  "Exp_G_Full_Multimodal": {
+    "name": "Full-feature XGBoost (+History)",
+    "modalities": ["satellite", "weather", "soil", "historical"],
+    "num_features": 26,
+    "mae": 0.2014,
+    "rmse": 0.2641,
+    "r2": 0.9548,
+    "nrmse_pct": 5.47,
+    "fusion_net_mae": 0.2774,
+    "fusion_net_rmse": 0.3217,
+    "fusion_net_r2": 0.9329
+  }
+}

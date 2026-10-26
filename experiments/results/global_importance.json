@@ -1,0 +1,141 @@
+{
+  "feature_importance": [
+    {
+      "feature": "rainfall_cumulative_mm",
+      "modality": "weather",
+      "importance_score": 0.2442
+    },
+    {
+      "feature": "ndvi_anomaly",
+      "modality": "satellite",
+      "importance_score": 0.1734
+    },
+    {
+      "feature": "ndvi_mean",
+      "modality": "satellite",
+      "importance_score": 0.0887
+    },
+    {
+      "feature": "evi_mean",
+      "modality": "satellite",
+      "importance_score": 0.0839
+    },
+    {
+      "feature": "temp_min_deg_c",
+      "modality": "weather",
+      "importance_score": 0.0688
+    },
+    {
+      "feature": "historical_yield_3yr_mean",
+      "modality": "historical",
+      "importance_score": 0.05
+    },
+    {
+      "feature": "sown_area_ha",
+      "modality": "historical",
+      "importance_score": 0.0387
+    },
+    {
+      "feature": "historical_yield_lag1",
+      "modality": "historical",
+      "importance_score": 0.0368
+    },
+    {
+      "feature": "soil_clay_pct",
+      "modality": "soil",
+      "importance_score": 0.0302
+    },
+    {
+      "feature": "temp_max_deg_c",
+      "modality": "weather",
+      "importance_score": 0.0294
+    },
+    {
+      "feature": "historical_yield_lag2",
+      "modality": "historical",
+      "importance_score": 0.0247
+    },
+    {
+      "feature": "extreme_heat_days",
+      "modality": "weather",
+      "importance_score": 0.0232
+    },
+    {
+      "feature": "soil_organic_carbon_g_kg",
+      "modality": "soil",
+      "importance_score": 0.0193
+    },
+    {
+      "feature": "relative_humidity_pct",
+      "modality": "weather",
+      "importance_score": 0.0147
+    },
+    {
+      "feature": "rainfall_anomaly_pct",
+      "modality": "weather",
+      "importance_score": 0.0132
+    },
+    {
+      "feature": "temp_mean_deg_c",
+      "modality": "weather",
+      "importance_score": 0.0112
+    },
+    {
+      "feature": "soil_available_water_capacity",
+      "modality": "soil",
+      "importance_score": 0.0101
+    },
+    {
+      "feature": "soil_sand_pct",
+      "modality": "soil",
+      "importance_score": 0.0099
+    },
+    {
+      "feature": "ndwi_mean",
+      "modality": "satellite",
+      "importance_score": 0.0093
+    },
+    {
+      "feature": "solar_radiation_mj_m2",
+      "modality": "weather",
+      "importance_score": 0.006
+    },
+    {
+      "feature": "temp_anomaly_deg_c",
+      "modality": "weather",
+      "importance_score": 0.0051
+    },
+    {
+      "feature": "soil_ph",
+      "modality": "soil",
+      "importance_score": 0.0045
+    },
+    {
+      "feature": "consecutive_dry_days",
+      "modality": "weather",
+      "importance_score": 0.0023
+    },
+    {
+      "feature": "ndvi_peak",
+      "modality": "satellite",
+      "importance_score": 0.0014
+    },
+    {
+      "feature": "soil_cation_exchange_capacity",
+      "modality": "soil",
+      "importance_score": 0.0009
+    },
+    {
+      "feature": "soil_nitrogen_g_kg",
+      "modality": "soil",
+      "importance_score": 0.0001
+    }
+  ],
+  "modality_importance": {
+    "weather": 0.4181,
+    "satellite": 0.3567,
+    "historical": 0.1502,
+    "soil": 0.075
+  },
+  "method": "SHAP / Perturbation Game-Theoretic Attribution"
+}

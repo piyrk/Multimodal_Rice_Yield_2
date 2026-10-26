@@ -1,0 +1,14 @@
+{
+  "source_ground_truth": "Directorate of Economics and Statistics (DES), Ministry of Agriculture & Farmers Welfare, GoI",
+  "source_weather": "NASA POWER Agroclimatology / IMD Gridded Weather",
+  "source_satellite": "NASA MODIS MOD13Q1 / Sentinel-2 MSI",
+  "source_soil": "ISRIC SoilGrids 2.0 (250m)",
+  "spatial_units": 24,
+  "temporal_range": [
+    2000,
+    2020
+  ],
+  "total_observations": 504,
+  "target": "yield_tonnes_per_ha",
+  "random_seed": 42
+}

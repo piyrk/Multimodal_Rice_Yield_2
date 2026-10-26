@@ -1,0 +1,100 @@
+project:
+  name: "ClimateRice-AI"
+  version: "1.0.0"
+  description: "Climate-Aware Multimodal Deep Learning for Rice Yield Prediction Using Satellite, Weather, and Soil Data"
+
+paths:
+  raw_data_dir: "data/raw"
+  processed_data_dir: "data/processed"
+  external_data_dir: "data/external"
+  models_dir: "models/saved_models"
+  reports_dir: "reports"
+  figures_dir: "reports/figures"
+  results_dir: "experiments/results"
+
+data:
+  target_column: "yield_tonnes_per_ha"
+  id_columns:
+    - "district_name"
+    - "state_name"
+    - "crop_year"
+    - "season"
+  spatial_columns:
+    - "latitude"
+    - "longitude"
+  
+  split:
+    train_max_year: 2014
+    val_years: [2015, 2016]
+    test_min_year: 2017
+    random_state: 42
+
+modalities:
+  satellite:
+    - "ndvi_mean"
+    - "ndvi_peak"
+    - "evi_mean"
+    - "ndwi_mean"
+    - "ndvi_anomaly"
+  
+  weather:
+    - "rainfall_cumulative_mm"
+    - "rainfall_anomaly_pct"
+    - "temp_min_deg_c"
+    - "temp_max_deg_c"
+    - "temp_mean_deg_c"
+    - "temp_anomaly_deg_c"
+    - "extreme_heat_days"
+    - "consecutive_dry_days"
+    - "relative_humidity_pct"
+    - "solar_radiation_mj_m2"
+
+  soil:
+    - "soil_ph"
+    - "soil_organic_carbon_g_kg"
+    - "soil_nitrogen_g_kg"
+    - "soil_clay_pct"
+    - "soil_sand_pct"
+    - "soil_available_water_capacity"
+    - "soil_cation_exchange_capacity"
+
+  historical:
+    - "historical_yield_lag1"
+    - "historical_yield_lag2"
+    - "historical_yield_3yr_mean"
+    - "sown_area_ha"
+
+training:
+  batch_size: 64
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  max_epochs: 100
+  early_stopping_patience: 12
+  lr_reduce_patience: 5
+  lr_reduce_factor: 0.5
+  mc_dropout_passes: 50
+  seeds: [42, 101, 2024, 7, 999]
+
+models:
+  baseline_ridge:
+    alpha: 1.0
+  baseline_random_forest:
+    n_estimators: 150
+    max_depth: 12
+    random_state: 42
+    n_jobs: -1
+  baseline_xgboost:
+    n_estimators: 200
+    learning_rate: 0.05
+    max_depth: 6
+    subsample: 0.8
+    colsample_bytree: 0.8
+    random_state: 42
+  deep_mlp:
+    hidden_dims: [128, 64, 32]
+    dropout: 0.2
+  fusion_net:
+    embedding_dim: 24
+    attention_dim: 16
+    dense_hidden: [64, 32]
+    dropout: 0.2

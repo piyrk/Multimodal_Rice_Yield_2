@@ -1,0 +1,233 @@
+{
+  "dataset_path": "data/raw/harmonized_rice_multimodal.csv",
+  "row_count": 504,
+  "column_count": 35,
+  "spatial_coverage": {
+    "num_districts": 24,
+    "num_states": 11,
+    "states": [
+      "Andhra Pradesh",
+      "Assam",
+      "Bihar",
+      "Chhattisgarh",
+      "Haryana",
+      "Odisha",
+      "Punjab",
+      "Tamil Nadu",
+      "Telangana",
+      "Uttar Pradesh",
+      "West Bengal"
+    ],
+    "districts": [
+      "Amritsar",
+      "Baleshwar",
+      "Bareilly",
+      "Bilaspur",
+      "Birbhum",
+      "Burdwan",
+      "Cuttack",
+      "Durg",
+      "East Godavari",
+      "Gorakhpur",
+      "Kamrup",
+      "Karnal",
+      "Ludhiana",
+      "Midnapore",
+      "Nagaon",
+      "Nalanda",
+      "Nalgonda",
+      "Patna",
+      "Raipur",
+      "Sambalpur",
+      "Thanjavur",
+      "Tiruchirappalli",
+      "Varanasi",
+      "West Godavari"
+    ],
+    "agro_ecological_zones": [
+      "East Coast Plains",
+      "Eastern Himalayan",
+      "Eastern Plateau",
+      "Lower Gangetic Plain",
+      "Middle Gangetic Plain",
+      "Southern Plateau",
+      "Trans-Gangetic Plains",
+      "Upper Gangetic Plain"
+    ]
+  },
+  "temporal_coverage": {
+    "start_year": 2000,
+    "end_year": 2020,
+    "num_years": 21,
+    "years": [
+      2000,
+      2001,
+      2002,
+      2003,
+      2004,
+      2005,
+      2006,
+      2007,
+      2008,
+      2009,
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020
+    ],
+    "temporal_partitions": {
+      "train": {
+        "years": [
+          2000,
+          2001,
+          2002,
+          2003,
+          2004,
+          2005,
+          2006,
+          2007,
+          2008,
+          2009,
+          2010,
+          2011,
+          2012,
+          2013,
+          2014
+        ],
+        "count": 360
+      },
+      "validation": {
+        "years": [
+          2015,
+          2016
+        ],
+        "count": 48
+      },
+      "test": {
+        "years": [
+          2017,
+          2018,
+          2019,
+          2020
+        ],
+        "count": 96
+      }
+    }
+  },
+  "integrity_checks": {
+    "expected_records": 504,
+    "actual_records": 504,
+    "grid_completeness_24x21": true,
+    "duplicate_district_year_pairs": 0,
+    "total_missing_values": 0,
+    "missing_values_by_column": {
+      "district_name": 0,
+      "state_name": 0,
+      "crop_year": 0,
+      "season": 0,
+      "latitude": 0,
+      "longitude": 0,
+      "agro_ecological_zone": 0,
+      "irrigation_ratio": 0,
+      "yield_tonnes_per_ha": 0,
+      "ndvi_mean": 0,
+      "ndvi_peak": 0,
+      "evi_mean": 0,
+      "ndwi_mean": 0,
+      "ndvi_anomaly": 0,
+      "rainfall_cumulative_mm": 0,
+      "rainfall_anomaly_pct": 0,
+      "temp_min_deg_c": 0,
+      "temp_max_deg_c": 0,
+      "temp_mean_deg_c": 0,
+      "temp_anomaly_deg_c": 0,
+      "extreme_heat_days": 0,
+      "consecutive_dry_days": 0,
+      "relative_humidity_pct": 0,
+      "solar_radiation_mj_m2": 0,
+      "soil_ph": 0,
+      "soil_organic_carbon_g_kg": 0,
+      "soil_nitrogen_g_kg": 0,
+      "soil_clay_pct": 0,
+      "soil_sand_pct": 0,
+      "soil_available_water_capacity": 0,
+      "soil_cation_exchange_capacity": 0,
+      "historical_yield_lag1": 0,
+      "historical_yield_lag2": 0,
+      "historical_yield_3yr_mean": 0,
+      "sown_area_ha": 0
+    }
+  },
+  "target_variable": {
+    "units": "tonnes/hectare (t/ha)",
+    "column_name": "yield_tonnes_per_ha",
+    "count": 504,
+    "min": 1.655,
+    "max": 6.2,
+    "mean": 4.496065476190477,
+    "median": 4.378,
+    "std": 1.3580954320163914,
+    "skewness": -0.04621574669870979,
+    "kurtosis": -1.3990712015899176,
+    "25%": 3.3395,
+    "75%": 6.171
+  },
+  "district_year_matrix_shape": [
+    24,
+    21
+  ],
+  "category_classification_summary": {
+    "A_real_observed": [
+      "district_name",
+      "state_name",
+      "latitude",
+      "longitude",
+      "agro_ecological_zone",
+      "crop_year",
+      "season"
+    ],
+    "B_downloaded_raw": [],
+    "C_calculated_derived": [
+      "historical_yield_lag1",
+      "historical_yield_lag2",
+      "historical_yield_3yr_mean",
+      "temp_mean_deg_c",
+      "rainfall_anomaly_pct",
+      "temp_anomaly_deg_c",
+      "ndvi_anomaly"
+    ],
+    "D_interpolated": [],
+    "E_imputed": [],
+    "F_calibrated_synthetic_generated": [
+      "yield_tonnes_per_ha",
+      "irrigation_ratio",
+      "ndvi_mean",
+      "ndvi_peak",
+      "evi_mean",
+      "ndwi_mean",
+      "rainfall_cumulative_mm",
+      "temp_min_deg_c",
+      "temp_max_deg_c",
+      "extreme_heat_days",
+      "consecutive_dry_days",
+      "relative_humidity_pct",
+      "solar_radiation_mj_m2",
+      "soil_ph",
+      "soil_organic_carbon_g_kg",
+      "soil_nitrogen_g_kg",
+      "soil_clay_pct",
+      "soil_sand_pct",
+      "soil_available_water_capacity",
+      "soil_cation_exchange_capacity",
+      "sown_area_ha"
+    ],
+    "G_hardcoded_placeholder": []
+  }
+}

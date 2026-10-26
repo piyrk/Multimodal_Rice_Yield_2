@@ -1,0 +1,56 @@
+{
+  "Naive_District_Mean": {
+    "mae": 0.4043,
+    "rmse": 0.5015,
+    "nrmse_pct": 10.39,
+    "r2": 0.8371,
+    "mape_pct": 9.35,
+    "max_error": 0.9795,
+    "n_samples": 96
+  },
+  "Ridge_Regression": {
+    "mae": 0.2303,
+    "rmse": 0.2921,
+    "nrmse_pct": 6.05,
+    "r2": 0.9447,
+    "mape_pct": 4.97,
+    "max_error": 0.856,
+    "n_samples": 96
+  },
+  "Random_Forest": {
+    "mae": 0.2134,
+    "rmse": 0.2878,
+    "nrmse_pct": 5.96,
+    "r2": 0.9463,
+    "mape_pct": 4.89,
+    "max_error": 0.7718,
+    "n_samples": 96
+  },
+  "XGBoost": {
+    "mae": 0.2073,
+    "rmse": 0.2733,
+    "nrmse_pct": 5.66,
+    "r2": 0.9516,
+    "mape_pct": 4.71,
+    "max_error": 0.829,
+    "n_samples": 96
+  },
+  "Deep_MLP": {
+    "mae": 3.8483,
+    "rmse": 4.039,
+    "nrmse_pct": 83.69,
+    "r2": -9.5711,
+    "mape_pct": 78.86,
+    "max_error": 6.1621,
+    "n_samples": 96
+  },
+  "ClimateRice_FusionNet": {
+    "mae": 0.2774,
+    "rmse": 0.3217,
+    "nrmse_pct": 6.67,
+    "r2": 0.9329,
+    "mape_pct": 5.93,
+    "max_error": 0.8127,
+    "n_samples": 96
+  }
+}

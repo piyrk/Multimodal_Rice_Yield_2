@@ -1,0 +1,73 @@
+{
+  "model_name": "ClimateRice-FusionNet",
+  "version": "1.1.0-optimized",
+  "promotion_date": "2026-10-11",
+  "previous_version": "1.0.0-baseline",
+  "architecture": {
+    "embed_dim": 24,
+    "dense_hidden": [
+      48,
+      24
+    ],
+    "dropout": 0.15,
+    "batch_size": 16,
+    "weight_decay": 0.001,
+    "scheduler": "cosine",
+    "num_parameters": 12306,
+    "head_layers": [
+      "[48, 120]",
+      "[24, 48]",
+      "[1, 24]"
+    ]
+  },
+  "modalities": [
+    "satellite",
+    "weather",
+    "soil",
+    "historical"
+  ],
+  "total_features": 26,
+  "benchmark_dataset": {
+    "type": "Calibrated Semi-Synthetic Multimodal Agricultural Benchmark",
+    "n_total": 504,
+    "n_train": 360,
+    "n_val": 48,
+    "n_test": 96,
+    "test_years": "2017-2020 (Untouched Chronological Holdout)"
+  },
+  "held_out_test_metrics": {
+    "fusion_net_mc50": {
+      "test_mae": 0.2314,
+      "test_rmse": 0.2892,
+      "test_r2": 0.9458,
+      "previous_v1_baseline_mc50_rmse": 0.3266,
+      "error_reduction_pct": 11.5,
+      "seed_stability_stats_3_seeds": {
+        "mae_mean": 0.2197,
+        "mae_std": 0.0136,
+        "rmse_mean": 0.275,
+        "rmse_std": 0.0159,
+        "r2_mean": 0.9508,
+        "r2_std": 0.0056
+      }
+    },
+    "optimized_xgboost": {
+      "test_mae": 0.218,
+      "test_rmse": 0.2829,
+      "test_r2": 0.9482,
+      "seed_stability_stats_3_seeds": {
+        "mae_mean": 0.2136,
+        "mae_std": 0.0038,
+        "rmse_mean": 0.2766,
+        "rmse_std": 0.0053,
+        "r2_mean": 0.9504,
+        "r2_std": 0.0019
+      }
+    }
+  },
+  "rollback_instructions": {
+    "restore_fusion_net": "Copy models/saved_models/climate_rice_fusion_net_v1_baseline_backup.pt to climate_rice_fusion_net.pt",
+    "restore_xgboost": "Copy models/saved_models/xgboost_baseline_v1_backup.joblib to xgboost_baseline.joblib",
+    "restore_metadata": "Copy models/saved_models/model_metadata_v1_backup.json to model_metadata.json"
+  }
+}
