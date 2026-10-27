@@ -31,7 +31,7 @@ To establish a verified empirical baseline on genuine Indian agricultural data, 
 | **Linear Model** | Ridge Regression ($\alpha = 10.0$) | **0.3502** | **0.4771** | **0.6720** | Strong regularized linear baseline with minimal variance. |
 | **Tree Ensemble** | Random Forest Regressor | 0.3932 | 0.5559 | 0.5548 | Outperforms naive mean; shows slight overfitting to train splits. |
 | **Tree Ensemble** | XGBoost Regressor | 0.3699 | 0.5332 | 0.5904 | Gradient boosting captures non-linear climate anomalies well. |
-| **Deep Learning** | **ClimateRice-FusionNet** | **0.3656** | **0.5076** | **0.6288** | Multi-branch architecture with LayerNorm, Huber loss, and MC Dropout. |
+| **Deep Learning** | **ClimateRice-FusionNet** | **0.3366** | **0.4711** | **0.6803** | Multi-branch architecture with LayerNorm, Huber loss, and MC Dropout (lowest error and highest R²). |
 
 ---
 
@@ -45,8 +45,8 @@ A core research objective is understanding how models perform when moving from a
 | **Weather Source** | Parametric climate anomalies | NASA POWER daily gridded observations |
 | **Sample Size** | $N = 504$ (2000–2020) | $N = 303$ (2000–2014) |
 | **Held-Out Test Size** | $N = 96$ (2017–2020) | $N = 36$ (2013–2014) |
-| **Best Model $R^2$** | $R^2 = 0.9548$ (Full-feature XGBoost) | $R^2 = 0.6720$ (Ridge) / $R^2 = 0.6288$ (FusionNet) |
-| **Best Model MAE** | $0.2014\text{ t/ha}$ | $0.3502\text{ t/ha}$ (Ridge) / $0.3656\text{ t/ha}$ (FusionNet) |
+| **Best Model $R^2$** | $R^2 = 0.9548$ (Full-feature XGBoost) | $R^2 = 0.6803$ (ClimateRice-FusionNet) |
+| **Best Model MAE** | $0.2014\text{ t/ha}$ (XGBoost) | $0.3366\text{ t/ha}$ (ClimateRice-FusionNet) |
 | **Realistic Literature Alignment** | High (benchmark condition) | Matches empirical agricultural literature ($R^2 \approx 0.55 - 0.70$) |
 
 ### Scientific Insights

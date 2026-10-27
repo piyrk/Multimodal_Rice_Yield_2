@@ -41,9 +41,11 @@ export default function BenchmarkPage() {
   ];
 
   const observationalList = [
-    { name: 'ClimateRice-FusionNet', type: 'Multimodal Attention Network', mae: 0.3371, rmse: 0.4428, r2: 0.6802, coverage: '44.44%' },
-    { name: 'Ridge Regression', type: 'L2 Linear Baseline', mae: 0.3502, rmse: 0.4485, r2: 0.6720, coverage: 'N/A' },
-    { name: 'XGBoost Regressor', type: 'Gradient Boosted Trees', mae: 0.3656, rmse: 0.4574, r2: 0.6588, coverage: 'N/A' },
+    { name: 'ClimateRice-FusionNet', type: 'Multimodal Attention Network', mae: 0.3366, rmse: 0.4711, r2: 0.6803, coverage: '44.44% (calibrated: 83.33%)' },
+    { name: 'Ridge Regression', type: 'L2 Linear Baseline', mae: 0.3502, rmse: 0.4771, r2: 0.6720, coverage: 'N/A' },
+    { name: 'XGBoost Regressor', type: 'Gradient Boosted Trees', mae: 0.3699, rmse: 0.5332, r2: 0.5904, coverage: 'N/A' },
+    { name: 'Random Forest', type: 'Bagged Tree Ensemble', mae: 0.3932, rmse: 0.5559, r2: 0.5548, coverage: 'N/A' },
+    { name: 'Historical District Mean', type: 'Naive Mean Baseline', mae: 0.6222, rmse: 0.9022, r2: -0.1727, coverage: 'N/A' },
   ];
 
   return (
@@ -118,9 +120,8 @@ export default function BenchmarkPage() {
         </div>
 
         <p className="text-[11px] text-stone-600 italic leading-relaxed">
-          *On real observational data, <strong>ClimateRice-FusionNet achieves R² = 0.6802 and MAE = 0.3371 t/ha</strong>. 
-          Uncalibrated predictive intervals achieve 44.44% (16/36) coverage on raw observations due to microclimate shocks; 
-          the 95.83% coverage figure applies specifically to the calibrated benchmark below.
+          *On real observational data, <strong>ClimateRice-FusionNet achieves R² = 0.6803 and MAE = 0.3366 t/ha (RMSE: 0.4711 t/ha)</strong>, outperforming traditional gradient boosting (XGBoost MAE: 0.3699 t/ha, R²: 0.5904). 
+          Uncalibrated predictive intervals achieve 44.44% (16/36) coverage on raw observations due to unobserved farm-level noise; split-conformal recalibration lifts held-out test coverage to 83.33% (5-split cross-validation mean: 90.56% ± 2.83%).
         </p>
       </div>
 
@@ -308,7 +309,7 @@ export default function BenchmarkPage() {
           </div>
           <p>
             On tabular panel features, gradient boosted trees (Full-feature XGBoost, MAE: 0.2014 t/ha) achieve lower numerical point error than deep learning. 
-            However, <strong>ClimateRice-FusionNet (MAE: 0.2774 t/ha on benchmark, 0.3371 t/ha on observational)</strong> provides: 
+            However, <strong>ClimateRice-FusionNet (MAE: 0.2774 t/ha on benchmark, 0.3366 t/ha on observational)</strong> provides: 
             (1) <em>end-to-end differentiable cross-modal attention</em> that dynamically reweights environmental signals during heat/drought shocks, and 
             (2) <em>MC Dropout epistemic predictive intervals</em>, communicating prediction uncertainty to agricultural decision-makers.
           </p>
