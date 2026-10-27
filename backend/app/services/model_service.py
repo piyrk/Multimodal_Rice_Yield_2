@@ -125,6 +125,15 @@ class ModelService:
                 self.calibrated_coverage_pct = 44.44
                 self.calibration_method = "Uncalibrated Benchmark Baseline (+-1.05 sigma)"
 
+            # Load season estimates (2025/2026) if available
+            self.season_estimates = {}
+            for se_path in ["data/season_estimates.json", "frontend/src/data/seasonEstimates.json"]:
+                if os.path.exists(se_path):
+                    with open(se_path, "r", encoding="utf-8") as f_se:
+                        self.season_estimates = json.load(f_se)
+                    logger.info("Loaded season estimates from %s", se_path)
+                    break
+
         except Exception as e:
             logger.warning("Artifact loading partial or deferred: %s", e)
 
@@ -250,6 +259,60 @@ class ModelService:
         self, district_name: str, crop_year: Optional[int] = None, season: Optional[str] = "Kharif"
     ) -> Optional[Dict[str, Any]]:
         """Returns verified environmental feature profile for a district, season, and year."""
+        # Check if season estimates (2025/2026) are requested
+        if crop_year in [2025, 2026] and (not season or season.strip().lower() == "kharif") and getattr(self, "season_estimates", None):
+            year_str = str(crop_year)
+            year_data = self.season_estimates.get(year_str, {})
+            clean_name = district_name.strip().lower()
+            matched_dist = None
+            for d in year_data:
+                if d.strip().lower() == clean_name:
+                    matched_dist = d
+                    break
+            if matched_dist:
+                row = dict(year_data[matched_dist])
+                base_avail = [2026, 2025, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2010, 2005]
+                return {
+                    "district_name": str(row["district_name"]),
+                    "state_name": str(row["state_name"]),
+                    "crop_year": int(crop_year),
+                    "season": "Kharif",
+                    "data_source": f"Observed-Season Estimate Inputs — Kharif {crop_year} (NASA POWER)",
+                    "provenance_category": "Model Estimate — recorded yield for this year is not yet published (DES APY)",
+                    "is_observational": False,
+                    "provenance_details": f"{row.get('weather_provenance', '')} | Lags: {row.get('historical_provenance', '')} | Satellite: {row.get('satellite_provenance', '')} | Precomputed estimate: {row.get('precomputed_estimate_t_ha', '')} t/ha [{row.get('precomputed_interval_low', '')}, {row.get('precomputed_interval_high', '')}]",
+                    "available_years": base_avail,
+                    "latitude": round(float(row.get("latitude", 0.0)), 4),
+                    "longitude": round(float(row.get("longitude", 0.0)), 4),
+                    "agro_ecological_zone": str(row.get("agro_ecological_zone", "")),
+                    "irrigation_ratio": round(float(row.get("irrigation_ratio", 0.0)), 2),
+                    "ndvi_mean": round(float(row["ndvi_mean"]), 4),
+                    "ndvi_peak": round(float(row["ndvi_peak"]), 4),
+                    "evi_mean": round(float(row["evi_mean"]), 4),
+                    "ndwi_mean": round(float(row["ndwi_mean"]), 4),
+                    "ndvi_anomaly": round(float(row["ndvi_anomaly"]), 4),
+                    "rainfall_cumulative_mm": round(float(row["rainfall_cumulative_mm"]), 1),
+                    "rainfall_anomaly_pct": round(float(row["rainfall_anomaly_pct"]), 1),
+                    "temp_min_deg_c": round(float(row["temp_min_deg_c"]), 2),
+                    "temp_max_deg_c": round(float(row["temp_max_deg_c"]), 2),
+                    "temp_mean_deg_c": round(float(row["temp_mean_deg_c"]), 2),
+                    "temp_anomaly_deg_c": round(float(row["temp_anomaly_deg_c"]), 2),
+                    "extreme_heat_days": int(row["extreme_heat_days"]),
+                    "consecutive_dry_days": int(row["consecutive_dry_days"]),
+                    "relative_humidity_pct": round(float(row["relative_humidity_pct"]), 1),
+                    "solar_radiation_mj_m2": round(float(row["solar_radiation_mj_m2"]), 2),
+                    "soil_ph": round(float(row["soil_ph"]), 2),
+                    "soil_organic_carbon_g_kg": round(float(row["soil_organic_carbon_g_kg"]), 2),
+                    "soil_nitrogen_g_kg": round(float(row["soil_nitrogen_g_kg"]), 2),
+                    "soil_clay_pct": round(float(row["soil_clay_pct"]), 1),
+                    "soil_sand_pct": round(float(row["soil_sand_pct"]), 1),
+                    "soil_available_water_capacity": round(float(row["soil_available_water_capacity"]), 3),
+                    "soil_cation_exchange_capacity": round(float(row["soil_cation_exchange_capacity"]), 2),
+                    "historical_yield_lag1": round(float(row["historical_yield_lag1"]), 2),
+                    "historical_yield_lag2": round(float(row["historical_yield_lag2"]), 2),
+                    "historical_yield_3yr_mean": round(float(row["historical_yield_3yr_mean"]), 2),
+                    "sown_area_ha": round(float(row["sown_area_ha"]), 1),
+                }
         if self.historical_df is None:
             raw_csv = "data/raw/harmonized_rice_multimodal.csv"
             if os.path.exists(raw_csv):
@@ -270,7 +333,7 @@ class ModelService:
                 return None
             sub = sub_season
 
-        available_years = sorted(sub["crop_year"].unique().tolist())
+        available_years = [2026, 2025] + sorted(sub["crop_year"].unique().tolist())
 
         # Select target year: exact match if available, else closest/latest available
         if crop_year is not None and crop_year in available_years:

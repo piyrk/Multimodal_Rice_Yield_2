@@ -102,6 +102,49 @@ export default function PredictPage({ locations = [] }) {
       return;
     }
 
+    const targetYear = cropYear ?? formData.crop_year;
+    if ((targetYear === 2025 || targetYear === 2026) && SEASON_ESTIMATES?.[String(targetYear)]?.[distName]) {
+      if (activeAbortRef.current) {
+        activeAbortRef.current.abort();
+      }
+      fetchSequenceRef.current += 1;
+      setProfileLoading(false);
+      setProfileError(null);
+
+      const row = SEASON_ESTIMATES[String(targetYear)][distName];
+      const {
+        precomputed_estimate_t_ha,
+        precomputed_interval_low,
+        precomputed_interval_high,
+        weather_provenance,
+        satellite_provenance,
+        soil_provenance,
+        historical_provenance,
+        ...fields
+      } = row;
+
+      const merged = { ...fields, crop_year: targetYear, season: 'Kharif' };
+      if (postTransform) {
+        setFormData(postTransform(merged));
+        setDataSourceType('preset');
+      } else {
+        setFormData((prev) => ({ ...prev, ...merged }));
+        setDataSourceType('preset');
+      }
+      setActivePresetName(`Kharif ${targetYear} Season Estimate`);
+      setSeasonEstimateYear(targetYear);
+      setProfileMetadata({
+        dataSource: `Observed-Season Estimate Inputs — Kharif ${targetYear} (NASA POWER)`,
+        provenanceCategory: 'Model Estimate — recorded yield for this year is not yet published (DES APY)',
+        provenanceDetails: `${weather_provenance} | Lags: ${historical_provenance} | Satellite: ${satellite_provenance} | Precomputed estimate: ${precomputed_estimate_t_ha} t/ha [${precomputed_interval_low}, ${precomputed_interval_high}]`,
+        isObservational: false,
+        availableYears: [2026, 2025, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2010, 2005],
+        zone: fields.agro_ecological_zone,
+        irrigation: fields.irrigation_ratio,
+      });
+      return;
+    }
+
     const localProfile = getProfileForDistrict(distName);
     if (localProfile) {
       // Cancel any in-flight backend fetch so a stale response cannot
@@ -132,7 +175,7 @@ export default function PredictPage({ locations = [] }) {
         provenanceCategory: 'Category F (Calibrated Multi-Decadal Historical Panel)',
         provenanceDetails: `Centroid: (${localProfile.latitude || ''}, ${localProfile.longitude || ''}) | Zone: ${localProfile.agro_ecological_zone} | Irrigation: ${Math.round((localProfile.irrigation_ratio || 0.5) * 100)}%`,
         isObservational: true,
-        availableYears: [2000, 2005, 2010, 2014, 2015, 2016, 2017, 2018, 2019, 2020],
+        availableYears: [2026, 2025, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2010, 2005],
         zone: localProfile.agro_ecological_zone,
         irrigation: localProfile.irrigation_ratio,
       });
@@ -732,6 +775,8 @@ export default function PredictPage({ locations = [] }) {
                     disabled={formData.season === 'Rabi'}
                     className="w-full bg-stone-50 border border-stone-300 rounded-lg px-2.5 py-1.5 text-stone-900 focus:bg-white focus:ring-2 focus:ring-emerald-600 text-xs font-medium cursor-pointer disabled:opacity-60"
                   >
+                    <option value={2026}>2026 (Current-Season Estimate)</option>
+                    <option value={2025}>2025 (Season Estimate)</option>
                     <option value={2021}>2021 (Calibrated Benchmark / Baseline)</option>
                     <option value={2020}>2020 (Calibrated Benchmark)</option>
                     <option value={2019}>2019 (Calibrated Benchmark)</option>
