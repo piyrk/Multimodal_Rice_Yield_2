@@ -27,7 +27,7 @@ export default function VivaGuidePage() {
     },
     {
       q: "6. Is your uncertainty interval a confidence interval or a predictive interval, and what is its empirical coverage?",
-      a: "It is an MC Dropout predictive interval (Gal & Ghahramani, ICML 2016), NOT a population parameter confidence interval. It captures epistemic model uncertainty across 50 stochastic forward passes. On our held-out benchmark test partition (N = 96, 2017–2020), this achieves 95.83% empirical coverage. On raw real-world observational DES APY data, the same ±1.96σ interval covers 44.44% (16 of 36 test cases), proving that unmodeled field-level factors (fertilizer application, pest outbreaks, localized flooding) expand real-world residual variance."
+      a: "It is an MC Dropout predictive interval (Gal & Ghahramani, ICML 2016), NOT a population parameter confidence interval. In the uncalibrated deployment (±1.05σ), it achieved 95.83% coverage on benchmark data but only 44.44% (16/36) on raw DES APY field harvests due to unmodeled farm-level noise. Rather than hiding this, we applied normalized split-conformal prediction (Lei et al. 2018; Angelopoulos & Bates 2021) on observational data with target 90%. This derived calibrated multiplier m = 2.49 (5-split cross-validation m = 2.58 ± 0.05). On held-out observational data (n=36), recalibrated coverage reached 83.33% (30/36, 95% Wilson CI [68.1%, 92.1%]) with a 5-split mean coverage of 90.56% ± 2.83%. Intervals recalibrated on observational data (target 90%, held-out coverage 83.33%, n=36)."
     },
     {
       q: "7. How does this system meet the broader Project 19 Decision Support requirements?",

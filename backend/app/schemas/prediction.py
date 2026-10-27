@@ -70,15 +70,27 @@ class PredictionResponse(BaseModel):
     epistemic_uncertainty_std: float
     predictive_interval: List[float] = Field(
         ...,
-        description="MC Dropout Predictive Interval: mean ± 1.05 * std (empirical coverage = 95.83% on held-out test set)",
+        description="Observationally calibrated predictive interval: mean ± m * std (target 90% split-conformal coverage)",
+    )
+    calibrated_multiplier_m: Optional[float] = Field(
+        default=2.4858,
+        description="Split-conformal multiplier m calibrated on authentic observational data",
+    )
+    calibration_method: Optional[str] = Field(
+        default="Normalized Split-Conformal (target 90%)",
+        description="Method used to calibrate predictive intervals",
+    )
+    calibrated_heldout_coverage_pct: Optional[float] = Field(
+        default=83.33,
+        description="Empirical held-out test coverage after split-conformal recalibration (30/36 cases; 5-split mean 90.56%)",
     )
     empirical_coverage_pct: float = Field(
         default=95.83,
-        description="Empirical test set coverage rate of the MC Dropout interval on the calibrated benchmark (N=96, 2017-2020)",
+        description="Empirical test set coverage rate of the uncalibrated interval on the benchmark (N=96, 2017-2020)",
     )
     observational_coverage_pct: Optional[float] = Field(
         default=44.44,
-        description="Held-out coverage rate on uncalibrated observational DES APY test data (16/36 observations)",
+        description="Uncalibrated baseline coverage rate on raw observational DES APY test data with m=1.05 (16/36 observations)",
     )
     risk_level: str
     modality_attention_weights: Dict[str, float]

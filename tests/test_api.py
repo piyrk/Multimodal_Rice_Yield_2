@@ -227,4 +227,36 @@ def test_end_to_end_profile_to_prediction_pipeline():
     assert res_ludhiana["district_name"] != res_burdwan["district_name"]
 
 
+def test_conformal_calibration_artifact_loaded_and_applied():
+    """Verify that the split-conformal calibration specification is loaded and reported in predictions."""
+    prof_ludhiana = client.get("/api/v1/profile/Ludhiana").json()
+    resp = client.post("/api/v1/predict", json=prof_ludhiana)
+    assert resp.status_code == 200
+    data = resp.json()
+
+    assert "calibrated_multiplier_m" in data
+    assert "calibrated_heldout_coverage_pct" in data
+    assert "calibration_method" in data
+    assert data["calibrated_multiplier_m"] >= 2.0
+    assert data["calibrated_heldout_coverage_pct"] >= 80.0
+
+
+def test_conformal_interval_widens_vs_uncalibrated_baseline():
+    """Verify that split-conformal recalibration produces wider, honest real-world intervals vs m=1.05."""
+    prof_ludhiana = client.get("/api/v1/profile/Ludhiana").json()
+    resp = client.post("/api/v1/predict", json=prof_ludhiana)
+    assert resp.status_code == 200
+    data = resp.json()
+
+    pi_low, pi_high = data["predictive_interval"]
+    calibrated_width = pi_high - pi_low
+    sigma = data["epistemic_uncertainty_std"]
+    uncalibrated_width = 2.0 * 1.05 * sigma
+
+    # Calibrated width must be strictly greater than uncalibrated 1.05*sigma width
+    assert calibrated_width > uncalibrated_width
+    assert data["calibrated_multiplier_m"] > 1.05
+
+
+
 

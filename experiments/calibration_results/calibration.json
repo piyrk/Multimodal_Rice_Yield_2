@@ -1,0 +1,87 @@
+{
+  "method": "Normalized Split-Conformal Prediction (Angelopoulos & Bates 2021; Lei et al. 2018)",
+  "target_coverage_pct": 90.0,
+  "calibrated_multiplier_m": 2.4858,
+  "stability_5_split": {
+    "multiplier_m_mean": 2.5809,
+    "multiplier_m_std": 0.0545,
+    "held_out_coverage_mean_pct": 90.56,
+    "held_out_coverage_std_pct": 2.83,
+    "mean_interval_width_mean_tonnes_per_ha": 1.2981,
+    "mean_interval_width_std_tonnes_per_ha": 0.0778,
+    "splits": [
+      {
+        "split_id": 1,
+        "multiplier_m": 2.5075,
+        "held_out_coverage_pct": 86.11,
+        "n_covered": "31/36",
+        "mean_interval_width_tonnes_per_ha": 1.1608
+      },
+      {
+        "split_id": 2,
+        "multiplier_m": 2.6396,
+        "held_out_coverage_pct": 94.44,
+        "n_covered": "34/36",
+        "mean_interval_width_tonnes_per_ha": 1.3888
+      },
+      {
+        "split_id": 3,
+        "multiplier_m": 2.6173,
+        "held_out_coverage_pct": 91.67,
+        "n_covered": "33/36",
+        "mean_interval_width_tonnes_per_ha": 1.3245
+      },
+      {
+        "split_id": 4,
+        "multiplier_m": 2.5229,
+        "held_out_coverage_pct": 88.89,
+        "n_covered": "32/36",
+        "mean_interval_width_tonnes_per_ha": 1.2748
+      },
+      {
+        "split_id": 5,
+        "multiplier_m": 2.6173,
+        "held_out_coverage_pct": 91.67,
+        "n_covered": "33/36",
+        "mean_interval_width_tonnes_per_ha": 1.3418
+      }
+    ]
+  },
+  "primary_chronological_evaluation": {
+    "calibration_partition": {
+      "years": "2000-2012",
+      "sample_size_n": 267
+    },
+    "held_out_evaluation_partition": {
+      "years": "2013-2014",
+      "sample_size_n": 36
+    },
+    "uncalibrated_baseline": {
+      "multiplier": 1.05,
+      "held_out_coverage_pct": 44.44,
+      "n_covered": "16/36",
+      "wilson_score_95_ci_pct": [
+        29.54,
+        60.42
+      ],
+      "mean_interval_width_tonnes_per_ha": 0.5161
+    },
+    "recalibrated_conformal": {
+      "multiplier": 2.4858,
+      "held_out_coverage_pct": 83.33,
+      "n_covered": "30/36",
+      "wilson_score_95_ci_pct": [
+        68.11,
+        92.13
+      ],
+      "mean_interval_width_tonnes_per_ha": 1.2218
+    }
+  },
+  "provenance": {
+    "observational_dataset": "data/observational/observational_kharif_rice.csv",
+    "weights": "experiments/observational_results/observational_fusion_net.pt",
+    "timestamp": "2026-10-27",
+    "seed": 42,
+    "num_mc_samples": 40
+  }
+}

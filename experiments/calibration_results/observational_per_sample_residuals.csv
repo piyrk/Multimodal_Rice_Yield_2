@@ -1,0 +1,304 @@
+row_id,district_name,state_name,crop_year,season,actual_yield_tonnes_per_ha,predicted_yield_tonnes_per_ha,mc_std_tonnes_per_ha,absolute_residual_tonnes_per_ha,ratio_r,is_held_out_test,is_validation
+0,Ludhiana,Punjab,2000,Kharif,3.9454,3.8279,0.4445,0.1175,0.2644,False,False
+1,Ludhiana,Punjab,2001,Kharif,3.8979,3.9212,0.4542,0.0233,0.0512,False,False
+2,Ludhiana,Punjab,2002,Kharif,4.322,4.0745,0.5128,0.2475,0.4827,False,False
+3,Ludhiana,Punjab,2003,Kharif,4.3444,4.1342,0.5629,0.2102,0.3735,False,False
+4,Ludhiana,Punjab,2004,Kharif,2.86,4.1432,0.6131,1.2832,2.0928,False,False
+5,Ludhiana,Punjab,2005,Kharif,4.52,3.5686,0.4298,0.9514,2.2137,False,False
+6,Ludhiana,Punjab,2006,Kharif,4.371,4.2105,0.5161,0.1605,0.311,False,False
+7,Ludhiana,Punjab,2007,Kharif,4.532,4.2256,0.5749,0.3064,0.5329,False,False
+8,Ludhiana,Punjab,2008,Kharif,4.4685,3.9381,0.4678,0.5304,1.1338,False,False
+9,Ludhiana,Punjab,2009,Kharif,4.6926,4.4594,0.5157,0.2332,0.4522,False,False
+10,Ludhiana,Punjab,2010,Kharif,4.4086,4.3849,0.634,0.0237,0.0374,False,False
+11,Ludhiana,Punjab,2011,Kharif,4.2568,4.2994,0.4695,0.0426,0.0907,False,True
+12,Ludhiana,Punjab,2012,Kharif,4.5486,4.398,0.5421,0.1506,0.2779,False,True
+13,Ludhiana,Punjab,2013,Kharif,4.4241,4.3172,0.5726,0.1069,0.1867,True,False
+14,Ludhiana,Punjab,2014,Kharif,4.3541,4.3063,0.3776,0.0478,0.1266,True,False
+15,Amritsar,Punjab,2000,Kharif,3.047,3.196,0.3576,0.149,0.4168,False,False
+16,Amritsar,Punjab,2001,Kharif,3.0031,3.2666,0.3884,0.2635,0.6785,False,False
+17,Amritsar,Punjab,2002,Kharif,2.8264,3.2726,0.2924,0.4462,1.5263,False,False
+18,Amritsar,Punjab,2003,Kharif,2.6748,3.208,0.3581,0.5332,1.489,False,False
+19,Amritsar,Punjab,2004,Kharif,3.0958,3.0468,0.3237,0.049,0.1513,False,False
+20,Amritsar,Punjab,2005,Kharif,2.9072,3.3013,0.3209,0.3941,1.2282,False,False
+21,Amritsar,Punjab,2006,Kharif,3.0225,3.0343,0.265,0.0118,0.0445,False,False
+22,Amritsar,Punjab,2007,Kharif,3.0674,3.2703,0.292,0.2029,0.6949,False,False
+23,Amritsar,Punjab,2008,Kharif,2.9071,3.1003,0.3447,0.1932,0.5605,False,False
+24,Amritsar,Punjab,2009,Kharif,2.7081,3.2042,0.2776,0.4961,1.7873,False,False
+25,Amritsar,Punjab,2010,Kharif,2.7043,3.1711,0.2866,0.4668,1.6286,False,False
+26,Amritsar,Punjab,2011,Kharif,2.6196,3.0198,0.27,0.4002,1.4821,False,True
+27,Amritsar,Punjab,2012,Kharif,2.9405,3.0162,0.3032,0.0757,0.2498,False,True
+28,Amritsar,Punjab,2013,Kharif,2.8462,3.0935,0.2631,0.2473,0.9402,True,False
+29,Amritsar,Punjab,2014,Kharif,2.7747,2.9556,0.3276,0.1809,0.5523,True,False
+30,Karnal,Haryana,2000,Kharif,2.811,2.8776,0.3095,0.0666,0.2152,False,False
+31,Karnal,Haryana,2001,Kharif,2.9752,2.9125,0.3539,0.0627,0.1772,False,False
+32,Karnal,Haryana,2002,Kharif,2.6774,3.2096,0.302,0.5322,1.7625,False,False
+33,Karnal,Haryana,2003,Kharif,2.9794,2.9983,0.2667,0.0189,0.071,False,False
+34,Karnal,Haryana,2004,Kharif,3.387,3.1979,0.3059,0.1891,0.6181,False,False
+35,Karnal,Haryana,2005,Kharif,3.0805,3.3559,0.2397,0.2754,1.1489,False,False
+36,Karnal,Haryana,2006,Kharif,3.3273,3.3902,0.3355,0.0629,0.1874,False,False
+37,Karnal,Haryana,2007,Kharif,3.6494,3.4907,0.413,0.1587,0.3843,False,False
+38,Karnal,Haryana,2008,Kharif,2.7509,3.4126,0.4064,0.6617,1.628,False,False
+39,Karnal,Haryana,2009,Kharif,3.0376,3.281,0.3112,0.2434,0.7821,False,False
+40,Karnal,Haryana,2010,Kharif,2.6694,3.0871,0.376,0.4177,1.1109,False,False
+41,Karnal,Haryana,2011,Kharif,3.0357,2.8323,0.335,0.2034,0.607,False,True
+42,Karnal,Haryana,2012,Kharif,3.3613,3.1627,0.3623,0.1986,0.5483,False,True
+43,Burdwan,West Bengal,2000,Kharif,2.0286,2.8028,0.2263,0.7742,3.421,False,False
+44,Burdwan,West Bengal,2001,Kharif,2.7475,2.6728,0.2142,0.0747,0.3486,False,False
+45,Burdwan,West Bengal,2002,Kharif,2.9751,2.8552,0.2864,0.1199,0.4187,False,False
+46,Burdwan,West Bengal,2003,Kharif,2.9814,2.9151,0.3407,0.0663,0.1947,False,False
+47,Burdwan,West Bengal,2004,Kharif,2.9555,2.9264,0.2675,0.0291,0.1089,False,False
+48,Burdwan,West Bengal,2005,Kharif,3.2731,3.0485,0.3341,0.2246,0.6722,False,False
+49,Burdwan,West Bengal,2006,Kharif,2.8636,2.9734,0.3041,0.1098,0.3611,False,False
+50,Burdwan,West Bengal,2007,Kharif,2.7186,2.6707,0.2805,0.0479,0.1708,False,False
+51,Burdwan,West Bengal,2008,Kharif,2.803,2.9218,0.2398,0.1188,0.4956,False,False
+52,Burdwan,West Bengal,2009,Kharif,2.96,2.6977,0.2784,0.2623,0.9423,False,False
+53,Burdwan,West Bengal,2010,Kharif,2.8935,3.0463,0.3005,0.1528,0.5085,False,False
+54,Burdwan,West Bengal,2011,Kharif,3.0059,2.807,0.2296,0.1989,0.8662,False,True
+55,Burdwan,West Bengal,2012,Kharif,3.0922,3.149,0.3669,0.0568,0.1549,False,True
+56,Burdwan,West Bengal,2013,Kharif,3.1605,2.8318,0.3118,0.3287,1.0544,True,False
+57,Burdwan,West Bengal,2014,Kharif,3.2422,3.0051,0.3555,0.2371,0.6669,True,False
+58,Birbhum,West Bengal,2000,Kharif,2.3272,2.8404,0.2137,0.5132,2.402,False,False
+59,Birbhum,West Bengal,2001,Kharif,2.961,2.7284,0.2409,0.2326,0.9656,False,False
+60,Birbhum,West Bengal,2002,Kharif,2.8576,2.8772,0.303,0.0196,0.0647,False,False
+61,Birbhum,West Bengal,2003,Kharif,2.9209,3.0102,0.2463,0.0893,0.3624,False,False
+62,Birbhum,West Bengal,2004,Kharif,2.7704,2.8184,0.2673,0.048,0.1796,False,False
+63,Birbhum,West Bengal,2005,Kharif,3.0158,3.0026,0.3146,0.0132,0.0419,False,False
+64,Birbhum,West Bengal,2006,Kharif,3.0701,2.9248,0.2361,0.1453,0.6155,False,False
+65,Birbhum,West Bengal,2007,Kharif,3.0441,2.7107,0.2731,0.3334,1.2208,False,False
+66,Birbhum,West Bengal,2008,Kharif,3.0264,2.8292,0.2916,0.1972,0.6763,False,False
+67,Birbhum,West Bengal,2009,Kharif,2.6744,2.7403,0.2123,0.0659,0.3106,False,False
+68,Birbhum,West Bengal,2010,Kharif,2.8854,3.0971,0.3015,0.2117,0.702,False,False
+69,Birbhum,West Bengal,2011,Kharif,2.8824,2.7503,0.2679,0.1321,0.493,False,True
+70,Birbhum,West Bengal,2012,Kharif,2.8059,2.837,0.261,0.0311,0.1193,False,True
+71,Birbhum,West Bengal,2013,Kharif,3.304,2.7339,0.271,0.5701,2.1035,True,False
+72,Birbhum,West Bengal,2014,Kharif,3.262,3.1179,0.3293,0.1441,0.4375,True,False
+73,Midnapore,West Bengal,2000,Kharif,2.1952,2.3771,0.2943,0.1819,0.6182,False,False
+74,Midnapore,West Bengal,2001,Kharif,2.2591,2.3048,0.1832,0.0457,0.2492,False,False
+75,Midnapore,West Bengal,2002,Kharif,2.3235,2.4309,0.2862,0.1074,0.3754,False,False
+76,Midnapore,West Bengal,2003,Kharif,2.218,2.5165,0.227,0.2985,1.3151,False,False
+77,Midnapore,West Bengal,2004,Kharif,2.6212,2.4866,0.246,0.1346,0.547,False,False
+78,Midnapore,West Bengal,2005,Kharif,2.3979,2.6057,0.2769,0.2078,0.7505,False,False
+79,Midnapore,West Bengal,2006,Kharif,2.4971,2.5392,0.2393,0.0421,0.1759,False,False
+80,Midnapore,West Bengal,2007,Kharif,2.62,2.5857,0.2179,0.0343,0.1574,False,False
+81,Midnapore,West Bengal,2008,Kharif,2.6098,2.6409,0.2796,0.0311,0.1112,False,False
+82,Midnapore,West Bengal,2009,Kharif,2.4457,2.677,0.2324,0.2313,0.9952,False,False
+83,Midnapore,West Bengal,2010,Kharif,2.484,2.8008,0.2697,0.3168,1.1746,False,False
+84,Midnapore,West Bengal,2011,Kharif,2.5804,2.5512,0.2381,0.0292,0.1224,False,True
+85,Midnapore,West Bengal,2012,Kharif,2.7067,2.7699,0.3358,0.0632,0.1883,False,True
+86,Midnapore,West Bengal,2013,Kharif,2.0956,2.4809,0.2711,0.3853,1.4211,True,False
+87,Midnapore,West Bengal,2014,Kharif,2.7177,2.3585,0.2958,0.3592,1.2144,True,False
+88,Varanasi,Uttar Pradesh,2000,Kharif,2.4048,2.1956,0.2519,0.2092,0.8304,False,False
+89,Varanasi,Uttar Pradesh,2001,Kharif,2.5048,2.5381,0.2246,0.0333,0.1481,False,False
+90,Varanasi,Uttar Pradesh,2002,Kharif,1.7984,2.1655,0.2533,0.3671,1.4489,False,False
+91,Varanasi,Uttar Pradesh,2003,Kharif,2.6704,2.0706,0.2272,0.5998,2.6396,False,False
+92,Varanasi,Uttar Pradesh,2004,Kharif,0.5786,1.7627,0.1514,1.1841,7.8197,False,False
+93,Varanasi,Uttar Pradesh,2005,Kharif,1.521,1.5878,0.2845,0.0668,0.2349,False,False
+94,Varanasi,Uttar Pradesh,2006,Kharif,1.569,1.4988,0.2117,0.0702,0.3317,False,False
+95,Varanasi,Uttar Pradesh,2007,Kharif,1.696,1.7621,0.1953,0.0661,0.3384,False,False
+96,Varanasi,Uttar Pradesh,2008,Kharif,2.146,2.0009,0.2299,0.1451,0.6312,False,False
+97,Varanasi,Uttar Pradesh,2009,Kharif,1.483,1.7189,0.1566,0.2359,1.5058,False,False
+98,Varanasi,Uttar Pradesh,2010,Kharif,2.02,1.869,0.194,0.151,0.7786,False,False
+99,Varanasi,Uttar Pradesh,2011,Kharif,2.215,2.2041,0.2136,0.0109,0.0512,False,True
+100,Varanasi,Uttar Pradesh,2012,Kharif,2.428,2.0679,0.1841,0.3601,1.9556,False,True
+101,Varanasi,Uttar Pradesh,2013,Kharif,2.151,2.2673,0.1791,0.1163,0.6491,True,False
+102,Varanasi,Uttar Pradesh,2014,Kharif,2.322,2.0291,0.2128,0.2929,1.3768,True,False
+103,Gorakhpur,Uttar Pradesh,2000,Kharif,1.8626,1.6993,0.1577,0.1633,1.0357,False,False
+104,Gorakhpur,Uttar Pradesh,2001,Kharif,1.6866,1.7684,0.1965,0.0818,0.4161,False,False
+105,Gorakhpur,Uttar Pradesh,2002,Kharif,1.4993,1.8536,0.1491,0.3543,2.3753,False,False
+106,Gorakhpur,Uttar Pradesh,2003,Kharif,2.0231,1.8262,0.1919,0.1969,1.0263,False,False
+107,Gorakhpur,Uttar Pradesh,2004,Kharif,1.5168,1.505,0.189,0.0118,0.0623,False,False
+108,Gorakhpur,Uttar Pradesh,2005,Kharif,1.802,1.7331,0.1393,0.0689,0.4947,False,False
+109,Gorakhpur,Uttar Pradesh,2006,Kharif,1.696,1.7498,0.1614,0.0538,0.3334,False,False
+110,Gorakhpur,Uttar Pradesh,2007,Kharif,1.886,1.8508,0.1538,0.0352,0.2289,False,False
+111,Gorakhpur,Uttar Pradesh,2008,Kharif,1.938,1.9208,0.1351,0.0172,0.1272,False,False
+112,Gorakhpur,Uttar Pradesh,2009,Kharif,1.821,1.7189,0.1828,0.1021,0.5584,False,False
+113,Gorakhpur,Uttar Pradesh,2010,Kharif,2.027,1.8921,0.1782,0.1349,0.7573,False,False
+114,Gorakhpur,Uttar Pradesh,2011,Kharif,2.183,1.9763,0.2059,0.2067,1.0039,False,True
+115,Gorakhpur,Uttar Pradesh,2012,Kharif,2.278,1.9837,0.1838,0.2943,1.6015,False,True
+116,Gorakhpur,Uttar Pradesh,2013,Kharif,2.403,2.0737,0.2003,0.3293,1.6439,True,False
+117,Gorakhpur,Uttar Pradesh,2014,Kharif,2.21,2.0602,0.183,0.1498,0.8185,True,False
+118,Bareilly,Uttar Pradesh,2000,Kharif,1.9366,2.0483,0.2337,0.1117,0.478,False,False
+119,Bareilly,Uttar Pradesh,2001,Kharif,2.0689,1.9844,0.254,0.0845,0.3328,False,False
+120,Bareilly,Uttar Pradesh,2002,Kharif,1.8689,1.9382,0.19,0.0693,0.3644,False,False
+121,Bareilly,Uttar Pradesh,2003,Kharif,2.1187,2.1023,0.2351,0.0164,0.0699,False,False
+122,Bareilly,Uttar Pradesh,2004,Kharif,1.9186,1.9923,0.1681,0.0737,0.4383,False,False
+123,Bareilly,Uttar Pradesh,2005,Kharif,1.888,1.9915,0.2152,0.1035,0.4808,False,False
+124,Bareilly,Uttar Pradesh,2006,Kharif,1.789,1.8376,0.2127,0.0486,0.2287,False,False
+125,Bareilly,Uttar Pradesh,2007,Kharif,1.935,1.9283,0.1358,0.0067,0.0494,False,False
+126,Bareilly,Uttar Pradesh,2008,Kharif,1.749,2.017,0.2112,0.268,1.2688,False,False
+127,Bareilly,Uttar Pradesh,2009,Kharif,1.786,1.9601,0.1637,0.1741,1.0635,False,False
+128,Bareilly,Uttar Pradesh,2010,Kharif,1.658,1.9797,0.1596,0.3217,2.0155,False,False
+129,Bareilly,Uttar Pradesh,2011,Kharif,2.52,2.0035,0.1661,0.5165,3.1103,False,True
+130,Bareilly,Uttar Pradesh,2012,Kharif,2.234,1.7355,0.1845,0.4985,2.7013,False,True
+131,Bareilly,Uttar Pradesh,2013,Kharif,2.25,2.192,0.2011,0.058,0.2883,True,False
+132,Bareilly,Uttar Pradesh,2014,Kharif,2.059,2.1333,0.2426,0.0743,0.3064,True,False
+133,Patna,Bihar,2000,Kharif,1.2371,1.2991,0.1197,0.062,0.5185,False,False
+134,Patna,Bihar,2001,Kharif,1.6933,1.6637,0.1815,0.0296,0.1632,False,False
+135,Nalanda,Bihar,2002,Kharif,0.8921,1.0512,0.1014,0.1591,1.5687,False,False
+136,Nalanda,Bihar,2003,Kharif,0.978,1.1376,0.1715,0.1596,0.9303,False,False
+137,Nalanda,Bihar,2005,Kharif,0.4625,0.9429,0.133,0.4804,3.6113,False,False
+138,Nalanda,Bihar,2006,Kharif,2.3829,2.1045,0.2368,0.2784,1.1759,False,False
+139,Nalanda,Bihar,2007,Kharif,1.3159,1.5018,0.1438,0.1859,1.2933,False,False
+140,Nalanda,Bihar,2008,Kharif,1.3918,1.6107,0.2051,0.2189,1.0673,False,False
+141,Nalanda,Bihar,2009,Kharif,0.9298,1.0627,0.1058,0.1329,1.2555,False,False
+142,Nalanda,Bihar,2010,Kharif,1.0841,1.0477,0.1438,0.0364,0.2528,False,False
+143,Nalanda,Bihar,2011,Kharif,2.7515,1.5777,0.1401,1.1738,8.3755,False,True
+144,Nalanda,Bihar,2012,Kharif,2.5077,1.5368,0.1487,0.9709,6.5284,False,True
+145,Nalanda,Bihar,2013,Kharif,2.2755,1.9776,0.2684,0.2979,1.1099,True,False
+146,Nalanda,Bihar,2014,Kharif,2.5863,1.9097,0.1828,0.6766,3.7015,True,False
+147,Cuttack,Odisha,2001,Kharif,1.6831,1.8282,0.2193,0.1451,0.6617,False,False
+148,Cuttack,Odisha,2002,Kharif,1.1613,1.4319,0.1436,0.2706,1.8842,False,False
+149,Cuttack,Odisha,2003,Kharif,1.1479,1.3873,0.1432,0.2394,1.6713,False,False
+150,Baleshwar,Odisha,2001,Kharif,1.7733,1.7391,0.1664,0.0342,0.2053,False,False
+151,Baleshwar,Odisha,2002,Kharif,0.9554,1.4735,0.1195,0.5181,4.3364,False,False
+152,Baleshwar,Odisha,2003,Kharif,1.5787,1.368,0.1924,0.2107,1.095,False,False
+153,Sambalpur,Odisha,2001,Kharif,1.8552,1.7413,0.1413,0.1139,0.8065,False,False
+154,Sambalpur,Odisha,2002,Kharif,1.1295,1.2638,0.1605,0.1343,0.8365,False,False
+155,Sambalpur,Odisha,2003,Kharif,1.7724,1.7404,0.1456,0.032,0.2201,False,False
+156,East Godavari,Andhra Pradesh,2000,Kharif,2.691,2.7448,0.3098,0.0538,0.1737,False,False
+157,East Godavari,Andhra Pradesh,2001,Kharif,2.626,2.8108,0.2516,0.1848,0.7346,False,False
+158,East Godavari,Andhra Pradesh,2002,Kharif,2.829,2.9204,0.2986,0.0914,0.3062,False,False
+159,East Godavari,Andhra Pradesh,2003,Kharif,3.249,2.9618,0.3215,0.2872,0.8934,False,False
+160,East Godavari,Andhra Pradesh,2004,Kharif,3.312,3.3109,0.3531,0.0011,0.0032,False,False
+161,East Godavari,Andhra Pradesh,2005,Kharif,1.604,2.5928,0.2601,0.9888,3.8014,False,False
+162,East Godavari,Andhra Pradesh,2006,Kharif,2.403,2.4618,0.2111,0.0588,0.2786,False,False
+163,East Godavari,Andhra Pradesh,2007,Kharif,2.9545,2.9271,0.3275,0.0274,0.0835,False,False
+164,East Godavari,Andhra Pradesh,2008,Kharif,2.983,2.9743,0.3106,0.0087,0.0282,False,False
+165,East Godavari,Andhra Pradesh,2009,Kharif,3.05,2.8946,0.2685,0.1554,0.5788,False,False
+166,East Godavari,Andhra Pradesh,2010,Kharif,1.926,2.6354,0.2812,0.7094,2.5229,False,False
+167,East Godavari,Andhra Pradesh,2011,Kharif,2.9869,2.8367,0.3345,0.1502,0.4492,False,True
+168,East Godavari,Andhra Pradesh,2012,Kharif,1.531,2.8681,0.2953,1.3371,4.5277,False,True
+169,East Godavari,Andhra Pradesh,2013,Kharif,1.846,2.3597,0.2505,0.5137,2.0509,True,False
+170,East Godavari,Andhra Pradesh,2014,Kharif,3.016,2.4966,0.2301,0.5194,2.257,True,False
+171,West Godavari,Andhra Pradesh,2000,Kharif,2.911,2.9313,0.2739,0.0203,0.0743,False,False
+172,West Godavari,Andhra Pradesh,2001,Kharif,2.589,2.9976,0.2938,0.4086,1.391,False,False
+173,West Godavari,Andhra Pradesh,2002,Kharif,3.072,2.8212,0.2526,0.2508,0.9927,False,False
+174,West Godavari,Andhra Pradesh,2003,Kharif,3.499,3.1535,0.3535,0.3455,0.9773,False,False
+175,West Godavari,Andhra Pradesh,2004,Kharif,3.448,3.169,0.2863,0.279,0.9744,False,False
+176,West Godavari,Andhra Pradesh,2005,Kharif,1.877,2.6458,0.2668,0.7688,2.8818,False,False
+177,West Godavari,Andhra Pradesh,2006,Kharif,2.781,2.4957,0.2148,0.2853,1.3278,False,False
+178,West Godavari,Andhra Pradesh,2007,Kharif,3.248,2.8912,0.267,0.3568,1.3363,False,False
+179,West Godavari,Andhra Pradesh,2008,Kharif,3.048,2.9154,0.3643,0.1326,0.3641,False,False
+180,West Godavari,Andhra Pradesh,2009,Kharif,3.101,3.098,0.2533,0.003,0.0118,False,False
+181,West Godavari,Andhra Pradesh,2010,Kharif,2.1816,2.5774,0.2324,0.3958,1.7028,False,False
+182,West Godavari,Andhra Pradesh,2011,Kharif,3.1808,2.8388,0.2485,0.342,1.3761,False,True
+183,West Godavari,Andhra Pradesh,2012,Kharif,1.989,2.719,0.2487,0.73,2.9355,False,True
+184,West Godavari,Andhra Pradesh,2013,Kharif,2.169,2.5184,0.1834,0.3494,1.9048,True,False
+185,West Godavari,Andhra Pradesh,2014,Kharif,3.168,2.7027,0.2367,0.4653,1.9658,True,False
+186,Nalgonda,Telangana,2000,Kharif,3.174,2.9452,0.3186,0.2288,0.7181,False,False
+187,Nalgonda,Telangana,2001,Kharif,2.774,2.8215,0.3086,0.0475,0.1538,False,False
+188,Nalgonda,Telangana,2002,Kharif,2.244,2.7736,0.2625,0.5296,2.0178,False,False
+189,Nalgonda,Telangana,2003,Kharif,2.995,2.7751,0.3039,0.2199,0.7236,False,False
+190,Nalgonda,Telangana,2004,Kharif,2.818,2.7655,0.3028,0.0525,0.1734,False,False
+191,Nalgonda,Telangana,2005,Kharif,2.845,2.6191,0.2218,0.2259,1.0182,False,False
+192,Nalgonda,Telangana,2006,Kharif,2.591,2.7655,0.2938,0.1745,0.594,False,False
+193,Nalgonda,Telangana,2007,Kharif,3.1656,2.8421,0.3119,0.3235,1.0371,False,False
+194,Nalgonda,Telangana,2008,Kharif,3.111,3.2797,0.3699,0.1687,0.4561,False,False
+195,Nalgonda,Telangana,2009,Kharif,3.235,3.1791,0.3539,0.0559,0.1581,False,False
+196,Nalgonda,Telangana,2010,Kharif,3.117,2.9776,0.3781,0.1394,0.3687,False,False
+197,Nalgonda,Telangana,2011,Kharif,2.928,3.4416,0.4148,0.5136,1.2382,False,True
+198,Nalgonda,Telangana,2013,Kharif,2.842,2.8818,0.2692,0.0398,0.148,True,False
+199,Nalgonda,Telangana,2014,Kharif,3.098,2.9258,0.2258,0.1722,0.7627,True,False
+200,Thanjavur,Tamil Nadu,2000,Kharif,3.4449,3.4963,0.3545,0.0514,0.145,False,False
+201,Thanjavur,Tamil Nadu,2001,Kharif,2.9228,3.4508,0.3684,0.528,1.4333,False,False
+202,Thanjavur,Tamil Nadu,2002,Kharif,2.287,3.0133,0.2681,0.7263,2.7092,False,False
+203,Thanjavur,Tamil Nadu,2003,Kharif,2.8788,3.0437,0.2622,0.1649,0.6289,False,False
+204,Thanjavur,Tamil Nadu,2004,Kharif,2.7354,2.9383,0.3247,0.2029,0.6248,False,False
+205,Thanjavur,Tamil Nadu,2005,Kharif,2.579,2.6629,0.2528,0.0839,0.3319,False,False
+206,Thanjavur,Tamil Nadu,2006,Kharif,3.6419,2.7934,0.2875,0.8485,2.9517,False,False
+207,Thanjavur,Tamil Nadu,2007,Kharif,3.1928,3.1606,0.3222,0.0322,0.1001,False,False
+208,Thanjavur,Tamil Nadu,2008,Kharif,2.0168,3.171,0.3345,1.1542,3.4503,False,False
+209,Thanjavur,Tamil Nadu,2009,Kharif,2.6215,2.8392,0.2626,0.2177,0.8288,False,False
+210,Thanjavur,Tamil Nadu,2010,Kharif,2.8686,2.9947,0.2859,0.1261,0.4411,False,False
+211,Thanjavur,Tamil Nadu,2011,Kharif,3.9952,2.7337,0.261,1.2615,4.8344,False,True
+212,Thanjavur,Tamil Nadu,2012,Kharif,2.9336,3.2778,0.3519,0.3442,0.9781,False,True
+213,Thanjavur,Tamil Nadu,2013,Kharif,4.9703,3.1673,0.3384,1.803,5.3279,True,False
+214,Tiruchirappalli,Tamil Nadu,2000,Kharif,4.3405,3.7506,0.4978,0.5899,1.1848,False,False
+215,Tiruchirappalli,Tamil Nadu,2001,Kharif,4.1001,3.9469,0.5083,0.1532,0.3013,False,False
+216,Tiruchirappalli,Tamil Nadu,2002,Kharif,2.9944,3.522,0.4488,0.5276,1.1756,False,False
+217,Tiruchirappalli,Tamil Nadu,2003,Kharif,2.937,3.6232,0.3583,0.6862,1.9151,False,False
+218,Tiruchirappalli,Tamil Nadu,2004,Kharif,3.3034,3.3361,0.3615,0.0327,0.0903,False,False
+219,Tiruchirappalli,Tamil Nadu,2005,Kharif,2.975,3.214,0.2815,0.239,0.8492,False,False
+220,Tiruchirappalli,Tamil Nadu,2006,Kharif,3.938,3.1588,0.2862,0.7792,2.7228,False,False
+221,Tiruchirappalli,Tamil Nadu,2007,Kharif,3.7092,3.6894,0.4008,0.0198,0.0495,False,False
+222,Tiruchirappalli,Tamil Nadu,2008,Kharif,3.6176,3.5742,0.3291,0.0434,0.1319,False,False
+223,Tiruchirappalli,Tamil Nadu,2009,Kharif,4.1413,3.565,0.3892,0.5763,1.4808,False,False
+224,Tiruchirappalli,Tamil Nadu,2010,Kharif,3.9922,3.7762,0.4526,0.216,0.4772,False,False
+225,Tiruchirappalli,Tamil Nadu,2011,Kharif,4.7307,3.9088,0.4362,0.8219,1.8842,False,True
+226,Tiruchirappalli,Tamil Nadu,2012,Kharif,3.0523,3.6656,0.4645,0.6133,1.3203,False,True
+227,Tiruchirappalli,Tamil Nadu,2013,Kharif,4.7166,3.5638,0.5006,1.1528,2.3031,True,False
+228,Raipur,Chhattisgarh,2000,Kharif,0.4061,0.8186,0.1789,0.4125,2.3064,False,False
+229,Raipur,Chhattisgarh,2001,Kharif,1.1916,1.277,0.14,0.0854,0.6098,False,False
+230,Raipur,Chhattisgarh,2002,Kharif,0.7485,0.8051,0.1844,0.0566,0.307,False,False
+231,Raipur,Chhattisgarh,2003,Kharif,1.3658,1.5969,0.1305,0.2311,1.7711,False,False
+232,Raipur,Chhattisgarh,2004,Kharif,1.2009,1.2246,0.1379,0.0237,0.172,False,False
+233,Raipur,Chhattisgarh,2005,Kharif,1.5522,1.5583,0.1159,0.0061,0.0529,False,False
+234,Raipur,Chhattisgarh,2006,Kharif,1.4708,1.3215,0.1046,0.1493,1.4266,False,False
+235,Raipur,Chhattisgarh,2007,Kharif,1.4919,1.5453,0.1204,0.0534,0.4434,False,False
+236,Raipur,Chhattisgarh,2008,Kharif,1.3075,1.2162,0.1293,0.0913,0.7058,False,False
+237,Raipur,Chhattisgarh,2009,Kharif,1.4439,1.1481,0.1322,0.2958,2.237,False,False
+238,Raipur,Chhattisgarh,2010,Kharif,1.4129,1.5037,0.1499,0.0908,0.606,False,False
+239,Raipur,Chhattisgarh,2011,Kharif,1.3009,1.6967,0.1339,0.3958,2.9552,False,True
+240,Raipur,Chhattisgarh,2012,Kharif,2.0421,1.6805,0.1692,0.3616,2.1369,False,True
+241,Raipur,Chhattisgarh,2013,Kharif,1.6956,1.8162,0.1576,0.1206,0.7651,True,False
+242,Raipur,Chhattisgarh,2014,Kharif,2.0227,1.5997,0.1406,0.423,3.0084,True,False
+243,Bilaspur,Chhattisgarh,2000,Kharif,0.6226,0.7359,0.1736,0.1133,0.6527,False,False
+244,Bilaspur,Chhattisgarh,2001,Kharif,1.4035,1.4712,0.1042,0.0677,0.6502,False,False
+245,Bilaspur,Chhattisgarh,2002,Kharif,0.6704,0.8316,0.191,0.1612,0.8439,False,False
+246,Bilaspur,Chhattisgarh,2003,Kharif,1.5802,1.6018,0.1645,0.0216,0.1313,False,False
+247,Bilaspur,Chhattisgarh,2004,Kharif,1.3493,1.4481,0.1247,0.0988,0.7925,False,False
+248,Bilaspur,Chhattisgarh,2005,Kharif,1.5988,1.5749,0.1388,0.0239,0.1718,False,False
+249,Bilaspur,Chhattisgarh,2006,Kharif,1.4258,1.4084,0.19,0.0174,0.0916,False,False
+250,Bilaspur,Chhattisgarh,2007,Kharif,1.444,1.6309,0.1487,0.1869,1.2564,False,False
+251,Bilaspur,Chhattisgarh,2008,Kharif,1.3825,1.3636,0.1224,0.0189,0.1541,False,False
+252,Bilaspur,Chhattisgarh,2009,Kharif,1.0211,1.0397,0.186,0.0186,0.1003,False,False
+253,Bilaspur,Chhattisgarh,2010,Kharif,1.6762,1.4341,0.1214,0.2421,1.9943,False,False
+254,Bilaspur,Chhattisgarh,2011,Kharif,1.8351,1.7545,0.1615,0.0806,0.499,False,True
+255,Bilaspur,Chhattisgarh,2012,Kharif,1.9865,1.6899,0.1307,0.2966,2.2701,False,True
+256,Bilaspur,Chhattisgarh,2013,Kharif,2.0644,1.7182,0.1381,0.3462,2.5075,True,False
+257,Bilaspur,Chhattisgarh,2014,Kharif,2.0059,1.7025,0.1759,0.3034,1.7247,True,False
+258,Durg,Chhattisgarh,2000,Kharif,0.515,0.8655,0.1264,0.3505,2.7724,False,False
+259,Durg,Chhattisgarh,2001,Kharif,1.3854,1.2565,0.0944,0.1289,1.3655,False,False
+260,Durg,Chhattisgarh,2002,Kharif,0.5392,0.7759,0.1503,0.2367,1.5746,False,False
+261,Durg,Chhattisgarh,2003,Kharif,1.618,1.5662,0.1555,0.0518,0.333,False,False
+262,Durg,Chhattisgarh,2004,Kharif,1.409,1.1741,0.1303,0.2349,1.8035,False,False
+263,Durg,Chhattisgarh,2005,Kharif,1.6454,1.5587,0.1398,0.0867,0.6199,False,False
+264,Durg,Chhattisgarh,2006,Kharif,1.462,1.3605,0.114,0.1015,0.8904,False,False
+265,Durg,Chhattisgarh,2007,Kharif,1.5707,1.5211,0.1372,0.0496,0.3618,False,False
+266,Durg,Chhattisgarh,2008,Kharif,0.9058,1.2606,0.1212,0.3548,2.9279,False,False
+267,Durg,Chhattisgarh,2009,Kharif,0.7883,1.278,0.1387,0.4897,3.5293,False,False
+268,Durg,Chhattisgarh,2010,Kharif,1.8281,1.556,0.1406,0.2721,1.9352,False,False
+269,Durg,Chhattisgarh,2011,Kharif,1.9221,1.7101,0.1499,0.212,1.4144,False,True
+270,Durg,Chhattisgarh,2012,Kharif,2.2817,1.769,0.1096,0.5127,4.6788,False,True
+271,Durg,Chhattisgarh,2013,Kharif,1.9415,1.7863,0.1527,0.1552,1.0168,True,False
+272,Durg,Chhattisgarh,2014,Kharif,1.8552,1.8051,0.1912,0.0501,0.2623,True,False
+273,Kamrup,Assam,2000,Kharif,1.3737,1.6091,0.1253,0.2354,1.8792,False,False
+274,Kamrup,Assam,2001,Kharif,1.4136,1.5742,0.1514,0.1606,1.0607,False,False
+275,Kamrup,Assam,2002,Kharif,1.4939,1.6093,0.1425,0.1154,0.8094,False,False
+276,Kamrup,Assam,2003,Kharif,1.5176,1.7004,0.148,0.1828,1.2358,False,False
+277,Kamrup,Assam,2004,Kharif,1.5594,1.6277,0.1615,0.0683,0.4229,False,False
+278,Kamrup,Assam,2005,Kharif,1.6397,1.6815,0.1931,0.0418,0.2164,False,False
+279,Kamrup,Assam,2006,Kharif,1.2979,1.4501,0.161,0.1522,0.9451,False,False
+280,Kamrup,Assam,2007,Kharif,1.5053,1.6575,0.1538,0.1522,0.9896,False,False
+281,Kamrup,Assam,2008,Kharif,1.636,1.5764,0.16,0.0596,0.3722,False,False
+282,Kamrup,Assam,2009,Kharif,1.8327,1.6949,0.1325,0.1378,1.0399,False,False
+283,Kamrup,Assam,2010,Kharif,2.3112,1.7375,0.1847,0.5737,3.105,False,False
+284,Kamrup,Assam,2011,Kharif,1.6713,1.7672,0.1755,0.0959,0.5463,False,True
+285,Kamrup,Assam,2012,Kharif,2.1363,1.762,0.1753,0.3743,2.1353,False,True
+286,Kamrup,Assam,2013,Kharif,2.1403,1.7173,0.1455,0.423,2.9082,True,False
+287,Kamrup,Assam,2014,Kharif,2.0782,1.8672,0.1693,0.211,1.2464,True,False
+288,Nagaon,Assam,2000,Kharif,1.6401,1.6892,0.1425,0.0491,0.3444,False,False
+289,Nagaon,Assam,2001,Kharif,1.7509,1.5448,0.1526,0.2061,1.3502,False,False
+290,Nagaon,Assam,2002,Kharif,1.6944,1.7008,0.1983,0.0064,0.0324,False,False
+291,Nagaon,Assam,2003,Kharif,1.8007,1.7429,0.1568,0.0578,0.3685,False,False
+292,Nagaon,Assam,2004,Kharif,1.6981,1.7336,0.1278,0.0355,0.2775,False,False
+293,Nagaon,Assam,2005,Kharif,1.5095,1.667,0.1561,0.1575,1.0093,False,False
+294,Nagaon,Assam,2006,Kharif,1.3971,1.4576,0.1126,0.0605,0.5371,False,False
+295,Nagaon,Assam,2007,Kharif,1.4265,1.6655,0.1279,0.239,1.8683,False,False
+296,Nagaon,Assam,2008,Kharif,1.4825,1.6557,0.1281,0.1732,1.352,False,False
+297,Nagaon,Assam,2009,Kharif,1.9974,1.6312,0.1473,0.3662,2.4858,False,False
+298,Nagaon,Assam,2010,Kharif,1.6687,1.7593,0.143,0.0906,0.6334,False,False
+299,Nagaon,Assam,2011,Kharif,1.5288,1.5916,0.119,0.0628,0.5273,False,True
+300,Nagaon,Assam,2012,Kharif,1.8749,1.7012,0.122,0.1737,1.4235,False,True
+301,Nagaon,Assam,2013,Kharif,2.1047,1.7544,0.1338,0.3503,2.6173,True,False
+302,Nagaon,Assam,2014,Kharif,1.8434,1.7585,0.1625,0.0849,0.5228,True,False

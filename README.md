@@ -5,7 +5,7 @@
 [![FastAPI](https://img.shields.io/badge/Backend-FastAPI_0.143-009688.svg)](https://fastapi.tiangolo.com/)
 [![React Vite](https://img.shields.io/badge/Frontend-React_18_%2B_Vite-61DAFB.svg)](https://vitejs.dev/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Tests: Passed](https://img.shields.io/badge/Tests-37%20Passed-brightgreen.svg)]()
+[![Tests: Passed](https://img.shields.io/badge/Tests-39%20Passed-brightgreen.svg)]()
 [![Audit: Verified](https://img.shields.io/badge/Research_Audit-YELLOW_Verified-yellow.svg)](docs/research_integrity_audit.md)
 [![Observational: 303 Records](https://img.shields.io/badge/Observational_Data-303_Records-emerald.svg)](docs/observational_dataset_report.md)
 
@@ -272,8 +272,8 @@ python scripts/predict.py --district Ludhiana
 ### 9.4 Run Test Suite
 ```powershell
 python -m pytest tests/ -v
-# 37 unit, integration, and browser regression tests passing:
-# - 13 API route contracts & validation (test_api.py)
+# 39 unit, integration, browser regression, and conformal calibration tests passing:
+# - 15 API route contracts & conformal calibration validation (test_api.py)
 # - 6 Selenium Chrome headless browser regression (test_browser_regression.py)
 # - 6 Frontend state & profile integration (test_frontend_integration.py)
 # - 5 Climate feature formulas & bounds (test_features.py)

@@ -89,3 +89,35 @@ $$\mathcal{I}(x) = \left[ \mu_{\hat{y}}(x) - c \cdot \sigma_{\hat{y}}(x), \; \mu
 2. **Real-Data Calibration:** To achieve $\approx 85-90\%$ empirical coverage on real Indian agricultural statistics, the epistemic interval requires $c \approx 2.8 - 3.0$ ($\approx 1.5 - 1.6\text{ t/ha}$ interval width).
 3. **No Guaranteed 95% Claim:** All project documentation and UI outputs report empirical coverage as measured on specific held-out test splits, never claiming an unconditioned "guaranteed 95% confidence interval."
 
+
+---
+
+## 5. Normalized Split-Conformal Prediction Recalibration (Target 90%)
+
+### A. Mathematical Methodology
+Following distribution-free conformal prediction principles (Lei et al. 2018; Angelopoulos & Bates 2021), we define the normalized nonconformity score for each observational calibration record:
+
+$$r_i = \frac{|y_i - \hat{\mu}(x_i)|}{\hat{\sigma}_{\text{MC}}(x_i)}$$
+
+For target nominal coverage $1 - \alpha = 0.90$, the conformal scaling multiplier $m$ is computed as the empirical quantile:
+
+$$m = \text{Quantile}_{\frac{\lceil (n+1)(1-\alpha) \rceil}{n}}\left(\{r_1, \dots, r_n\}\right)$$
+
+The resulting calibrated predictive interval is:
+$$\mathcal{C}(x) = \left[ \hat{\mu}(x) - m \cdot \hat{\sigma}_{\text{MC}}(x), \; \hat{\mu}(x) + m \cdot \hat{\sigma}_{\text{MC}}(x) \right]$$
+
+### B. Split Discipline & Empirical Verification
+- **Primary Chronological Calibration:** Fitted strictly on calibration years 2000–2012 ($N = 267$).
+- **Held-Out Evaluation:** Evaluated on future crop years 2013–2014 ($N = 36$). Calibration and test sets are strictly disjoint.
+- **Results:**
+  - Uncalibrated Baseline ($m = 1.05$): Held-out coverage = **44.44%** (16/36), 95% Wilson CI = [29.54%, 60.42%], Mean width = 0.516 t/ha.
+  - Recalibrated Conformal ($m = 2.4858$): Held-out coverage = **83.33%** (30/36), 95% Wilson CI = [68.11%, 92.13%], Mean width = 1.222 t/ha.
+
+### C. 5-Fold Cross-Validation Estimator Stability
+To ensure $m$ is not an artifact of a single chronological cut, 5 independent random splits ($N_{\text{cal}} = 267, N_{\text{test}} = 36$) were evaluated:
+- **Calibrated Multiplier ($m$):** $2.5809 \pm 0.0545$ ($\text{CV} < 2.2\%$)
+- **Held-Out Coverage:** $90.56\% \pm 2.83\%$ (achieving target $90.0\%$)
+- **Mean Interval Width:** $1.298 \pm 0.078\text{ t/ha}$
+
+### D. Cross-Checkpoint Conformal Transfer Caveat
+The conformal multiplier $m$ is derived empirically from the observational FusionNet checkpoint residuals and transferred to the deployed FastAPI prediction pipeline. Both checkpoints share the identical four-modality PyTorch architecture and 40-sample Monte Carlo Dropout epistemic variance definition ($\sigma_{\text{MC}}$). This transfer preserves per-instance input-dependent adaptivity while correcting the global uncertainty scale from benchmark-tuned tightness to real-world observational dispersion.
