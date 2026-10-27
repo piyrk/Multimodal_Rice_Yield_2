@@ -41,6 +41,7 @@ REPRESENTATIVE_DISTRICTS: List[Dict[str, Any]] = [
     {"district_name": "Sambalpur", "state_name": "Odisha", "lat": 21.4669, "lon": 83.9812, "zone": "Eastern Plateau", "base_yield": 1.95, "irrigation_ratio": 0.45},
 
     # Andhra Pradesh & Telangana / Southern Plateau & East Coast (Canal/River Delta)
+    {"district_name": "Krishna", "state_name": "Andhra Pradesh", "lat": 16.5062, "lon": 80.6480, "zone": "East Coast Plains", "base_yield": 3.75, "irrigation_ratio": 0.89},
     {"district_name": "East Godavari", "state_name": "Andhra Pradesh", "lat": 16.9891, "lon": 82.2475, "zone": "East Coast Plains", "base_yield": 3.70, "irrigation_ratio": 0.88},
     {"district_name": "West Godavari", "state_name": "Andhra Pradesh", "lat": 16.7107, "lon": 81.0952, "zone": "East Coast Plains", "base_yield": 3.85, "irrigation_ratio": 0.90},
     {"district_name": "Nalgonda", "state_name": "Telangana", "lat": 17.0577, "lon": 79.2684, "zone": "Southern Plateau", "base_yield": 3.10, "irrigation_ratio": 0.70},

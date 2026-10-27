@@ -8,7 +8,7 @@
 
 ## 1. Overview & Architectural Upgrade Strategy
 
-The current version of ClimateRice-AI utilizes a **Calibrated Semi-Synthetic Multimodal Agricultural Benchmark** ($N = 504$ observations across 24 districts and 21 crop years). To transition to 100% genuine Earth observation and government records without altering the machine learning models, neural architecture (`ClimateRiceFusionNet`), preprocessing pipeline, or API contracts, a standardized interface is provided in [`src/data/real_data_interface.py`](file:///c:/Users/Piyush%20Kumar/Desktop/capstone_project/src/data/real_data_interface.py).
+The current version of ClimateRice-AI utilizes a **Calibrated Semi-Synthetic Multimodal Agricultural Benchmark** ($N = 504$ observations across 24 districts and 21 crop years). To transition to 100% genuine Earth observation and government records without altering the machine learning models, neural architecture (`ClimateRiceFusionNet`), preprocessing pipeline, or API contracts, a standardized interface is provided in [`src/data/real_data_interface.py`](../src/data/real_data_interface.py).
 
 The upgrade is prioritized in order of feasibility, administrative availability, and signal-to-noise impact:
 1. **Priority 1:** Real Rice Yield Observations (Ground Truth Target)

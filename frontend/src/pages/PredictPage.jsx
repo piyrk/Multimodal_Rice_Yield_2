@@ -572,9 +572,12 @@ export default function PredictPage({ locations = [] }) {
                     onChange={(e) => handleSeasonChange(e.target.value)}
                     className="w-full bg-stone-50 border border-stone-300 rounded-lg px-2.5 py-1.5 text-stone-900 focus:bg-white focus:ring-2 focus:ring-emerald-600 text-xs font-medium cursor-pointer"
                   >
-                    <option value="Kharif">Kharif</option>
-                    <option value="Rabi">Rabi</option>
+                    <option value="Kharif">Kharif (Monsoon - Active Model)</option>
+                    <option value="Rabi">Rabi (Winter - Unsupported Checkpoint)</option>
                   </select>
+                  <span className="text-[10px] text-amber-700 block mt-0.5">
+                    *Kharif calibrated. Rabi disabled in prediction engine.
+                  </span>
                 </div>
                 <div>
                   <label className="block font-medium text-stone-700 mb-1">Crop Year</label>
@@ -909,6 +912,26 @@ export default function PredictPage({ locations = [] }) {
                     className="w-full bg-stone-50 border border-stone-300 rounded-lg px-2.5 py-1.5 text-stone-900 font-mono focus:bg-white text-xs"
                   />
                 </div>
+                <div>
+                  <label className="block font-medium text-stone-700 mb-1">Sand Content (%)</label>
+                  <input
+                    type="number"
+                    step="any"
+                    value={formData.soil_sand_pct}
+                    onChange={(e) => handleInputChange('soil_sand_pct', e.target.value)}
+                    className="w-full bg-stone-50 border border-stone-300 rounded-lg px-2.5 py-1.5 text-stone-900 font-mono focus:bg-white text-xs"
+                  />
+                </div>
+                <div>
+                  <label className="block font-medium text-stone-700 mb-1">Cation Exchange Cap. (meq/100g)</label>
+                  <input
+                    type="number"
+                    step="any"
+                    value={formData.soil_cation_exchange_capacity}
+                    onChange={(e) => handleInputChange('soil_cation_exchange_capacity', e.target.value)}
+                    className="w-full bg-stone-50 border border-stone-300 rounded-lg px-2.5 py-1.5 text-stone-900 font-mono focus:bg-white text-xs"
+                  />
+                </div>
               </div>
             </div>
 
@@ -920,7 +943,7 @@ export default function PredictPage({ locations = [] }) {
                 </h3>
                 <span className="text-[11px] text-stone-400 font-mono">4 variables</span>
               </div>
-              <div className="grid sm:grid-cols-3 gap-3 text-xs">
+              <div className="grid sm:grid-cols-4 gap-3 text-xs">
                 <div>
                   <label className="block font-medium text-stone-700 mb-1">Lag-1 Prior Yield (t/ha)</label>
                   <input
@@ -928,6 +951,16 @@ export default function PredictPage({ locations = [] }) {
                     step="any"
                     value={formData.historical_yield_lag1}
                     onChange={(e) => handleInputChange('historical_yield_lag1', e.target.value)}
+                    className="w-full bg-stone-50 border border-stone-300 rounded-lg px-2.5 py-1.5 text-stone-900 font-mono focus:bg-white text-xs"
+                  />
+                </div>
+                <div>
+                  <label className="block font-medium text-stone-700 mb-1">Lag-2 Prior Yield (t/ha)</label>
+                  <input
+                    type="number"
+                    step="any"
+                    value={formData.historical_yield_lag2}
+                    onChange={(e) => handleInputChange('historical_yield_lag2', e.target.value)}
                     className="w-full bg-stone-50 border border-stone-300 rounded-lg px-2.5 py-1.5 text-stone-900 font-mono focus:bg-white text-xs"
                   />
                 </div>
@@ -1034,9 +1067,21 @@ export default function PredictPage({ locations = [] }) {
                   </span>
                 </div>
                 <div className="py-2.5 flex items-center justify-between">
-                  <span className="text-stone-600 font-medium">Empirical Coverage</span>
+                  <div>
+                    <span className="text-stone-600 font-medium block">Benchmark Test Coverage</span>
+                    <span className="text-[10px] text-stone-400">Calibrated semi-synthetic (N=96)</span>
+                  </div>
                   <span className="font-mono font-bold text-emerald-800">
                     {result.empirical_coverage_pct || 95.83}%
+                  </span>
+                </div>
+                <div className="py-2.5 flex items-center justify-between">
+                  <div>
+                    <span className="text-stone-600 font-medium block">Observational Test Coverage</span>
+                    <span className="text-[10px] text-stone-400">Real DES APY data (N=36)</span>
+                  </div>
+                  <span className="font-mono font-bold text-amber-800">
+                    44.44%
                   </span>
                 </div>
                 <div className="py-2.5 flex items-center justify-between">
@@ -1047,7 +1092,7 @@ export default function PredictPage({ locations = [] }) {
                 </div>
               </div>
               <p className="text-[11px] text-stone-500 italic bg-stone-50 p-2.5 rounded border border-stone-200/60 leading-relaxed">
-                *Coverage measured on the held-out test set (N=96, 2017–2020) with empirically calibrated multiplier c = 1.05.
+                *Scientific Provenance Note: 95.83% coverage applies to the calibrated benchmark test set with c = 1.05. On raw observational DES APY test data, the same intervals achieved 44.44% (16/36) coverage due to unmodelled microclimate variance.
               </p>
 
               {/* Why This Prediction? (Explainability) */}

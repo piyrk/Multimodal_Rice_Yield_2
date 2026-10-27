@@ -190,6 +190,7 @@ class ModelService:
             epistemic_uncertainty_std=std_uncert,
             predictive_interval=[pi_low, pi_high],
             empirical_coverage_pct=95.83,
+            observational_coverage_pct=44.44,
             risk_level=risk,
             modality_attention_weights=attn_dict,
             top_positive_factors=pos_factors,

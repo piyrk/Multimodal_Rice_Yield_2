@@ -29,6 +29,7 @@ export async function getLocations() {
       { district_name: "Ludhiana", state_name: "Punjab", lat: 30.9010, lon: 75.8573, zone: "Trans-Gangetic Plains", base_yield: 4.35, irrigation_ratio: 0.98 },
       { district_name: "Burdwan", state_name: "West Bengal", lat: 23.2324, lon: 87.8615, zone: "Lower Gangetic Plain", base_yield: 3.25, irrigation_ratio: 0.72 },
       { district_name: "Varanasi", state_name: "Uttar Pradesh", lat: 25.3176, lon: 82.9739, zone: "Middle Gangetic Plain", base_yield: 2.65, irrigation_ratio: 0.78 },
+      { district_name: "Krishna", state_name: "Andhra Pradesh", lat: 16.5062, lon: 80.6480, zone: "East Coast Plains", base_yield: 3.75, irrigation_ratio: 0.89 },
       { district_name: "East Godavari", state_name: "Andhra Pradesh", lat: 16.9891, lon: 82.2475, zone: "East Coast Plains", base_yield: 3.70, irrigation_ratio: 0.88 },
       { district_name: "Thanjavur", state_name: "Tamil Nadu", lat: 10.7870, lon: 79.1378, zone: "East Coast Plains", base_yield: 3.90, irrigation_ratio: 0.86 },
       { district_name: "Raipur", state_name: "Chhattisgarh", lat: 21.2514, lon: 81.6296, zone: "Eastern Plateau", base_yield: 1.85, irrigation_ratio: 0.38 },

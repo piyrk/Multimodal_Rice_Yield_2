@@ -95,10 +95,11 @@ export const DISTRICT_PROFILES = {
     "soil_sand_pct": 40.9,
     "soil_available_water_capacity": 0.16,
     "soil_cation_exchange_capacity": 17.6,
-    "historical_yield_lag1": 6.2,
-    "historical_yield_lag2": 6.1,
-    "historical_yield_3yr_mean": 6.2,
-    "sown_area_ha": 127536.0
+    "historical_yield_lag1": 4.15,
+    "historical_yield_lag2": 4.05,
+    "historical_yield_3yr_mean": 4.1,
+    "sown_area_ha": 127536.0,
+    "provenance_note": "DES APY Ground Truth Baseline (4.15 t/ha base)"
   },
   "Burdwan": {
     "district_name": "Burdwan",
@@ -106,31 +107,32 @@ export const DISTRICT_PROFILES = {
     "agro_ecological_zone": "Lower Gangetic Plain",
     "irrigation_ratio": 0.72,
     "rainfall_cumulative_mm": 1596.5,
-    "rainfall_anomaly_pct": 15.6,
-    "temp_min_deg_c": 25.28,
-    "temp_max_deg_c": 33.29,
-    "temp_mean_deg_c": 29.29,
-    "temp_anomaly_deg_c": -0.09,
-    "extreme_heat_days": 3,
-    "consecutive_dry_days": 9,
-    "relative_humidity_pct": 72.7,
-    "solar_radiation_mj_m2": 17.36,
+    "rainfall_anomaly_pct": -4.5,
+    "temp_min_deg_c": 24.8,
+    "temp_max_deg_c": 33.5,
+    "temp_mean_deg_c": 29.15,
+    "temp_anomaly_deg_c": 0.35,
+    "extreme_heat_days": 4,
+    "consecutive_dry_days": 8,
+    "relative_humidity_pct": 78.0,
+    "solar_radiation_mj_m2": 17.5,
     "ndvi_mean": 0.868,
-    "ndvi_peak": 0.94,
-    "evi_mean": 0.6286,
-    "ndwi_mean": 0.3028,
-    "ndvi_anomaly": 0.388,
+    "ndvi_peak": 0.895,
+    "evi_mean": 0.58,
+    "ndwi_mean": 0.28,
+    "ndvi_anomaly": 0.05,
     "soil_ph": 6.74,
-    "soil_organic_carbon_g_kg": 8.61,
-    "soil_nitrogen_g_kg": 2.26,
+    "soil_organic_carbon_g_kg": 7.8,
+    "soil_nitrogen_g_kg": 1.7,
     "soil_clay_pct": 33.4,
-    "soil_sand_pct": 26.7,
-    "soil_available_water_capacity": 0.233,
-    "soil_cation_exchange_capacity": 21.9,
-    "historical_yield_lag1": 3.16,
-    "historical_yield_lag2": 3.06,
-    "historical_yield_3yr_mean": 3.16,
-    "sown_area_ha": 96442.0
+    "soil_sand_pct": 25.0,
+    "soil_available_water_capacity": 0.24,
+    "soil_cation_exchange_capacity": 23.5,
+    "historical_yield_lag1": 3.25,
+    "historical_yield_lag2": 3.1,
+    "historical_yield_3yr_mean": 3.18,
+    "sown_area_ha": 140000.0,
+    "provenance_note": "DES APY Ground Truth Baseline (3.25 t/ha base, 2000-2014)"
   },
   "Birbhum": {
     "district_name": "Birbhum",
@@ -159,9 +161,9 @@ export const DISTRICT_PROFILES = {
     "soil_sand_pct": 26.9,
     "soil_available_water_capacity": 0.221,
     "soil_cation_exchange_capacity": 24.3,
-    "historical_yield_lag1": 3.3,
-    "historical_yield_lag2": 3.2,
-    "historical_yield_3yr_mean": 3.3,
+    "historical_yield_lag1": 2.85,
+    "historical_yield_lag2": 2.75,
+    "historical_yield_3yr_mean": 2.8,
     "sown_area_ha": 124170.0
   },
   "Midnapore": {
@@ -191,9 +193,9 @@ export const DISTRICT_PROFILES = {
     "soil_sand_pct": 22.1,
     "soil_available_water_capacity": 0.224,
     "soil_cation_exchange_capacity": 18.8,
-    "historical_yield_lag1": 2.1,
-    "historical_yield_lag2": 2.0,
-    "historical_yield_3yr_mean": 2.1,
+    "historical_yield_lag1": 2.95,
+    "historical_yield_lag2": 2.85,
+    "historical_yield_3yr_mean": 2.9,
     "sown_area_ha": 128272.0
   },
   "Varanasi": {
@@ -223,9 +225,9 @@ export const DISTRICT_PROFILES = {
     "soil_sand_pct": 32.4,
     "soil_available_water_capacity": 0.164,
     "soil_cation_exchange_capacity": 18.8,
-    "historical_yield_lag1": 2.15,
-    "historical_yield_lag2": 2.05,
-    "historical_yield_3yr_mean": 2.15,
+    "historical_yield_lag1": 2.65,
+    "historical_yield_lag2": 2.55,
+    "historical_yield_3yr_mean": 2.6,
     "sown_area_ha": 126119.0
   },
   "Gorakhpur": {
@@ -255,8 +257,8 @@ export const DISTRICT_PROFILES = {
     "soil_sand_pct": 34.3,
     "soil_available_water_capacity": 0.162,
     "soil_cation_exchange_capacity": 17.2,
-    "historical_yield_lag1": 2.4,
-    "historical_yield_lag2": 2.3,
+    "historical_yield_lag1": 2.45,
+    "historical_yield_lag2": 2.35,
     "historical_yield_3yr_mean": 2.4,
     "sown_area_ha": 141727.0
   },
@@ -287,9 +289,9 @@ export const DISTRICT_PROFILES = {
     "soil_sand_pct": 31.6,
     "soil_available_water_capacity": 0.171,
     "soil_cation_exchange_capacity": 20.7,
-    "historical_yield_lag1": 2.25,
-    "historical_yield_lag2": 2.15,
-    "historical_yield_3yr_mean": 2.25,
+    "historical_yield_lag1": 2.8,
+    "historical_yield_lag2": 2.7,
+    "historical_yield_3yr_mean": 2.75,
     "sown_area_ha": 113099.0
   },
   "Patna": {
@@ -319,9 +321,9 @@ export const DISTRICT_PROFILES = {
     "soil_sand_pct": 35.2,
     "soil_available_water_capacity": 0.165,
     "soil_cation_exchange_capacity": 22.3,
-    "historical_yield_lag1": 4.31,
-    "historical_yield_lag2": 4.21,
-    "historical_yield_3yr_mean": 4.31,
+    "historical_yield_lag1": 2.3,
+    "historical_yield_lag2": 2.2,
+    "historical_yield_3yr_mean": 2.25,
     "sown_area_ha": 111445.0
   },
   "Nalanda": {
@@ -351,9 +353,9 @@ export const DISTRICT_PROFILES = {
     "soil_sand_pct": 30.2,
     "soil_available_water_capacity": 0.23,
     "soil_cation_exchange_capacity": 21.8,
-    "historical_yield_lag1": 2.28,
-    "historical_yield_lag2": 2.18,
-    "historical_yield_3yr_mean": 2.28,
+    "historical_yield_lag1": 2.4,
+    "historical_yield_lag2": 2.3,
+    "historical_yield_3yr_mean": 2.35,
     "sown_area_ha": 118265.0
   },
   "Cuttack": {
@@ -383,9 +385,9 @@ export const DISTRICT_PROFILES = {
     "soil_sand_pct": 31.1,
     "soil_available_water_capacity": 0.263,
     "soil_cation_exchange_capacity": 20.9,
-    "historical_yield_lag1": 3.82,
-    "historical_yield_lag2": 3.72,
-    "historical_yield_3yr_mean": 3.82,
+    "historical_yield_lag1": 2.2,
+    "historical_yield_lag2": 2.1,
+    "historical_yield_3yr_mean": 2.15,
     "sown_area_ha": 119516.0
   },
   "Baleshwar": {
@@ -415,9 +417,9 @@ export const DISTRICT_PROFILES = {
     "soil_sand_pct": 25.8,
     "soil_available_water_capacity": 0.225,
     "soil_cation_exchange_capacity": 18.5,
-    "historical_yield_lag1": 3.74,
-    "historical_yield_lag2": 3.64,
-    "historical_yield_3yr_mean": 3.74,
+    "historical_yield_lag1": 2.1,
+    "historical_yield_lag2": 2.0,
+    "historical_yield_3yr_mean": 2.05,
     "sown_area_ha": 103351.0
   },
   "Sambalpur": {
@@ -447,10 +449,43 @@ export const DISTRICT_PROFILES = {
     "soil_sand_pct": 34.5,
     "soil_available_water_capacity": 0.139,
     "soil_cation_exchange_capacity": 14.5,
-    "historical_yield_lag1": 3.15,
-    "historical_yield_lag2": 3.05,
-    "historical_yield_3yr_mean": 3.15,
+    "historical_yield_lag1": 1.95,
+    "historical_yield_lag2": 1.85,
+    "historical_yield_3yr_mean": 1.9,
     "sown_area_ha": 123653.0
+  },
+  "Krishna": {
+    "district_name": "Krishna",
+    "state_name": "Andhra Pradesh",
+    "agro_ecological_zone": "East Coast Plains (Krishna Delta - Vijayawada)",
+    "irrigation_ratio": 0.89,
+    "rainfall_cumulative_mm": 985.4,
+    "rainfall_anomaly_pct": -2.4,
+    "temp_min_deg_c": 25.1,
+    "temp_max_deg_c": 33.8,
+    "temp_mean_deg_c": 29.45,
+    "temp_anomaly_deg_c": 0.15,
+    "extreme_heat_days": 7,
+    "consecutive_dry_days": 8,
+    "relative_humidity_pct": 74.2,
+    "solar_radiation_mj_m2": 18.1,
+    "ndvi_mean": 0.742,
+    "ndvi_peak": 0.865,
+    "evi_mean": 0.548,
+    "ndwi_mean": 0.282,
+    "ndvi_anomaly": 0.12,
+    "soil_ph": 7.45,
+    "soil_organic_carbon_g_kg": 6.8,
+    "soil_nitrogen_g_kg": 1.45,
+    "soil_clay_pct": 42.0,
+    "soil_sand_pct": 28.5,
+    "soil_available_water_capacity": 0.22,
+    "soil_cation_exchange_capacity": 26.4,
+    "historical_yield_lag1": 3.75,
+    "historical_yield_lag2": 3.65,
+    "historical_yield_3yr_mean": 3.7,
+    "sown_area_ha": 245000.0,
+    "provenance_note": "Andhra Pradesh Krishna Delta (Vijayawada) Benchmark (3.75 t/ha base)"
   },
   "East Godavari": {
     "district_name": "East Godavari",
@@ -479,9 +514,9 @@ export const DISTRICT_PROFILES = {
     "soil_sand_pct": 28.5,
     "soil_available_water_capacity": 0.236,
     "soil_cation_exchange_capacity": 25.3,
-    "historical_yield_lag1": 1.85,
-    "historical_yield_lag2": 1.75,
-    "historical_yield_3yr_mean": 1.85,
+    "historical_yield_lag1": 3.7,
+    "historical_yield_lag2": 3.6,
+    "historical_yield_3yr_mean": 3.65,
     "sown_area_ha": 112624.0
   },
   "West Godavari": {
@@ -511,9 +546,9 @@ export const DISTRICT_PROFILES = {
     "soil_sand_pct": 22.9,
     "soil_available_water_capacity": 0.229,
     "soil_cation_exchange_capacity": 26.5,
-    "historical_yield_lag1": 2.17,
-    "historical_yield_lag2": 2.07,
-    "historical_yield_3yr_mean": 2.17,
+    "historical_yield_lag1": 3.85,
+    "historical_yield_lag2": 3.75,
+    "historical_yield_3yr_mean": 3.8,
     "sown_area_ha": 115724.0
   },
   "Nalgonda": {
@@ -543,9 +578,9 @@ export const DISTRICT_PROFILES = {
     "soil_sand_pct": 38.9,
     "soil_available_water_capacity": 0.185,
     "soil_cation_exchange_capacity": 19.5,
-    "historical_yield_lag1": 2.84,
-    "historical_yield_lag2": 2.74,
-    "historical_yield_3yr_mean": 2.84,
+    "historical_yield_lag1": 3.1,
+    "historical_yield_lag2": 3.0,
+    "historical_yield_3yr_mean": 3.05,
     "sown_area_ha": 112961.0
   },
   "Thanjavur": {
@@ -575,9 +610,9 @@ export const DISTRICT_PROFILES = {
     "soil_sand_pct": 32.2,
     "soil_available_water_capacity": 0.223,
     "soil_cation_exchange_capacity": 26.4,
-    "historical_yield_lag1": 6.2,
-    "historical_yield_lag2": 6.1,
-    "historical_yield_3yr_mean": 6.2,
+    "historical_yield_lag1": 3.9,
+    "historical_yield_lag2": 3.8,
+    "historical_yield_3yr_mean": 3.85,
     "sown_area_ha": 112531.0
   },
   "Tiruchirappalli": {
@@ -607,9 +642,9 @@ export const DISTRICT_PROFILES = {
     "soil_sand_pct": 31.3,
     "soil_available_water_capacity": 0.199,
     "soil_cation_exchange_capacity": 16.6,
-    "historical_yield_lag1": 6.11,
-    "historical_yield_lag2": 6.01,
-    "historical_yield_3yr_mean": 6.11,
+    "historical_yield_lag1": 3.45,
+    "historical_yield_lag2": 3.35,
+    "historical_yield_3yr_mean": 3.4,
     "sown_area_ha": 115554.0
   },
   "Raipur": {
@@ -639,9 +674,9 @@ export const DISTRICT_PROFILES = {
     "soil_sand_pct": 42.2,
     "soil_available_water_capacity": 0.151,
     "soil_cation_exchange_capacity": 17.6,
-    "historical_yield_lag1": 1.7,
-    "historical_yield_lag2": 1.6,
-    "historical_yield_3yr_mean": 1.7,
+    "historical_yield_lag1": 1.85,
+    "historical_yield_lag2": 1.75,
+    "historical_yield_3yr_mean": 1.8,
     "sown_area_ha": 131571.0
   },
   "Bilaspur": {
@@ -671,9 +706,9 @@ export const DISTRICT_PROFILES = {
     "soil_sand_pct": 37.6,
     "soil_available_water_capacity": 0.173,
     "soil_cation_exchange_capacity": 11.7,
-    "historical_yield_lag1": 2.06,
-    "historical_yield_lag2": 1.96,
-    "historical_yield_3yr_mean": 2.06,
+    "historical_yield_lag1": 1.75,
+    "historical_yield_lag2": 1.65,
+    "historical_yield_3yr_mean": 1.7,
     "sown_area_ha": 131875.0
   },
   "Durg": {
@@ -703,9 +738,9 @@ export const DISTRICT_PROFILES = {
     "soil_sand_pct": 42.2,
     "soil_available_water_capacity": 0.163,
     "soil_cation_exchange_capacity": 14.1,
-    "historical_yield_lag1": 1.94,
-    "historical_yield_lag2": 1.84,
-    "historical_yield_3yr_mean": 1.94,
+    "historical_yield_lag1": 1.8,
+    "historical_yield_lag2": 1.7,
+    "historical_yield_3yr_mean": 1.75,
     "sown_area_ha": 130439.0
   },
   "Kamrup": {
@@ -735,9 +770,9 @@ export const DISTRICT_PROFILES = {
     "soil_sand_pct": 28.9,
     "soil_available_water_capacity": 0.186,
     "soil_cation_exchange_capacity": 20.2,
-    "historical_yield_lag1": 2.14,
-    "historical_yield_lag2": 2.04,
-    "historical_yield_3yr_mean": 2.14,
+    "historical_yield_lag1": 2.15,
+    "historical_yield_lag2": 2.05,
+    "historical_yield_3yr_mean": 2.1,
     "sown_area_ha": 95582.0
   },
   "Nagaon": {
@@ -767,9 +802,9 @@ export const DISTRICT_PROFILES = {
     "soil_sand_pct": 34.6,
     "soil_available_water_capacity": 0.184,
     "soil_cation_exchange_capacity": 17.4,
-    "historical_yield_lag1": 2.1,
-    "historical_yield_lag2": 2.0,
-    "historical_yield_3yr_mean": 2.1,
+    "historical_yield_lag1": 2.25,
+    "historical_yield_lag2": 2.15,
+    "historical_yield_3yr_mean": 2.2,
     "sown_area_ha": 90989.0
   }
 };
@@ -802,6 +837,7 @@ export const STATES_AND_DISTRICTS = {
     "Sambalpur"
   ],
   "Andhra Pradesh": [
+    "Krishna",
     "East Godavari",
     "West Godavari"
   ],

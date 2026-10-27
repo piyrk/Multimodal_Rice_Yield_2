@@ -9,10 +9,12 @@
 [![Audit: Verified](https://img.shields.io/badge/Research_Audit-YELLOW_Verified-yellow.svg)](docs/research_integrity_audit.md)
 [![Observational: 303 Records](https://img.shields.io/badge/Observational_Data-303_Records-emerald.svg)](docs/observational_dataset_report.md)
 
-> **B.Tech CSE Final Year Capstone Project**  
-> **Author:** Piyush Kumar  
-> **Short Name:** ClimateRice-AI  
+> **Project 19 — B.Tech CSE Final Year Capstone Project**  
+> **Student Team:** Piyush Kumar, Rajesh, Laxmi Pavani, Mullapudi Pravallika  
+> **Faculty Mentor / Supervisor:** Dr. E. Raveendra Reddy  
+> **Department:** Department of Computer Science and Engineering  
 > **Target:** Rice Yield Prediction in Metric Tonnes per Hectare ($t/ha$)  
+> **Regional Scope:** Origin in Andhra Pradesh (Krishna / Vijayawada agro-ecological zone) with pan-India benchmark generalization across 24 representative districts  
 > **Integrity & Lineage:** [Research Integrity Audit](docs/research_integrity_audit.md) | [Data Lineage Audit](docs/data_audit.md) | [Observational Dataset Report](docs/observational_dataset_report.md) | [Observational Experiments](docs/observational_experiments.md)  
 
 ---
@@ -23,11 +25,9 @@ Rice (*Oryza sativa*) is the dietary cornerstone for over 50% of the global popu
 
 Conventional agricultural forecasting approaches predominantly rely either on single-source meteorological weather stations or isolated satellite vegetation indices (e.g. NDVI alone). These single-modality models fail to capture non-linear, cross-domain dependencies between atmospheric water supply, surface canopy reflectance, root-zone soil water retention, and historical agronomic momentum.
 
-**ClimateRice-AI** investigates this challenge through a **Calibrated Semi-Synthetic Multimodal Agricultural Benchmark** ($N = 504$ observations across 24 districts and 21 crop years) integrating:
-1. **Satellite Remote Sensing:** Multi-spectral vegetation and moisture dynamics (NDVI, EVI, NDWI, Canopy Anomalies).
-2. **Weather & Agroclimatology:** Agro-meteorology and climate shock anomaly metrics (Cumulative precipitation, rainfall anomalies, minimum/maximum temperature extrema, extreme heat days $\ge 35^\circ\text{C}$, consecutive dry spells).
-3. **Soil Edaphic Constraints:** Digital pedometrics at 0–30 cm root-zone depth (pH, Soil Organic Carbon, Nitrogen, Clay %, Sand %, Available Water Capacity, Cation Exchange Capacity).
-4. **Historical Agricultural Records:** District-level agricultural momentum (Autoregressive Lag-1, Lag-2, and 3-Year rolling yield trends, sown area).
+**ClimateRice-AI** investigates this challenge through a rigorous dual-track empirical strategy:
+1. **Authentic Observational Evaluation Track ($N = 303$ records, 2001–2022):** Ground-truth district crop yields from the Directorate of Economics and Statistics (DES), Ministry of Agriculture & Farmers Welfare, Government of India, paired with NASA POWER agro-meteorology and MODIS MOD13Q1 remote sensing.
+2. **Calibrated Semi-Synthetic Modality Benchmark Track ($N = 504$ panel observations, 24 districts $\times$ 21 crop years):** Grounded in authentic administrative centroids and baseline yields, coupled to peer-reviewed biophysical equations (Peng et al. 2004, Lobell et al. 2015) for systematic 7-phase ablation testing.
 
 ---
 
@@ -41,25 +41,42 @@ Conventional agricultural forecasting approaches predominantly rely either on si
 * **Null Hypothesis ($H_0$):** Multimodal feature integration provides no statistically meaningful improvement over single-modality models ($p \ge 0.05$).
 
 ### 2.3 Experimental Findings
-* **Multimodal Feature Integration:** **ACCEPTED ($p \ll 0.05$).** Fusing all four modalities reduces test MAE from $0.5427\text{ t/ha}$ (Satellite alone) to $0.2014\text{ t/ha}$ (Full-feature XGBoost) and $0.2774\text{ t/ha}$ (ClimateRice-FusionNet). Paired Student's t-test: $t = -5.5533, p = 2.54 \times 10^{-7} \ll 0.05$.
-* **Model Comparison (Tabular ML vs. Deep Learning):** On this structured tabular panel benchmark, **Full-feature XGBoost provides the strongest numerical prediction performance** ($\text{MAE} = 0.2014\text{ t/ha}, R^2 = 0.9548$), outperforming the deep neural network `ClimateRice-FusionNet` ($\text{MAE} = 0.2774\text{ t/ha}, R^2 = 0.9329, p = 0.0019$).
-* **Deep Learning Contribution:** `ClimateRice-FusionNet` provides complementary structural advantages: (1) differentiable cross-modal attention that dynamically redistributes modality weights during climate shocks, and (2) MC Dropout predictive intervals (empirical coverage = 95.83%) via 50-sample Monte Carlo Dropout.
+
+#### 1. Lead Story: Authentic Observational Results ($N = 303$ Ground-Truth Records)
+On real-world observational data reflecting authentic agricultural noise:
+* **`ClimateRice-FusionNet` (Multimodal):** $R^2 = 0.6800$, $\text{MAE} = 0.3370\text{ t/ha}$, $\text{RMSE} = 0.4410\text{ t/ha}$.
+* **Satellite-Only Baseline:** $R^2 = 0.4120$, $\text{MAE} = 0.4680\text{ t/ha}$.
+* **Multimodal Gain:** Fusing weather, satellite, and soil data yields a **$28.0\%$ error reduction** over satellite remote sensing alone under genuine observational field conditions.
+
+#### 2. Controlled Modality Benchmark Ablation (calibrated semi-synthetic benchmark, $N = 504$)
+* **Multimodal Integration:** **ACCEPTED ($p \ll 0.05$).** Fusing all four modalities reduces test MAE from $0.5427\text{ t/ha}$ (Satellite alone) to $0.2014\text{ t/ha}$ (Full-feature XGBoost) and $0.2774\text{ t/ha}$ (ClimateRice-FusionNet). Paired Student's t-test: $t = -5.5533, p = 2.54 \times 10^{-7} \ll 0.05$.
+* **Model Comparison (Tabular ML vs. Deep Learning):** On this structured tabular panel benchmark, **Full-feature XGBoost provides the strongest numerical prediction performance** ($\text{MAE} = 0.2014\text{ t/ha}, R^2 = 0.9548$ (calibrated semi-synthetic benchmark, $N=504$)), outperforming the deep neural network `ClimateRice-FusionNet` ($\text{MAE} = 0.2774\text{ t/ha}, R^2 = 0.9329, p = 0.0019$).
+* **Deep Learning Contribution:** `ClimateRice-FusionNet` provides complementary structural advantages: (1) differentiable cross-modal attention that dynamically redistributes modality weights during climate shocks, and (2) MC Dropout predictive intervals via 50-sample Monte Carlo Dropout.
+* **Predictive Uncertainty Coverage Discrepancy:** The MC Dropout $\pm 1.96\sigma$ predictive interval achieves **$95.83\%$ empirical coverage on the benchmark test set** (92/96 cases), but covers **$44.44\%$ on the raw observational test set** (16/36 cases), demonstrating that real-world unobserved field variables expand residual variance beyond atmospheric and optical signals.
 
 ---
 
-## 3. Project Scope & Strict Boundaries
+## 3. Project 19 Objectives & Technical Scope
 
-To maintain technical depth and scientific rigor, the project is strictly scoped:
+ClimateRice-AI fulfills the complete brief of **Project 19 (AI-Driven Climate-Resilient Agriculture Decision Support System)** through four coordinated technical objectives:
 
-| In Scope (Core Implementation) | Out of Scope (Documented as Future Work) |
+* **Objective 1 — Climate-Aware Yield Prediction:** Deep cross-modal attention network (`ClimateRice-FusionNet`) fusing 26 satellite, meteorological, edaphic, and autoregressive historical features with Monte Carlo Dropout uncertainty estimation.
+* **Objective 2 — Precision Water Management Advisory:** Rule-based Alternate Wetting and Drying (AWD) water management scheduling tailored to soil clay texture fraction, rainfall anomaly, and consecutive dry days.
+* **Objective 3 — Recommended Rice Cultivar Decision Matrix:** Authoritative cultivar selection matrix sourced directly from ICAR-NRRI and ANGRAU with maturity duration (days), flood/drought/submergence tolerances, and recommended agro-ecological zones.
+* **Objective 4 — Weather-Window Pest & Pathogen Forewarning:** Biophysical weather-window disease risk scoring for Rice Blast (*Magnaporthe oryzae*), Brown Planthopper (*Nilaparvata lugens*), and Bacterial Leaf Blight (*Xanthomonas oryzae*) based on nighttime temperature, humidity, and dry/rain spell patterns.
+
+### Technical Boundaries
+
+| In Scope (Implemented Deliverables) | Out of Scope (Documented as Future Work) |
 | :--- | :--- |
-| Multimodal environmental data alignment | Real-time IoT soil-moisture hardware & irrigation relays |
-| Strict temporal leakage-free partitioning | Genetic-algorithm crop cultivar selection |
-| Climate resilience feature engineering | CNN-based leaf pest and plant disease classification |
+| Multimodal environmental data alignment | Real-time IoT soil-moisture hardware & physical irrigation relays |
+| Strict temporal leakage-free partitioning | Genetic-algorithm crop gene sequencing |
+| Climate resilience feature engineering | CNN-based raw leaf image mobile disease classification |
 | Controlled 7-phase modality ablation suite | Autonomous drone hardware automation |
 | Deep cross-modal gated attention network | Chatbots or generic conversational LLM wrappers |
 | Monte Carlo Dropout uncertainty estimation | Unrelated multi-crop recommendation engines |
 | Game-theoretic XAI factor attributions (SHAP) | Sub-field parcel robotics |
+| AWD water advice, cultivar matrix & pest risk forewarning | In-situ chemical pesticide dispensing pumps |
 | FastAPI REST API & Interactive React Dashboard | |
 
 ---
@@ -149,12 +166,24 @@ Dense(16)+Norm+GELU  Dense(32)+Norm+GELU  Dense(16)+Norm+GELU  Dense(16)+Norm+GE
 
 ## 7. Experimental Results & Dual Ablation Suites
 
-All experiments were conducted on the strictly held-out test partition ($t \ge 2017$, 96 records) across 24 representative Indian districts.
+Experiments were conducted on both (1) authentic observational records from DES APY and (2) the strictly held-out temporal partition ($t \ge 2017$, 96 records) of the calibrated semi-synthetic benchmark.
 
-### 7.1 Feature-Modality Ablation Matrix using XGBoost (Exp A – Exp G)
-*Evaluates the marginal predictive value of adding environmental feature sets for tabular gradient boosting:*
+### 7.1 Authentic Observational Results ($N = 303$ Ground-Truth Records, 2001–2022)
+*Evaluated on genuine Directorate of Economics & Statistics (DES APY) historical harvests and real-world Earth observation inputs:*
 
-| Experiment ID | Included Modalities | Dim | Test MAE ($t/ha$) | Test RMSE ($t/ha$) | Test $R^2$ Score | Key Finding |
+| Model / Modality Configuration | Included Inputs | Test MAE ($t/ha$) | Test RMSE ($t/ha$) | Test $R^2$ Score | Real-World Empirical Coverage | Operational Notes |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Historical District Mean** | Static prior yield | 0.4920 | 0.6120 | 0.2840 | N/A | Non-parametric baseline |
+| **Satellite Baseline (Exp B)** | MODIS NDVI, EVI, NDWI | 0.4680 | 0.5890 | 0.4120 | N/A | Single-modality optical baseline |
+| **Weather Baseline (Exp A)** | NASA POWER precipitation, temperatures | 0.5210 | 0.6430 | 0.3010 | N/A | Meteorological supply alone |
+| **ClimateRice-FusionNet (Multimodal)** | Satellite + Weather + Soil + History | **0.3370** | **0.4410** | **0.6800** | **44.44% (16/36 test cases)** | **Multimodal fusion reduces observational error by 28.0% over satellite alone.** |
+
+> **Real-World Empirical Finding:** Real-world observational yield variance is substantially driven by unobserved on-farm management factors (fertilizer application, micro-irrigation timing, localized pest outbreaks). Consequently, multimodal fusion achieves $R^2 = 0.6800$, and epistemic uncertainty intervals cover $44.44\%$ of test outcomes, demonstrating the need for wider real-world operational calibration.
+
+### 7.2 Feature-Modality Ablation Matrix using XGBoost (Exp A – Exp G, calibrated semi-synthetic benchmark, $N = 504$)
+*Evaluates the marginal predictive value of adding environmental feature sets for tabular gradient boosting on the benchmark partition:*
+
+| Experiment ID | Included Modalities | Dim | Test MAE ($t/ha$) | Test RMSE ($t/ha$) | Test $R^2$ Score | Benchmark Evaluation Context |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Exp A** | Weather Only | 10 | 0.9132 | 1.1055 | 0.2081 | Meteorological supply alone cannot capture soil buffers or canopy vigor. |
 | **Exp B** | Satellite Only | 5 | 0.5335 | 0.7025 | 0.6802 | Optical greenness captures standing biomass but saturates in dense canopies. |
@@ -162,12 +191,12 @@ All experiments were conducted on the strictly held-out test partition ($t \ge 2
 | **Exp D** | Weather + Soil | 17 | 0.3368 | 0.4214 | 0.8849 | Coupling atmospheric precipitation with soil moisture capacity reduces error. |
 | **Exp E** | Satellite + Weather | 15 | 0.5022 | 0.6579 | 0.7195 | Meteorological drivers contextualize optical canopy anomalies. |
 | **Exp F** | Satellite + Weather + Soil | 22 | 0.3632 | 0.4696 | 0.8571 | Complete biophysical environmental model without historical autoregression. |
-| **Exp G** | **Full-feature XGBoost (+History)** | **26** | **0.2014** | **0.2641** | **0.9548** | **Strongest numerical predictor on the tabular benchmark.** |
+| **Exp G** | **Full-feature XGBoost (+History)** | **26** | **0.2014** | **0.2641** | **0.9548** | **Strongest numerical predictor on calibrated semi-synthetic benchmark ($N=504$).** |
 
-### 7.2 Neural Modality Ablation Matrix using ClimateRice-FusionNet (Exp FN-A – Exp FN-G)
+### 7.3 Neural Modality Ablation Matrix using ClimateRice-FusionNet (Exp FN-A – Exp FN-G, calibrated semi-synthetic benchmark, $N = 504$)
 *Evaluates deep cross-modal neural attention as heterogeneous modality branches are added:*
 
-| Experiment ID | Included Modalities | Dim | Test MAE ($t/ha$) | Test RMSE ($t/ha$) | Test $R^2$ Score | Key Finding |
+| Experiment ID | Included Modalities | Dim | Test MAE ($t/ha$) | Test RMSE ($t/ha$) | Test $R^2$ Score | Benchmark Evaluation Context |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Exp FN-A** | Weather Only | 10 | 1.2050 | 1.4140 | -0.2957 | Neural network underfits unstructured meteorological variance alone. |
 | **Exp FN-B** | Satellite Only | 5 | 0.5793 | 0.6971 | 0.6851 | Canopy reflectance provides solid foundation for neural embeddings. |
@@ -175,9 +204,9 @@ All experiments were conducted on the strictly held-out test partition ($t \ge 2
 | **Exp FN-D** | Weather + Soil | 17 | 0.3941 | 0.4521 | 0.8676 | Latent interaction captures moisture-holding physics. |
 | **Exp FN-E** | Satellite + Weather | 15 | 0.4456 | 0.5351 | 0.8145 | Cross-modal attention balances canopy reflectance and rain supply. |
 | **Exp FN-F** | Satellite + Weather + Soil | 22 | 0.3532 | 0.4191 | 0.8862 | Biophysical multimodal neural baseline. |
-| **Exp FN-G** | **ClimateRice-FusionNet Full (+History)** | **26** | **0.2774** | **0.3217** | **0.9329** | **Deep neural architecture with dynamic attention & MC uncertainty.** |
+| **Exp FN-G** | **ClimateRice-FusionNet Full (+History)** | **26** | **0.2774** | **0.3217** | **0.9329** | **Deep neural architecture with dynamic attention & MC uncertainty ($N=504$).** |
 
-### 7.3 Model Architecture Benchmark (Full 26 Features)
+### 7.4 Model Architecture Benchmark (Full 26 Features, calibrated semi-synthetic benchmark, $N = 504$)
 
 | Model Family | Architecture Details | Test MAE ($t/ha$) | Test RMSE ($t/ha$) | Test $R^2$ Score | Operational Role |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -185,11 +214,11 @@ All experiments were conducted on the strictly held-out test partition ($t \ge 2
 | **Ridge Regression** | L2 regularized linear model | 0.2303 | 0.2921 | 0.9447 | Fast, interpretable linear benchmark. |
 | **Random Forest** | 150 bagged de-correlated trees | 0.2134 | 0.2878 | 0.9463 | Non-linear feature subsampling. |
 | **XGBoost Regressor (Baseline)** | 200 gradient boosted trees ($\eta=0.05$, depth 6) | 0.2073 | 0.2733 | 0.9516 | Strong traditional machine-learning baseline. |
-| **Full-feature XGBoost (Exp G)** | 180 gradient boosted trees ($\eta=0.05$, depth 5) | **0.2014** | **0.2641** | **0.9548** | **Lowest numerical error on tabular benchmark.** |
+| **Full-feature XGBoost (Exp G)** | 180 gradient boosted trees ($\eta=0.05$, depth 5) | **0.2014** | **0.2641** | **0.9548** | **Lowest numerical error (calibrated semi-synthetic benchmark, $N=504$).** |
 | **Deep MLP** | 3-layer dense network with BatchNorm | 0.4074 | 0.4676 | 0.8583 | Non-linear flat tabular neural baseline. |
-| **ClimateRice-FusionNet** | Cross-modal attention + MC-Dropout | **0.2774** | **0.3217** | **0.9329** | **Dynamic cross-modal attention & MC Dropout predictive intervals (empirical coverage = 95.83%).** |
+| **ClimateRice-FusionNet** | Cross-modal attention + MC-Dropout | **0.2774** | **0.3217** | **0.9329** | **Dynamic cross-modal attention & MC Dropout predictive intervals (benchmark coverage = 95.83%).** |
 
-> **Scientific Finding:** On this small-to-medium tabular dataset ($N = 504$), gradient boosted trees (`Full-feature XGBoost`) achieve lower point prediction error ($\text{MAE} = 0.2014\text{ t/ha}$) than the deep neural network (`ClimateRice-FusionNet`, $\text{MAE} = 0.2774\text{ t/ha}$, $p = 0.0019$). This is consistent with empirical literature on tabular benchmarks (Grinsztajn et al., NeurIPS 2022). `ClimateRice-FusionNet` provides complementary value through differentiable cross-modal attention weights and MC Dropout predictive intervals (empirical coverage = 95.83%).
+> **Scientific Finding:** On the calibrated semi-synthetic tabular benchmark ($N = 504$), gradient boosted trees (`Full-feature XGBoost`) achieve lower point prediction error ($\text{MAE} = 0.2014\text{ t/ha}$) than the deep neural network (`ClimateRice-FusionNet`, $\text{MAE} = 0.2774\text{ t/ha}, p = 0.0019$). This is consistent with empirical literature on tabular benchmarks (Grinsztajn et al., NeurIPS 2022). `ClimateRice-FusionNet` provides complementary value through differentiable cross-modal attention weights and MC Dropout predictive intervals (empirical coverage = 95.83% on benchmark, 44.44% on raw observational data).
 
 ---
 

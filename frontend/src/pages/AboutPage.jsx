@@ -157,9 +157,67 @@ export default function AboutPage({ onNavigate }) {
         </p>
       </section>
 
-      {/* 4. Technology Stack */}
+      {/* 4. Geographic Scope: Andhra Pradesh Delta Origin & Pan-India Benchmark */}
       <section className="bg-white border border-stone-200 rounded-xl p-6 sm:p-8 shadow-sm space-y-4">
-        <h2 className="text-xl font-bold text-stone-900">4. Technology Stack</h2>
+        <h2 className="text-xl font-bold text-stone-900">4. Geographic Focus &amp; Generalization Strategy</h2>
+        <div className="space-y-3 text-xs sm:text-sm text-stone-600 leading-relaxed">
+          <p>
+            <strong>Project 19 Regional Origin:</strong> Grounded in the rice agro-ecosystem of <strong>Andhra Pradesh</strong>, specifically focusing on the high-intensity irrigated delta of <strong>Krishna district (Vijayawada region)</strong> and adjacent Godavari basins. Krishna represents an intensive canal-irrigated paddy system yielding 3.75 t/ha with high input adoption and vulnerability to cyclonic coastal weather.
+          </p>
+          <p>
+            <strong>Pan-India Generalization Benchmark:</strong> To evaluate model transferability across diverse thermal, rainfall, and soil regimes, the evaluation was scaled to a <strong>24-district benchmark panel</strong> across 11 major rice-producing states (Punjab, Haryana, West Bengal, Bihar, Uttar Pradesh, Odisha, Andhra Pradesh, Telangana, Tamil Nadu, Chhattisgarh, and Assam) encompassing 12 distinct ICAR agro-ecological zones.
+          </p>
+        </div>
+      </section>
+
+      {/* 5. Project Team & Academic Guidance */}
+      <section className="bg-white border border-stone-200 rounded-xl p-6 sm:p-8 shadow-sm space-y-6">
+        <div className="border-b border-stone-100 pb-3">
+          <h2 className="text-xl font-bold text-stone-900">5. Project Team &amp; Academic Supervision</h2>
+          <p className="text-xs sm:text-sm text-stone-500 mt-1">
+            B.Tech Final Year Capstone Project (Project 19) &bull; Department of Computer Science &amp; Engineering
+          </p>
+        </div>
+
+        <div className="grid sm:grid-cols-2 gap-4">
+          <div className="p-4 rounded-xl bg-stone-50 border border-stone-200 space-y-1">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-800">Student Team Members</span>
+            <ul className="text-xs text-stone-800 font-medium space-y-1.5 pt-2">
+              <li className="flex items-center space-x-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-700"></span>
+                <span><strong>Piyush Kumar</strong> — Lead, Neural Architecture &amp; System Integration</span>
+              </li>
+              <li className="flex items-center space-x-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-700"></span>
+                <span><strong>Rajesh</strong> — Data Pipeline Harmonization &amp; Agricultural Research</span>
+              </li>
+              <li className="flex items-center space-x-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-700"></span>
+                <span><strong>Laxmi Pavani</strong> — Feature Engineering &amp; Statistical Evaluation</span>
+              </li>
+              <li className="flex items-center space-x-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-700"></span>
+                <span><strong>Mullapudi Pravallika</strong> — UI/UX &amp; Agronomic Advisory Integration</span>
+              </li>
+            </ul>
+          </div>
+
+          <div className="p-4 rounded-xl bg-emerald-50/70 border border-emerald-200 space-y-1">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-900">Faculty Project Supervisor</span>
+            <div className="pt-2 space-y-1 text-xs">
+              <p className="font-bold text-stone-900 text-sm">Dr. E. Raveendra Reddy</p>
+              <p className="text-stone-600">Department of Computer Science &amp; Engineering</p>
+              <p className="text-[11px] text-stone-500 italic mt-2">
+                Guidance on scientific methodology, multimodal architecture formulation, temporal leakage prevention, and research integrity.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. Technology Stack */}
+      <section className="bg-white border border-stone-200 rounded-xl p-6 sm:p-8 shadow-sm space-y-4">
+        <h2 className="text-xl font-bold text-stone-900">6. Technology Stack</h2>
         <div className="divide-y divide-stone-100">
           {techStack.map((t, idx) => (
             <div key={idx} className="py-3 flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 text-sm">

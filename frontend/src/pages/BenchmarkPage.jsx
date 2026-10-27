@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Legend } from 'recharts';
-import { CheckCircle2, Award, Layers, Scale, AlertCircle } from 'lucide-react';
+import { Award, Layers, Scale, AlertCircle, Database, CheckCircle2 } from 'lucide-react';
 import { getBenchmarkData } from '../api/client';
 
 export default function BenchmarkPage() {
@@ -11,13 +11,13 @@ export default function BenchmarkPage() {
   }, []);
 
   const xgboostAblationList = [
-    { id: 'Exp_A', name: 'Weather Only (XGBoost)', modalities: 'Weather', mae: 0.9132, rmse: 1.1055, r2: 0.2081 },
-    { id: 'Exp_B', name: 'Satellite Only (XGBoost)', modalities: 'Satellite', mae: 0.5335, rmse: 0.7025, r2: 0.6802 },
-    { id: 'Exp_C', name: 'Soil Only (XGBoost)', modalities: 'Soil', mae: 0.4073, rmse: 0.5045, r2: 0.8351 },
-    { id: 'Exp_D', name: 'Weather + Soil (XGBoost)', modalities: 'Weather + Soil', mae: 0.3368, rmse: 0.4214, r2: 0.8849 },
-    { id: 'Exp_E', name: 'Satellite + Weather (XGBoost)', modalities: 'Satellite + Weather', mae: 0.5022, rmse: 0.6579, r2: 0.7195 },
-    { id: 'Exp_F', name: 'Biophysical All (XGBoost)', modalities: 'Satellite + Weather + Soil', mae: 0.3632, rmse: 0.4696, r2: 0.8571 },
-    { id: 'Exp_G', name: 'Full-feature XGBoost', modalities: 'Sat + Wea + Soil + Hist', mae: 0.2014, rmse: 0.2641, r2: 0.9548 },
+    { id: 'Exp_A', name: 'Weather Only', modalities: 'Weather', mae: 0.9132, rmse: 1.1055, r2: 0.2081 },
+    { id: 'Exp_B', name: 'Satellite Only', modalities: 'Satellite', mae: 0.5335, rmse: 0.7025, r2: 0.6802 },
+    { id: 'Exp_C', name: 'Soil Only', modalities: 'Soil', mae: 0.4073, rmse: 0.5045, r2: 0.8351 },
+    { id: 'Exp_D', name: 'Weather + Soil', modalities: 'Weather + Soil', mae: 0.3368, rmse: 0.4214, r2: 0.8849 },
+    { id: 'Exp_E', name: 'Satellite + Weather', modalities: 'Satellite + Weather', mae: 0.5022, rmse: 0.6579, r2: 0.7195 },
+    { id: 'Exp_F', name: 'Biophysical All', modalities: 'Satellite + Weather + Soil', mae: 0.3632, rmse: 0.4696, r2: 0.8571 },
+    { id: 'Exp_G', name: 'Full (+History)', modalities: 'Sat + Wea + Soil + Hist', mae: 0.2014, rmse: 0.2641, r2: 0.9548 },
   ];
 
   const fusionNetAblationList = [
@@ -27,88 +27,168 @@ export default function BenchmarkPage() {
     { id: 'Exp_FN-D', name: 'Weather + Soil (FusionNet)', modalities: 'Weather + Soil', mae: 0.3941, rmse: 0.4521, r2: 0.8676 },
     { id: 'Exp_FN-E', name: 'Satellite + Weather (FusionNet)', modalities: 'Satellite + Weather', mae: 0.4456, rmse: 0.5351, r2: 0.8145 },
     { id: 'Exp_FN-F', name: 'Biophysical All (FusionNet)', modalities: 'Satellite + Weather + Soil', mae: 0.3532, rmse: 0.4191, r2: 0.8862 },
-    { id: 'Exp_FN-G', name: 'ClimateRice-FusionNet Full', modalities: 'Sat + Wea + Soil + Hist', mae: 0.2774, rmse: 0.3217, r2: 0.9329 },
+    { id: 'Exp_FN-G', name: 'FusionNet Full (+History)', modalities: 'Sat + Wea + Soil + Hist', mae: 0.2774, rmse: 0.3217, r2: 0.9329 },
   ];
 
   const baselinesList = [
     { name: 'Naive District Mean', type: 'Heuristic Baseline', mae: 0.4043, rmse: 0.5015, r2: 0.8371 },
     { name: 'Ridge Linear Regression', type: 'L2 Regularized Linear', mae: 0.2303, rmse: 0.2921, r2: 0.9447 },
-    { name: 'Random Forest', type: 'Bagged Tree Ensemble (150 trees)', mae: 0.2134, rmse: 0.2878, r2: 0.9463 },
+    { name: 'Random Forest', type: 'Bagged Trees (150 trees)', mae: 0.2134, rmse: 0.2878, r2: 0.9463 },
     { name: 'XGBoost Regressor (Baseline)', type: 'Gradient Boosted Trees (200 trees)', mae: 0.2073, rmse: 0.2733, r2: 0.9516 },
     { name: 'Full-feature XGBoost (Exp G)', type: 'Gradient Boosted Trees (180 trees, depth 5)', mae: 0.2014, rmse: 0.2641, r2: 0.9548 },
-    { name: 'Deep Tabular MLP', type: 'Feed-forward Neural Network', mae: 0.4074, rmse: 0.4676, r2: 0.8583 },
+    { name: 'Deep Tabular MLP', type: '3-Layer Neural Baseline', mae: 0.4074, rmse: 0.4676, r2: 0.8583 },
     { name: 'ClimateRice-FusionNet', type: 'Cross-Modal Attention + MC-Dropout', mae: 0.2774, rmse: 0.3217, r2: 0.9329 },
   ];
 
+  const observationalList = [
+    { name: 'ClimateRice-FusionNet', type: 'Multimodal Attention Network', mae: 0.3371, rmse: 0.4428, r2: 0.6802, coverage: '44.44%' },
+    { name: 'Ridge Regression', type: 'L2 Linear Baseline', mae: 0.3502, rmse: 0.4485, r2: 0.6720, coverage: 'N/A' },
+    { name: 'XGBoost Regressor', type: 'Gradient Boosted Trees', mae: 0.3656, rmse: 0.4574, r2: 0.6588, coverage: 'N/A' },
+  ];
+
   return (
-    <div className="space-y-8 py-4">
+    <div className="space-y-8 py-6 sm:py-8 max-w-6xl mx-auto">
+      {/* Header */}
       <div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-white">Modality Ablation Suite &amp; Benchmarks</h1>
-        <p className="text-slate-400 text-sm mt-1">
-          Controlled empirical evaluation: Feature-Modality Ablation via XGBoost, Neural Modality Ablation via FusionNet, and Full Baseline Comparisons on held-out test years (&ge;2017).
+        <div className="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+          <Layers className="h-3.5 w-3.5" />
+          <span>Dual Empirical Evaluation (Observational + Calibrated Benchmark)</span>
+        </div>
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-stone-900 tracking-tight mt-2">
+          Model Benchmarks &amp; Modality Ablation Matrix
+        </h1>
+        <p className="text-xs sm:text-sm text-stone-600 mt-1 max-w-3xl leading-relaxed">
+          Rigorous experimental evaluation across two parallel tracks: 
+          (1) <strong>Genuine Observational Dataset (DES APY, N=303)</strong> evaluating real-world accuracy, and 
+          (2) <strong>Calibrated Semi-Synthetic Benchmark (N=504)</strong> evaluating controlled 7-phase modality ablations and cross-modal attention dynamics.
         </p>
       </div>
 
-      {/* Hypothesis Confirmation Card */}
-      <div className="bg-gradient-to-r from-emerald-950/40 via-slate-800 to-slate-900 border border-emerald-500/40 rounded-3xl p-6 sm:p-8 space-y-4 shadow-xl">
+      {/* Primary Observational Results Highlight (F1 & F2 Lead Story) */}
+      <div className="bg-emerald-50/70 border border-emerald-200 rounded-2xl p-6 sm:p-8 space-y-4 shadow-xs">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-emerald-200/80 pb-4">
+          <div className="flex items-center space-x-3">
+            <div className="h-10 w-10 rounded-xl bg-emerald-700 text-white flex items-center justify-center shadow-xs">
+              <Database className="h-5 w-5" />
+            </div>
+            <div>
+              <span className="text-xs font-mono font-bold text-emerald-800 uppercase tracking-wider">
+                Primary Ground Truth Evaluation (Lead Story)
+              </span>
+              <h2 className="text-lg font-bold text-stone-900">
+                Genuine Observational Dataset Results (DES APY + NASA POWER, N = 303)
+              </h2>
+            </div>
+          </div>
+          <span className="text-xs bg-emerald-100 text-emerald-900 font-mono font-bold px-3 py-1 rounded-full self-start sm:self-auto">
+            Real Observations: 2000–2014
+          </span>
+        </div>
+
+        <p className="text-xs sm:text-sm text-stone-700 leading-relaxed">
+          Evaluated against 15 years of official district-level crop statistics from India&apos;s Directorate of Economics and Statistics (DES APY) 
+          coupled with NASA POWER daily meteorology and SoilGrids pedometrics across 24 representative districts:
+        </p>
+
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-xs font-mono bg-white rounded-xl border border-emerald-200/80 overflow-hidden">
+            <thead className="bg-emerald-100/60 text-emerald-950 font-bold border-b border-emerald-200">
+              <tr>
+                <th className="py-2.5 px-3">Model Architecture</th>
+                <th className="py-2.5 px-3">Model Family</th>
+                <th className="py-2.5 px-3">Test MAE (t/ha)</th>
+                <th className="py-2.5 px-3">Test RMSE (t/ha)</th>
+                <th className="py-2.5 px-3">Test R² Score</th>
+                <th className="py-2.5 px-3">Interval Coverage</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-emerald-100 text-stone-800">
+              {observationalList.map((m, idx) => (
+                <tr key={idx} className={idx === 0 ? 'bg-emerald-50/50 font-semibold' : ''}>
+                  <td className="py-2.5 px-3 text-stone-900">{m.name}</td>
+                  <td className="py-2.5 px-3 text-stone-600 font-sans">{m.type}</td>
+                  <td className="py-2.5 px-3 text-emerald-800 font-bold">{m.mae.toFixed(4)}</td>
+                  <td className="py-2.5 px-3 text-stone-700">{m.rmse.toFixed(4)}</td>
+                  <td className="py-2.5 px-3 text-emerald-800 font-bold">{m.r2.toFixed(4)}</td>
+                  <td className="py-2.5 px-3 text-stone-600">{m.coverage}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <p className="text-[11px] text-stone-600 italic leading-relaxed">
+          *On real observational data, <strong>ClimateRice-FusionNet achieves R² = 0.6802 and MAE = 0.3371 t/ha</strong>. 
+          Uncalibrated predictive intervals achieve 44.44% (16/36) coverage on raw observations due to microclimate shocks; 
+          the 95.83% coverage figure applies specifically to the calibrated benchmark below.
+        </p>
+      </div>
+
+      {/* Hypothesis Confirmation Card (Benchmark) */}
+      <div className="bg-white border border-stone-200 rounded-2xl p-6 sm:p-8 space-y-4 shadow-sm">
         <div className="flex items-center space-x-3">
-          <div className="h-10 w-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center border border-emerald-500/40">
-            <Award className="h-6 w-6" />
+          <div className="h-10 w-10 rounded-xl bg-stone-100 text-emerald-700 flex items-center justify-center border border-stone-200">
+            <Award className="h-5 w-5" />
           </div>
           <div>
-            <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">Formal Statistical Validation</span>
-            <h2 className="text-xl font-bold text-white">Multimodal Feature Integration Confirmed</h2>
+            <span className="text-xs font-mono font-bold text-emerald-800 uppercase tracking-wider">
+              Controlled Modality Ablation (calibrated semi-synthetic benchmark, N=504)
+            </span>
+            <h2 className="text-lg font-bold text-stone-900">
+              Multimodal Feature Integration Confirmed (p = 2.54 × 10⁻⁷)
+            </h2>
           </div>
         </div>
 
-        <p className="text-sm text-slate-300 leading-relaxed">
-          Multimodal feature integration significantly improves prediction relative to selected single-modality configurations. A paired Student&apos;s t-test comparing multimodal models against single-modality baselines confirms a statistically decisive error reduction:
+        <p className="text-xs sm:text-sm text-stone-600 leading-relaxed">
+          Controlled ablation confirms that fusing satellite, weather, soil, and historical momentum yields a statistically decisive error reduction over single-modality configurations:
         </p>
 
-        <div className="grid sm:grid-cols-3 gap-3 pt-2">
-          <div className="bg-slate-900/80 p-4 rounded-xl border border-slate-700 font-mono text-xs">
-            <span className="text-slate-400 text-[10px] uppercase">Mean Error Reduction</span>
-            <div className="text-lg font-bold text-emerald-400 mt-1">0.2652 tonnes/ha</div>
-            <span className="text-slate-500 text-[10px]">vs Single Modality (Satellite)</span>
+        <div className="grid sm:grid-cols-3 gap-3 pt-1">
+          <div className="bg-stone-50 p-4 rounded-xl border border-stone-200 font-mono text-xs">
+            <span className="text-stone-500 text-[10px] uppercase font-sans">Mean Error Reduction</span>
+            <div className="text-lg font-bold text-emerald-800 mt-1">0.2652 t/ha</div>
+            <span className="text-stone-500 text-[10px]">vs Satellite Only (p &lt;&lt; 0.05)</span>
           </div>
 
-          <div className="bg-slate-900/80 p-4 rounded-xl border border-slate-700 font-mono text-xs">
-            <span className="text-slate-400 text-[10px] uppercase">Paired t-test p-value</span>
-            <div className="text-lg font-bold text-teal-400 mt-1">2.54 &times; 10⁻⁷</div>
-            <span className="text-emerald-400 text-[10px]">p &lt;&lt; 0.05 (Significant)</span>
+          <div className="bg-stone-50 p-4 rounded-xl border border-stone-200 font-mono text-xs">
+            <span className="text-stone-500 text-[10px] uppercase font-sans">Paired t-test p-value</span>
+            <div className="text-lg font-bold text-emerald-800 mt-1">2.54 &times; 10⁻⁷</div>
+            <span className="text-emerald-700 text-[10px]">Statistically Significant (H1 Accepted)</span>
           </div>
 
-          <div className="bg-slate-900/80 p-4 rounded-xl border border-slate-700 font-mono text-xs">
-            <span className="text-slate-400 text-[10px] uppercase">Model Comparison (Tabular vs DL)</span>
-            <div className="text-sm font-bold text-amber-400 mt-1">XGBoost &lt; FusionNet Error</div>
-            <span className="text-slate-400 text-[10px]">p = 0.0019 (XGBoost achieves lower MAE)</span>
+          <div className="bg-stone-50 p-4 rounded-xl border border-stone-200 font-mono text-xs">
+            <span className="text-stone-500 text-[10px] uppercase font-sans">Model Comparison (Tabular vs DL)</span>
+            <div className="text-sm font-bold text-stone-800 mt-1">XGBoost &lt; FusionNet Error</div>
+            <span className="text-stone-500 text-[10px]">p = 0.0019 (Tabular ML achieves lower MAE)</span>
           </div>
         </div>
       </div>
 
-      {/* Ablation Chart */}
-      <div className="bg-slate-800/80 border border-slate-700/80 rounded-3xl p-6 sm:p-8 space-y-4 shadow-xl">
-        <div className="flex justify-between items-center">
+      {/* Feature Ablation Chart */}
+      <div className="bg-white border border-stone-200 rounded-2xl p-6 sm:p-8 space-y-4 shadow-sm">
+        <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-1">
           <div>
-            <h3 className="text-base font-bold text-white">Feature-Modality Ablation via XGBoost (Exp A – Exp G)</h3>
-            <p className="text-xs text-slate-400 mt-0.5">Evaluating feature combination predictive value for tabular gradient boosting</p>
+            <h3 className="text-base font-bold text-stone-900">
+              Feature-Modality Ablation via XGBoost (calibrated semi-synthetic benchmark, N=504)
+            </h3>
+            <p className="text-xs text-stone-500">Marginal predictive value as environmental modalities are coupled</p>
           </div>
-          <span className="text-xs font-mono text-slate-400 hidden sm:inline">Lower error is better &darr;</span>
+          <span className="text-xs text-stone-500 font-mono">Lower error is better &darr;</span>
         </div>
 
         <div className="h-72 w-full pt-4">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={xgboostAblationList} margin={{ top: 10, right: 10, left: -20, bottom: 25 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#334155" opacity={0.5} />
-              <XAxis dataKey="name" stroke="#94a3b8" tick={{ fontSize: 11 }} angle={-15} textAnchor="end" />
-              <YAxis stroke="#94a3b8" tick={{ fontSize: 11 }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+              <XAxis dataKey="name" stroke="#6b7280" tick={{ fontSize: 11 }} angle={-15} textAnchor="end" />
+              <YAxis stroke="#6b7280" tick={{ fontSize: 11 }} />
               <Tooltip
-                contentStyle={{ backgroundColor: '#0f172a', borderColor: '#334155', borderRadius: '0.75rem', fontSize: '12px' }}
-                itemStyle={{ color: '#e2e8f0' }}
+                contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e5e7eb', borderRadius: '0.75rem', fontSize: '12px' }}
               />
               <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }} />
-              <Bar dataKey="mae" name="MAE (tonnes/ha)" fill="#10b981" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="rmse" name="RMSE (tonnes/ha)" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="mae" name="MAE (t/ha)" fill="#047857" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="rmse" name="RMSE (t/ha)" fill="#3b82f6" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -116,15 +196,17 @@ export default function BenchmarkPage() {
 
       {/* Dual Ablation Tables Grid */}
       <div className="grid lg:grid-cols-2 gap-6">
-        {/* XGBoost Feature Ablation Table */}
-        <div className="bg-slate-800/80 border border-slate-700/80 rounded-3xl p-6 space-y-4 shadow-xl overflow-hidden">
+        {/* Table 1 */}
+        <div className="bg-white border border-stone-200 rounded-2xl p-6 space-y-4 shadow-sm">
           <div>
-            <h3 className="text-base font-bold text-white">1. Feature-Modality Ablation (XGBoost)</h3>
-            <p className="text-xs text-slate-400 mt-0.5">Which feature combination works best for tabular ML?</p>
+            <h3 className="text-sm font-bold text-stone-900">
+              1. Modality Ablation — XGBoost (calibrated benchmark, N=504)
+            </h3>
+            <p className="text-xs text-stone-500">Tabular gradient boosting progression across modality combinations</p>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs font-mono">
-              <thead className="bg-slate-900/80 text-slate-400 border-b border-slate-700">
+              <thead className="bg-stone-50 text-stone-700 border-b border-stone-200">
                 <tr>
                   <th className="py-2.5 px-3">Experiment</th>
                   <th className="py-2.5 px-3">MAE</th>
@@ -132,13 +214,13 @@ export default function BenchmarkPage() {
                   <th className="py-2.5 px-3">R² Score</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-700/50">
+              <tbody className="divide-y divide-stone-100">
                 {xgboostAblationList.map((exp) => (
-                  <tr key={exp.id} className={`hover:bg-slate-700/30 transition-colors ${exp.id === 'Exp_G' ? 'bg-emerald-950/20' : ''}`}>
-                    <td className="py-2.5 px-3 font-bold text-white">{exp.name}</td>
-                    <td className="py-2.5 px-3 text-emerald-400 font-bold">{exp.mae.toFixed(4)}</td>
-                    <td className="py-2.5 px-3 text-sky-400">{exp.rmse.toFixed(4)}</td>
-                    <td className="py-2.5 px-3 text-amber-400 font-bold">{(exp.r2).toFixed(4)}</td>
+                  <tr key={exp.id} className={exp.id === 'Exp_G' ? 'bg-emerald-50/60 font-semibold' : ''}>
+                    <td className="py-2.5 px-3 text-stone-900">{exp.name}</td>
+                    <td className="py-2.5 px-3 text-emerald-800 font-bold">{exp.mae.toFixed(4)}</td>
+                    <td className="py-2.5 px-3 text-stone-700">{exp.rmse.toFixed(4)}</td>
+                    <td className="py-2.5 px-3 text-stone-900 font-bold">{exp.r2.toFixed(4)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -146,15 +228,17 @@ export default function BenchmarkPage() {
           </div>
         </div>
 
-        {/* FusionNet Neural Ablation Table */}
-        <div className="bg-slate-800/80 border border-slate-700/80 rounded-3xl p-6 space-y-4 shadow-xl overflow-hidden">
+        {/* Table 2 */}
+        <div className="bg-white border border-stone-200 rounded-2xl p-6 space-y-4 shadow-sm">
           <div>
-            <h3 className="text-base font-bold text-white">2. Neural Modality Ablation (FusionNet)</h3>
-            <p className="text-xs text-slate-400 mt-0.5">How does deep cross-modal attention behave as modalities are added?</p>
+            <h3 className="text-sm font-bold text-stone-900">
+              2. Modality Ablation — FusionNet (calibrated benchmark, N=504)
+            </h3>
+            <p className="text-xs text-stone-500">Deep cross-modal neural attention network progression</p>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs font-mono">
-              <thead className="bg-slate-900/80 text-slate-400 border-b border-slate-700">
+              <thead className="bg-stone-50 text-stone-700 border-b border-stone-200">
                 <tr>
                   <th className="py-2.5 px-3">Experiment</th>
                   <th className="py-2.5 px-3">MAE</th>
@@ -162,13 +246,13 @@ export default function BenchmarkPage() {
                   <th className="py-2.5 px-3">R² Score</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-700/50">
+              <tbody className="divide-y divide-stone-100">
                 {fusionNetAblationList.map((exp) => (
-                  <tr key={exp.id} className={`hover:bg-slate-700/30 transition-colors ${exp.id === 'Exp_FN-G' ? 'bg-teal-950/20' : ''}`}>
-                    <td className="py-2.5 px-3 font-bold text-white">{exp.name}</td>
-                    <td className="py-2.5 px-3 text-emerald-400 font-bold">{exp.mae.toFixed(4)}</td>
-                    <td className="py-2.5 px-3 text-sky-400">{exp.rmse.toFixed(4)}</td>
-                    <td className="py-2.5 px-3 text-amber-400 font-bold">{(exp.r2).toFixed(4)}</td>
+                  <tr key={exp.id} className={exp.id === 'Exp_FN-G' ? 'bg-emerald-50/60 font-semibold' : ''}>
+                    <td className="py-2.5 px-3 text-stone-900">{exp.name}</td>
+                    <td className="py-2.5 px-3 text-emerald-800 font-bold">{exp.mae.toFixed(4)}</td>
+                    <td className="py-2.5 px-3 text-stone-700">{exp.rmse.toFixed(4)}</td>
+                    <td className="py-2.5 px-3 text-stone-900 font-bold">{exp.r2.toFixed(4)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -178,40 +262,38 @@ export default function BenchmarkPage() {
       </div>
 
       {/* Model Family Benchmarks */}
-      <div className="bg-slate-800/80 border border-slate-700/80 rounded-3xl p-6 space-y-4 shadow-xl overflow-hidden">
+      <div className="bg-white border border-stone-200 rounded-2xl p-6 space-y-4 shadow-sm">
         <div className="flex justify-between items-center">
           <div>
-            <h3 className="text-base font-bold text-white">Baseline vs. Deep Learning Models (Full Modalities)</h3>
-            <p className="text-xs text-slate-400 mt-0.5">Evaluating tree-based ensembles against neural cross-modal fusion</p>
+            <h3 className="text-sm font-bold text-stone-900">
+              All Model Families Comparison (calibrated semi-synthetic benchmark, N=504, 26 features)
+            </h3>
+            <p className="text-xs text-stone-500">Evaluating tree-based ensembles, linear baselines, and neural architectures</p>
           </div>
-          <span className="text-xs bg-slate-700 px-3 py-1 rounded-full text-slate-300 font-mono">All 26 Features</span>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs font-mono">
-            <thead className="bg-slate-900/80 text-slate-400 border-b border-slate-700">
+            <thead className="bg-stone-50 text-stone-700 border-b border-stone-200">
               <tr>
-                <th className="py-3 px-4">Model Architecture</th>
-                <th className="py-3 px-4">Type &amp; Complexity</th>
-                <th className="py-3 px-4">Test MAE</th>
-                <th className="py-3 px-4">Test RMSE</th>
-                <th className="py-3 px-4">Test R²</th>
-                <th className="py-3 px-4">Key Advantage</th>
+                <th className="py-3 px-3">Model Architecture</th>
+                <th className="py-3 px-3">Complexity</th>
+                <th className="py-3 px-3">Test MAE (t/ha)</th>
+                <th className="py-3 px-3">Test RMSE (t/ha)</th>
+                <th className="py-3 px-3">Test R² Score</th>
+                <th className="py-3 px-3">Key Functional Role</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-700/50">
+            <tbody className="divide-y divide-stone-100">
               {baselinesList.map((m, i) => (
-                <tr key={i} className={`hover:bg-slate-700/30 transition-colors ${m.name.includes('Fusion') ? 'bg-emerald-950/20' : ''}`}>
-                  <td className="py-3 px-4 font-bold text-white flex items-center space-x-2">
-                    {m.name.includes('Fusion') && <span className="h-2 w-2 rounded-full bg-emerald-400"></span>}
-                    <span>{m.name}</span>
-                  </td>
-                  <td className="py-3 px-4 text-slate-300 font-sans">{m.type}</td>
-                  <td className="py-3 px-4 text-emerald-400 font-bold">{m.mae.toFixed(4)}</td>
-                  <td className="py-3 px-4 text-sky-400">{m.rmse.toFixed(4)}</td>
-                  <td className="py-3 px-4 text-amber-400 font-bold">{m.r2.toFixed(4)}</td>
-                  <td className="py-3 px-4 text-slate-300 font-sans">
-                    {m.name.includes('Fusion') ? 'Cross-modal dynamic attention & MC uncertainty' : (m.name.includes('XGB') ? 'Fast training & robust tree split thresholds' : 'Benchmark baseline')}
+                <tr key={i} className={m.name.includes('Fusion') ? 'bg-emerald-50/60 font-semibold' : ''}>
+                  <td className="py-2.5 px-3 text-stone-900 font-bold">{m.name}</td>
+                  <td className="py-2.5 px-3 text-stone-600 font-sans">{m.type}</td>
+                  <td className="py-2.5 px-3 text-emerald-800 font-bold">{m.mae.toFixed(4)}</td>
+                  <td className="py-2.5 px-3 text-stone-700">{m.rmse.toFixed(4)}</td>
+                  <td className="py-2.5 px-3 text-stone-900 font-bold">{m.r2.toFixed(4)}</td>
+                  <td className="py-2.5 px-3 text-stone-600 font-sans">
+                    {m.name.includes('Fusion') ? 'Cross-modal dynamic attention & MC uncertainty' : (m.name.includes('XGB') ? 'Strongest numerical point predictor on tabular features' : 'Comparison baseline')}
                   </td>
                 </tr>
               ))}
@@ -219,13 +301,16 @@ export default function BenchmarkPage() {
           </table>
         </div>
 
-        <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-700 text-xs text-slate-300 space-y-1.5 leading-relaxed">
-          <div className="font-bold text-white flex items-center space-x-1.5">
-            <Scale className="h-4 w-4 text-emerald-400" />
-            <span>Scientific Model Selection Analysis (Addressing Viva Criterion 30)</span>
+        <div className="p-4 rounded-xl bg-stone-50 border border-stone-200 text-xs text-stone-700 space-y-1.5 leading-relaxed">
+          <div className="font-bold text-stone-900 flex items-center space-x-1.5">
+            <Scale className="h-4 w-4 text-emerald-700" />
+            <span>Scientific Model Selection Analysis</span>
           </div>
           <p>
-            While gradient boosting (XGBoost, MAE: 0.2073 t/ha) achieves outstanding tabular precision, <strong>ClimateRice-FusionNet</strong> (MAE: 0.2774 t/ha) provides two irreplaceable scientific advantages: (1) <em>end-to-end differentiable cross-modal attention</em> that dynamically shifts representation weights under severe drought/heat shocks, and (2) <em>MC Dropout predictive intervals (empirical coverage = 95.83%)</em>, ensuring farmers and policymakers are informed of prediction dispersion during anomalous climate seasons.
+            On tabular panel features, gradient boosted trees (Full-feature XGBoost, MAE: 0.2014 t/ha) achieve lower numerical point error than deep learning. 
+            However, <strong>ClimateRice-FusionNet (MAE: 0.2774 t/ha on benchmark, 0.3371 t/ha on observational)</strong> provides: 
+            (1) <em>end-to-end differentiable cross-modal attention</em> that dynamically reweights environmental signals during heat/drought shocks, and 
+            (2) <em>MC Dropout epistemic predictive intervals</em>, communicating prediction uncertainty to agricultural decision-makers.
           </p>
         </div>
       </div>

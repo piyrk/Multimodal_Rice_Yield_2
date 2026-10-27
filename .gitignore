@@ -48,6 +48,9 @@ npm-debug.log*
 # IDE
 .vscode/
 .idea/
+
+# Scratch & Temporary
+scratch/
 *.swp
 *.swo
 

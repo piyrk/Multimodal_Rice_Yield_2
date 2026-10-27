@@ -40,7 +40,7 @@ The definitive, scientifically defensible research question investigated by this
 3. **Synthetic Generation Justification:**  
    Because downloading and processing raw multi-decadal satellite rasters (MODIS MOD13Q1 / Sentinel-2 HDF/GeoTIFF) and live ISRIC SoilGrids WCS rasters would require hundreds of gigabytes of storage and external API credentials beyond the local student compute environment, the annual time series were generated via peer-reviewed biophysical response functions (Peng et al. 2004, Lobell et al. 2015, Huete et al. 2002) coupled to historical Indian drought (2002, 2004, 2009, 2014, 2015) and heatwave (2010, 2016) shock years.
 4. **Authentic Data Migration Path:**  
-   A clean, modular real-data ingestion interface has been implemented in [`src/data/real_data_interface.py`](file:///c:/Users/Piyush%20Kumar/Desktop/capstone_project/src/data/real_data_interface.py), and the complete step-by-step data upgrade protocol is documented in [`docs/real_data_upgrade_plan.md`](file:///c:/Users/Piyush%20Kumar/Desktop/capstone_project/docs/real_data_upgrade_plan.md).
+   A clean, modular real-data ingestion interface has been implemented in [`src/data/real_data_interface.py`](../src/data/real_data_interface.py), and the complete step-by-step data upgrade protocol is documented in [`docs/real_data_upgrade_plan.md`](real_data_upgrade_plan.md).
 
 ---
 

@@ -50,7 +50,7 @@
 
 ## 3. Data Authenticity & Lineage Audit
 
-The complete lineage and taxonomic classification for all 35 columns in `data/raw/harmonized_rice_multimodal.csv` is documented in [`docs/data_audit.md`](file:///c:/Users/Piyush%20Kumar/Desktop/capstone_project/docs/data_audit.md).
+The complete lineage and taxonomic classification for all 35 columns in `data/raw/harmonized_rice_multimodal.csv` is documented in [`docs/data_audit.md`](data_audit.md).
 
 ### Summary Breakdown by Data Category ($N = 504$ Rows)
 - **Category A (Real Observed Metadata):** 7 columns (20.0%)  
@@ -174,7 +174,7 @@ Exp G in `ablation_benchmark.json` reflects **multimodal feature ablation using 
 
 All benchmark evaluation metrics were independently recomputed on the frozen test set ($N = 96$ observations, years 2017–2020) directly from `experiments/results/test_predictions.csv` and verified against `experiments/results/model_benchmark.json`.
 
-Full results are recorded in [`reports/results/reproducibility_check.json`](file:///c:/Users/Piyush%20Kumar/Desktop/capstone_project/reports/results/reproducibility_check.json):
+Full results are recorded in [`reports/results/reproducibility_check.json`](../reports/results/reproducibility_check.json):
 
 | Model Name | Metric | Reported Value | Recomputed Value | Absolute Difference | Verification Status |
 |---|---|---|---|---|---|

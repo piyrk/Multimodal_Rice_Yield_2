@@ -74,7 +74,11 @@ class PredictionResponse(BaseModel):
     )
     empirical_coverage_pct: float = Field(
         default=95.83,
-        description="Empirical test set coverage rate of the MC Dropout predictive interval",
+        description="Empirical test set coverage rate of the MC Dropout interval on the calibrated benchmark (N=96, 2017-2020)",
+    )
+    observational_coverage_pct: Optional[float] = Field(
+        default=44.44,
+        description="Held-out coverage rate on uncalibrated observational DES APY test data (16/36 observations)",
     )
     risk_level: str
     modality_attention_weights: Dict[str, float]
