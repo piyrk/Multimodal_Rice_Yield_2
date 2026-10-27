@@ -83,12 +83,57 @@ export default function PredictPage({ locations = [] }) {
   const activeAbortRef = useRef(null);
   const fetchSequenceRef = useRef(0);
 
-  // Fetch benchmark environmental profile from backend
+  // Load the district profile for the form.
+  // F3 fix: the DES APY-synced local profile (districtProfiles.js) is the
+  // single source of truth for district defaults. Previously this function
+  // always fetched the backend benchmark profile — served from the
+  // semi-synthetic benchmark CSV — and overwrote the local profile, which
+  // re-pinned historical yields to benchmark-scale values (e.g. Burdwan
+  // 6.2 t/ha instead of the DES APY 3.25 t/ha). The backend profile is now
+  // only a fallback for districts with no synced local profile, and its
+  // Category F semi-synthetic provenance is shown whenever it is used.
   const fetchProfile = async (distName, cropYear = null, season = 'Kharif', postTransform = null) => {
     if (season === 'Rabi') {
       setDataSourceType('unavailable');
       setProfileError(null);
       setProfileLoading(false);
+      return;
+    }
+
+    const localProfile = getProfileForDistrict(distName);
+    if (localProfile) {
+      // Cancel any in-flight backend fetch so a stale response cannot
+      // overwrite the local profile after this point.
+      if (activeAbortRef.current) {
+        activeAbortRef.current.abort();
+      }
+      fetchSequenceRef.current += 1;
+      setProfileLoading(false);
+      setProfileError(null);
+
+      const mergedLocal = {
+        ...localProfile,
+        crop_year: cropYear ?? localProfile.crop_year ?? formData.crop_year,
+        season,
+      };
+
+      if (postTransform) {
+        setFormData(postTransform(mergedLocal));
+        setDataSourceType('preset');
+      } else {
+        setFormData((prev) => ({ ...prev, ...mergedLocal }));
+        setDataSourceType('benchmark');
+      }
+
+      setProfileMetadata({
+        dataSource: '15-20 Year Grounded Observational Baseline (DES APY & NASA POWER)',
+        provenanceCategory: 'Category F (Calibrated Multi-Decadal Historical Panel)',
+        provenanceDetails: `Centroid: (${localProfile.latitude || ''}, ${localProfile.longitude || ''}) | Zone: ${localProfile.agro_ecological_zone} | Irrigation: ${Math.round((localProfile.irrigation_ratio || 0.5) * 100)}%`,
+        isObservational: true,
+        availableYears: [2000, 2005, 2010, 2014, 2015, 2016, 2017, 2018, 2019, 2020],
+        zone: localProfile.agro_ecological_zone,
+        irrigation: localProfile.irrigation_ratio,
+      });
       return;
     }
 
