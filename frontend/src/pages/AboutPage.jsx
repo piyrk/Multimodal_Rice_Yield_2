@@ -137,9 +137,9 @@ export default function AboutPage({ onNavigate }) {
             </p>
           </div>
           <div className="p-4 bg-emerald-50/70 border border-emerald-200 rounded-lg space-y-1.5">
-            <span className="text-xs font-bold uppercase tracking-wider text-emerald-900">B. Genuine Observational Dataset (N = 303)</span>
+            <span className="text-xs font-bold uppercase tracking-wider text-emerald-900">B. Genuine Observational Dataset (N = 427, extended)</span>
             <p className="text-xs text-emerald-800 leading-relaxed">
-              303 panel records coupling <strong>real observed rice yield and sown area</strong> from official Government of India (DES APY) statistics with <strong>real daily meteorology</strong> from NASA POWER REST API and SoilGrids pedometrics (2000–2014).
+              303 original panel records coupling <strong>real observed rice yield and sown area</strong> from official Government of India (DES APY) statistics with <strong>real daily meteorology</strong> from NASA POWER REST API and SoilGrids pedometrics (2000–2014), <strong>extended with recorded DES yields to 427 records (2000–2024)</strong> via the India Data Portal APY/UPAG compilations under vintage, identity and lag-integrity gates. Kharif 2025–2026 are available in the Predict studio as labelled model estimates (recorded yields not yet published).
             </p>
           </div>
         </div>

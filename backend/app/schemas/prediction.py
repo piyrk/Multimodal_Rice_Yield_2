@@ -35,8 +35,12 @@ class PredictionRequest(BaseModel):
     temp_max_deg_c: float = Field(default=33.5, ge=15.0, le=52.0, description="Maximum day temperature (°C)")
     temp_mean_deg_c: float = Field(default=29.15, ge=10.0, le=42.0, description="Mean daily temperature (°C)")
     temp_anomaly_deg_c: float = Field(default=0.35, ge=-8.0, le=8.0, description="Temperature anomaly (°C)")
-    extreme_heat_days: int = Field(default=4, ge=0, le=100, description="Days with Tmax >= 35°C")
-    consecutive_dry_days: int = Field(default=8, ge=0, le=100, description="Longest consecutive dry spell")
+    # Day counts span the Kharif window (Jun 1 - Oct 31 = 153 days), so the
+    # physical maximum is 153. The previous cap of 100 rejected real
+    # observed seasons: Kharif 2026 recorded 101-103 heat days in
+    # Ludhiana / Thanjavur / Tiruchirappalli (NASA POWER).
+    extreme_heat_days: int = Field(default=4, ge=0, le=153, description="Days with Tmax >= 35°C")
+    consecutive_dry_days: int = Field(default=8, ge=0, le=153, description="Longest consecutive dry spell")
     relative_humidity_pct: float = Field(default=78.0, ge=10.0, le=100.0, description="Mean relative humidity (%)")
     solar_radiation_mj_m2: float = Field(default=17.5, ge=5.0, le=35.0, description="Daily solar radiation (MJ/m²)")
 

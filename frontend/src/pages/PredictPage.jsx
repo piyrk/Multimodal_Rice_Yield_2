@@ -24,6 +24,7 @@ import {
   getProfileForDistrict,
   getDistrictsForState,
 } from '../data/districtProfiles';
+import SEASON_ESTIMATES from '../data/seasonEstimates.json';
 
 export default function PredictPage({ locations = [] }) {
   // Initial authentic profile based on representative baseline district (Burdwan, WB)
@@ -77,6 +78,7 @@ export default function PredictPage({ locations = [] }) {
   const [profileError, setProfileError] = useState(null);
   const [dataSourceType, setDataSourceType] = useState('benchmark'); // 'benchmark' | 'preset' | 'manual' | 'unavailable'
   const [activePresetName, setActivePresetName] = useState(null);
+  const [seasonEstimateYear, setSeasonEstimateYear] = useState(null); // null | 2025 | 2026
   const [profileMetadata, setProfileMetadata] = useState(null);
 
   // References for race-condition prevention across rapid dropdown clicks
@@ -301,6 +303,7 @@ export default function PredictPage({ locations = [] }) {
     setResult(null);
     setError(null);
     setActivePresetName(null);
+    setSeasonEstimateYear(null);
     setDataSourceType('manual');
     setFormData((prev) => ({
       ...prev,
@@ -317,6 +320,7 @@ export default function PredictPage({ locations = [] }) {
     setError(null);
     setProfileError(null);
     setActivePresetName(null);
+    setSeasonEstimateYear(null);
 
     // Look up static verified profile for immediate zero-latency population
     const staticProfile = getProfileForDistrict(distName);
@@ -355,6 +359,7 @@ export default function PredictPage({ locations = [] }) {
     setResult(null);
     setError(null);
     setActivePresetName(null);
+    setSeasonEstimateYear(null);
 
     setFormData((prev) => ({ ...prev, season: newSeason }));
 
@@ -372,6 +377,7 @@ export default function PredictPage({ locations = [] }) {
     setResult(null);
     setError(null);
     setActivePresetName(null);
+    setSeasonEstimateYear(null);
 
     const yearNum = parseInt(newYear, 10);
     setFormData((prev) => ({ ...prev, crop_year: yearNum }));
@@ -387,6 +393,7 @@ export default function PredictPage({ locations = [] }) {
     setError(null);
     setProfileError(null);
     setActivePresetName(null);
+    setSeasonEstimateYear(null);
     const p = getProfileForDistrict(formData.district_name) || getProfileForDistrict('Burdwan');
     setFormData((prev) => ({
       ...prev,
@@ -433,6 +440,50 @@ export default function PredictPage({ locations = [] }) {
       ...prev,
       ...preset.updates(prev),
     }));
+  };
+
+  // Season-estimate preset: load observed-weather inputs for Kharif 2025 or
+  // 2026 for the current district (frontend/src/data/seasonEstimates.json,
+  // built by scripts/build_season_2026.py from NASA POWER daily data).
+  // These are ESTIMATE inputs: the recorded DES yield for these years has
+  // not been published yet, so any prediction from them is a model
+  // estimate, never a measurement. The banner and profile metadata keep
+  // that visible. Manual edits, district/season/year changes and Reset
+  // all clear the estimate state.
+  const handleApplySeasonEstimate = (year) => {
+    const row = SEASON_ESTIMATES?.[String(year)]?.[formData.district_name];
+    if (!row) {
+      setProfileError(`No Kharif ${year} season-estimate inputs are available for ${formData.district_name}.`);
+      return;
+    }
+    setResult(null);
+    setError(null);
+    setProfileError(null);
+
+    const {
+      precomputed_estimate_t_ha,
+      precomputed_interval_low,
+      precomputed_interval_high,
+      weather_provenance,
+      satellite_provenance,
+      soil_provenance,
+      historical_provenance,
+      ...fields
+    } = row;
+
+    setFormData((prev) => ({ ...prev, ...fields, crop_year: year, season: 'Kharif' }));
+    setDataSourceType('preset');
+    setActivePresetName(`Kharif ${year} Season Estimate`);
+    setSeasonEstimateYear(year);
+    setProfileMetadata({
+      dataSource: `Observed-Season Estimate Inputs — Kharif ${year} (NASA POWER)`,
+      provenanceCategory: 'Model Estimate — recorded yield for this year is not yet published (DES APY)',
+      provenanceDetails: `${weather_provenance} | Lags: ${historical_provenance} | Satellite: ${satellite_provenance} | Precomputed estimate: ${precomputed_estimate_t_ha} t/ha [${precomputed_interval_low}, ${precomputed_interval_high}]`,
+      isObservational: false,
+      availableYears: [year],
+      zone: fields.agro_ecological_zone,
+      irrigation: fields.irrigation_ratio,
+    });
   };
 
   const handlePredict = async (e) => {
@@ -536,6 +587,55 @@ export default function PredictPage({ locations = [] }) {
               );
             })}
           </div>
+        </div>
+        {/* Season Estimates (observed weather, recorded yield not yet published) */}
+        <div className="bg-amber-50/60 border border-amber-200 rounded-xl p-4 shadow-sm space-y-2">
+          <div className="flex items-center justify-between">
+            <div className="text-xs font-semibold text-amber-900 uppercase tracking-wider">
+              Season Estimates — Observed Weather
+            </div>
+            <span className="text-[11px] text-amber-700">
+              Loads real NASA POWER season inputs for the selected district
+            </span>
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            {[2025, 2026].map((year) => {
+              const isActive = seasonEstimateYear === year;
+              return (
+                <button
+                  key={year}
+                  type="button"
+                  onClick={() => handleApplySeasonEstimate(year)}
+                  className={`p-2.5 rounded-lg border text-left transition-colors text-xs cursor-pointer ${
+                    isActive
+                      ? 'border-amber-600 bg-amber-100/70 shadow-xs ring-1 ring-amber-600'
+                      : 'border-amber-200 hover:border-amber-600 hover:bg-amber-100/40'
+                  }`}
+                >
+                  <div className="font-semibold text-stone-900 flex items-center justify-between">
+                    <span>Kharif {year} {year === 2026 ? 'Current-Season Estimate' : 'Season Estimate'}</span>
+                    {isActive && <CheckCircle className="h-3 w-3 text-amber-700 shrink-0" />}
+                  </div>
+                  <div className="text-[11px] text-stone-500 line-clamp-1 mt-0.5">
+                    {year === 2026
+                      ? 'Season in progress: observed days + climatology-filled tail'
+                      : 'Completed season: 153/153 days observed'}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+          {seasonEstimateYear && (
+            <div className="flex items-start space-x-2 text-[11px] text-amber-900 bg-amber-100/60 border border-amber-200 rounded-lg p-2.5">
+              <AlertTriangle className="h-3.5 w-3.5 mt-0.5 shrink-0" />
+              <span>
+                Estimate inputs loaded for <strong>{formData.district_name}, Kharif {seasonEstimateYear}</strong>.
+                Weather is observed (NASA POWER); the <strong>recorded yield for {seasonEstimateYear} has not been
+                published yet</strong> (DES APY), so a prediction from these inputs is a <strong>model
+                estimate</strong>, not a measurement.
+              </span>
+            </div>
+          )}
         </div>
       </div>
 

@@ -125,6 +125,64 @@ export default function BenchmarkPage() {
         </p>
       </div>
 
+      {/* Extended Observational Panel (recorded yields to 2024) */}
+      <div className="bg-white border border-stone-200 rounded-2xl p-6 sm:p-8 space-y-4 shadow-sm">
+        <div>
+          <span className="text-xs font-mono font-bold text-emerald-800 uppercase tracking-wider">
+            Extended Observational Panel — Recorded Yields to 2024 (N = 427)
+          </span>
+          <p className="text-xs text-stone-600 leading-relaxed mt-2">
+            The original 303-record panel (2000–2014) was extended with <strong>recorded</strong> DES yields from the
+            India Data Portal APY compilation (+100 district-years to 2022) and its UPAG compilation (+24 to 2024,
+            admitted only after 96/96 cross-source agreement on 2015–2022). Twelve districts now run continuously
+            2000–2024. Extension gates: vintage match on all 216 overlapping district-years, (district, state)
+            identity joins, and complete recorded lag chains — no simulated yields anywhere in the panel.
+          </p>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr className="border-b border-stone-200 text-stone-500 uppercase tracking-wider">
+                <th className="py-2 px-2">Held-Out Window</th>
+                <th className="py-2 px-2">FusionNet MAE</th>
+                <th className="py-2 px-2">FusionNet R²</th>
+                <th className="py-2 px-2">Best Model</th>
+                <th className="py-2 px-2">Coverage (uncal. → conformal)</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-stone-100 text-stone-800">
+              <tr>
+                <td className="py-2 px-2">2013–2014 (train ≤2010, n=36)</td>
+                <td className="py-2 px-2 font-bold text-emerald-800">0.3366</td>
+                <td className="py-2 px-2 font-bold text-emerald-800">0.6803</td>
+                <td className="py-2 px-2">FusionNet</td>
+                <td className="py-2 px-2">44.44% → 83.33% (m = 2.4858)</td>
+              </tr>
+              <tr>
+                <td className="py-2 px-2">2019–2022 (train ≤2016, n=48)</td>
+                <td className="py-2 px-2">0.4485</td>
+                <td className="py-2 px-2">0.4195</td>
+                <td className="py-2 px-2">Ridge (0.3845)</td>
+                <td className="py-2 px-2">45.83% → 87.50% (m = 2.6090)</td>
+              </tr>
+              <tr>
+                <td className="py-2 px-2">2021–2024 (train ≤2018, n=48)</td>
+                <td className="py-2 px-2 font-bold text-emerald-800">0.3454</td>
+                <td className="py-2 px-2 font-bold text-emerald-800">0.5666</td>
+                <td className="py-2 px-2">FusionNet</td>
+                <td className="py-2 px-2">56.25% → 85.42% (m = 3.1339)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="text-[11px] text-stone-600 italic leading-relaxed">
+          Holdouts are reported separately, never averaged: each uses a different training window, and the two
+          later windows cover the 12 extended districts. Recorded district yields end at 2024 — the newest
+          published compilations end at agricultural year 2024-25 — so 2025–2026 appear in the Predict studio
+          only as clearly labelled model estimates built from observed NASA POWER weather.
+        </p>
+      </div>
+
       {/* Hypothesis Confirmation Card (Benchmark) */}
       <div className="bg-white border border-stone-200 rounded-2xl p-6 sm:p-8 space-y-4 shadow-sm">
         <div className="flex items-center space-x-3">
