@@ -5,16 +5,32 @@ import {
   Droplets,
   Bug,
   LineChart,
-  Info
+  Info,
+  Volume2,
+  Square,
+  Mic
 } from 'lucide-react';
 import seasonEstimatesData from '../data/seasonEstimates.json';
+import {
+  VOICE_LANGS,
+  speakText,
+  stopSpeech,
+  speechSupported,
+  recognitionSupported,
+  buildSummary,
+  WATER_ACTIONS
+} from '../utils/voice';
 
-const { _meta: SEASON_META, ...SEASON_ESTIMATES } = seasonEstimatesData;
+const { _meta: SEASON_META, recorded_actuals: RECORDED_ACTUALS, ...SEASON_ESTIMATES } = seasonEstimatesData;
 
 export default function DashboardPage() {
   const districts = Object.keys(SEASON_ESTIMATES['2026'] || {});
   const [selectedDistrict, setSelectedDistrict] = useState('Krishna');
   const [selectedYear, setSelectedYear] = useState('2026');
+  const [voiceLang, setVoiceLang] = useState('en-IN');
+  const [speaking, setSpeaking] = useState(false);
+  const [listening, setListening] = useState(false);
+  const [voiceNote, setVoiceNote] = useState('');
 
   const row = SEASON_ESTIMATES[selectedYear]?.[selectedDistrict];
   const row2025 = SEASON_ESTIMATES['2025']?.[selectedDistrict];
@@ -33,10 +49,71 @@ export default function DashboardPage() {
   // Same published thresholds as the Advisory page
   const water =
     (row.consecutive_dry_days >= 12 || anom <= -20)
-      ? { label: 'Needs water — critical', action: 'Irrigate now, especially at flowering. Do not let the field dry out.', color: 'bg-rose-50 text-rose-800 border-rose-200' }
+      ? { key: 'critical', label: 'Needs water — critical', action: 'Irrigate now, especially at flowering. Do not let the field dry out.', color: 'bg-rose-50 text-rose-800 border-rose-200' }
       : (row.consecutive_dry_days >= 8 || anom < 0)
-      ? { label: 'Watch — moderate', action: 'Use controlled AWD: let water drop about 10 cm below the surface before re-flooding.', color: 'bg-amber-50 text-amber-800 border-amber-200' }
-      : { label: 'Comfortable', action: 'Rainfall has been sufficient. Keep drainage channels clear to avoid waterlogging.', color: 'bg-emerald-50 text-emerald-800 border-emerald-200' };
+      ? { key: 'moderate', label: 'Watch — moderate', action: 'Use controlled AWD: let water drop about 10 cm below the surface before re-flooding.', color: 'bg-amber-50 text-amber-800 border-amber-200' }
+      : { key: 'comfortable', label: 'Comfortable', action: 'Rainfall has been sufficient. Keep drainage channels clear to avoid waterlogging.', color: 'bg-emerald-50 text-emerald-800 border-emerald-200' };
+
+  const handleListen = () => {
+    if (speaking) {
+      stopSpeech();
+      setSpeaking(false);
+      return;
+    }
+    const actions = WATER_ACTIONS[water.key];
+    const text = buildSummary(voiceLang, {
+      district: selectedDistrict,
+      year: selectedYear,
+      estimate: row.precomputed_estimate_t_ha,
+      low: row.precomputed_interval_low,
+      high: row.precomputed_interval_high,
+      rainfallMm: row.rainfall_cumulative_mm,
+      anomalyPct: anom,
+      dryDays: row.consecutive_dry_days,
+      waterKey: water.key,
+      waterActionEn: actions.en,
+      waterActionHi: actions.hi,
+      waterActionTe: actions.te,
+      blast, bph, blb
+    });
+    if (speakText(text, voiceLang)) {
+      setSpeaking(true);
+      setVoiceNote('');
+      const ms = Math.max(6000, text.length * 95);
+      setTimeout(() => setSpeaking(false), ms);
+    } else {
+      setVoiceNote('Speech is not supported in this browser.');
+    }
+  };
+
+  const handleMic = () => {
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SR) {
+      setVoiceNote('Voice input needs Chrome — speech recognition is not available in this browser.');
+      return;
+    }
+    const rec = new SR();
+    rec.lang = 'en-IN';
+    rec.interimResults = false;
+    rec.maxAlternatives = 3;
+    setListening(true);
+    setVoiceNote('Listening… say a district name, e.g. "Krishna".');
+    rec.onresult = (e) => {
+      const heard = Array.from(e.results[0]).map((a) => a.transcript.toLowerCase().trim());
+      const match = districts.find((d) =>
+        heard.some((h) => h.includes(d.toLowerCase()) || d.toLowerCase().includes(h.replace(/ district$/, '')))
+      );
+      if (match) {
+        setSelectedDistrict(match);
+        setVoiceNote(`Heard you — district set to ${match}.`);
+      } else {
+        setVoiceNote(`Heard "${e.results[0][0].transcript}" — that does not match a district. Try again.`);
+      }
+    };
+    rec.onerror = () => { setListening(false); setVoiceNote('Could not hear clearly — try again in a quiet place.'); };
+    rec.onend = () => setListening(false);
+    rec.start();
+  };
 
   const blast = (row.temp_min_deg_c <= 24.5 && row.relative_humidity_pct >= 80.0) ? 'Elevated' : 'Low';
   const bph = (row.temp_min_deg_c >= 23.5 && row.temp_max_deg_c <= 34.5 && row.relative_humidity_pct >= 76.0) ? 'High' : 'Moderate';
@@ -77,7 +154,7 @@ export default function DashboardPage() {
         </div>
         <div className="flex items-center space-x-2">
           <span className="text-xs font-bold uppercase tracking-wider text-stone-500">Season:</span>
-          {['2026', '2025'].map((y) => (
+          {['2026', '2025', '2024', '2023', '2022'].map((y) => (
             <button
               key={y}
               onClick={() => setSelectedYear(y)}
@@ -85,11 +162,46 @@ export default function DashboardPage() {
                 selectedYear === y ? 'bg-emerald-700 text-white' : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
               }`}
             >
-              Kharif {y}{y === '2026' ? ' (completed)' : ''}
+              Kharif {y}{y <= '2024' ? ' (recorded)' : ''}
             </button>
           ))}
         </div>
         <span className="text-xs text-stone-500 sm:ml-auto">{row.agro_ecological_zone}</span>
+      </div>
+
+      {/* Voice bar — listen to the dashboard, or pick the district by voice */}
+      <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 shadow-sm flex flex-col sm:flex-row sm:items-center gap-3">
+        <span className="text-xs font-bold uppercase tracking-wider text-emerald-900 flex items-center space-x-1.5">
+          <Volume2 className="h-4 w-4" /> <span>Listen / Bolkar chunein</span>
+        </span>
+        <select
+          value={voiceLang}
+          onChange={(e) => setVoiceLang(e.target.value)}
+          className="bg-white border border-emerald-300 rounded-lg px-3 py-1.5 text-xs font-bold text-stone-900 focus:ring-2 focus:ring-emerald-600 cursor-pointer"
+        >
+          {VOICE_LANGS.map((l) => (
+            <option key={l.code} value={l.code}>{l.label}</option>
+          ))}
+        </select>
+        <button
+          onClick={handleListen}
+          disabled={!speechSupported()}
+          className="px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-700 text-white hover:bg-emerald-800 disabled:opacity-50 flex items-center space-x-1.5"
+        >
+          {speaking ? <Square className="h-3.5 w-3.5" /> : <Volume2 className="h-3.5 w-3.5" />}
+          <span>{speaking ? 'Stop' : 'Listen to this dashboard'}</span>
+        </button>
+        <button
+          onClick={handleMic}
+          disabled={!recognitionSupported()}
+          className="px-3 py-1.5 rounded-lg text-xs font-bold bg-white border border-emerald-600 text-emerald-800 hover:bg-emerald-100 disabled:opacity-50 flex items-center space-x-1.5"
+        >
+          <Mic className="h-3.5 w-3.5" />
+          <span>{listening ? 'Listening…' : 'Say district name'}</span>
+        </button>
+        <span className="text-[11px] text-emerald-900/70 sm:ml-auto">
+          {voiceNote || 'Voice uses your browser’s built-in speech — Chrome works best; Hindi/Telugu voices depend on your device.'}
+        </span>
       </div>
 
       {/* Cards */}
@@ -107,7 +219,9 @@ export default function DashboardPage() {
             District's recorded baseline: {row.historical_yield_3yr_mean} t/ha (3-year mean).
           </p>
           <p className="text-[11px] text-amber-800 bg-amber-50 border border-amber-200 rounded-lg p-2">
-            This is a season <strong>estimate</strong> from measured weather — not a recorded official yield.
+            {selectedYear <= '2024'
+              ? <>A model <strong>estimate</strong> from that season's measured weather and satellite inputs. The official recorded yield for Kharif {selectedYear} is published — see the comparison in the tracker below.</>
+              : <>This is a season <strong>estimate</strong> from measured weather — not a recorded official yield.</>}
           </p>
         </div>
 
@@ -121,7 +235,7 @@ export default function DashboardPage() {
             <div className="flex justify-between"><span className="text-stone-600">Compared to normal</span><strong className={`font-mono ${rainColor}`}>{anom > 0 ? `+${anom}` : anom}% — {rainLabel}</strong></div>
             <div className="flex justify-between"><span className="text-stone-600">Longest dry spell</span><strong className="font-mono">{row.consecutive_dry_days} days</strong></div>
             <div className="flex justify-between"><span className="text-stone-600">Very hot days (35°C+)</span><strong className="font-mono">{row.extreme_heat_days} days</strong></div>
-            <div className="flex justify-between"><span className="text-stone-600">Days measured</span><strong className="font-mono">{row.weather_provenance?.match(/valid (\d+)\/153/)?.[1] || '153'} of 153</strong></div>
+            <div className="flex justify-between"><span className="text-stone-600">Days measured</span><strong className="font-mono">{row.weather_provenance?.match(/(?:valid )?(\d+)\/153/)?.[1] || '153'} of 153</strong></div>
           </div>
         </div>
 
@@ -154,8 +268,8 @@ export default function DashboardPage() {
         <h3 className="text-sm font-bold text-stone-900">Estimate vs Actual — {selectedDistrict}</h3>
         <p className="text-xs text-stone-600 leading-relaxed">
           We publish our estimate first, then compare it with the official recorded yield (DES) when it is
-          released. Official recorded yields currently end at Kharif 2024; the rows below fill in as DES
-          publishes each season's finals.
+          released. For Kharif 2022–2024 the comparison is already live for the 12 districts in the recorded
+          panel; 2025–2026 rows fill in as DES publishes those seasons' finals.
         </p>
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse">
@@ -168,14 +282,22 @@ export default function DashboardPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-stone-100 text-stone-700">
-              {[['2025', row2025], ['2026', row2026]].map(([y, r]) => (
-                <tr key={y}>
-                  <td className="py-2.5 px-3 font-semibold text-stone-900">Kharif {y}</td>
-                  <td className="py-2.5 px-3 font-mono">{r.precomputed_estimate_t_ha} ({r.precomputed_interval_low} – {r.precomputed_interval_high})</td>
-                  <td className="py-2.5 px-3">Awaited — DES finals not yet published</td>
-                  <td className="py-2.5 px-3">—</td>
-                </tr>
-              ))}
+              {[['2026', row2026], ['2025', row2025],
+                ['2024', SEASON_ESTIMATES['2024']?.[selectedDistrict]],
+                ['2023', SEASON_ESTIMATES['2023']?.[selectedDistrict]],
+                ['2022', SEASON_ESTIMATES['2022']?.[selectedDistrict]]].filter(([, r]) => r).map(([y, r]) => {
+                const actual = RECORDED_ACTUALS?.[y]?.[selectedDistrict];
+                const diff = actual !== undefined ? (r.precomputed_estimate_t_ha - actual).toFixed(2) : null;
+                const inRange = actual !== undefined && actual >= r.precomputed_interval_low && actual <= r.precomputed_interval_high;
+                return (
+                  <tr key={y}>
+                    <td className="py-2.5 px-3 font-semibold text-stone-900">Kharif {y}</td>
+                    <td className="py-2.5 px-3 font-mono">{r.precomputed_estimate_t_ha} ({r.precomputed_interval_low} – {r.precomputed_interval_high})</td>
+                    <td className="py-2.5 px-3 font-mono">{actual !== undefined ? actual : (y >= '2025' ? 'Awaited — DES finals not yet published' : 'Not in the recorded panel for this district')}</td>
+                    <td className="py-2.5 px-3">{diff !== null ? `${diff > 0 ? '+' : ''}${diff} t/ha — ${inRange ? 'actual inside our range' : 'actual outside our range'}` : '—'}</td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>

@@ -105,7 +105,7 @@ export default function PredictPage({ locations = [] }) {
     }
 
     const targetYear = cropYear ?? formData.crop_year;
-    if ((targetYear === 2025 || targetYear === 2026) && SEASON_ESTIMATES?.[String(targetYear)]?.[distName]) {
+    if (SEASON_ESTIMATES?.[String(targetYear)]?.[distName]) {
       if (activeAbortRef.current) {
         activeAbortRef.current.abort();
       }
@@ -133,14 +133,14 @@ export default function PredictPage({ locations = [] }) {
         setFormData((prev) => ({ ...prev, ...merged }));
         setDataSourceType('preset');
       }
-      setActivePresetName(`Kharif ${targetYear} Season Estimate`);
+      setActivePresetName(targetYear <= 2024 ? `Kharif ${targetYear} Recorded Season (Measured Inputs)` : `Kharif ${targetYear} Season Estimate`);
       setSeasonEstimateYear(targetYear);
       setProfileMetadata({
-        dataSource: `Observed-Season Estimate Inputs — Kharif ${targetYear} (NASA POWER)`,
-        provenanceCategory: 'Model Estimate — recorded yield for this year is not yet published (DES APY)',
+        dataSource: `Measured-Season Inputs — Kharif ${targetYear} (NASA POWER + MODIS)`,
+        provenanceCategory: targetYear <= 2024 ? 'Model estimate from measured season inputs — the recorded yield for this year is published (DES APY); compare it on the Farmer Dashboard tracker' : 'Model Estimate — recorded yield for this year is not yet published (DES APY)',
         provenanceDetails: `${weather_provenance} | Lags: ${historical_provenance} | Satellite: ${satellite_provenance} | Precomputed estimate: ${precomputed_estimate_t_ha} t/ha [${precomputed_interval_low}, ${precomputed_interval_high}]`,
         isObservational: false,
-        availableYears: [2026, 2025, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000],
+        availableYears: [2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000],
         zone: fields.agro_ecological_zone,
         irrigation: fields.irrigation_ratio,
       });
@@ -177,7 +177,7 @@ export default function PredictPage({ locations = [] }) {
         provenanceCategory: 'Category F (Calibrated Multi-Decadal Historical Panel)',
         provenanceDetails: `Centroid: (${localProfile.latitude || ''}, ${localProfile.longitude || ''}) | Zone: ${localProfile.agro_ecological_zone} | Irrigation: ${Math.round((localProfile.irrigation_ratio || 0.5) * 100)}%`,
         isObservational: true,
-        availableYears: [2026, 2025, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000],
+        availableYears: [2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000],
         zone: localProfile.agro_ecological_zone,
         irrigation: localProfile.irrigation_ratio,
       });
@@ -487,14 +487,14 @@ export default function PredictPage({ locations = [] }) {
     }));
   };
 
-  // Season-estimate preset: load observed-weather inputs for Kharif 2025 or
-  // 2026 for the current district (frontend/src/data/seasonEstimates.json,
-  // built by scripts/build_season_2026.py from NASA POWER daily data).
-  // These are ESTIMATE inputs: the recorded DES yield for these years has
-  // not been published yet, so any prediction from them is a model
-  // estimate, never a measurement. The banner and profile metadata keep
-  // that visible. Manual edits, district/season/year changes and Reset
-  // all clear the estimate state.
+  // Measured-season preset: load measured weather + satellite inputs for
+  // any Kharif year present in frontend/src/data/seasonEstimates.json
+  // (2022-2026; NASA POWER + MODIS, built by scripts/refresh_season_estimates.py).
+  // For 2025-2026 the recorded DES yield is not yet published, so a
+  // prediction is a season estimate; for 2022-2024 the recorded yield IS
+  // published and the Dashboard tracker compares estimate vs actual. The
+  // banner and profile metadata keep the distinction visible. Manual
+  // edits, district/season/year changes and Reset all clear this state.
   const handleApplySeasonEstimate = (year) => {
     const row = SEASON_ESTIMATES?.[String(year)]?.[formData.district_name];
     if (!row) {
@@ -518,11 +518,11 @@ export default function PredictPage({ locations = [] }) {
 
     setFormData((prev) => ({ ...prev, ...fields, crop_year: year, season: 'Kharif' }));
     setDataSourceType('preset');
-    setActivePresetName(`Kharif ${year} Season Estimate`);
+    setActivePresetName(year <= 2024 ? `Kharif ${year} Recorded Season (Measured Inputs)` : `Kharif ${year} Season Estimate`);
     setSeasonEstimateYear(year);
     setProfileMetadata({
-      dataSource: `Observed-Season Estimate Inputs — Kharif ${year} (NASA POWER)`,
-      provenanceCategory: 'Model Estimate — recorded yield for this year is not yet published (DES APY)',
+      dataSource: `Measured-Season Inputs — Kharif ${year} (NASA POWER + MODIS)`,
+      provenanceCategory: year <= 2024 ? 'Model estimate from measured season inputs — the recorded yield for this year is published (DES APY); compare it on the Farmer Dashboard tracker' : 'Model Estimate — recorded yield for this year is not yet published (DES APY)',
       provenanceDetails: `${weather_provenance} | Lags: ${historical_provenance} | Satellite: ${satellite_provenance} | Precomputed estimate: ${precomputed_estimate_t_ha} t/ha [${precomputed_interval_low}, ${precomputed_interval_high}]`,
       isObservational: false,
       availableYears: [year],
@@ -645,12 +645,14 @@ export default function PredictPage({ locations = [] }) {
           </div>
           {SEASON_META && (
             <div className="text-[11px] text-amber-800">
-              Weather inputs: NASA POWER &bull; Data as of {SEASON_META.generated_on} &bull; Kharif 2025: {SEASON_META.days_observed['2025']}/{SEASON_META.season_days_total} days observed &bull; Kharif 2026: {SEASON_META.days_observed['2026']}/{SEASON_META.season_days_total} observed{(SEASON_META.forecast_days?.['2026'] ?? 0) > 0 ? `, ${SEASON_META.forecast_days['2026']} days forecast-blended` : ''}, {SEASON_META.tail_filled_days['2026']} days climatology-filled
+              Weather inputs: NASA POWER &bull; Data as of {SEASON_META.generated_on} &bull; Kharif 2025: {SEASON_META.days_observed['2025']}/{SEASON_META.season_days_total} days observed &bull; Kharif 2026: {SEASON_META.days_observed['2026']}/{SEASON_META.season_days_total} observed{(SEASON_META.forecast_days?.['2026'] ?? 0) > 0 ? `, ${SEASON_META.forecast_days['2026']} days forecast-blended` : ''}, {SEASON_META.tail_filled_days['2026']} days climatology-filled &bull; Kharif 2022–2024: recorded seasons, measured inputs
             </div>
           )}
-          <div className="grid grid-cols-2 gap-2">
-            {[2025, 2026].map((year) => {
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            {[2022, 2023, 2024, 2025, 2026].map((year) => {
               const isActive = seasonEstimateYear === year;
+              const obs = SEASON_META?.days_observed?.[String(year)];
+              const inProgress = obs !== undefined && obs < (SEASON_META?.season_days_total ?? 153);
               return (
                 <button
                   key={year}
@@ -663,15 +665,13 @@ export default function PredictPage({ locations = [] }) {
                   }`}
                 >
                   <div className="font-semibold text-stone-900 flex items-center justify-between">
-                    <span>Kharif {year} {year === 2026 ? 'Current-Season Estimate' : 'Season Estimate'}</span>
+                    <span>Kharif {year} {year <= 2024 ? 'Recorded Season' : inProgress ? 'Current-Season Estimate' : 'Season Estimate'}</span>
                     {isActive && <CheckCircle className="h-3 w-3 text-amber-700 shrink-0" />}
                   </div>
                   <div className="text-[11px] text-stone-500 line-clamp-1 mt-0.5">
-                    {year === 2026
-                      ? (SEASON_META
-                        ? `Season in progress: ${SEASON_META.days_observed['2026']}/${SEASON_META.season_days_total} days observed + climatology-filled tail`
-                        : 'Season in progress: observed days + climatology-filled tail')
-                      : 'Completed season: 153/153 days observed'}
+                    {inProgress
+                      ? `Season in progress: ${obs}/${SEASON_META.season_days_total} days observed + blended tail`
+                      : `Completed season: ${obs ?? 153}/${SEASON_META?.season_days_total ?? 153} days observed`}
                   </div>
                 </button>
               );
@@ -681,10 +681,17 @@ export default function PredictPage({ locations = [] }) {
             <div className="flex items-start space-x-2 text-[11px] text-amber-900 bg-amber-100/60 border border-amber-200 rounded-lg p-2.5">
               <AlertTriangle className="h-3.5 w-3.5 mt-0.5 shrink-0" />
               <span>
-                Estimate inputs loaded for <strong>{formData.district_name}, Kharif {seasonEstimateYear}</strong>.
-                Weather is observed (NASA POWER); the <strong>recorded yield for {seasonEstimateYear} has not been
-                published yet</strong> (DES APY), so a prediction from these inputs is a <strong>model
-                estimate</strong>, not a measurement.
+                {seasonEstimateYear <= 2024 ? (
+                  <>Measured inputs loaded for <strong>{formData.district_name}, Kharif {seasonEstimateYear}</strong>.
+                  Weather (NASA POWER) and satellite (MODIS) are that season's real measurements; a prediction
+                  from them is a <strong>model estimate</strong> — the <strong>recorded yield for {seasonEstimateYear} is
+                  published</strong> (DES APY), so compare the two on the Farmer Dashboard tracker.</>
+                ) : (
+                  <>Estimate inputs loaded for <strong>{formData.district_name}, Kharif {seasonEstimateYear}</strong>.
+                  Weather is observed (NASA POWER); the <strong>recorded yield for {seasonEstimateYear} has not been
+                  published yet</strong> (DES APY), so a prediction from these inputs is a <strong>model
+                  estimate</strong>, not a measurement.</>
+                )}
               </span>
             </div>
           )}
@@ -784,8 +791,11 @@ export default function PredictPage({ locations = [] }) {
                     disabled={formData.season === 'Rabi'}
                     className="w-full bg-stone-50 border border-stone-300 rounded-lg px-2.5 py-1.5 text-stone-900 focus:bg-white focus:ring-2 focus:ring-emerald-600 text-xs font-medium cursor-pointer disabled:opacity-60"
                   >
-                    <option value={2026}>2026 (Current-Season Estimate)</option>
+                    <option value={2026}>2026 (Season Estimate)</option>
                     <option value={2025}>2025 (Season Estimate)</option>
+                    <option value={2024}>2024 (Recorded Season — Measured Inputs)</option>
+                    <option value={2023}>2023 (Recorded Season — Measured Inputs)</option>
+                    <option value={2022}>2022 (Recorded Season — Measured Inputs)</option>
                     <option value={2021}>2021 (Calibrated Benchmark / Baseline)</option>
                     <option value={2020}>2020 (Calibrated Benchmark)</option>
                     <option value={2019}>2019 (Calibrated Benchmark)</option>
@@ -810,7 +820,7 @@ export default function PredictPage({ locations = [] }) {
                     <option value={2000}>2000 (Calibrated Benchmark)</option>
                   </select>
                   <span className="text-[10px] text-stone-500 block mt-0.5">
-                    Benchmark years 2000–2020 (2021 = baseline profile). Recorded yields to 2024 are evaluated on the Benchmarks page; 2025–2026 are labelled season estimates.
+                    Measured seasons 2022–2026 use real NASA POWER weather + MODIS satellite inputs — 2022–2024 are completed recorded seasons (official yields compared on the Dashboard tracker); 2025–2026 are season estimates. Benchmark years 2000–2020 (2021 = baseline profile).
                   </span>
                 </div>
               </div>
