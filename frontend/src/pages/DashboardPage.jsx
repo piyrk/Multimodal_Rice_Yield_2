@@ -124,7 +124,19 @@ export default function DashboardPage() {
         setVoiceNote(`Heard "${e.results[0][0].transcript}" — that does not match a district. Try again.`);
       }
     };
-    rec.onerror = () => { setListening(false); setVoiceNote('Could not hear clearly — try again in a quiet place.'); };
+    rec.onerror = (e) => {
+      setListening(false);
+      const code = e && e.error;
+      if (code === 'not-allowed' || code === 'service-not-allowed') {
+        setVoiceNote('Microphone is blocked — allow mic access in the browser site settings, then try again.');
+      } else if (code === 'audio-capture') {
+        setVoiceNote('No microphone found on this device — you can still pick the district from the list above.');
+      } else if (code === 'network') {
+        setVoiceNote('Speech service unreachable — check the connection, or pick the district from the list above.');
+      } else {
+        setVoiceNote('Could not hear clearly — try again in a quiet place.');
+      }
+    };
     rec.onend = () => setListening(false);
     rec.start();
   };

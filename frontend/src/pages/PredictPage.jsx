@@ -718,7 +718,7 @@ export default function PredictPage({ locations = [], initialDistrict = null }) 
           <div className="flex items-center justify-between border-b border-stone-100 pb-3">
             <div>
               <h2 className="text-lg font-bold text-stone-900">Prediction Inputs</h2>
-              <p className="text-xs text-stone-500">Adjust the 26 supported multimodal variables.</p>
+              <p className="text-xs text-stone-500">Adjust the input variables — the deployed model uses the weather, soil and historical fields (22); the satellite fields are measured season context.</p>
             </div>
             <button
               type="button"
