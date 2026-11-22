@@ -171,10 +171,16 @@ def pull_cached(dist, lat, lon, start, end):
 
 def maybe_alert(data, old_est):
     """Step G: one summary Telegram message when a refresh moves any
-    estimate by >= 0.25 t/ha or a current-season district is water-critical
-    (rainfall anomaly <= -20% or dry spell >= 12 days). Credentials come
-    only from the environment (GitHub Actions secrets); without them this
-    step silently skips."""
+    estimate by >= 0.25 t/ha, or the current season shows water stress.
+    Two honest tiers, because a long dry spell inside a wet season is a
+    distribution problem, not a water crisis:
+      WATER-CRITICAL - rainfall anomaly <= -20% (a real deficit season).
+      Dry-spell watch - anomaly > -20% but longest dry spell >= 12 days:
+        total rain was adequate, protective irrigation was the binding
+        constraint. Listed compactly so the message stays readable and
+        no district is silently truncated.
+    Credentials come only from the environment (GitHub Actions secrets);
+    without them this step silently skips."""
     token = os.environ.get("TELEGRAM_BOT_TOKEN")
     chat = os.environ.get("TELEGRAM_CHAT_ID")
     if not token or not chat:
@@ -184,20 +190,36 @@ def maybe_alert(data, old_est):
         new = data[y][d].get("precomputed_estimate_t_ha")
         if old is not None and new is not None and abs(new - old) >= 0.25:
             lines.append(f"{d} Kharif {y}: estimate {old} -> {new} t/ha")
+    critical, watch = [], []
     for d, r in data.get("2026", {}).items():
-        if r["rainfall_anomaly_pct"] <= -20 or r["consecutive_dry_days"] >= 12:
-            lines.append(f"{d} Kharif 2026 water-critical: rainfall anomaly "
-                         f"{r['rainfall_anomaly_pct']}%, dry spell {r['consecutive_dry_days']} days")
-    if not lines:
+        anom, dry = r["rainfall_anomaly_pct"], r["consecutive_dry_days"]
+        if anom <= -20:
+            critical.append(f"{d} Kharif 2026 WATER-CRITICAL: rainfall {anom}% vs normal, "
+                            f"longest dry spell {dry} days")
+        elif dry >= 12:
+            watch.append(f"{d} ({dry} dry days, rain {anom}%)")
+    if not lines and not critical and not watch:
         return "no alert conditions met"
-    text = "ClimateRice-AI season refresh - changes worth knowing:\n" + "\n".join(lines[:20])
+    parts = ["ClimateRice-AI season refresh - changes worth knowing:"]
+    # After October the Kharif season is harvested: the same numbers are a
+    # season record to learn from, not a live action alert.
+    if date.today().month > 10:
+        parts.append("Kharif 2026 is complete - this is the season record, not a live action alert.")
+    parts += lines
+    parts += critical
+    if watch:
+        parts.append("Long dry spells despite normal-or-better rainfall "
+                     "(protective irrigation mattered more than total rain): "
+                     + ", ".join(watch))
+    text = "\n".join(parts)
+    n_lines = len(lines) + len(critical) + (1 if watch else 0)
     try:
         req = urllib.request.Request(
             f"https://api.telegram.org/bot{token}/sendMessage",
             data=json.dumps({"chat_id": chat, "text": text}).encode(),
             headers={"Content-Type": "application/json"})
         urllib.request.urlopen(req, timeout=30).read()
-        return f"telegram alert sent ({len(lines)} lines)"
+        return f"telegram alert sent ({n_lines} lines)"
     except Exception as e:
         return f"telegram alert FAILED: {e}"
 
