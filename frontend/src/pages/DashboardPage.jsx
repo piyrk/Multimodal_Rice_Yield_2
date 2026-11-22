@@ -20,6 +20,7 @@ import {
   buildSummary,
   WATER_ACTIONS
 } from '../utils/voice';
+import TalkPanel from '../components/TalkPanel';
 
 const { _meta: SEASON_META, recorded_actuals: RECORDED_ACTUALS, ...SEASON_ESTIMATES } = seasonEstimatesData;
 
@@ -203,6 +204,18 @@ export default function DashboardPage() {
           {voiceNote || 'Voice uses your browser’s built-in speech — Chrome works best; Hindi/Telugu voices depend on your device.'}
         </span>
       </div>
+
+      {/* Talk panel — Phase 1 voice Q&A over the same measured data */}
+      <TalkPanel
+        districts={districts}
+        district={selectedDistrict}
+        year={selectedYear}
+        data={SEASON_ESTIMATES}
+        recordedActuals={RECORDED_ACTUALS}
+        voiceLang={voiceLang}
+        onDistrictChange={setSelectedDistrict}
+        onYearChange={setSelectedYear}
+      />
 
       {/* Cards */}
       <div className="grid md:grid-cols-2 gap-6">
