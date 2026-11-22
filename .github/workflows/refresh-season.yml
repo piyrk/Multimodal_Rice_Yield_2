@@ -1,13 +1,15 @@
 name: Refresh season estimates (NASA POWER)
 
+
 # Weekly during the Kharif season (Jun-Nov) + on demand.
 # Recomputes the weather features in frontend/src/data/seasonEstimates.json
 # from live NASA POWER data, re-runs the deployed model for the precomputed
 # estimates, and commits the file back if anything changed.
 on:
   schedule:
-    - cron: "30 3 * * 1" # Mondays 09:00 IST, Jun-Nov (guarded below)
+    - cron: "30 3 * * 1"→ Runs at 03:30, only on Monday # Mondays 09:00 IST, Jun-Nov (guarded below)
   workflow_dispatch:
+
 
 jobs:
   refresh:
@@ -35,6 +37,9 @@ jobs:
       - name: Run the refresh
         if: env.SKIP != '1'
         run: python3 scripts/refresh_season_estimates.py
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       - name: Commit if changed
         if: env.SKIP != '1'
         run: |
@@ -47,3 +52,4 @@ jobs:
             git commit -m "Season estimates auto-refresh (NASA POWER, $(date -u +%d\ %b\ %Y))"
             git push
           fi
+
