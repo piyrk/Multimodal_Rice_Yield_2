@@ -12,12 +12,31 @@ import {
   ArrowRight
 } from 'lucide-react';
 import { DISTRICT_PROFILES } from '../data/districtProfiles';
+import seasonEstimatesData from '../data/seasonEstimates.json';
+
+const { _meta: SEASON_META, ...SEASON_ESTIMATES } = seasonEstimatesData;
 
 export default function AdvisoryPage({ onNavigate }) {
   const [activeSubTab, setActiveSubTab] = useState('water');
   const [selectedDistrict, setSelectedDistrict] = useState('Krishna');
 
   const profile = DISTRICT_PROFILES[selectedDistrict] || DISTRICT_PROFILES['Krishna'] || DISTRICT_PROFILES['Burdwan'];
+
+  // Latest season's measured weather (NASA POWER) overrides the static
+  // profile's weather fields when a season row exists for this district.
+  // Soil, irrigation and zone fields stay from the district profile.
+  const seasonRow = SEASON_ESTIMATES['2026']?.[selectedDistrict];
+  const effectiveProfile = seasonRow
+    ? {
+        ...profile,
+        consecutive_dry_days: seasonRow.consecutive_dry_days,
+        rainfall_anomaly_pct: seasonRow.rainfall_anomaly_pct,
+        temp_min_deg_c: seasonRow.temp_min_deg_c,
+        temp_max_deg_c: seasonRow.temp_max_deg_c,
+        relative_humidity_pct: seasonRow.relative_humidity_pct,
+        extreme_heat_days: seasonRow.extreme_heat_days,
+      }
+    : profile;
 
   // Sourced ICAR / NRRI / ANGRAU verified rice variety matrix
   const varieties = [
@@ -92,8 +111,8 @@ export default function AdvisoryPage({ onNavigate }) {
   // Dynamic rule-based water management advice
   const getIrrigationAdvice = () => {
     const awc = profile.soil_available_water_capacity || 0.20;
-    const cdd = profile.consecutive_dry_days || 8;
-    const rainAnom = profile.rainfall_anomaly_pct || 0;
+    const cdd = effectiveProfile.consecutive_dry_days ?? 8;
+    const rainAnom = effectiveProfile.rainfall_anomaly_pct ?? 0;
     const irrigRatio = profile.irrigation_ratio || 0.70;
 
     let schedule = 'Normal Alternate Wetting and Drying (AWD)';
@@ -129,10 +148,10 @@ export default function AdvisoryPage({ onNavigate }) {
 
   // Dynamic weather-window pest risk calculation
   const getPestRisk = () => {
-    const tmin = profile.temp_min_deg_c || 24.0;
-    const tmax = profile.temp_max_deg_c || 33.0;
-    const rh = profile.relative_humidity_pct || 75.0;
-    const heatDays = profile.extreme_heat_days || 4;
+    const tmin = effectiveProfile.temp_min_deg_c ?? 24.0;
+    const tmax = effectiveProfile.temp_max_deg_c ?? 33.0;
+    const rh = effectiveProfile.relative_humidity_pct ?? 75.0;
+    const heatDays = effectiveProfile.extreme_heat_days ?? 4;
 
     // Blast risk: Night temp 18-24°C, RH >= 82%
     const blastRisk = (tmin <= 24.5 && rh >= 80.0) ? 'Elevated' : 'Low';
@@ -187,6 +206,14 @@ export default function AdvisoryPage({ onNavigate }) {
           <span>Irrigation: <strong>{Math.round((profile.irrigation_ratio || 0.7) * 100)}%</strong></span>
         </div>
       </div>
+
+      <p className="text-[11px] text-stone-500 px-1">
+        {seasonRow ? (
+          <>Weather basis for the advisory below: <strong>Kharif 2026 observed season</strong> (NASA POWER, data as of {SEASON_META?.generated_on || '—'}) — dry days, rainfall anomaly, temperature and humidity are this season's measured values for {selectedDistrict}.</>
+        ) : (
+          <>Weather basis: district baseline profile values for {selectedDistrict}.</>
+        )}
+      </p>
 
       {/* Advisory Navigation Tabs */}
       <div className="flex items-center space-x-2 border-b border-stone-200 pb-2">
