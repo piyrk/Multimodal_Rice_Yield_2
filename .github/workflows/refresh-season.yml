@@ -1,0 +1,49 @@
+name: Refresh season estimates (NASA POWER)
+
+# Weekly during the Kharif season (Jun-Nov) + on demand.
+# Recomputes the weather features in frontend/src/data/seasonEstimates.json
+# from live NASA POWER data, re-runs the deployed model for the precomputed
+# estimates, and commits the file back if anything changed.
+on:
+  schedule:
+    - cron: "30 3 * * 1" # Mondays 09:00 IST, Jun-Nov (guarded below)
+  workflow_dispatch:
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Season guard (scheduled runs only, Jun-Nov)
+        if: github.event_name == 'schedule'
+        run: |
+          m=$(date -u +%m)
+          if [ "$m" -lt 6 ] || [ "$m" -gt 11 ]; then
+            echo "Outside Kharif window - skipping."
+            echo "SKIP=1" >> "$GITHUB_ENV"
+          fi
+      - uses: actions/checkout@v4
+        if: env.SKIP != '1'
+      - uses: actions/setup-python@v5
+        if: env.SKIP != '1'
+        with:
+          python-version: "3.12"
+      - name: Wake the backend
+        if: env.SKIP != '1'
+        run: curl -s -m 120 https://climaterice-api.onrender.com/api/v1/health || true
+      - name: Run the refresh
+        if: env.SKIP != '1'
+        run: python3 scripts/refresh_season_estimates.py
+      - name: Commit if changed
+        if: env.SKIP != '1'
+        run: |
+          if git diff --quiet -- frontend/src/data/seasonEstimates.json; then
+            echo "No changes."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add frontend/src/data/seasonEstimates.json
+            git commit -m "Season estimates auto-refresh (NASA POWER, $(date -u +%d\ %b\ %Y))"
+            git push
+          fi
