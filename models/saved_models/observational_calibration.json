@@ -1,0 +1,27 @@
+{
+  "method": "normalized split-conformal (mirror of scripts/calibrate_intervals.py)",
+  "target_coverage_pct": 90.0,
+  "calibration_years": "<= 2020",
+  "n_calibration": 379,
+  "test_years": ">= 2021",
+  "n_test": 48,
+  "multiplier_m": 3.1339,
+  "coverage_before_pct": 56.25,
+  "coverage_before_wilson95": [
+    42.28,
+    69.3
+  ],
+  "coverage_after_pct": 85.42,
+  "coverage_after_wilson95": [
+    72.83,
+    92.75
+  ],
+  "mean_width_before_t_ha": 0.5801,
+  "mean_width_after_t_ha": 1.7315,
+  "random_split_stability": {
+    "m_mean": 3.2087,
+    "m_sd": 0.0583,
+    "coverage_mean_pct": 89.58,
+    "coverage_sd_pct": 3.73
+  }
+}

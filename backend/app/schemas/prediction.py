@@ -58,6 +58,10 @@ class PredictionRequest(BaseModel):
     historical_yield_lag2: float = Field(default=3.10, ge=0.3, le=9.0, description="Lag-2 year yield (t/ha)")
     historical_yield_3yr_mean: float = Field(default=3.18, ge=0.3, le=9.0, description="3-year rolling mean yield (t/ha)")
     sown_area_ha: float = Field(default=140000.0, ge=100.0, le=2000000.0, description="Total sown area (ha)")
+    # Observational model only (22-feature schema): the benchmark schema has no
+    # irrigation input, but ObservationalFusionNet's historical branch expects it.
+    # Optional: when omitted, the backend resolves it from the district profile.
+    irrigation_ratio: Optional[float] = Field(default=None, ge=0.0, le=1.0, description="Irrigation ratio (observational model historical branch)")
 
 
 class FactorAttribution(BaseModel):

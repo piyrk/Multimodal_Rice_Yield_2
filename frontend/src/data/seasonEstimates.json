@@ -24,7 +24,8 @@
       "2022": 0,
       "2023": 0,
       "2024": 0
-    }
+    },
+    "served_model": "Live model (from 22 Nov 2026): ObservationalFusionNet H3 (P2 panel, train <=2018) + split-conformal m=3.1339 (calibration <=2020, n=379; held-out 2021-2024 coverage 85.42%). Precomputed estimates in this file were regenerated through the observational backend. Satellite values are measured MODIS season context; the observational model itself uses the weather, soil and historical branches."
   },
   "2025": {
     "Ludhiana": {
@@ -64,9 +65,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 489 of 1681 pixels (2000-2014 mean NDVI >= 0.35) in a +/-5 km window at the district centroid; 9 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4555); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "recorded DES yields 2022-2024 (panel v2) + recorded 2024 sown area",
-      "precomputed_estimate_t_ha": 3.64,
-      "precomputed_interval_low": 2.71,
-      "precomputed_interval_high": 4.57
+      "precomputed_estimate_t_ha": 4.42,
+      "precomputed_interval_low": 2.78,
+      "precomputed_interval_high": 6.06
     },
     "Amritsar": {
       "rainfall_cumulative_mm": 1138.42,
@@ -105,9 +106,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 49 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 9 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.403); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "recorded DES yields 2022-2024 (panel v2) + recorded 2024 sown area",
-      "precomputed_estimate_t_ha": 3.3,
-      "precomputed_interval_low": 2.92,
-      "precomputed_interval_high": 3.68
+      "precomputed_estimate_t_ha": 3.21,
+      "precomputed_interval_low": 2.4,
+      "precomputed_interval_high": 4.02
     },
     "Karnal": {
       "rainfall_cumulative_mm": 894.88,
@@ -146,9 +147,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 123 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 9 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4209); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "recorded DES yields 2022-2024 (panel v2) + recorded 2024 sown area",
-      "precomputed_estimate_t_ha": 3.42,
-      "precomputed_interval_low": 3.11,
-      "precomputed_interval_high": 3.73
+      "precomputed_estimate_t_ha": 4.1,
+      "precomputed_interval_low": 2.71,
+      "precomputed_interval_high": 5.49
     },
     "Burdwan": {
       "rainfall_cumulative_mm": 1285.27,
@@ -187,9 +188,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 274 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 7 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4979); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 3.28,
-      "precomputed_interval_low": 2.97,
-      "precomputed_interval_high": 3.59
+      "precomputed_estimate_t_ha": 3.07,
+      "precomputed_interval_low": 2.2,
+      "precomputed_interval_high": 3.94
     },
     "Birbhum": {
       "rainfall_cumulative_mm": 1208.35,
@@ -228,9 +229,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 289 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 6 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.6); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 3.36,
-      "precomputed_interval_low": 2.98,
-      "precomputed_interval_high": 3.74
+      "precomputed_estimate_t_ha": 2.7,
+      "precomputed_interval_low": 2.01,
+      "precomputed_interval_high": 3.39
     },
     "Midnapore": {
       "rainfall_cumulative_mm": 1450.26,
@@ -269,9 +270,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 285 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 6 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.5464); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 3.45,
-      "precomputed_interval_low": 3.19,
-      "precomputed_interval_high": 3.71
+      "precomputed_estimate_t_ha": 3.06,
+      "precomputed_interval_low": 2.33,
+      "precomputed_interval_high": 3.79
     },
     "Varanasi": {
       "rainfall_cumulative_mm": 1090.94,
@@ -310,9 +311,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 171 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 8 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4527); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "recorded DES yields 2022-2024 (panel v2) + recorded 2024 sown area",
-      "precomputed_estimate_t_ha": 3.33,
-      "precomputed_interval_low": 2.95,
-      "precomputed_interval_high": 3.71
+      "precomputed_estimate_t_ha": 2.86,
+      "precomputed_interval_low": 1.93,
+      "precomputed_interval_high": 3.79
     },
     "Gorakhpur": {
       "rainfall_cumulative_mm": 1121.15,
@@ -351,9 +352,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 177 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 8 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4369); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "recorded DES yields 2022-2024 (panel v2) + recorded 2024 sown area",
-      "precomputed_estimate_t_ha": 3.16,
-      "precomputed_interval_low": 2.6,
-      "precomputed_interval_high": 3.72
+      "precomputed_estimate_t_ha": 3.04,
+      "precomputed_interval_low": 2.28,
+      "precomputed_interval_high": 3.8
     },
     "Bareilly": {
       "rainfall_cumulative_mm": 1067.34,
@@ -392,9 +393,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 84 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 7 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4152); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "recorded DES yields 2022-2024 (panel v2) + recorded 2024 sown area",
-      "precomputed_estimate_t_ha": 3.26,
-      "precomputed_interval_low": 2.86,
-      "precomputed_interval_high": 3.66
+      "precomputed_estimate_t_ha": 2.66,
+      "precomputed_interval_low": 2.01,
+      "precomputed_interval_high": 3.31
     },
     "Patna": {
       "rainfall_cumulative_mm": 984.05,
@@ -433,9 +434,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 160 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 6 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4392); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 3.23,
-      "precomputed_interval_low": 2.84,
-      "precomputed_interval_high": 3.62
+      "precomputed_estimate_t_ha": 2.01,
+      "precomputed_interval_low": 1.56,
+      "precomputed_interval_high": 2.46
     },
     "Nalanda": {
       "rainfall_cumulative_mm": 987.84,
@@ -474,9 +475,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 277 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 8 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4839); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 3.2,
-      "precomputed_interval_low": 2.77,
-      "precomputed_interval_high": 3.63
+      "precomputed_estimate_t_ha": 2.06,
+      "precomputed_interval_low": 1.74,
+      "precomputed_interval_high": 2.38
     },
     "Cuttack": {
       "rainfall_cumulative_mm": 1142.95,
@@ -515,9 +516,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 195 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 6 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4228); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 3.24,
-      "precomputed_interval_low": 2.84,
-      "precomputed_interval_high": 3.64
+      "precomputed_estimate_t_ha": 1.62,
+      "precomputed_interval_low": 1.07,
+      "precomputed_interval_high": 2.17
     },
     "Baleshwar": {
       "rainfall_cumulative_mm": 1549.74,
@@ -556,9 +557,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 289 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 7 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.5843); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 3.23,
-      "precomputed_interval_low": 2.78,
-      "precomputed_interval_high": 3.68
+      "precomputed_estimate_t_ha": 1.96,
+      "precomputed_interval_low": 1.19,
+      "precomputed_interval_high": 2.73
     },
     "Sambalpur": {
       "rainfall_cumulative_mm": 1284.7,
@@ -597,9 +598,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 234 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 5 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.5527); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 2.81,
-      "precomputed_interval_low": 2.29,
-      "precomputed_interval_high": 3.33
+      "precomputed_estimate_t_ha": 1.83,
+      "precomputed_interval_low": 1.42,
+      "precomputed_interval_high": 2.24
     },
     "Krishna": {
       "rainfall_cumulative_mm": 972.2,
@@ -638,9 +639,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 139 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 5 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4403); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 3.05,
-      "precomputed_interval_low": 2.63,
-      "precomputed_interval_high": 3.47
+      "precomputed_estimate_t_ha": 3.18,
+      "precomputed_interval_low": 2.26,
+      "precomputed_interval_high": 4.1
     },
     "East Godavari": {
       "rainfall_cumulative_mm": 1325.46,
@@ -679,9 +680,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 283 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 7 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4665); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "recorded DES yields 2022-2024 (panel v2) + recorded 2024 sown area",
-      "precomputed_estimate_t_ha": 3.56,
-      "precomputed_interval_low": 3.19,
-      "precomputed_interval_high": 3.93
+      "precomputed_estimate_t_ha": 3.16,
+      "precomputed_interval_low": 2.34,
+      "precomputed_interval_high": 3.98
     },
     "West Godavari": {
       "rainfall_cumulative_mm": 896.1,
@@ -720,9 +721,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 270 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 6 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.5187); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "recorded DES yields 2022-2024 (panel v2) + recorded 2024 sown area",
-      "precomputed_estimate_t_ha": 3.38,
-      "precomputed_interval_low": 3.02,
-      "precomputed_interval_high": 3.74
+      "precomputed_estimate_t_ha": 3.35,
+      "precomputed_interval_low": 2.65,
+      "precomputed_interval_high": 4.05
     },
     "Nalgonda": {
       "rainfall_cumulative_mm": 939.09,
@@ -761,9 +762,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 247 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 9 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4498); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "recorded DES yields 2022-2024 (panel v2) + recorded 2024 sown area",
-      "precomputed_estimate_t_ha": 3.48,
-      "precomputed_interval_low": 2.92,
-      "precomputed_interval_high": 4.04
+      "precomputed_estimate_t_ha": 3.79,
+      "precomputed_interval_low": 2.36,
+      "precomputed_interval_high": 5.22
     },
     "Thanjavur": {
       "rainfall_cumulative_mm": 558.04,
@@ -802,9 +803,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 259 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 8 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4604); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 3.29,
-      "precomputed_interval_low": 2.93,
-      "precomputed_interval_high": 3.65
+      "precomputed_estimate_t_ha": 3.28,
+      "precomputed_interval_low": 2.12,
+      "precomputed_interval_high": 4.44
     },
     "Tiruchirappalli": {
       "rainfall_cumulative_mm": 448.14,
@@ -843,9 +844,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 235 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 7 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4624); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 3.08,
-      "precomputed_interval_low": 2.57,
-      "precomputed_interval_high": 3.59
+      "precomputed_estimate_t_ha": 3.77,
+      "precomputed_interval_low": 2.67,
+      "precomputed_interval_high": 4.87
     },
     "Raipur": {
       "rainfall_cumulative_mm": 1360.79,
@@ -884,9 +885,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 116 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 4 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4267); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "recorded DES yields 2022-2024 (panel v2) + recorded 2024 sown area",
-      "precomputed_estimate_t_ha": 2.67,
-      "precomputed_interval_low": 2.29,
-      "precomputed_interval_high": 3.05
+      "precomputed_estimate_t_ha": 3.07,
+      "precomputed_interval_low": 2.04,
+      "precomputed_interval_high": 4.1
     },
     "Bilaspur": {
       "rainfall_cumulative_mm": 1374.14,
@@ -925,9 +926,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 244 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 6 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4443); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "recorded DES yields 2022-2024 (panel v2) + recorded 2024 sown area",
-      "precomputed_estimate_t_ha": 2.54,
-      "precomputed_interval_low": 2.1,
-      "precomputed_interval_high": 2.98
+      "precomputed_estimate_t_ha": 3.29,
+      "precomputed_interval_low": 2.15,
+      "precomputed_interval_high": 4.43
     },
     "Durg": {
       "rainfall_cumulative_mm": 1434.06,
@@ -966,9 +967,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 207 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 5 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4693); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "recorded DES yields 2022-2024 (panel v2) + recorded 2024 sown area",
-      "precomputed_estimate_t_ha": 2.72,
-      "precomputed_interval_low": 2.26,
-      "precomputed_interval_high": 3.18
+      "precomputed_estimate_t_ha": 2.6,
+      "precomputed_interval_low": 1.85,
+      "precomputed_interval_high": 3.35
     },
     "Kamrup": {
       "rainfall_cumulative_mm": 1172.55,
@@ -1007,9 +1008,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 289 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 8 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.6857); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 3.29,
-      "precomputed_interval_low": 2.89,
-      "precomputed_interval_high": 3.69
+      "precomputed_estimate_t_ha": 1.97,
+      "precomputed_interval_low": 1.4,
+      "precomputed_interval_high": 2.54
     },
     "Nagaon": {
       "rainfall_cumulative_mm": 850.57,
@@ -1048,9 +1049,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 289 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 8 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.6256); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 3.16,
-      "precomputed_interval_low": 2.84,
-      "precomputed_interval_high": 3.48
+      "precomputed_estimate_t_ha": 2.12,
+      "precomputed_interval_low": 1.36,
+      "precomputed_interval_high": 2.88
     }
   },
   "2026": {
@@ -1091,9 +1092,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 489 of 1681 pixels (2000-2014 mean NDVI >= 0.35) in a +/-5 km window at the district centroid; 9 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4555); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 3.87,
-      "precomputed_interval_low": 3.35,
-      "precomputed_interval_high": 4.39
+      "precomputed_estimate_t_ha": 4.49,
+      "precomputed_interval_low": 3.07,
+      "precomputed_interval_high": 5.91
     },
     "Amritsar": {
       "rainfall_cumulative_mm": 759.52,
@@ -1132,9 +1133,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 49 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 9 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.403); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 3.25,
-      "precomputed_interval_low": 2.94,
-      "precomputed_interval_high": 3.56
+      "precomputed_estimate_t_ha": 2.87,
+      "precomputed_interval_low": 2.2,
+      "precomputed_interval_high": 3.54
     },
     "Karnal": {
       "rainfall_cumulative_mm": 810.78,
@@ -1173,9 +1174,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 123 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 9 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4209); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 3.44,
-      "precomputed_interval_low": 3.14,
-      "precomputed_interval_high": 3.74
+      "precomputed_estimate_t_ha": 4.03,
+      "precomputed_interval_low": 2.64,
+      "precomputed_interval_high": 5.42
     },
     "Burdwan": {
       "rainfall_cumulative_mm": 1304.91,
@@ -1214,9 +1215,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 274 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 8 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4979); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 3.3,
-      "precomputed_interval_low": 3.0,
-      "precomputed_interval_high": 3.6
+      "precomputed_estimate_t_ha": 2.99,
+      "precomputed_interval_low": 2.26,
+      "precomputed_interval_high": 3.72
     },
     "Birbhum": {
       "rainfall_cumulative_mm": 1130.01,
@@ -1255,9 +1256,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 289 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 8 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.6); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 3.35,
-      "precomputed_interval_low": 3.01,
-      "precomputed_interval_high": 3.69
+      "precomputed_estimate_t_ha": 2.77,
+      "precomputed_interval_low": 2.06,
+      "precomputed_interval_high": 3.48
     },
     "Midnapore": {
       "rainfall_cumulative_mm": 1436.68,
@@ -1296,9 +1297,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 285 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 7 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.5464); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 3.32,
-      "precomputed_interval_low": 3.09,
-      "precomputed_interval_high": 3.55
+      "precomputed_estimate_t_ha": 3.11,
+      "precomputed_interval_low": 2.22,
+      "precomputed_interval_high": 4.0
     },
     "Varanasi": {
       "rainfall_cumulative_mm": 1040.19,
@@ -1337,9 +1338,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 171 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 4 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4527); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 3.19,
-      "precomputed_interval_low": 2.97,
-      "precomputed_interval_high": 3.41
+      "precomputed_estimate_t_ha": 2.53,
+      "precomputed_interval_low": 1.76,
+      "precomputed_interval_high": 3.3
     },
     "Gorakhpur": {
       "rainfall_cumulative_mm": 1128.48,
@@ -1378,9 +1379,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 177 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 8 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4369); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 3.18,
-      "precomputed_interval_low": 3.03,
-      "precomputed_interval_high": 3.33
+      "precomputed_estimate_t_ha": 2.4,
+      "precomputed_interval_low": 1.8,
+      "precomputed_interval_high": 3.0
     },
     "Bareilly": {
       "rainfall_cumulative_mm": 1227.42,
@@ -1419,9 +1420,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 84 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 9 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4152); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 3.28,
-      "precomputed_interval_low": 2.97,
-      "precomputed_interval_high": 3.59
+      "precomputed_estimate_t_ha": 2.48,
+      "precomputed_interval_low": 1.97,
+      "precomputed_interval_high": 2.99
     },
     "Patna": {
       "rainfall_cumulative_mm": 765.78,
@@ -1460,9 +1461,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 160 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 7 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4392); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 3.24,
-      "precomputed_interval_low": 2.87,
-      "precomputed_interval_high": 3.61
+      "precomputed_estimate_t_ha": 1.73,
+      "precomputed_interval_low": 1.33,
+      "precomputed_interval_high": 2.13
     },
     "Nalanda": {
       "rainfall_cumulative_mm": 828.18,
@@ -1501,9 +1502,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 277 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 8 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4839); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 3.15,
-      "precomputed_interval_low": 2.87,
-      "precomputed_interval_high": 3.43
+      "precomputed_estimate_t_ha": 2.04,
+      "precomputed_interval_low": 1.68,
+      "precomputed_interval_high": 2.4
     },
     "Cuttack": {
       "rainfall_cumulative_mm": 1519.81,
@@ -1542,9 +1543,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 195 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 7 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4228); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 3.2,
-      "precomputed_interval_low": 2.96,
-      "precomputed_interval_high": 3.44
+      "precomputed_estimate_t_ha": 1.81,
+      "precomputed_interval_low": 1.35,
+      "precomputed_interval_high": 2.27
     },
     "Baleshwar": {
       "rainfall_cumulative_mm": 1813.61,
@@ -1583,9 +1584,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 289 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 7 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.5843); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 3.16,
-      "precomputed_interval_low": 2.87,
-      "precomputed_interval_high": 3.45
+      "precomputed_estimate_t_ha": 2.01,
+      "precomputed_interval_low": 1.4,
+      "precomputed_interval_high": 2.62
     },
     "Sambalpur": {
       "rainfall_cumulative_mm": 1502.28,
@@ -1624,9 +1625,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 234 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 7 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.5527); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 2.78,
-      "precomputed_interval_low": 2.28,
-      "precomputed_interval_high": 3.28
+      "precomputed_estimate_t_ha": 1.98,
+      "precomputed_interval_low": 1.53,
+      "precomputed_interval_high": 2.43
     },
     "Krishna": {
       "rainfall_cumulative_mm": 742.87,
@@ -1665,9 +1666,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 139 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 7 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4403); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 2.92,
-      "precomputed_interval_low": 2.25,
-      "precomputed_interval_high": 3.59
+      "precomputed_estimate_t_ha": 3.72,
+      "precomputed_interval_low": 2.58,
+      "precomputed_interval_high": 4.86
     },
     "East Godavari": {
       "rainfall_cumulative_mm": 1080.75,
@@ -1706,9 +1707,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 283 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 5 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4665); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 3.35,
-      "precomputed_interval_low": 2.95,
-      "precomputed_interval_high": 3.75
+      "precomputed_estimate_t_ha": 3.42,
+      "precomputed_interval_low": 2.67,
+      "precomputed_interval_high": 4.17
     },
     "West Godavari": {
       "rainfall_cumulative_mm": 943.57,
@@ -1747,9 +1748,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 270 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 6 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.5187); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 3.29,
-      "precomputed_interval_low": 2.8,
-      "precomputed_interval_high": 3.78
+      "precomputed_estimate_t_ha": 2.91,
+      "precomputed_interval_low": 2.3,
+      "precomputed_interval_high": 3.52
     },
     "Nalgonda": {
       "rainfall_cumulative_mm": 398.2,
@@ -1788,9 +1789,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 247 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 8 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4498); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 3.4,
-      "precomputed_interval_low": 3.04,
-      "precomputed_interval_high": 3.76
+      "precomputed_estimate_t_ha": 3.46,
+      "precomputed_interval_low": 2.44,
+      "precomputed_interval_high": 4.48
     },
     "Thanjavur": {
       "rainfall_cumulative_mm": 512.47,
@@ -1829,9 +1830,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 259 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 8 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4604); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 3.3,
-      "precomputed_interval_low": 3.03,
-      "precomputed_interval_high": 3.57
+      "precomputed_estimate_t_ha": 2.98,
+      "precomputed_interval_low": 2.31,
+      "precomputed_interval_high": 3.65
     },
     "Tiruchirappalli": {
       "rainfall_cumulative_mm": 487.3,
@@ -1870,9 +1871,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 235 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 8 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4624); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 3.11,
-      "precomputed_interval_low": 2.71,
-      "precomputed_interval_high": 3.51
+      "precomputed_estimate_t_ha": 3.62,
+      "precomputed_interval_low": 2.6,
+      "precomputed_interval_high": 4.64
     },
     "Raipur": {
       "rainfall_cumulative_mm": 1377.52,
@@ -1911,9 +1912,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 116 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 7 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4267); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 2.7,
-      "precomputed_interval_low": 2.27,
-      "precomputed_interval_high": 3.13
+      "precomputed_estimate_t_ha": 1.97,
+      "precomputed_interval_low": 1.55,
+      "precomputed_interval_high": 2.39
     },
     "Bilaspur": {
       "rainfall_cumulative_mm": 1329.66,
@@ -1952,9 +1953,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 244 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 5 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4443); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 2.48,
-      "precomputed_interval_low": 2.04,
-      "precomputed_interval_high": 2.92
+      "precomputed_estimate_t_ha": 2.04,
+      "precomputed_interval_low": 1.56,
+      "precomputed_interval_high": 2.52
     },
     "Durg": {
       "rainfall_cumulative_mm": 1388.02,
@@ -1993,9 +1994,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 207 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 6 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4693); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 2.7,
-      "precomputed_interval_low": 2.35,
-      "precomputed_interval_high": 3.05
+      "precomputed_estimate_t_ha": 1.95,
+      "precomputed_interval_low": 1.57,
+      "precomputed_interval_high": 2.33
     },
     "Kamrup": {
       "rainfall_cumulative_mm": 1109.07,
@@ -2034,9 +2035,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 289 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 7 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.6857); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 3.2,
-      "precomputed_interval_low": 2.94,
-      "precomputed_interval_high": 3.46
+      "precomputed_estimate_t_ha": 1.94,
+      "precomputed_interval_low": 1.33,
+      "precomputed_interval_high": 2.55
     },
     "Nagaon": {
       "rainfall_cumulative_mm": 635.48,
@@ -2075,9 +2076,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 289 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 5 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.6256); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "district DES baseline profile lags (not recorded 2023-2025 yields)",
-      "precomputed_estimate_t_ha": 3.2,
-      "precomputed_interval_low": 2.96,
-      "precomputed_interval_high": 3.44
+      "precomputed_estimate_t_ha": 2.15,
+      "precomputed_interval_low": 1.18,
+      "precomputed_interval_high": 3.12
     }
   },
   "2022": {
@@ -2118,9 +2119,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 489 of 1681 pixels (2000-2014 mean NDVI >= 0.35) in a +/-5 km window at the district centroid; 9 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4555); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2022",
-      "precomputed_estimate_t_ha": 3.56,
-      "precomputed_interval_low": 2.67,
-      "precomputed_interval_high": 4.45
+      "precomputed_estimate_t_ha": 4.4,
+      "precomputed_interval_low": 2.88,
+      "precomputed_interval_high": 5.92
     },
     "Amritsar": {
       "rainfall_cumulative_mm": 771.41,
@@ -2159,9 +2160,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 49 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 8 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.403); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2022",
-      "precomputed_estimate_t_ha": 3.21,
-      "precomputed_interval_low": 2.73,
-      "precomputed_interval_high": 3.69
+      "precomputed_estimate_t_ha": 3.39,
+      "precomputed_interval_low": 2.55,
+      "precomputed_interval_high": 4.23
     },
     "Karnal": {
       "rainfall_cumulative_mm": 960.0,
@@ -2200,9 +2201,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 123 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 9 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4209); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2022",
-      "precomputed_estimate_t_ha": 3.32,
-      "precomputed_interval_low": 2.77,
-      "precomputed_interval_high": 3.87
+      "precomputed_estimate_t_ha": 3.91,
+      "precomputed_interval_low": 2.94,
+      "precomputed_interval_high": 4.88
     },
     "Burdwan": {
       "rainfall_cumulative_mm": 915.38,
@@ -2241,9 +2242,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 274 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 7 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4979); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 3.27,
-      "precomputed_interval_low": 2.83,
-      "precomputed_interval_high": 3.71
+      "precomputed_estimate_t_ha": 3.18,
+      "precomputed_interval_low": 2.28,
+      "precomputed_interval_high": 4.08
     },
     "Birbhum": {
       "rainfall_cumulative_mm": 852.25,
@@ -2282,9 +2283,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 289 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 4 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.6); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 3.23,
-      "precomputed_interval_low": 2.84,
-      "precomputed_interval_high": 3.62
+      "precomputed_estimate_t_ha": 2.87,
+      "precomputed_interval_low": 2.23,
+      "precomputed_interval_high": 3.51
     },
     "Midnapore": {
       "rainfall_cumulative_mm": 1114.99,
@@ -2323,9 +2324,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 285 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 7 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.5464); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 3.34,
-      "precomputed_interval_low": 3.09,
-      "precomputed_interval_high": 3.59
+      "precomputed_estimate_t_ha": 3.09,
+      "precomputed_interval_low": 2.08,
+      "precomputed_interval_high": 4.1
     },
     "Varanasi": {
       "rainfall_cumulative_mm": 808.58,
@@ -2364,9 +2365,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 171 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 8 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4527); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2022",
-      "precomputed_estimate_t_ha": 3.31,
-      "precomputed_interval_low": 2.97,
-      "precomputed_interval_high": 3.65
+      "precomputed_estimate_t_ha": 2.59,
+      "precomputed_interval_low": 1.93,
+      "precomputed_interval_high": 3.25
     },
     "Gorakhpur": {
       "rainfall_cumulative_mm": 1037.85,
@@ -2405,9 +2406,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 177 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 9 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4369); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2022",
-      "precomputed_estimate_t_ha": 3.17,
-      "precomputed_interval_low": 2.86,
-      "precomputed_interval_high": 3.48
+      "precomputed_estimate_t_ha": 2.3,
+      "precomputed_interval_low": 1.64,
+      "precomputed_interval_high": 2.96
     },
     "Bareilly": {
       "rainfall_cumulative_mm": 715.66,
@@ -2446,9 +2447,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 84 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 8 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4152); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2022",
-      "precomputed_estimate_t_ha": 3.22,
-      "precomputed_interval_low": 3.02,
-      "precomputed_interval_high": 3.42
+      "precomputed_estimate_t_ha": 2.68,
+      "precomputed_interval_low": 2.0,
+      "precomputed_interval_high": 3.36
     },
     "Patna": {
       "rainfall_cumulative_mm": 615.95,
@@ -2487,9 +2488,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 160 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 6 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4392); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 3.16,
-      "precomputed_interval_low": 2.66,
-      "precomputed_interval_high": 3.66
+      "precomputed_estimate_t_ha": 1.78,
+      "precomputed_interval_low": 1.14,
+      "precomputed_interval_high": 2.42
     },
     "Nalanda": {
       "rainfall_cumulative_mm": 634.15,
@@ -2528,9 +2529,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 277 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 6 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4839); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 3.2,
-      "precomputed_interval_low": 2.75,
-      "precomputed_interval_high": 3.65
+      "precomputed_estimate_t_ha": 2.02,
+      "precomputed_interval_low": 1.57,
+      "precomputed_interval_high": 2.47
     },
     "Cuttack": {
       "rainfall_cumulative_mm": 1219.74,
@@ -2569,9 +2570,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 195 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 6 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4228); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 3.23,
-      "precomputed_interval_low": 2.78,
-      "precomputed_interval_high": 3.68
+      "precomputed_estimate_t_ha": 1.73,
+      "precomputed_interval_low": 1.26,
+      "precomputed_interval_high": 2.2
     },
     "Baleshwar": {
       "rainfall_cumulative_mm": 1400.34,
@@ -2610,9 +2611,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 289 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 7 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.5843); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 3.18,
-      "precomputed_interval_low": 2.82,
-      "precomputed_interval_high": 3.54
+      "precomputed_estimate_t_ha": 2.03,
+      "precomputed_interval_low": 1.27,
+      "precomputed_interval_high": 2.79
     },
     "Sambalpur": {
       "rainfall_cumulative_mm": 1187.27,
@@ -2651,9 +2652,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 234 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 4 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.5527); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 2.8,
-      "precomputed_interval_low": 2.25,
-      "precomputed_interval_high": 3.35
+      "precomputed_estimate_t_ha": 1.76,
+      "precomputed_interval_low": 1.42,
+      "precomputed_interval_high": 2.1
     },
     "Krishna": {
       "rainfall_cumulative_mm": 919.78,
@@ -2692,9 +2693,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 139 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 5 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4403); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 3.07,
-      "precomputed_interval_low": 2.51,
-      "precomputed_interval_high": 3.63
+      "precomputed_estimate_t_ha": 3.48,
+      "precomputed_interval_low": 2.4,
+      "precomputed_interval_high": 4.56
     },
     "East Godavari": {
       "rainfall_cumulative_mm": 1259.64,
@@ -2733,9 +2734,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 283 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 6 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4665); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2022",
-      "precomputed_estimate_t_ha": 3.35,
-      "precomputed_interval_low": 2.81,
-      "precomputed_interval_high": 3.89
+      "precomputed_estimate_t_ha": 2.7,
+      "precomputed_interval_low": 2.15,
+      "precomputed_interval_high": 3.25
     },
     "West Godavari": {
       "rainfall_cumulative_mm": 1061.29,
@@ -2774,9 +2775,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 270 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 6 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.5187); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2022",
-      "precomputed_estimate_t_ha": 3.36,
-      "precomputed_interval_low": 2.84,
-      "precomputed_interval_high": 3.88
+      "precomputed_estimate_t_ha": 2.74,
+      "precomputed_interval_low": 2.03,
+      "precomputed_interval_high": 3.45
     },
     "Nalgonda": {
       "rainfall_cumulative_mm": 794.54,
@@ -2815,9 +2816,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 247 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 8 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4498); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2022",
-      "precomputed_estimate_t_ha": 3.59,
-      "precomputed_interval_low": 3.45,
-      "precomputed_interval_high": 3.73
+      "precomputed_estimate_t_ha": 3.84,
+      "precomputed_interval_low": 2.37,
+      "precomputed_interval_high": 5.31
     },
     "Thanjavur": {
       "rainfall_cumulative_mm": 569.69,
@@ -2856,9 +2857,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 259 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 7 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4604); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 3.34,
-      "precomputed_interval_low": 2.79,
-      "precomputed_interval_high": 3.89
+      "precomputed_estimate_t_ha": 3.78,
+      "precomputed_interval_low": 2.23,
+      "precomputed_interval_high": 5.33
     },
     "Tiruchirappalli": {
       "rainfall_cumulative_mm": 573.98,
@@ -2897,9 +2898,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 235 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 8 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4624); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 3.21,
-      "precomputed_interval_low": 2.57,
-      "precomputed_interval_high": 3.85
+      "precomputed_estimate_t_ha": 3.79,
+      "precomputed_interval_low": 2.62,
+      "precomputed_interval_high": 4.96
     },
     "Raipur": {
       "rainfall_cumulative_mm": 1309.31,
@@ -2938,9 +2939,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 116 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 3 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4267); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2022",
-      "precomputed_estimate_t_ha": 2.68,
-      "precomputed_interval_low": 2.03,
-      "precomputed_interval_high": 3.33
+      "precomputed_estimate_t_ha": 2.74,
+      "precomputed_interval_low": 1.76,
+      "precomputed_interval_high": 3.72
     },
     "Bilaspur": {
       "rainfall_cumulative_mm": 1323.66,
@@ -2979,9 +2980,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 244 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 4 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4443); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2022",
-      "precomputed_estimate_t_ha": 2.46,
-      "precomputed_interval_low": 2.04,
-      "precomputed_interval_high": 2.88
+      "precomputed_estimate_t_ha": 2.53,
+      "precomputed_interval_low": 1.75,
+      "precomputed_interval_high": 3.31
     },
     "Durg": {
       "rainfall_cumulative_mm": 1391.94,
@@ -3020,9 +3021,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 207 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 4 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4693); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2022",
-      "precomputed_estimate_t_ha": 2.65,
-      "precomputed_interval_low": 2.18,
-      "precomputed_interval_high": 3.12
+      "precomputed_estimate_t_ha": 2.4,
+      "precomputed_interval_low": 1.71,
+      "precomputed_interval_high": 3.09
     },
     "Kamrup": {
       "rainfall_cumulative_mm": 1476.75,
@@ -3061,9 +3062,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 289 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 9 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.6857); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 3.34,
-      "precomputed_interval_low": 3.0,
-      "precomputed_interval_high": 3.68
+      "precomputed_estimate_t_ha": 2.13,
+      "precomputed_interval_low": 1.55,
+      "precomputed_interval_high": 2.71
     },
     "Nagaon": {
       "rainfall_cumulative_mm": 1031.47,
@@ -3102,9 +3103,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 289 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 4 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.6256); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 3.26,
-      "precomputed_interval_low": 2.86,
-      "precomputed_interval_high": 3.66
+      "precomputed_estimate_t_ha": 2.2,
+      "precomputed_interval_low": 1.45,
+      "precomputed_interval_high": 2.95
     }
   },
   "2023": {
@@ -3145,9 +3146,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 489 of 1681 pixels (2000-2014 mean NDVI >= 0.35) in a +/-5 km window at the district centroid; 9 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4555); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2023",
-      "precomputed_estimate_t_ha": 3.71,
-      "precomputed_interval_low": 2.9,
-      "precomputed_interval_high": 4.52
+      "precomputed_estimate_t_ha": 4.42,
+      "precomputed_interval_low": 2.5,
+      "precomputed_interval_high": 6.34
     },
     "Amritsar": {
       "rainfall_cumulative_mm": 1136.41,
@@ -3186,9 +3187,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 49 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 9 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.403); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2023",
-      "precomputed_estimate_t_ha": 3.39,
-      "precomputed_interval_low": 3.16,
-      "precomputed_interval_high": 3.62
+      "precomputed_estimate_t_ha": 3.49,
+      "precomputed_interval_low": 2.52,
+      "precomputed_interval_high": 4.46
     },
     "Karnal": {
       "rainfall_cumulative_mm": 761.2,
@@ -3227,9 +3228,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 123 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 9 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4209); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2023",
-      "precomputed_estimate_t_ha": 3.38,
-      "precomputed_interval_low": 2.85,
-      "precomputed_interval_high": 3.91
+      "precomputed_estimate_t_ha": 4.1,
+      "precomputed_interval_low": 2.96,
+      "precomputed_interval_high": 5.24
     },
     "Burdwan": {
       "rainfall_cumulative_mm": 1036.33,
@@ -3268,9 +3269,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 274 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 9 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4979); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 3.2,
-      "precomputed_interval_low": 2.78,
-      "precomputed_interval_high": 3.62
+      "precomputed_estimate_t_ha": 3.3,
+      "precomputed_interval_low": 2.57,
+      "precomputed_interval_high": 4.03
     },
     "Birbhum": {
       "rainfall_cumulative_mm": 1108.39,
@@ -3309,9 +3310,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 289 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 6 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.6); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 3.29,
-      "precomputed_interval_low": 2.85,
-      "precomputed_interval_high": 3.73
+      "precomputed_estimate_t_ha": 2.78,
+      "precomputed_interval_low": 2.11,
+      "precomputed_interval_high": 3.45
     },
     "Midnapore": {
       "rainfall_cumulative_mm": 1085.28,
@@ -3351,8 +3352,8 @@
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
       "precomputed_estimate_t_ha": 3.26,
-      "precomputed_interval_low": 2.94,
-      "precomputed_interval_high": 3.58
+      "precomputed_interval_low": 2.19,
+      "precomputed_interval_high": 4.33
     },
     "Varanasi": {
       "rainfall_cumulative_mm": 640.4,
@@ -3391,9 +3392,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 171 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 6 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4527); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2023",
-      "precomputed_estimate_t_ha": 3.34,
-      "precomputed_interval_low": 2.94,
-      "precomputed_interval_high": 3.74
+      "precomputed_estimate_t_ha": 2.75,
+      "precomputed_interval_low": 2.03,
+      "precomputed_interval_high": 3.47
     },
     "Gorakhpur": {
       "rainfall_cumulative_mm": 955.29,
@@ -3432,9 +3433,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 177 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 7 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4369); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2023",
-      "precomputed_estimate_t_ha": 3.14,
-      "precomputed_interval_low": 2.77,
-      "precomputed_interval_high": 3.51
+      "precomputed_estimate_t_ha": 2.28,
+      "precomputed_interval_low": 1.73,
+      "precomputed_interval_high": 2.83
     },
     "Bareilly": {
       "rainfall_cumulative_mm": 859.89,
@@ -3473,9 +3474,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 84 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 7 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4152); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2023",
-      "precomputed_estimate_t_ha": 3.25,
-      "precomputed_interval_low": 2.88,
-      "precomputed_interval_high": 3.62
+      "precomputed_estimate_t_ha": 2.64,
+      "precomputed_interval_low": 2.03,
+      "precomputed_interval_high": 3.25
     },
     "Patna": {
       "rainfall_cumulative_mm": 756.4,
@@ -3514,9 +3515,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 160 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 5 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4392); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 3.24,
-      "precomputed_interval_low": 3.0,
-      "precomputed_interval_high": 3.48
+      "precomputed_estimate_t_ha": 1.82,
+      "precomputed_interval_low": 1.35,
+      "precomputed_interval_high": 2.29
     },
     "Nalanda": {
       "rainfall_cumulative_mm": 978.4,
@@ -3555,9 +3556,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 277 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 7 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4839); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 3.14,
-      "precomputed_interval_low": 2.81,
-      "precomputed_interval_high": 3.47
+      "precomputed_estimate_t_ha": 2.03,
+      "precomputed_interval_low": 1.62,
+      "precomputed_interval_high": 2.44
     },
     "Cuttack": {
       "rainfall_cumulative_mm": 1141.19,
@@ -3596,9 +3597,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 195 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 7 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4228); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 3.2,
-      "precomputed_interval_low": 2.83,
-      "precomputed_interval_high": 3.57
+      "precomputed_estimate_t_ha": 1.63,
+      "precomputed_interval_low": 1.07,
+      "precomputed_interval_high": 2.19
     },
     "Baleshwar": {
       "rainfall_cumulative_mm": 1311.45,
@@ -3637,9 +3638,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 289 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 6 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.5843); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 3.1,
-      "precomputed_interval_low": 2.83,
-      "precomputed_interval_high": 3.37
+      "precomputed_estimate_t_ha": 1.87,
+      "precomputed_interval_low": 1.17,
+      "precomputed_interval_high": 2.57
     },
     "Sambalpur": {
       "rainfall_cumulative_mm": 1347.81,
@@ -3678,9 +3679,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 234 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 5 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.5527); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 2.76,
-      "precomputed_interval_low": 2.4,
-      "precomputed_interval_high": 3.12
+      "precomputed_estimate_t_ha": 2.05,
+      "precomputed_interval_low": 1.54,
+      "precomputed_interval_high": 2.56
     },
     "Krishna": {
       "rainfall_cumulative_mm": 697.96,
@@ -3719,9 +3720,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 139 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 8 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4403); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 2.91,
-      "precomputed_interval_low": 2.33,
-      "precomputed_interval_high": 3.49
+      "precomputed_estimate_t_ha": 3.67,
+      "precomputed_interval_low": 2.4,
+      "precomputed_interval_high": 4.94
     },
     "East Godavari": {
       "rainfall_cumulative_mm": 816.22,
@@ -3760,9 +3761,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 283 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 6 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4665); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2023",
-      "precomputed_estimate_t_ha": 3.24,
-      "precomputed_interval_low": 2.94,
-      "precomputed_interval_high": 3.54
+      "precomputed_estimate_t_ha": 3.12,
+      "precomputed_interval_low": 2.52,
+      "precomputed_interval_high": 3.72
     },
     "West Godavari": {
       "rainfall_cumulative_mm": 699.81,
@@ -3801,9 +3802,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 270 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 6 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.5187); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2023",
-      "precomputed_estimate_t_ha": 3.23,
-      "precomputed_interval_low": 2.87,
-      "precomputed_interval_high": 3.59
+      "precomputed_estimate_t_ha": 3.13,
+      "precomputed_interval_low": 2.42,
+      "precomputed_interval_high": 3.84
     },
     "Nalgonda": {
       "rainfall_cumulative_mm": 550.69,
@@ -3842,9 +3843,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 247 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 8 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4498); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2023",
-      "precomputed_estimate_t_ha": 3.41,
-      "precomputed_interval_low": 2.91,
-      "precomputed_interval_high": 3.91
+      "precomputed_estimate_t_ha": 3.74,
+      "precomputed_interval_low": 2.28,
+      "precomputed_interval_high": 5.2
     },
     "Thanjavur": {
       "rainfall_cumulative_mm": 406.14,
@@ -3884,8 +3885,8 @@
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
       "precomputed_estimate_t_ha": 3.28,
-      "precomputed_interval_low": 3.02,
-      "precomputed_interval_high": 3.54
+      "precomputed_interval_low": 2.5,
+      "precomputed_interval_high": 4.06
     },
     "Tiruchirappalli": {
       "rainfall_cumulative_mm": 399.29,
@@ -3924,9 +3925,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 235 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 8 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4624); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 3.18,
-      "precomputed_interval_low": 2.67,
-      "precomputed_interval_high": 3.69
+      "precomputed_estimate_t_ha": 3.73,
+      "precomputed_interval_low": 2.48,
+      "precomputed_interval_high": 4.98
     },
     "Raipur": {
       "rainfall_cumulative_mm": 1450.6,
@@ -3965,9 +3966,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 116 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 9 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4267); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2023",
-      "precomputed_estimate_t_ha": 2.71,
-      "precomputed_interval_low": 2.2,
-      "precomputed_interval_high": 3.22
+      "precomputed_estimate_t_ha": 2.82,
+      "precomputed_interval_low": 2.13,
+      "precomputed_interval_high": 3.51
     },
     "Bilaspur": {
       "rainfall_cumulative_mm": 1344.1,
@@ -4006,9 +4007,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 244 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 8 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4443); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2023",
-      "precomputed_estimate_t_ha": 2.5,
-      "precomputed_interval_low": 2.0,
-      "precomputed_interval_high": 3.0
+      "precomputed_estimate_t_ha": 2.91,
+      "precomputed_interval_low": 2.04,
+      "precomputed_interval_high": 3.78
     },
     "Durg": {
       "rainfall_cumulative_mm": 1504.51,
@@ -4047,9 +4048,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 207 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 8 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4693); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2023",
-      "precomputed_estimate_t_ha": 2.69,
-      "precomputed_interval_low": 2.34,
-      "precomputed_interval_high": 3.04
+      "precomputed_estimate_t_ha": 2.44,
+      "precomputed_interval_low": 1.78,
+      "precomputed_interval_high": 3.1
     },
     "Kamrup": {
       "rainfall_cumulative_mm": 1335.72,
@@ -4088,9 +4089,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 289 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 7 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.6857); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 3.22,
-      "precomputed_interval_low": 3.01,
-      "precomputed_interval_high": 3.43
+      "precomputed_estimate_t_ha": 2.21,
+      "precomputed_interval_low": 1.48,
+      "precomputed_interval_high": 2.94
     },
     "Nagaon": {
       "rainfall_cumulative_mm": 866.97,
@@ -4129,9 +4130,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 289 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 6 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.6256); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 3.19,
-      "precomputed_interval_low": 2.77,
-      "precomputed_interval_high": 3.61
+      "precomputed_estimate_t_ha": 2.14,
+      "precomputed_interval_low": 1.43,
+      "precomputed_interval_high": 2.85
     }
   },
   "2024": {
@@ -4172,9 +4173,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 489 of 1681 pixels (2000-2014 mean NDVI >= 0.35) in a +/-5 km window at the district centroid; 9 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4555); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2024",
-      "precomputed_estimate_t_ha": 3.43,
-      "precomputed_interval_low": 2.77,
-      "precomputed_interval_high": 4.09
+      "precomputed_estimate_t_ha": 4.49,
+      "precomputed_interval_low": 3.1,
+      "precomputed_interval_high": 5.88
     },
     "Amritsar": {
       "rainfall_cumulative_mm": 702.51,
@@ -4213,9 +4214,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 49 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 9 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.403); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2024",
-      "precomputed_estimate_t_ha": 3.23,
-      "precomputed_interval_low": 2.79,
-      "precomputed_interval_high": 3.67
+      "precomputed_estimate_t_ha": 3.41,
+      "precomputed_interval_low": 2.53,
+      "precomputed_interval_high": 4.29
     },
     "Karnal": {
       "rainfall_cumulative_mm": 746.13,
@@ -4254,9 +4255,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 123 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 7 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4209); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2024",
-      "precomputed_estimate_t_ha": 3.38,
-      "precomputed_interval_low": 2.93,
-      "precomputed_interval_high": 3.83
+      "precomputed_estimate_t_ha": 3.99,
+      "precomputed_interval_low": 2.73,
+      "precomputed_interval_high": 5.25
     },
     "Burdwan": {
       "rainfall_cumulative_mm": 1417.75,
@@ -4295,9 +4296,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 274 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 7 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4979); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 3.25,
-      "precomputed_interval_low": 2.99,
-      "precomputed_interval_high": 3.51
+      "precomputed_estimate_t_ha": 2.93,
+      "precomputed_interval_low": 2.17,
+      "precomputed_interval_high": 3.69
     },
     "Birbhum": {
       "rainfall_cumulative_mm": 1293.58,
@@ -4336,9 +4337,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 289 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 7 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.6); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 3.35,
-      "precomputed_interval_low": 3.01,
-      "precomputed_interval_high": 3.69
+      "precomputed_estimate_t_ha": 2.7,
+      "precomputed_interval_low": 2.05,
+      "precomputed_interval_high": 3.35
     },
     "Midnapore": {
       "rainfall_cumulative_mm": 1385.39,
@@ -4377,9 +4378,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 285 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 6 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.5464); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 3.25,
-      "precomputed_interval_low": 2.76,
-      "precomputed_interval_high": 3.74
+      "precomputed_estimate_t_ha": 3.09,
+      "precomputed_interval_low": 2.27,
+      "precomputed_interval_high": 3.91
     },
     "Varanasi": {
       "rainfall_cumulative_mm": 861.47,
@@ -4418,9 +4419,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 171 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 8 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4527); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2024",
-      "precomputed_estimate_t_ha": 3.25,
-      "precomputed_interval_low": 3.0,
-      "precomputed_interval_high": 3.5
+      "precomputed_estimate_t_ha": 2.83,
+      "precomputed_interval_low": 1.92,
+      "precomputed_interval_high": 3.74
     },
     "Gorakhpur": {
       "rainfall_cumulative_mm": 1248.57,
@@ -4459,9 +4460,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 177 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 7 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4369); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2024",
-      "precomputed_estimate_t_ha": 3.17,
-      "precomputed_interval_low": 2.94,
-      "precomputed_interval_high": 3.4
+      "precomputed_estimate_t_ha": 2.6,
+      "precomputed_interval_low": 2.0,
+      "precomputed_interval_high": 3.2
     },
     "Bareilly": {
       "rainfall_cumulative_mm": 997.74,
@@ -4500,9 +4501,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 84 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 8 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4152); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2024",
-      "precomputed_estimate_t_ha": 3.25,
-      "precomputed_interval_low": 3.09,
-      "precomputed_interval_high": 3.41
+      "precomputed_estimate_t_ha": 2.67,
+      "precomputed_interval_low": 1.89,
+      "precomputed_interval_high": 3.45
     },
     "Patna": {
       "rainfall_cumulative_mm": 652.15,
@@ -4541,9 +4542,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 160 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 5 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4392); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 3.21,
-      "precomputed_interval_low": 2.74,
-      "precomputed_interval_high": 3.68
+      "precomputed_estimate_t_ha": 1.78,
+      "precomputed_interval_low": 1.21,
+      "precomputed_interval_high": 2.35
     },
     "Nalanda": {
       "rainfall_cumulative_mm": 811.01,
@@ -4582,9 +4583,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 277 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 8 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4839); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 3.25,
-      "precomputed_interval_low": 2.9,
-      "precomputed_interval_high": 3.6
+      "precomputed_estimate_t_ha": 2.02,
+      "precomputed_interval_low": 1.58,
+      "precomputed_interval_high": 2.46
     },
     "Cuttack": {
       "rainfall_cumulative_mm": 1179.01,
@@ -4623,9 +4624,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 195 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 5 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4228); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 3.22,
-      "precomputed_interval_low": 2.89,
-      "precomputed_interval_high": 3.55
+      "precomputed_estimate_t_ha": 1.65,
+      "precomputed_interval_low": 1.11,
+      "precomputed_interval_high": 2.19
     },
     "Baleshwar": {
       "rainfall_cumulative_mm": 1522.24,
@@ -4664,9 +4665,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 289 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 5 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.5843); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 3.17,
-      "precomputed_interval_low": 2.87,
-      "precomputed_interval_high": 3.47
+      "precomputed_estimate_t_ha": 1.89,
+      "precomputed_interval_low": 1.41,
+      "precomputed_interval_high": 2.37
     },
     "Sambalpur": {
       "rainfall_cumulative_mm": 1031.62,
@@ -4705,9 +4706,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 234 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 5 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.5527); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 2.77,
-      "precomputed_interval_low": 2.36,
-      "precomputed_interval_high": 3.18
+      "precomputed_estimate_t_ha": 1.67,
+      "precomputed_interval_low": 1.09,
+      "precomputed_interval_high": 2.25
     },
     "Krishna": {
       "rainfall_cumulative_mm": 1077.21,
@@ -4746,9 +4747,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 139 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 5 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4403); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 3.17,
+      "precomputed_estimate_t_ha": 3.13,
       "precomputed_interval_low": 2.23,
-      "precomputed_interval_high": 4.11
+      "precomputed_interval_high": 4.03
     },
     "East Godavari": {
       "rainfall_cumulative_mm": 1201.51,
@@ -4787,9 +4788,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 283 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 6 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4665); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2024",
-      "precomputed_estimate_t_ha": 3.5,
-      "precomputed_interval_low": 3.11,
-      "precomputed_interval_high": 3.89
+      "precomputed_estimate_t_ha": 3.41,
+      "precomputed_interval_low": 2.63,
+      "precomputed_interval_high": 4.19
     },
     "West Godavari": {
       "rainfall_cumulative_mm": 1178.74,
@@ -4828,9 +4829,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 270 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 6 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.5187); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2024",
-      "precomputed_estimate_t_ha": 3.56,
-      "precomputed_interval_low": 3.04,
-      "precomputed_interval_high": 4.08
+      "precomputed_estimate_t_ha": 2.7,
+      "precomputed_interval_low": 2.1,
+      "precomputed_interval_high": 3.3
     },
     "Nalgonda": {
       "rainfall_cumulative_mm": 760.78,
@@ -4869,9 +4870,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 247 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 7 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4498); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2024",
-      "precomputed_estimate_t_ha": 3.45,
-      "precomputed_interval_low": 2.82,
-      "precomputed_interval_high": 4.08
+      "precomputed_estimate_t_ha": 3.87,
+      "precomputed_interval_low": 2.62,
+      "precomputed_interval_high": 5.12
     },
     "Thanjavur": {
       "rainfall_cumulative_mm": 514.12,
@@ -4910,9 +4911,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 259 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 8 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4604); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 3.24,
-      "precomputed_interval_low": 2.8,
-      "precomputed_interval_high": 3.68
+      "precomputed_estimate_t_ha": 3.36,
+      "precomputed_interval_low": 2.26,
+      "precomputed_interval_high": 4.46
     },
     "Tiruchirappalli": {
       "rainfall_cumulative_mm": 557.61,
@@ -4951,9 +4952,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 235 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 7 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4624); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 3.16,
-      "precomputed_interval_low": 2.43,
-      "precomputed_interval_high": 3.89
+      "precomputed_estimate_t_ha": 3.58,
+      "precomputed_interval_low": 2.36,
+      "precomputed_interval_high": 4.8
     },
     "Raipur": {
       "rainfall_cumulative_mm": 1224.1,
@@ -4992,9 +4993,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 116 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 4 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4267); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2024",
-      "precomputed_estimate_t_ha": 2.68,
-      "precomputed_interval_low": 2.01,
-      "precomputed_interval_high": 3.35
+      "precomputed_estimate_t_ha": 3.05,
+      "precomputed_interval_low": 2.24,
+      "precomputed_interval_high": 3.86
     },
     "Bilaspur": {
       "rainfall_cumulative_mm": 1254.72,
@@ -5033,9 +5034,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 244 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 7 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4443); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2024",
-      "precomputed_estimate_t_ha": 2.55,
-      "precomputed_interval_low": 1.96,
-      "precomputed_interval_high": 3.14
+      "precomputed_estimate_t_ha": 3.29,
+      "precomputed_interval_low": 2.18,
+      "precomputed_interval_high": 4.4
     },
     "Durg": {
       "rainfall_cumulative_mm": 1316.81,
@@ -5074,9 +5075,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 207 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 5 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.4693); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "Recorded DES yields (extended panel v2): lag-1, lag-2, 3-yr mean and sown area are the district's published values for 2024",
-      "precomputed_estimate_t_ha": 2.69,
-      "precomputed_interval_low": 2.12,
-      "precomputed_interval_high": 3.26
+      "precomputed_estimate_t_ha": 2.62,
+      "precomputed_interval_low": 1.93,
+      "precomputed_interval_high": 3.31
     },
     "Kamrup": {
       "rainfall_cumulative_mm": 1604.89,
@@ -5115,9 +5116,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 289 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 4 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.6857); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 3.27,
-      "precomputed_interval_low": 2.87,
-      "precomputed_interval_high": 3.67
+      "precomputed_estimate_t_ha": 2.21,
+      "precomputed_interval_low": 1.68,
+      "precomputed_interval_high": 2.74
     },
     "Nagaon": {
       "rainfall_cumulative_mm": 1178.29,
@@ -5156,9 +5157,9 @@
       "satellite_provenance": "MODIS MOD13Q1 measured (NASA ORNL DAAC subset), cropland-masked: season statistics over 289 of 289 pixels (2000-2014 mean NDVI >= 0.35) in a +/-2 km window at the district centroid; 4 16-day composites; anomaly vs the district's masked 2000-2014 MODIS climatology (0.6256); NDWI carried from the district baseline profile (MOD13Q1 has no SWIR band)",
       "soil_provenance": "district profile / agro-zone prior (static)",
       "historical_provenance": "District baseline-profile lags (this district's recorded series ends 2014/2016 in the project panels); same basis as its 2025-2026 rows",
-      "precomputed_estimate_t_ha": 3.23,
-      "precomputed_interval_low": 2.78,
-      "precomputed_interval_high": 3.68
+      "precomputed_estimate_t_ha": 2.21,
+      "precomputed_interval_low": 1.31,
+      "precomputed_interval_high": 3.11
     }
   },
   "recorded_actuals": {

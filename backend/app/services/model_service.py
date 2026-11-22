@@ -40,6 +40,16 @@ class ModelService:
         self.calibrated_coverage_pct: float = 83.33
         self.calibration_method: str = "Uncalibrated Baseline (+-1.05 sigma)"
 
+        # Active model backend: "benchmark" (default; deployed 4-branch FusionNet)
+        # or "observational" (ObservationalFusionNet H3/P2), selected by env flag.
+        # The benchmark path stays the default and is untouched when the flag is unset.
+        self.model_backend: str = os.environ.get("CLIMATERICE_MODEL_BACKEND", "benchmark").strip().lower()
+        self.obs_model: Any = None
+        self.obs_branch_scalers: Optional[Dict[str, Any]] = None
+        self.response_empirical_coverage: float = 95.83
+        self.response_uncalibrated_coverage: float = 44.44
+        self.active_model_version: Optional[str] = None
+
         self.load_artifacts()
 
     @classmethod
@@ -134,8 +144,117 @@ class ModelService:
                     logger.info("Loaded season estimates from %s", se_path)
                     break
 
+            # Flag-gated observational backend (runs last so its calibration
+            # constants override the benchmark C1 values when active)
+            if self.model_backend == "observational":
+                self._load_observational_artifacts()
+
         except Exception as e:
             logger.warning("Artifact loading partial or deferred: %s", e)
+
+    def _load_observational_artifacts(self) -> None:
+        """Loads the H3 observational checkpoint (P2 panel) for the flag-gated backend.
+
+        Artifacts (in models/saved_models/):
+          observational_fusion_net_extended.pt   -- H3 checkpoint (train <=2018,
+            val 2019-20, test 2021-2024: MAE 0.3454, R2 0.5666)
+          observational_branch_scalers.joblib    -- per-branch StandardScalers.
+            The evaluation script (scripts/run_extended_evaluation_v2.py) used
+            branch scalers but persisted only the flat one; these are refit
+            deterministically on train <=2018 and verified to reproduce H3.
+          observational_calibration.json         -- C3 recalibration artifact
+            (cal <=2020, n=379): m = 3.1339, coverage 56.25% -> 85.42%.
+        """
+        try:
+            from scripts.train_observational_models import ObservationalFusionNet, FEATURE_GROUPS
+
+            scalers_path = os.path.join(self.models_dir, "observational_branch_scalers.joblib")
+            weights_path = os.path.join(self.models_dir, "observational_fusion_net_extended.pt")
+            if not (os.path.exists(scalers_path) and os.path.exists(weights_path)):
+                logger.warning("Observational backend requested but artifacts missing; benchmark path remains")
+                return
+            self.obs_branch_scalers = joblib.load(scalers_path)
+            branch_dims = {b: len(cols) for b, cols in FEATURE_GROUPS.items()}
+            net = ObservationalFusionNet(branch_dims=branch_dims, embed_dim=16, dropout=0.20)
+            net.load_state_dict(torch.load(weights_path, map_location=self.device))
+            net.to(self.device)
+            self.obs_model = net
+
+            cal_path = os.path.join(self.models_dir, "observational_calibration.json")
+            if os.path.exists(cal_path):
+                with open(cal_path, "r", encoding="utf-8") as f_cal:
+                    cal = json.load(f_cal)
+                self.conformal_multiplier = float(cal.get("multiplier_m", 3.1339))
+                self.calibrated_coverage_pct = float(cal.get("coverage_after_pct", 85.42))
+                self.response_uncalibrated_coverage = float(cal.get("coverage_before_pct", 56.25))
+                self.calibration_method = (
+                    "Normalized Split-Conformal (target 90%) - P2 panel, calibration <=2020 (n=379)"
+                )
+            self.active_model_version = (
+                "ObservationalFusionNet H3 (P2 panel, train <=2018) + split-conformal m=3.1339"
+            )
+            logger.info(
+                "Observational backend active: m=%.4f, calibrated held-out coverage=%.2f%%",
+                self.conformal_multiplier, self.calibrated_coverage_pct,
+            )
+        except Exception as e:
+            logger.warning("Observational artifact loading failed, benchmark path remains: %s", e)
+            self.obs_model = None
+
+    def _observational_inference(self, req: PredictionRequest):
+        """Runs ObservationalFusionNet (22 features, 3 branches) with MC dropout.
+
+        The 5 satellite fields of the 26-field request are dropped (the
+        observational schema has no satellite branch). irrigation_ratio --
+        the 5th historical feature -- comes from the request, else from the
+        district profile in REPRESENTATIVE_DISTRICTS, else a 0.75 default.
+        Uses 40 MC passes and the same per-payload deterministic seeding as
+        the benchmark path so repeated calls are reproducible.
+        """
+        from scripts.train_observational_models import FEATURE_GROUPS, ALL_FEATURES
+
+        irrigation = req.irrigation_ratio
+        if irrigation is None:
+            irrigation = 0.75
+            try:
+                from src.data.ingestion import REPRESENTATIVE_DISTRICTS
+                for d in REPRESENTATIVE_DISTRICTS:
+                    if d["district_name"].strip().lower() == req.district_name.strip().lower():
+                        irrigation = float(d["irrigation_ratio"])
+                        break
+            except Exception:
+                pass
+
+        values = {f: float(getattr(req, f)) for f in ALL_FEATURES if f != "irrigation_ratio"}
+        values["irrigation_ratio"] = float(irrigation)
+
+        inputs_torch = {}
+        for branch, cols in FEATURE_GROUPS.items():
+            arr = np.array([[values[c] for c in cols]], dtype=np.float64)
+            arr = self.obs_branch_scalers[branch].transform(arr)
+            inputs_torch[branch] = torch.tensor(arr, dtype=torch.float32).to(self.device)
+
+        import hashlib
+        raw_signature = json.dumps([round(values[f], 4) for f in ALL_FEATURES]).encode("utf-8")
+        seed = int(hashlib.sha256(raw_signature).hexdigest()[:8], 16)
+        torch.manual_seed(seed)
+        if torch.cuda.is_available():
+            torch.cuda.manual_seed_all(seed)
+
+        self.obs_model.train()  # dropout active for MC sampling
+        preds, attns = [], []
+        with torch.no_grad():
+            for _ in range(40):
+                p, w = self.obs_model(inputs_torch)
+                preds.append(p.cpu().numpy())
+                attns.append(w.cpu().numpy())
+        preds = np.array(preds)
+        mean_attn = np.array(attns).mean(axis=0)[0]
+        attn_dict = {
+            name: round(float(mean_attn[i]), 4)
+            for i, name in enumerate(self.obs_model.branch_names)
+        }
+        return round(float(preds.mean()), 2), round(float(preds.std()), 3), attn_dict
 
     def predict(self, req: PredictionRequest) -> PredictionResponse:
         """Executes full multimodal inference pipeline with calibrated uncertainty."""
@@ -155,7 +274,13 @@ class ModelService:
         raw_dict = req.model_dump()
         df_single = pd.DataFrame([raw_dict])
 
-        if self.pipeline is None or self.fusion_model is None:
+        if self.model_backend == "observational" and self.obs_model is not None:
+            pred_yield, std_uncert, attn_dict = self._observational_inference(req)
+            # The SHAP explainer is fitted on the 26-feature benchmark schema
+            # (paper-facts X1: benchmark model importances); it is not valid for
+            # the observational model, so factor attributions are omitted here.
+            pos_factors, neg_factors = [], []
+        elif self.pipeline is None or self.fusion_model is None:
             # Fallback heuristic calculation if models still training
             base = 2.85
             ndvi_contrib = (req.ndvi_mean - 0.60) * 2.0
@@ -229,13 +354,13 @@ class ModelService:
             calibrated_multiplier_m=self.conformal_multiplier,
             calibration_method=self.calibration_method,
             calibrated_heldout_coverage_pct=self.calibrated_coverage_pct,
-            empirical_coverage_pct=95.83,
-            observational_coverage_pct=44.44,
+            empirical_coverage_pct=self.response_empirical_coverage,
+            observational_coverage_pct=self.response_uncalibrated_coverage,
             risk_level=risk,
             modality_attention_weights=attn_dict,
             top_positive_factors=pos_factors,
             top_negative_factors=neg_factors,
-            model_version=self.metadata.get("model_name", "ClimateRice-FusionNet v1.0.0"),
+            model_version=self.active_model_version or self.metadata.get("model_name", "ClimateRice-FusionNet v1.0.0"),
         )
 
     def get_locations(self) -> List[Dict[str, Any]]:

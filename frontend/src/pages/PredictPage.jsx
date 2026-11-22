@@ -1296,10 +1296,10 @@ export default function PredictPage({ locations = [] }) {
                 <div className="py-2.5 flex items-center justify-between">
                   <div>
                     <span className="text-stone-600 font-medium block">Calibrated Observational Coverage</span>
-                    <span className="text-[10px] text-stone-400">Held-out real DES APY test set (n=36)</span>
+                    <span className="text-[10px] text-stone-400">Held-out DES APY 2021–2024 (n=48), P2 panel</span>
                   </div>
                   <span className="font-mono font-bold text-emerald-800">
-                    {result.calibrated_heldout_coverage_pct || 83.33}% (30/36)
+                    {result.calibrated_heldout_coverage_pct || 85.42}% (41/48)
                   </span>
                 </div>
                 <div className="py-2.5 flex items-center justify-between">
@@ -1314,10 +1314,10 @@ export default function PredictPage({ locations = [] }) {
                 <div className="py-2.5 flex items-center justify-between">
                   <div>
                     <span className="text-stone-600 font-medium block">Uncalibrated Baseline Coverage</span>
-                    <span className="text-[10px] text-stone-400">Before conformal recalibration (m=1.05)</span>
+                    <span className="text-[10px] text-stone-400">Before conformal recalibration (P2 holdout, 2021–2024)</span>
                   </div>
                   <span className="font-mono font-bold text-amber-800 line-through">
-                    44.44% (16/36)
+                    {result.observational_coverage_pct || 56.25}% (27/48)
                   </span>
                 </div>
                 <div className="py-2.5 flex items-center justify-between">
@@ -1333,7 +1333,7 @@ export default function PredictPage({ locations = [] }) {
                   <span>Conformal Uncertainty Recalibration Active</span>
                 </div>
                 <p>
-                  Intervals recalibrated on observational data (target 90%, held-out coverage {result.calibrated_heldout_coverage_pct || 83.33}%, n=36). 5-split cross-validation coverage: 90.56% &plusmn; 2.83% (mean m = 2.58 &plusmn; 0.05).
+                  Intervals recalibrated on the P2 observational panel (normalized split-conformal, target 90%): multiplier m = {result.calibrated_multiplier_m || 3.1339} from calibration &le;2020 (n=379); held-out coverage {result.calibrated_heldout_coverage_pct || 85.42}% on 2021–2024 (n=48).
                 </p>
               </div>
 
@@ -1577,7 +1577,7 @@ export default function PredictPage({ locations = [] }) {
                 <span>4. Epistemic Uncertainty via MC Dropout</span>
               </h4>
               <p className="text-stone-600 leading-relaxed">
-                Executes 40 stochastic forward inference passes at test time to compute predictive intervals: [&mu; &plusmn; 1.05&sigma;] yielding a statistically justified <strong>95.83% empirical test coverage</strong> on unseen future seasons.
+                Executes 40 stochastic forward inference passes at test time to compute predictive intervals, widened by the split-conformal multiplier m = 3.1339 (calibrated on the P2 observational panel, &le;2020): <strong>85.42% held-out coverage</strong> on 2021–2024 DES APY records.
               </p>
             </div>
 
