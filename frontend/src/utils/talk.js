@@ -92,14 +92,19 @@ const WATER_WORD = {
 // ---------------------------------------------------------------------------
 // NOTE: \b is ASCII-only in JS, so Indic-script words are alternated WITHOUT
 // \b — otherwise "దిగుబడి" never matches. Latin words keep \b.
+// Latin keywords are STEMS with a leading \b only — a trailing \b after the
+// group silently broke every inflected form ("irrigat\b" never matches
+// "irrigation", "yield\b" never matches "yields"). Prefix matching fixes
+// plurals/-ing/-tion forms; the leading \b still blocks mid-word hits
+// (e.g. "rain" inside "grain" or "training").
 const TOPIC_KEYWORDS = [
-  ['compare', /\b(actual|recorded|asli|tulna|compare|sahi|galat)\b|వాస్తవం/],
-  ['pest', /\b(pest|keet|blast|hopper|blight|rog|bimari|scout)\b|తెగుళ్లు|తెగులు/],
-  ['water', /\b(water|paani|pani|irrigat|sinchai|paani kab|watering)\b|నీరు/],
-  ['rainfall', /\b(rain|rainfall|barish|varsha|barsaat|barsat)\b|వర్షపాతం/],
-  ['dry', /\b(dry spell|dry days|sukha|sookha|sukha daur)\b|వర్షాభావ/],
-  ['heat', /\b(heat|hot days|garmi|tapman|temperature)\b|వేడి/],
-  ['yield', /\b(yield|harvest|paidavaar|upaj|fasal|production|kitni hogi|kharif)\b|దిగుబడి/],
+  ['compare', /\b(actual|recorded|asli|tulna|compar|sahi|galat)|వాస్తవం/],
+  ['pest', /\b(pest|keet|blast|hopper|blight|rog|bimari|scout)|తెగుళ్లు|తెగులు/],
+  ['water', /\b(water|paani|pani|irrigat|sinchai|neeru|watering)|నీరు/],
+  ['rainfall', /\b(rain|barish|varsha|barsaat|barsat)|వర్షపాతం/],
+  ['dry', /\b(dry|sukha|sookha)|వర్షాభావ/],
+  ['heat', /\b(heat|hot|garmi|tapman|temperatur)|వేడి/],
+  ['yield', /\b(yield|harvest|paidavaar|upaj|fasal|production|kitni hogi|kharif)|దిగుబడి/],
 ];
 
 export function parseQuestion(text, districts, currentDistrict, currentYear) {
