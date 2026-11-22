@@ -1,6 +1,6 @@
 /**
  * Verified District Environmental & Agricultural Profiles
- * Grounded in 15-20 years of DES APY and NASA POWER records across 24 representative districts.
+ * Grounded in 15-20 years of DES APY and NASA POWER records across 25 representative districts.
  */
 
 export const DISTRICT_PROFILES = {

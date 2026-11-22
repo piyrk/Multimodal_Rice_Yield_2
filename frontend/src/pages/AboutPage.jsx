@@ -189,7 +189,7 @@ export default function AboutPage({ onNavigate }) {
               </li>
               <li className="flex items-center space-x-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-700"></span>
-                <span><strong>Rajesh</strong> — Data Pipeline Harmonization &amp; Agricultural Research</span>
+                <span><strong>Rajesh Nemalipuri</strong> — Data Pipeline Harmonization &amp; Agricultural Research</span>
               </li>
               <li className="flex items-center space-x-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-700"></span>

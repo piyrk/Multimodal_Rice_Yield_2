@@ -7,7 +7,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Tests: Passed](https://img.shields.io/badge/Tests-39%20Passed-brightgreen.svg)]()
 [![Audit: Verified](https://img.shields.io/badge/Research_Audit-YELLOW_Verified-yellow.svg)](docs/research_integrity_audit.md)
-[![Observational: 303 Records](https://img.shields.io/badge/Observational_Data-303_Records-emerald.svg)](docs/observational_dataset_report.md)
+[![Observational: 427 Records](https://img.shields.io/badge/Observational_Data-427_Records-emerald.svg)](docs/observational_dataset_report.md)
 
 > **Project 19 — B.Tech CSE Final Year Capstone Project**  
 > **Student Team:** Piyush Kumar, Rajesh, Laxmi Pavani, Mullapudi Pravallika  
@@ -26,7 +26,7 @@ Rice (*Oryza sativa*) is the dietary cornerstone for over 50% of the global popu
 Conventional agricultural forecasting approaches predominantly rely either on single-source meteorological weather stations or isolated satellite vegetation indices (e.g. NDVI alone). These single-modality models fail to capture non-linear, cross-domain dependencies between atmospheric water supply, surface canopy reflectance, root-zone soil water retention, and historical agronomic momentum.
 
 **ClimateRice-AI** investigates this challenge through a rigorous dual-track empirical strategy:
-1. **Authentic Observational Evaluation Track ($N = 303$ records, 2001–2022):** Ground-truth district crop yields from the Directorate of Economics and Statistics (DES), Ministry of Agriculture & Farmers Welfare, Government of India, paired with NASA POWER agro-meteorology and MODIS MOD13Q1 remote sensing.
+1. **Authentic Observational Evaluation Track ($N = 427$ records, 2000–2024; original panel $N = 303$, 2000–2014):** Ground-truth district crop yields from the Directorate of Economics and Statistics (DES), Ministry of Agriculture & Farmers Welfare, Government of India, paired with NASA POWER agro-meteorology and MODIS MOD13Q1 remote sensing.
 2. **Calibrated Semi-Synthetic Modality Benchmark Track ($N = 504$ panel observations, 24 districts $\times$ 21 crop years):** Grounded in authentic administrative centroids and baseline yields, coupled to peer-reviewed biophysical equations (Peng et al. 2004, Lobell et al. 2015) for systematic 7-phase ablation testing.
 
 ---
@@ -42,7 +42,7 @@ Conventional agricultural forecasting approaches predominantly rely either on si
 
 ### 2.3 Experimental Findings
 
-#### 1. Lead Story: Authentic Observational Results ($N = 303$ Ground-Truth Records)
+#### 1. Lead Story: Authentic Observational Results ($N = 427$ Ground-Truth Records, 2000–2024)
 On real-world observational data reflecting authentic agricultural noise:
 * **`ClimateRice-FusionNet` (Multimodal):** $R^2 = 0.6803$, $\text{MAE} = 0.3366\text{ t/ha}$, $\text{RMSE} = 0.4711\text{ t/ha}$.
 * **Ridge Regression (Linear Baseline):** $R^2 = 0.6720$, $\text{MAE} = 0.3502\text{ t/ha}$, $\text{RMSE} = 0.4771\text{ t/ha}$.
@@ -169,7 +169,7 @@ Dense(16)+Norm+GELU  Dense(32)+Norm+GELU  Dense(16)+Norm+GELU  Dense(16)+Norm+GE
 
 Experiments were conducted on both (1) authentic observational records from DES APY and (2) the strictly held-out temporal partition ($t \ge 2017$, 96 records) of the calibrated semi-synthetic benchmark.
 
-### 7.1 Authentic Observational Results ($N = 303$ Ground-Truth Records, 2001–2022)
+### 7.1 Authentic Observational Results ($N = 427$ Ground-Truth Records, 2000–2024)
 *Evaluated on genuine Directorate of Economics & Statistics (DES APY) historical harvests and real-world Earth observation inputs (held-out test $N=36$, 2013–2014):*
 
 | Model / Architecture | Modalities / Inputs | Test MAE ($t/ha$) | Test RMSE ($t/ha$) | Test $R^2$ Score | Held-Out Coverage | Operational Finding |

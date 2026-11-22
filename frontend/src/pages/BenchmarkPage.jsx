@@ -134,8 +134,9 @@ export default function BenchmarkPage() {
           <p className="text-xs text-stone-600 leading-relaxed mt-2">
             The original 303-record panel (2000–2014) was extended with <strong>recorded</strong> DES yields from the
             India Data Portal APY compilation (+100 district-years to 2022) and its UPAG compilation (+24 to 2024,
-            admitted only after 96/96 cross-source agreement on 2015–2022). Twelve districts now run continuously
-            2000–2024. Extension gates: vintage match on all 216 overlapping district-years, (district, state)
+            admitted only after 96/96 cross-source agreement on 2015–2022). Twelve districts now span 2000–2024
+            (ten with complete annual records — Karnal lacks 2013–2014 and Nalgonda 2012 in the published
+            sources). Extension gates: vintage match on all 216 overlapping district-years, (district, state)
             identity joins, and complete recorded lag chains — no simulated yields anywhere in the panel.
           </p>
         </div>

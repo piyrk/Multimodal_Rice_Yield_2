@@ -11,7 +11,7 @@ export default function VivaGuidePage() {
     },
     {
       q: "2. Is your dataset real observational data or a calibrated benchmark?",
-      a: "The project evaluates both tracks rigorously: (1) An authentic observational dataset (DES APY, N=303 records, 2001–2022) where FusionNet achieves R² = 0.680 and MAE = 0.337 t/ha, reflecting real-world agricultural noise. (2) A calibrated semi-synthetic benchmark (N = 504 rows across 24 districts and 21 crop years) where spatial centroids, agro-ecological classifications, and baseline yields are grounded in authentic DES GoI and ICRISAT records, coupled to peer-reviewed biophysical response functions (Peng et al. 2004, Lobell et al. 2015) for Controlled Modality Ablation (Exp A–G)."
+      a: "The project evaluates both tracks rigorously: (1) An authentic observational dataset (DES APY, N=303 records, 2000–2014; extended panel N=427, 2000–2024) where FusionNet achieves R² = 0.680 and MAE = 0.337 t/ha, reflecting real-world agricultural noise. (2) A calibrated semi-synthetic benchmark (N = 504 rows across 24 districts and 21 crop years) where spatial centroids, agro-ecological classifications, and baseline yields are grounded in authentic DES GoI and ICRISAT records, coupled to peer-reviewed biophysical response functions (Peng et al. 2004, Lobell et al. 2015) for Controlled Modality Ablation (Exp A–G)."
     },
     {
       q: "3. How did you prevent data leakage in your agricultural time-series?",
