@@ -48,7 +48,7 @@ export default function HomePage({ onNavigate }) {
     {
       num: '04',
       title: 'Explainability + Uncertainty',
-      desc: 'Monte Carlo Dropout generates predictive intervals alongside local SHAP feature influences.',
+      desc: 'Monte Carlo Dropout generates predictive intervals, and cross-modal attention weights show how the deployed model weighed each input branch (SHAP analysis for the benchmark model is on the Explainability page).',
     },
   ];
 

@@ -36,6 +36,9 @@ export default function ExplainabilityPage() {
         <p className="text-sm text-stone-600 mt-1 max-w-3xl">
           Demystifying multimodal deep representations and decision trees using game-theoretically grounded Shapley Additive Explanations (SHAP) across 26 environmental indicators.
         </p>
+        <p className="text-xs text-amber-800 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 mt-3 max-w-3xl">
+          Scope note: this SHAP analysis belongs to the earlier 4-branch benchmark model (26 features, incl. satellite). The deployed observational model (22 features, 3 branches) does not emit SHAP values — it explains each prediction with the attention weights shown on the Predict page. Both are reported, never merged.
+        </p>
       </div>
 
       {/* Aggregate Modality Share */}

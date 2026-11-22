@@ -86,6 +86,11 @@ export default function PredictPage({ locations = [] }) {
   // References for race-condition prevention across rapid dropdown clicks
   const activeAbortRef = useRef(null);
   const fetchSequenceRef = useRef(0);
+  // Latest form state for async handlers: dropdown handlers must read the
+  // values the user just chose, not the stale closure of an earlier render
+  // (rapid district+year changes otherwise race and can stamp a wrong year).
+  const formDataRef = useRef(formData);
+  formDataRef.current = formData;
 
   // Load the district profile for the form.
   // F3 fix: the DES APY-synced local profile (districtProfiles.js) is the
@@ -104,7 +109,7 @@ export default function PredictPage({ locations = [] }) {
       return;
     }
 
-    const targetYear = cropYear ?? formData.crop_year;
+    const targetYear = cropYear ?? formDataRef.current.crop_year;
     if (SEASON_ESTIMATES?.[String(targetYear)]?.[distName]) {
       if (activeAbortRef.current) {
         activeAbortRef.current.abort();
@@ -160,7 +165,7 @@ export default function PredictPage({ locations = [] }) {
 
       const mergedLocal = {
         ...localProfile,
-        crop_year: cropYear ?? localProfile.crop_year ?? formData.crop_year,
+        crop_year: cropYear ?? formDataRef.current.crop_year,
         season,
       };
 
@@ -206,7 +211,7 @@ export default function PredictPage({ locations = [] }) {
       const mergedData = {
         district_name: profile.district_name,
         state_name: profile.state_name,
-        crop_year: profile.crop_year,
+        crop_year: cropYear ?? profile.crop_year,
         season: profile.season,
         // Weather
         rainfall_cumulative_mm: profile.rainfall_cumulative_mm,
@@ -388,7 +393,7 @@ export default function PredictPage({ locations = [] }) {
       });
     }
 
-    fetchProfile(distName, formData.crop_year, formData.season);
+    fetchProfile(distName, formDataRef.current.crop_year, formDataRef.current.season);
   };
 
   // State change: select first district of that state and immediately populate
@@ -413,7 +418,7 @@ export default function PredictPage({ locations = [] }) {
       setProfileError(null);
     } else {
       setProfileError(null);
-      fetchProfile(formData.district_name, formData.crop_year, 'Kharif');
+      fetchProfile(formDataRef.current.district_name, formDataRef.current.crop_year, 'Kharif');
     }
   };
 
@@ -427,8 +432,8 @@ export default function PredictPage({ locations = [] }) {
     const yearNum = parseInt(newYear, 10);
     setFormData((prev) => ({ ...prev, crop_year: yearNum }));
 
-    if (formData.season === 'Kharif') {
-      fetchProfile(formData.district_name, yearNum, 'Kharif');
+    if (formDataRef.current.season === 'Kharif') {
+      fetchProfile(formDataRef.current.district_name, yearNum, 'Kharif');
     }
   };
 
@@ -472,7 +477,7 @@ export default function PredictPage({ locations = [] }) {
         }));
         setDataSourceType('preset');
       }
-      fetchProfile(preset.targetDistrict, formData.crop_year, formData.season, (profileData) => ({
+      fetchProfile(preset.targetDistrict, formDataRef.current.crop_year, formDataRef.current.season, (profileData) => ({
         ...profileData,
         ...preset.updates(profileData),
       }));
@@ -1342,7 +1347,7 @@ export default function PredictPage({ locations = [] }) {
                 <div>
                   <h3 className="text-sm font-bold text-stone-900">Why this prediction?</h3>
                   <p className="text-[11px] text-stone-500">
-                    Features influencing the model prediction (marginal SHAP attributions; not proof of physical causation).
+                    How the deployed model weighs its inputs — the attention weights below. Per-feature SHAP attributions were computed for the earlier benchmark model and are reported on the Explainability page.
                   </p>
                 </div>
 
@@ -1371,6 +1376,12 @@ export default function PredictPage({ locations = [] }) {
                       </span>
                     </div>
                   ))}
+
+                  {!result.top_positive_factors?.length && !result.top_negative_factors?.length && (
+                    <p className="text-[11px] text-stone-500 bg-stone-50 border border-stone-200 rounded-lg p-2.5">
+                      The deployed observational model (22 features, 3 branches) does not emit per-feature SHAP values, so no factor list is shown here — its explanation is the attention weighting below. SHAP attributions for the earlier 4-branch benchmark model are on the Explainability page.
+                    </p>
+                  )}
                 </div>
 
                 {/* Attention Weights */}
@@ -1552,10 +1563,10 @@ export default function PredictPage({ locations = [] }) {
             <div className="p-4 rounded-xl bg-stone-50 border border-stone-200 space-y-2">
               <h4 className="font-bold text-stone-900 text-sm flex items-center space-x-2">
                 <Layers className="h-4 w-4 text-emerald-700" />
-                <span>2. 4 Modality Representation Encoders</span>
+                <span>2. Modality Representation Encoders</span>
               </h4>
               <p className="text-stone-600 leading-relaxed">
-                Heterogeneous raw variables (5 Satellite, 10 Weather, 7 Soil, 4 Historical) are projected through dedicated linear and LayerNorm layers with GELU activations to prevent feature scale domination.
+                The deployed observational model projects 22 heterogeneous variables (10 Weather, 7 Soil, 5 Historical) through dedicated linear and LayerNorm encoders with GELU activations to prevent feature scale domination. The earlier benchmark model used a fourth, satellite encoder (26 variables, 4 branches).
               </p>
             </div>
 
