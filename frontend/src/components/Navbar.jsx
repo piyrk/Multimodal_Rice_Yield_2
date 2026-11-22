@@ -1,9 +1,28 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Sprout } from 'lucide-react';
 
 export default function Navbar({ activeTab, setActiveTab, healthInfo }) {
   const isOnline = healthInfo?.status === 'healthy';
-  const isChecking = healthInfo === null;
+  const isChecking = healthInfo === null || healthInfo?.status === 'waking';
+
+  // After ~4 s of checking, the backend is almost certainly cold-starting:
+  // say so honestly instead of showing a bare "Connecting..." for minutes.
+  const [slowCheck, setSlowCheck] = useState(false);
+  const checkingSince = useRef(null);
+  useEffect(() => {
+    if (isChecking) {
+      if (checkingSince.current === null) checkingSince.current = Date.now();
+      const elapsed = Date.now() - checkingSince.current;
+      if (elapsed >= 4000) {
+        setSlowCheck(true);
+        return;
+      }
+      const t = setTimeout(() => setSlowCheck(true), 4000 - elapsed);
+      return () => clearTimeout(t);
+    }
+    checkingSince.current = null;
+    setSlowCheck(false);
+  }, [isChecking, healthInfo]);
 
   const navItems = [
     { id: 'home', label: 'Home' },
@@ -65,7 +84,7 @@ export default function Navbar({ activeTab, setActiveTab, healthInfo }) {
             {isChecking ? (
               <div className="flex items-center space-x-1.5 text-stone-500 font-medium text-[11px]">
                 <span className="h-2 w-2 rounded-full bg-amber-400 animate-pulse"></span>
-                <span className="hidden sm:inline">Connecting...</span>
+                <span className="hidden sm:inline">{slowCheck ? 'Waking server… (~30–60 s)' : 'Connecting...'}</span>
               </div>
             ) : isOnline ? (
               <div className="flex items-center space-x-1.5 text-stone-700 font-medium text-[11px]">

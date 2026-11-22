@@ -6,15 +6,26 @@ const API_HOST = import.meta.env.VITE_API_URL || '';
 const BASE_URL = `${API_HOST}/api/v1`;
 
 export async function checkHealth() {
+  // Cold-start friendly: a sleeping free-tier backend can take 30-60 s to
+  // answer (or return 502/503/504 while it boots). Report that as 'waking'
+  // instead of hanging forever or flashing 'offline'.
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 25000);
   try {
-    const res = await fetch(`${BASE_URL}/health`);
+    const res = await fetch(`${BASE_URL}/health`, { signal: controller.signal });
+    if (res.status === 502 || res.status === 503 || res.status === 504) {
+      return { status: 'waking' };
+    }
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } catch (err) {
+    if (err.name === 'AbortError') return { status: 'waking' };
     return {
       status: 'offline',
       error: err.message
     };
+  } finally {
+    clearTimeout(timer);
   }
 }
 
@@ -84,15 +95,29 @@ export async function getBenchmarkData() {
 }
 
 export async function predictYield(payload) {
-  const res = await fetch(`${BASE_URL}/predict`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  });
-  if (!res.ok) {
-    const errorData = await res.json().catch(() => null);
-    const message = errorData?.detail || `Prediction server returned error ${res.status}`;
-    throw new Error(message);
+  // 90 s ceiling so a cold-starting backend shows a helpful message
+  // instead of leaving the Predict button spinning forever.
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 90000);
+  try {
+    const res = await fetch(`${BASE_URL}/predict`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      signal: controller.signal
+    });
+    if (!res.ok) {
+      const errorData = await res.json().catch(() => null);
+      const message = errorData?.detail || `Prediction server returned error ${res.status}`;
+      throw new Error(message);
+    }
+    return await res.json();
+  } catch (err) {
+    if (err.name === 'AbortError') {
+      throw new Error('The server took too long to respond — it may still be waking up from sleep (free tier). Wait a few seconds and press Predict again.');
+    }
+    throw err;
+  } finally {
+    clearTimeout(timer);
   }
-  return await res.json();
 }

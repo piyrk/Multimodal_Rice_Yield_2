@@ -33,7 +33,7 @@ export default function MapPage({ locations, onSelectDistrict }) {
           <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2 mb-3 px-1">
             <span className="text-xs font-bold text-stone-700 uppercase tracking-wider flex items-center gap-1.5">
               <MapPin className="h-4 w-4 text-emerald-700" />
-              <span>Spatial Distribution ({locations.length} Districts)</span>
+              <span>Spatial Distribution ({locations.length === 0 ? 'Loading districts…' : `${locations.length} Districts`})</span>
             </span>
             <div className="flex items-center space-x-4 text-xs font-mono">
               <div className="flex items-center space-x-1.5">
