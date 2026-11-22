@@ -185,34 +185,65 @@ def maybe_alert(data, old_est):
     chat = os.environ.get("TELEGRAM_CHAT_ID")
     if not token or not chat:
         return "alerts skipped (Telegram env not set)"
-    lines = []
+    moves = []
     for (y, d), old in old_est.items():
         new = data[y][d].get("precomputed_estimate_t_ha")
         if old is not None and new is not None and abs(new - old) >= 0.25:
-            lines.append(f"{d} Kharif {y}: estimate {old} -> {new} t/ha")
+            moves.append(f"- {d} (Kharif {y}): expected harvest changed from "
+                         f"{old} to {new} tonnes per hectare")
     critical, watch = [], []
     for d, r in data.get("2026", {}).items():
         anom, dry = r["rainfall_anomaly_pct"], r["consecutive_dry_days"]
         if anom <= -20:
-            critical.append(f"{d} Kharif 2026 WATER-CRITICAL: rainfall {anom}% vs normal, "
-                            f"longest dry spell {dry} days")
+            critical.append((d, anom, dry))
         elif dry >= 12:
-            watch.append(f"{d} ({dry} dry days, rain {anom}%)")
-    if not lines and not critical and not watch:
+            watch.append((d, dry))
+    if not moves and not critical and not watch:
         return "no alert conditions met"
-    parts = ["ClimateRice-AI season refresh - changes worth knowing:"]
-    # After October the Kharif season is harvested: the same numbers are a
-    # season record to learn from, not a live action alert.
-    if date.today().month > 10:
-        parts.append("Kharif 2026 is complete - this is the season record, not a live action alert.")
-    parts += lines
-    parts += critical
+    # Plain-language report: the reader is a person, not a developer.
+    # After October the Kharif season is harvested, so the same numbers
+    # are a final season summary, not a live action alert.
+    season_over = date.today().month > 10
+    parts = ["ClimateRice-AI - Kharif 2026 season report"]
+    if season_over:
+        parts.append("The season is over. This is the final summary - "
+                     "nothing urgent, nothing to do now.")
+    if critical:
+        parts.append("")
+        parts.append("Real problem - much less rain than normal:")
+        for d, anom, dry in critical:
+            line = f"- {d}: {abs(round(anom))}% less rain than normal"
+            if dry >= 12:
+                line += f", and {dry} days in a row with no rain"
+            parts.append(line + ".")
     if watch:
-        parts.append("Long dry spells despite normal-or-better rainfall "
-                     "(protective irrigation mattered more than total rain): "
-                     + ", ".join(watch))
+        parts.append("")
+        parts.append("Rain was enough in total, but it stopped for many "
+                     "days in the middle - farmers here still needed "
+                     "irrigation in a good-rain year:")
+        parts.append(", ".join(f"{d} ({dry} days with no rain)" for d, dry in watch))
+    if moves:
+        parts.append("")
+        parts.append("Expected harvest changed:")
+        parts += moves
+    parts.append("")
+    if critical and watch:
+        names = ", ".join(d for d, _, _ in critical[:3])
+        parts.append(f"In short: only {names} had a real rain shortage. "
+                     "Everywhere else the rain was enough - it just came "
+                     "with long dry gaps.")
+    elif critical:
+        names = ", ".join(d for d, _, _ in critical[:3])
+        parts.append(f"In short: {names} had a real rain shortage; "
+                     "other districts were fine.")
+    elif watch:
+        parts.append("In short: rain was enough almost everywhere - the "
+                     "problem was timing, not quantity.")
+    else:
+        parts.append("In short: no water problems - only harvest "
+                     "estimates changed.")
     text = "\n".join(parts)
-    n_lines = len(lines) + len(critical) + (1 if watch else 0)
+    n_lines = len(moves) + len(critical) + (1 if watch else 0)
     try:
         req = urllib.request.Request(
             f"https://api.telegram.org/bot{token}/sendMessage",
