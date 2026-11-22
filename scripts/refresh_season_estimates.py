@@ -72,11 +72,48 @@ def climatology(param):
     return {md: {p: sum(vs) / len(vs) for p, vs in ps.items()}
             for md, ps in acc.items()}
 
-def season_features(param, clim, year, rain_normal, temp_normal):
+FORECAST_URL = "https://api.open-meteo.com/v1/forecast"
+
+def fetch_forecast(lat, lon):
+    """Open-Meteo 16-day daily forecast mapped onto the POWER parameter names.
+    Returns {date: {param: value}}; empty dict on any failure (the caller then
+    falls back to climatology, and the counts say so)."""
+    q = (f"?latitude={lat}&longitude={lon}"
+         "&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,"
+         "precipitation_sum,relative_humidity_2m_mean,shortwave_radiation_sum"
+         "&timezone=Asia%2FKolkata&forecast_days=16")
+    try:
+        with urllib.request.urlopen(FORECAST_URL + q, timeout=60) as r:
+            daily = json.load(r)["daily"]
+        out = {}
+        for i, ds in enumerate(daily["time"]):
+            y, m, dd = (int(x) for x in ds.split("-"))
+            out[date(y, m, dd)] = {
+                "PRECTOTCORR": float(daily["precipitation_sum"][i]),
+                "T2M_MAX": float(daily["temperature_2m_max"][i]),
+                "T2M_MIN": float(daily["temperature_2m_min"][i]),
+                "T2M": float(daily["temperature_2m_mean"][i]),
+                "RH2M": float(daily["relative_humidity_2m_mean"][i]),
+                "ALLSKY_SFC_SW_DWN": float(daily["shortwave_radiation_sum"][i]),
+            }
+        return out
+    except Exception as e:
+        print(f"  forecast unavailable ({e}); climatology fallback", flush=True)
+        return {}
+
+def season_features(param, clim, year, rain_normal, temp_normal, forecast=None, today=None):
+    """Day sources, in priority order: NASA POWER observed -> Open-Meteo
+    forecast (future days inside the 16-day horizon) -> district climatology.
+    Returns (features, observed_days, forecast_days, climatology_days)."""
+    today = today or date.today()
+    forecast = forecast or {}
     days = window(year)
-    rows, filled = [], 0
+    rows, filled, fc_days = [], 0, 0
     for d in days:
         v = day_vals(param, d)
+        if v is None and d >= today and d in forecast:
+            v = forecast[d]
+            fc_days += 1
         if v is None:
             v = clim[(d.month, d.day)]
             filled += 1
@@ -99,7 +136,7 @@ def season_features(param, clim, year, rain_normal, temp_normal):
         "relative_humidity_pct": round(sum(r["RH2M"] for r in rows) / len(rows), 2),
         "solar_radiation_mj_m2": round(sum(r["ALLSKY_SFC_SW_DWN"] for r in rows) / len(rows), 2),
     }
-    return feats, len(days) - filled, filled
+    return feats, len(days) - filled - fc_days, fc_days, filled
 
 def predict(payload, tries=8):
     body = json.dumps(payload).encode()
@@ -142,6 +179,7 @@ def main():
     report = []
     districts = list(data["2025"].keys())
     obs_counts, fill_counts = {2025: [], 2026: []}, {2025: [], 2026: []}
+    fc_counts = {2025: [], 2026: []}
     gate_flags = []
     npred = 0
     pending = []
@@ -154,8 +192,13 @@ def main():
         clim = climatology(pull_cached(dist, lat, lon, "20000601", "20141031"))
         rain_normal = row25["rainfall_cumulative_mm"] / (1 + row25["rainfall_anomaly_pct"] / 100)
         temp_normal = row25["temp_mean_deg_c"] - row25["temp_anomaly_deg_c"]
+        forecast = {}
+        if date.today() <= date(2026, 10, 31):
+            forecast = fetch_forecast(lat, lon)
         for year, row in ((2025, row25), (2026, row26)):
-            feats, valid, filled = season_features(seasons, clim, year, rain_normal, temp_normal)
+            feats, valid, fc, filled = season_features(
+                seasons, clim, year, rain_normal, temp_normal,
+                forecast=forecast if year == 2026 else None)
             if year == 2025:
                 checks = [
                     ("rainfall_cumulative_mm", 0.02), ("temp_mean_deg_c", 0.3),
@@ -171,9 +214,15 @@ def main():
                     if abs(feats[k] - row[k]) > 3:
                         gate_flags.append(f"{dist} 2025 {k}: shipped {row[k]} vs recomputed {feats[k]}")
             row.update(feats)
-            row["weather_provenance"] = (f"NASA POWER daily {year} (valid {valid}/153 d, "
-                                         f"tail-filled {filled} d)")
+            if fc:
+                row["weather_provenance"] = (
+                    f"NASA POWER daily {year} (valid {valid}/153 d, "
+                    f"forecast-blended {fc} d, climatology-filled {filled} d)")
+            else:
+                row["weather_provenance"] = (f"NASA POWER daily {year} (valid {valid}/153 d, "
+                                             f"tail-filled {filled} d)")
             obs_counts[year].append(valid); fill_counts[year].append(filled)
+            fc_counts[year].append(fc)
             payload = {k: v for k, v in row.items() if k not in (
                 "weather_provenance", "satellite_provenance", "soil_provenance",
                 "historical_provenance", "precomputed_estimate_t_ha",
@@ -210,6 +259,7 @@ def main():
         "generated_on": today.strftime("%d %b %Y"),
         "season_days_total": 153,
         "days_observed": {str(y): min(obs_counts[y]) for y in (2025, 2026)},
+        "forecast_days": {str(y): max(fc_counts[y]) for y in (2025, 2026)},
         "tail_filled_days": {str(y): max(fill_counts[y]) for y in (2025, 2026)},
         "satellite_note": "Satellite features are district climatology carried forward, not measured for the season.",
     }

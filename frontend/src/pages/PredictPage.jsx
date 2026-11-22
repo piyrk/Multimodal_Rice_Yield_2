@@ -645,7 +645,7 @@ export default function PredictPage({ locations = [] }) {
           </div>
           {SEASON_META && (
             <div className="text-[11px] text-amber-800">
-              Weather inputs: NASA POWER &bull; Data as of {SEASON_META.generated_on} &bull; Kharif 2025: {SEASON_META.days_observed['2025']}/{SEASON_META.season_days_total} days observed &bull; Kharif 2026: {SEASON_META.days_observed['2026']}/{SEASON_META.season_days_total} observed, {SEASON_META.tail_filled_days['2026']} days climatology-filled
+              Weather inputs: NASA POWER &bull; Data as of {SEASON_META.generated_on} &bull; Kharif 2025: {SEASON_META.days_observed['2025']}/{SEASON_META.season_days_total} days observed &bull; Kharif 2026: {SEASON_META.days_observed['2026']}/{SEASON_META.season_days_total} observed{(SEASON_META.forecast_days?.['2026'] ?? 0) > 0 ? `, ${SEASON_META.forecast_days['2026']} days forecast-blended` : ''}, {SEASON_META.tail_filled_days['2026']} days climatology-filled
             </div>
           )}
           <div className="grid grid-cols-2 gap-2">
