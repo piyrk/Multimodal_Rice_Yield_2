@@ -16,11 +16,19 @@ import seasonEstimatesData from '../data/seasonEstimates.json';
 
 const { _meta: SEASON_META, ...SEASON_ESTIMATES } = seasonEstimatesData;
 
+// Kharif runs Jun-Oct; after the season ends, its advisory is a record of
+// what the season's measured weather called for, not a live instruction
+// (same gate as the Farmer Dashboard's water card).
+function isKharifSeasonOver(d = new Date()) {
+  return d.getMonth() > 9 || (d.getMonth() === 9 && d.getDate() > 31);
+}
+
 export default function AdvisoryPage({ onNavigate }) {
   const [activeSubTab, setActiveSubTab] = useState('water');
   const [selectedDistrict, setSelectedDistrict] = useState('Krishna');
 
   const profile = DISTRICT_PROFILES[selectedDistrict] || DISTRICT_PROFILES['Krishna'] || DISTRICT_PROFILES['Burdwan'];
+  const seasonOver = isKharifSeasonOver();
 
   // Latest season's measured weather (NASA POWER) overrides the static
   // profile's weather fields when a season row exists for this district.
@@ -124,7 +132,15 @@ export default function AdvisoryPage({ onNavigate }) {
       urgency = 'Critical Irrigation Recommended';
       urgencyColor = 'bg-rose-50 text-rose-800 border-rose-200';
       schedule = 'Immediate Supplementary Flooding (3–5 cm depth)';
-      recommendations.push('Root-zone moisture deficit detected due to prolonged dry spell.');
+      if (cdd >= 12 && rainAnom > 0) {
+        // A wet season can still hurt: what matters is distribution, not
+        // the total. Say so instead of claiming a plain deficit.
+        recommendations.push(`Season rainfall was above normal (+${Math.round(rainAnom)}%), but unevenly distributed: the longest rainless spell ran ${cdd} days — long enough to stress the crop at flowering. Protective irrigation, not total rainfall, was the binding constraint.`);
+      } else if (cdd >= 12) {
+        recommendations.push(`Root-zone moisture deficit: a ${cdd}-day rainless spell${rainAnom <= -20 ? ` in a season ${Math.abs(Math.round(rainAnom))}% below normal rainfall` : ''} leaves the root zone dry at sensitive stages.`);
+      } else {
+        recommendations.push(`Root-zone moisture deficit: season rainfall ${Math.abs(Math.round(rainAnom))}% below normal leaves the root zone dry at sensitive stages.`);
+      }
       recommendations.push('Prioritize irrigation during anthesis (flowering) to prevent floret sterility.');
       if (irrigRatio < 0.50) {
         recommendations.push('Rainfed vulnerability is high: apply protective surface mulch to conserve capillary soil moisture.');
@@ -209,7 +225,7 @@ export default function AdvisoryPage({ onNavigate }) {
 
       <p className="text-[11px] text-stone-500 px-1">
         {seasonRow ? (
-          <>Weather basis for the advisory below: <strong>Kharif 2026 observed season</strong> (NASA POWER, data as of {SEASON_META?.generated_on || '—'}) — dry days, rainfall anomaly, temperature and humidity are this season's measured values for {selectedDistrict}.</>
+          <>Weather basis for the advisory below: <strong>Kharif 2026 observed season{seasonOver ? ' — complete' : ''}</strong> (NASA POWER, data as of {SEASON_META?.generated_on || '—'}) — dry days, rainfall anomaly, temperature and humidity are this season's measured values for {selectedDistrict}.</>
         ) : (
           <>Weather basis: district baseline profile values for {selectedDistrict}.</>
         )}
@@ -257,13 +273,18 @@ export default function AdvisoryPage({ onNavigate }) {
       {/* Tab 1: Water & Irrigation Advisory */}
       {activeSubTab === 'water' && (
         <div className="space-y-6">
+          {seasonOver && seasonRow && (
+            <div className="p-3 bg-stone-100 border border-stone-300 rounded-lg text-[11px] text-stone-700 leading-relaxed">
+              <strong>Season complete:</strong> Kharif 2026 has ended, so the status and recommendations below are this season's record — what {selectedDistrict}'s measured weather called for — kept for review and next-season planning. No irrigation action applies after harvest.
+            </div>
+          )}
           <div className="grid md:grid-cols-3 gap-6">
             {/* Status Card */}
             <div className="bg-white border border-stone-200 rounded-xl p-5 shadow-sm space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold uppercase tracking-wider text-stone-500">Current Status</span>
                 <span className={`px-2 py-0.5 rounded-full text-[11px] font-bold border ${advice.urgencyColor}`}>
-                  {advice.urgency}
+                  {advice.urgency}{seasonOver && seasonRow ? ' — season over' : ''}
                 </span>
               </div>
               <div className="pt-1">
@@ -293,7 +314,7 @@ export default function AdvisoryPage({ onNavigate }) {
             <div className="md:col-span-2 bg-white border border-stone-200 rounded-xl p-5 shadow-sm space-y-4">
               <h3 className="text-sm font-bold text-stone-900 flex items-center space-x-2">
                 <CheckCircle2 className="h-4 w-4 text-emerald-700" />
-                <span>Field-Level Scheduling Recommendations</span>
+                <span>Field-Level Scheduling Recommendations{seasonOver && seasonRow ? ' — Season Record' : ''}</span>
               </h3>
               <ul className="space-y-2.5 text-xs text-stone-700">
                 {advice.recommendations.map((rec, idx) => (
@@ -435,6 +456,7 @@ export default function AdvisoryPage({ onNavigate }) {
               <p className="text-[11px] leading-relaxed text-amber-800 mt-0.5">
                 These indicators model weather-window conditions (temperature, humidity thresholds, rainfall anomalies, and canopy moisture) 
                 correlated with pest spore germination and insect proliferation in Indian rice ecology. They serve as prophylactic alerts for timely scouting.
+                {seasonOver && seasonRow ? ' Shown for the completed Kharif 2026 season: these are the risk windows that occurred, kept for review and next-season planning — not a live forewarning.' : ''}
               </p>
             </div>
           </div>
