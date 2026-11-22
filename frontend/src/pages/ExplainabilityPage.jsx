@@ -119,6 +119,9 @@ export default function ExplainabilityPage() {
       </div>
 
       {/* Real-World Case Studies */}
+      <p className="text-[11px] text-stone-500 leading-relaxed">
+        The two case studies below describe the earlier <strong>benchmark model</strong> (4 branches, incl. satellite) on its semi-synthetic panel — they illustrate how that model behaved. The deployed observational model's live estimates, with their wider calibrated intervals, are on the Predict and Dashboard pages.
+      </p>
       <div className="grid md:grid-cols-2 gap-5">
         <div className="bg-white border border-rose-200 rounded-2xl p-5 shadow-sm space-y-2.5">
           <div className="flex items-center gap-2 text-rose-700 font-bold text-sm">

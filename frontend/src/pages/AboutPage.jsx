@@ -21,7 +21,7 @@ export default function AboutPage({ onNavigate }) {
           About ClimateRice-AI
         </h1>
         <p className="text-base text-stone-600 leading-relaxed">
-          ClimateRice-AI is a climate-aware multimodal rice-yield prediction system integrating satellite-derived, weather, soil, and historical agricultural features.
+          ClimateRice-AI is a climate-aware multimodal rice-yield prediction system integrating weather, soil, and historical agricultural features, with measured satellite vegetation data tracked as season context.
         </p>
       </div>
 
@@ -40,7 +40,7 @@ export default function AboutPage({ onNavigate }) {
       <section className="bg-white border border-stone-200 rounded-xl p-6 sm:p-8 shadow-sm space-y-6">
         <h2 className="text-xl font-bold text-stone-900">2. Multimodal Fusion Architecture</h2>
         <p className="text-sm text-stone-600 leading-relaxed">
-          Rather than naively concatenating raw heterogenous features, <strong>ClimateRice-FusionNet</strong> routes each domain into dedicated representation encoders before computing dynamic cross-modal attention weights.
+          Rather than naively concatenating raw heterogeneous features, <strong>ClimateRice-FusionNet</strong> routes each domain into dedicated representation encoders before computing dynamic cross-modal attention weights. The diagram below shows the <strong>deployed</strong> observational model.
         </p>
 
         {/* Clean Architectural Flow Diagram */}
@@ -49,16 +49,13 @@ export default function AboutPage({ onNavigate }) {
             {/* Input Modalities */}
             <div className="space-y-3 w-36">
               <div className="bg-white border border-stone-300 p-2.5 rounded-lg text-center font-bold text-stone-800 shadow-2xs">
-                Satellite (5)
-              </div>
-              <div className="bg-white border border-stone-300 p-2.5 rounded-lg text-center font-bold text-stone-800 shadow-2xs">
                 Weather (10)
               </div>
               <div className="bg-white border border-stone-300 p-2.5 rounded-lg text-center font-bold text-stone-800 shadow-2xs">
                 Soil (7)
               </div>
               <div className="bg-white border border-stone-300 p-2.5 rounded-lg text-center font-bold text-stone-800 shadow-2xs">
-                Historical (4)
+                Historical (5)
               </div>
             </div>
 
@@ -67,14 +64,10 @@ export default function AboutPage({ onNavigate }) {
               <span>──►</span>
               <span>──►</span>
               <span>──►</span>
-              <span>──►</span>
             </div>
 
             {/* Modality Encoders */}
             <div className="space-y-3 w-40">
-              <div className="bg-emerald-50 border border-emerald-200 text-emerald-900 p-2.5 rounded-lg text-center font-semibold">
-                Satellite Encoder
-              </div>
               <div className="bg-emerald-50 border border-emerald-200 text-emerald-900 p-2.5 rounded-lg text-center font-semibold">
                 Weather Encoder
               </div>
@@ -120,6 +113,9 @@ export default function AboutPage({ onNavigate }) {
             </div>
           </div>
         </div>
+        <p className="text-xs text-stone-500 leading-relaxed">
+          Deployed model shown: 22 features across 3 encoders. The earlier benchmark model added a fourth, satellite encoder (26 features, 4 branches) — it is evaluated on the Benchmarks page and its SHAP analysis is on the Explainability page. Measured MODIS satellite data is still collected every season and shown as context on the Farmer Dashboard; the deployed model does not consume it.
+        </p>
       </section>
 
       {/* 3. Dataset & Academic Limitations */}
@@ -166,7 +162,7 @@ export default function AboutPage({ onNavigate }) {
         <h2 className="text-xl font-bold text-stone-900">4. Geographic Focus &amp; Generalization Strategy</h2>
         <div className="space-y-3 text-xs sm:text-sm text-stone-600 leading-relaxed">
           <p>
-            <strong>Project 19 Regional Origin:</strong> Grounded in the rice agro-ecosystem of <strong>Andhra Pradesh</strong>, specifically focusing on the high-intensity irrigated delta of <strong>Krishna district (Vijayawada region)</strong> and adjacent Godavari basins. Krishna represents an intensive canal-irrigated paddy system yielding 3.75 t/ha with high input adoption and vulnerability to cyclonic coastal weather.
+            <strong>Project 19 Regional Origin:</strong> Grounded in the rice agro-ecosystem of <strong>Andhra Pradesh</strong>, specifically focusing on the high-intensity irrigated delta of <strong>Krishna district (Vijayawada region)</strong> and adjacent Godavari basins. Krishna represents an intensive canal-irrigated paddy system yielding 3.75 t/ha (district baseline, DES APY average) with high input adoption and vulnerability to cyclonic coastal weather.
           </p>
           <p>
             <strong>Pan-India Generalization Benchmark:</strong> To evaluate model transferability across diverse thermal, rainfall, and soil regimes, the evaluation was scaled to a <strong>24-district benchmark panel</strong> across 11 major rice-producing states (Punjab, Haryana, West Bengal, Bihar, Uttar Pradesh, Odisha, Andhra Pradesh, Telangana, Tamil Nadu, Chhattisgarh, and Assam) encompassing 12 distinct ICAR agro-ecological zones.

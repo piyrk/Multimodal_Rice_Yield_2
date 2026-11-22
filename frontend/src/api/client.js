@@ -75,12 +75,12 @@ export async function getBenchmarkData() {
     console.warn('Benchmark API unavailable, using static benchmark results', err);
     return {
       ablation_experiments: {
-        "Exp_A_Weather_Only": { "name": "Weather Only", "mae": 0.8124, "rmse": 0.9421, "r2": 0.4217 },
-        "Exp_B_Satellite_Only": { "name": "Satellite Only", "mae": 0.5412, "rmse": 0.6834, "r2": 0.6974 },
-        "Exp_C_Soil_Only": { "name": "Soil Only", "mae": 0.6120, "rmse": 0.7241, "r2": 0.6605 },
-        "Exp_D_Weather_Soil": { "name": "Weather + Soil", "mae": 0.3368, "rmse": 0.4287, "r2": 0.8809 },
-        "Exp_E_Satellite_Weather": { "name": "Satellite + Weather", "mae": 0.3124, "rmse": 0.4012, "r2": 0.8958 },
-        "Exp_F_Biophysical_All": { "name": "Satellite + Weather + Soil", "mae": 0.2845, "rmse": 0.3621, "r2": 0.9151 },
+        "Exp_A_Weather_Only": { "name": "Weather Only", "mae": 0.9132, "rmse": 1.1055, "r2": 0.2081 },
+        "Exp_B_Satellite_Only": { "name": "Satellite Only", "mae": 0.5335, "rmse": 0.7025, "r2": 0.6802 },
+        "Exp_C_Soil_Only": { "name": "Soil Only", "mae": 0.4073, "rmse": 0.5045, "r2": 0.8351 },
+        "Exp_D_Weather_Soil": { "name": "Weather + Soil", "mae": 0.3368, "rmse": 0.4214, "r2": 0.8849 },
+        "Exp_E_Satellite_Weather": { "name": "Satellite + Weather", "mae": 0.5022, "rmse": 0.6579, "r2": 0.7195 },
+        "Exp_F_Biophysical_All": { "name": "Satellite + Weather + Soil", "mae": 0.3632, "rmse": 0.4696, "r2": 0.8571 },
         "Exp_G_Full_Multimodal": { "name": "Full-feature XGBoost (+History)", "mae": 0.2014, "rmse": 0.2641, "r2": 0.9548, "fusion_net_mae": 0.2774, "fusion_net_rmse": 0.3217, "fusion_net_r2": 0.9329 }
       },
       metadata: {

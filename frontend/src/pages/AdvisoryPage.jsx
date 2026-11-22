@@ -148,7 +148,7 @@ export default function AdvisoryPage({ onNavigate }) {
     } else if (cdd >= 8 || rainAnom < 0) {
       urgency = 'Moderate Advisory';
       urgencyColor = 'bg-amber-50 text-amber-800 border-amber-200';
-      schedule = 'Controlled AWD (Allow water to drop 10 cm below surface before re-flooding)';
+      schedule = 'Controlled AWD (Allow water to drop 10–15 cm below surface before re-flooding)';
       recommendations.push('Soil moisture holding capacity is adequate; avoid excessive standing water.');
       recommendations.push('Safe AWD saves 15–25% irrigation water without incurring yield penalties.');
     } else {

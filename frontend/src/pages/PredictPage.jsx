@@ -345,12 +345,12 @@ export default function PredictPage({ locations = [], initialDistrict = null }) 
 
   // Modality ablation validated results
   const ablationData = [
-    { name: 'Weather only', r2: 0.4217, mae: '0.81 t/ha' },
-    { name: 'Satellite only', r2: 0.6974, mae: '0.54 t/ha' },
-    { name: 'Soil only', r2: 0.6605, mae: '0.61 t/ha' },
-    { name: 'Weather + Soil', r2: 0.8809, mae: '0.34 t/ha' },
-    { name: 'Satellite + Weather', r2: 0.8958, mae: '0.31 t/ha' },
-    { name: 'Satellite + Weather + Soil', r2: 0.9151, mae: '0.28 t/ha' },
+    { name: 'Weather only', r2: 0.2081, mae: '0.91 t/ha' },
+    { name: 'Satellite only', r2: 0.6802, mae: '0.53 t/ha' },
+    { name: 'Soil only', r2: 0.8351, mae: '0.41 t/ha' },
+    { name: 'Weather + Soil', r2: 0.8849, mae: '0.34 t/ha' },
+    { name: 'Satellite + Weather', r2: 0.7195, mae: '0.50 t/ha' },
+    { name: 'Satellite + Weather + Soil', r2: 0.8571, mae: '0.36 t/ha' },
     { name: 'All + Historical (Full)', r2: 0.9548, mae: '0.20 t/ha' },
   ];
 
@@ -824,7 +824,7 @@ export default function PredictPage({ locations = [], initialDistrict = null }) 
                     <option value={2000}>2000 (Benchmark)</option>
                   </select>
                   <span className="text-[10px] text-stone-500 block mt-0.5">
-                    Measured seasons 2022–2026 use real NASA POWER weather + MODIS satellite inputs — 2022–2024 are completed recorded seasons (official yields compared on the Dashboard tracker); 2025–2026 are season estimates. Benchmark years 2000–2020 (2021 = baseline profile).
+                    Measured seasons 2022–2026 use real NASA POWER weather as model inputs, with measured MODIS satellite data as season context — 2022–2024 are completed recorded seasons (official yields compared on the Dashboard tracker); 2025–2026 are season estimates. Benchmark years 2000–2020 (2021 = baseline profile).
                   </span>
                 </div>
               </div>
@@ -1019,6 +1019,9 @@ export default function PredictPage({ locations = [], initialDistrict = null }) 
                 </h3>
                 <span className="text-[11px] text-stone-400 font-mono">5 variables</span>
               </div>
+              <p className="text-[11px] text-stone-500 leading-relaxed">
+                Measured season context (MODIS). The deployed observational model predicts from weather, soil and historical branches and does not consume these fields — editing them will not change the prediction. They remain editable for the benchmark model's experiments.
+              </p>
               <div className="grid sm:grid-cols-3 gap-3 text-xs">
                 <div>
                   <label className="block font-medium text-stone-700 mb-1">Mean NDVI</label>
@@ -1171,6 +1174,9 @@ export default function PredictPage({ locations = [], initialDistrict = null }) 
                 </h3>
                 <span className="text-[11px] text-stone-400 font-mono">4 variables</span>
               </div>
+              <p className="text-[11px] text-stone-500 leading-relaxed">
+                The deployed model's fifth historical feature — irrigation ratio — is taken from the district profile shown above, not edited here.
+              </p>
               <div className="grid sm:grid-cols-4 gap-3 text-xs">
                 <div>
                   <label className="block font-medium text-stone-700 mb-1">Lag-1 Prior Yield (t/ha)</label>
@@ -1291,7 +1297,7 @@ export default function PredictPage({ locations = [], initialDistrict = null }) 
                 <div className="py-2.5 flex items-center justify-between">
                   <div>
                     <span className="text-stone-600 font-medium block">Calibrated Predictive Interval</span>
-                    <span className="text-[10px] text-stone-400">Mean &plusmn; m&middot;&sigma; (Split-conformal, m = {result.calibrated_multiplier_m || 2.49})</span>
+                    <span className="text-[10px] text-stone-400">Mean &plusmn; m&middot;&sigma; (Split-conformal, m = {result.calibrated_multiplier_m || 3.1339})</span>
                   </div>
                   <span className="font-mono font-bold text-stone-900">
                     {result.predictive_interval?.[0]} — {result.predictive_interval?.[1]} t/ha
@@ -1434,9 +1440,9 @@ export default function PredictPage({ locations = [], initialDistrict = null }) 
         {/* Section 10: Model Performance */}
         <div className="bg-white border border-stone-200 rounded-xl p-6 shadow-sm space-y-4">
           <div>
-            <h3 className="text-base font-bold text-stone-900">Model Performance</h3>
+            <h3 className="text-base font-bold text-stone-900">Model Performance — Benchmark Panel</h3>
             <p className="text-xs text-stone-500 mt-0.5">
-              Empirical evaluation on held-out test years (&ge; 2017, N = 96).
+              Benchmark-model evaluation on the semi-synthetic panel's held-out test years (2017–2020, N = 96). The deployed observational model's held-out results are in the result panel above and on the Benchmarks page.
             </p>
           </div>
 

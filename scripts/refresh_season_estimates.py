@@ -358,13 +358,15 @@ def main():
             merged[str(y)] = fn(counts[y])
         meta[key] = merged
     meta["satellite_note"] = (
-        "Satellite inputs are MEASURED: MODIS MOD13Q1 NDVI/EVI from the NASA ORNL "
+        "Satellite data is MEASURED: MODIS MOD13Q1 NDVI/EVI from the NASA ORNL "
         "DAAC subset service, computed over each district's cropland mask (pixels with 2000-2014 mean "
         "Kharif NDVI >= 0.35 in a centroid window; Ludhiana uses a +/-5 km window because its +/-2 km "
         "window is urban). NDVI anomaly is against the district's own masked 2000-2014 MODIS climatology. "
         "NDWI is carried from the district baseline profile (MOD13Q1 carries no SWIR band). Measured "
         "season-mean NDVI is lower than the semi-synthetic values the site carried before Nov 2026 - "
-        "expected: a season mean over real cropland pixels is not a peak-greenness figure.")
+        "expected: a season mean over real cropland pixels is not a peak-greenness figure. "
+        "Satellite data is season context for this dashboard; the deployed observational model "
+        "predicts from weather, soil and historical inputs and does not consume satellite fields.")
     data["_meta"] = meta
     json.dump(data, open(out_path, "w"), indent=2)
     report.append(maybe_alert(data, old_est))

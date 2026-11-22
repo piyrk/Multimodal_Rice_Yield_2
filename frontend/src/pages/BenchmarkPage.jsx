@@ -123,6 +123,9 @@ export default function BenchmarkPage() {
           *On real observational data, <strong>ClimateRice-FusionNet achieves R² = 0.6803 and MAE = 0.3366 t/ha (RMSE: 0.4711 t/ha)</strong>, outperforming traditional gradient boosting (XGBoost MAE: 0.3699 t/ha, R²: 0.5904). 
           Uncalibrated predictive intervals achieve 44.44% (16/36) coverage on raw observations due to unobserved farm-level noise; split-conformal recalibration lifts held-out test coverage to 83.33% (5-split cross-validation mean: 90.56% ± 2.83%).
         </p>
+        <p className="text-[11px] text-stone-600 leading-relaxed">
+          Why the naive district-mean baseline flips between the two tracks (R² −0.17 here vs +0.84 on the benchmark below): the semi-synthetic benchmark generates yields around district baselines, so the district mean is already a strong predictor there. On real DES records, yields move with each season's weather, so the same fixed mean fails — that gap is exactly what the weather-aware model adds.
+        </p>
       </div>
 
       {/* Extended Observational Panel (recorded yields to 2024) */}
@@ -208,7 +211,7 @@ export default function BenchmarkPage() {
           <div className="bg-stone-50 p-4 rounded-xl border border-stone-200 font-mono text-xs">
             <span className="text-stone-500 text-[10px] uppercase font-sans">Mean Error Reduction</span>
             <div className="text-lg font-bold text-emerald-800 mt-1">0.2652 t/ha</div>
-            <span className="text-stone-500 text-[10px]">vs Satellite Only (p &lt;&lt; 0.05)</span>
+            <span className="text-stone-500 text-[10px]">FusionNet Full vs Satellite Only — MAE 0.5427 → 0.2774 (p = 2.54 × 10⁻⁷)</span>
           </div>
 
           <div className="bg-stone-50 p-4 rounded-xl border border-stone-200 font-mono text-xs">

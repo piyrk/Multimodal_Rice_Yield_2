@@ -6,8 +6,8 @@ export default function HomePage({ onNavigate }) {
     {
       icon: Satellite,
       title: 'Satellite',
-      badge: 'Optical Indices',
-      description: 'Vegetation and land-surface indicators capturing canopy chlorophyll, biomass vigor, and field surface moisture (NDVI, EVI, NDWI).',
+      badge: 'Season Context',
+      description: 'Measured vegetation and land-surface indicators (MODIS NDVI, EVI, NDWI) tracked each season on the Farmer Dashboard as context. The deployed model predicts from weather, soil, and historical branches; satellite was a fourth branch in the earlier benchmark model.',
     },
     {
       icon: CloudRain,
@@ -33,7 +33,7 @@ export default function HomePage({ onNavigate }) {
     {
       num: '01',
       title: 'Input Data',
-      desc: 'Enter district environmental conditions across weather, satellite, soil, and historical features.',
+      desc: 'Enter district environmental conditions across weather, soil, and historical features (satellite indices are carried as measured season context).',
     },
     {
       num: '02',
@@ -66,7 +66,7 @@ export default function HomePage({ onNavigate }) {
         </h1>
 
         <p className="text-base sm:text-lg text-stone-600 leading-relaxed max-w-2xl mx-auto">
-          Predict rice yield using satellite-derived, weather, soil, and historical agricultural information with dynamic cross-modal attention and calibrated predictive intervals.
+          Predict rice yield using weather, soil, and historical agricultural information with dynamic cross-modal attention and calibrated predictive intervals — with measured satellite vegetation data tracked alongside as season context.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
@@ -92,7 +92,7 @@ export default function HomePage({ onNavigate }) {
         <div className="text-center space-y-1">
           <h2 className="text-xl sm:text-2xl font-bold text-stone-900">Heterogeneous Input Modalities</h2>
           <p className="text-xs sm:text-sm text-stone-500">
-            Four scientifically grounded environmental sources harmonized into unified panel records.
+            Four scientifically grounded environmental sources harmonized into unified panel records — the deployed model predicts from weather, soil and historical; satellite is measured season context.
           </p>
         </div>
 

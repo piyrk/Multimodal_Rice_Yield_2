@@ -270,7 +270,7 @@ export default function DashboardPage() {
           <span className="text-xs font-bold uppercase tracking-wider text-stone-500 flex items-center space-x-1.5">
             <Droplets className="h-4 w-4 text-emerald-700" /> <span>Water Advice</span>
           </span>
-          <p><span className={`px-2 py-0.5 rounded-full text-[11px] font-bold border ${water.color}`}>{water.label}{seasonEnded ? ' — season over' : ''}</span></p>
+          <p><span className={`px-2 py-0.5 rounded-full text-[11px] font-bold border ${seasonEnded ? 'bg-stone-100 text-stone-700 border-stone-300' : water.color}`}>{water.label}{seasonEnded ? ' — season record' : ''}</span></p>
           <p className="text-xs text-stone-700 leading-relaxed">{seasonEnded ? seasonOverAction : water.action}</p>
           <p className="text-[11px] text-stone-500">Full schedule: Advisory page → Water &amp; Irrigation.</p>
         </div>

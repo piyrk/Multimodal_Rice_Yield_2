@@ -17,7 +17,7 @@
       "2023": 0,
       "2024": 0
     },
-    "satellite_note": "Satellite inputs are MEASURED: MODIS MOD13Q1 NDVI/EVI from the NASA ORNL DAAC subset service, computed over each district's cropland mask (pixels with 2000-2014 mean Kharif NDVI >= 0.35 in a centroid window; Ludhiana uses a +/-5 km window because its +/-2 km window is urban). NDVI anomaly is against the district's own masked 2000-2014 MODIS climatology. NDWI is carried from the district baseline profile (MOD13Q1 carries no SWIR band). Measured season-mean NDVI is lower than the semi-synthetic values the site carried before Nov 2026 - expected: a season mean over real cropland pixels is not a peak-greenness figure.",
+    "satellite_note": "Satellite data is MEASURED: MODIS MOD13Q1 NDVI/EVI from the NASA ORNL DAAC subset service, computed over each district's cropland mask (pixels with 2000-2014 mean Kharif NDVI >= 0.35 in a centroid window; Ludhiana uses a +/-5 km window because its +/-2 km window is urban). NDVI anomaly is against the district's own masked 2000-2014 MODIS climatology. NDWI is carried from the district baseline profile (MOD13Q1 carries no SWIR band). Measured season-mean NDVI is lower than the semi-synthetic values the site carried before Nov 2026 - expected: a season mean over real cropland pixels is not a peak-greenness figure. Satellite data is season context for this dashboard; the deployed observational model predicts from weather, soil and historical inputs and does not consume satellite fields.",
     "forecast_days": {
       "2025": 0,
       "2026": 0,

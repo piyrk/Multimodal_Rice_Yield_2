@@ -15,11 +15,11 @@ export default function VivaGuidePage() {
     },
     {
       q: "3. How did you prevent data leakage in your agricultural time-series?",
-      a: "Agricultural time-series exhibit strong temporal autocorrelation and climate trends. Standard random K-Fold cross-validation leaks future trends into earlier predictions. We enforced a strict Temporal Holdout Split: Training on 2000–2014, Validation on 2015–2016, and Held-Out Testing on 2017–2020. Furthermore, all scalers (StandardScaler) were fit strictly on the training partition, and historical yield lag features strictly draw from prior years (t-1, t-2, and t-3:t-1)."
+      a: "Agricultural time-series exhibit strong temporal autocorrelation and climate trends. Standard random K-Fold cross-validation leaks future trends into earlier predictions. We enforced strict Temporal Holdout Splits on both tracks: the benchmark track trains on 2000–2014, validates on 2015–2016, and tests on 2017–2020; the observational track uses three rolling holdouts (tests 2013–2014, 2019–2022, and 2021–2024 — the Benchmarks page lists each with its own calibration). Furthermore, all scalers (StandardScaler) were fit strictly on the training partition, and historical yield lag features strictly draw from prior years (t-1, t-2, and the mean of the three prior years)."
     },
     {
       q: "4. What is the agronomic justification for your engineered climate features?",
-      a: "All 26 features are grounded in published crop physiology: (1) Rainfall Anomaly (%) captures departure from climatological normal; (2) Extreme Heat Days (Tmax >= 35°C during anthesis) triggers spikelet sterility and pollen desiccation; (3) Consecutive Dry Days (CDD) models agricultural drought streaks; and (4) Minimum Nighttime Temperature anomalies (Tmin) model nocturnal respiration losses where rice consumes carbohydrates without photosynthesizing (Peng et al. 2004, PNAS)."
+      a: "All 26 features of the benchmark model are grounded in published crop physiology: (1) Rainfall Anomaly (%) captures departure from climatological normal; (2) Extreme Heat Days (Tmax >= 35°C during anthesis) triggers spikelet sterility and pollen desiccation; (3) Consecutive Dry Days (CDD) models agricultural drought streaks; and (4) Minimum Nighttime Temperature anomalies (Tmin) model nocturnal respiration losses where rice consumes carbohydrates without photosynthesizing (Peng et al. 2004, PNAS). The deployed observational model runs a 22-feature subset of the same design: the same weather and soil features, historical expanded to 5 (adding irrigation ratio), and no satellite branch."
     },
     {
       q: "5. What are the formal results of your hypothesis testing?",
