@@ -16,6 +16,15 @@ from backend.app.schemas.prediction import PredictionRequest, PredictionResponse
 
 logger = logging.getLogger(__name__)
 
+import threading
+
+# MC-dropout sampling in both inference paths seeds the process-global torch
+# RNG per payload. That seed-and-sample section must be atomic: without this
+# lock, concurrent requests interleave RNG draws and corrupt each other's MC
+# samples (found 2026-11-22: estimates generated under parallel load differed
+# from sequential reproduction for the same stored inputs).
+_MC_LOCK = threading.Lock()
+
 
 class ModelService:
     """Manages loaded ML artifacts, handles prediction, uncertainty, and XAI."""
@@ -237,17 +246,19 @@ class ModelService:
         import hashlib
         raw_signature = json.dumps([round(values[f], 4) for f in ALL_FEATURES]).encode("utf-8")
         seed = int(hashlib.sha256(raw_signature).hexdigest()[:8], 16)
-        torch.manual_seed(seed)
-        if torch.cuda.is_available():
-            torch.cuda.manual_seed_all(seed)
 
-        self.obs_model.train()  # dropout active for MC sampling
-        preds, attns = [], []
-        with torch.no_grad():
-            for _ in range(40):
-                p, w = self.obs_model(inputs_torch)
-                preds.append(p.cpu().numpy())
-                attns.append(w.cpu().numpy())
+        with _MC_LOCK:
+            torch.manual_seed(seed)
+            if torch.cuda.is_available():
+                torch.cuda.manual_seed_all(seed)
+
+            self.obs_model.train()  # dropout active for MC sampling
+            preds, attns = [], []
+            with torch.no_grad():
+                for _ in range(40):
+                    p, w = self.obs_model(inputs_torch)
+                    preds.append(p.cpu().numpy())
+                    attns.append(w.cpu().numpy())
         preds = np.array(preds)
         mean_attn = np.array(attns).mean(axis=0)[0]
         attn_dict = {
@@ -304,11 +315,13 @@ class ModelService:
             import hashlib
             raw_signature = json.dumps([round(float(raw_dict.get(f, 0.0)), 4) for f in self.pipeline.all_feature_cols]).encode("utf-8")
             seed = int(hashlib.sha256(raw_signature).hexdigest()[:8], 16)
-            torch.manual_seed(seed)
-            if torch.cuda.is_available():
-                torch.cuda.manual_seed_all(seed)
 
-            mean_pred, std_pred, mean_attn = self.fusion_model.predict_with_uncertainty(inputs_torch, num_mc_samples=40)
+            with _MC_LOCK:
+                torch.manual_seed(seed)
+                if torch.cuda.is_available():
+                    torch.cuda.manual_seed_all(seed)
+
+                mean_pred, std_pred, mean_attn = self.fusion_model.predict_with_uncertainty(inputs_torch, num_mc_samples=40)
             pred_yield = round(float(mean_pred.cpu().item()), 2)
             std_uncert = round(float(std_pred.cpu().item()), 3)
 
