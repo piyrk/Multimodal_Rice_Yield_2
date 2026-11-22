@@ -731,7 +731,7 @@ export default function PredictPage({ locations = [] }) {
                 </h3>
                 <span className="text-[11px] text-stone-400 font-mono">Location &amp; Temporal</span>
               </div>
-              <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-3 text-xs">
+              <div className="grid sm:grid-cols-2 gap-3 text-xs">
                 <div>
                   <label className="block font-medium text-stone-700 mb-1">State / Province</label>
                   <select
@@ -758,7 +758,7 @@ export default function PredictPage({ locations = [] }) {
                       <optgroup key={st} label={st}>
                         {(STATES_AND_DISTRICTS[st] || []).map((d) => (
                           <option key={d} value={d}>
-                            {d} ({st})
+                            {d}
                           </option>
                         ))}
                       </optgroup>

@@ -153,13 +153,13 @@ export default function DashboardPage() {
       </div>
 
       {/* Selectors */}
-      <div className="bg-white border border-stone-200 rounded-xl p-4 shadow-sm flex flex-col sm:flex-row sm:items-center gap-3">
+      <div className="bg-white border border-stone-200 rounded-xl p-4 shadow-sm flex flex-col sm:flex-row sm:items-center sm:flex-wrap gap-3">
         <div className="flex items-center space-x-2">
           <span className="text-xs font-bold uppercase tracking-wider text-stone-500">District:</span>
           <select
             value={selectedDistrict}
             onChange={(e) => setSelectedDistrict(e.target.value)}
-            className="bg-stone-50 border border-stone-300 rounded-lg px-3 py-1.5 text-xs font-bold text-stone-900 focus:bg-white focus:ring-2 focus:ring-emerald-600 cursor-pointer"
+            className="bg-stone-50 border border-stone-300 rounded-lg px-3 py-1.5 text-xs font-bold text-stone-900 focus:bg-white focus:ring-2 focus:ring-emerald-600 cursor-pointer min-w-[220px]"
           >
             {districts.map((d) => (
               <option key={d} value={d}>{d} ({SEASON_ESTIMATES['2026'][d].state_name})</option>

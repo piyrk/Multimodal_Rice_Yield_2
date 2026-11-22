@@ -207,7 +207,7 @@ export default function AdvisoryPage({ onNavigate }) {
           <select
             value={selectedDistrict}
             onChange={(e) => setSelectedDistrict(e.target.value)}
-            className="bg-stone-50 border border-stone-300 rounded-lg px-3 py-1.5 text-xs font-bold text-stone-900 focus:bg-white focus:ring-2 focus:ring-emerald-600 cursor-pointer"
+            className="bg-stone-50 border border-stone-300 rounded-lg px-3 py-1.5 text-xs font-bold text-stone-900 focus:bg-white focus:ring-2 focus:ring-emerald-600 cursor-pointer min-w-[210px]"
           >
             {Object.keys(DISTRICT_PROFILES).map((dist) => (
               <option key={dist} value={dist}>
