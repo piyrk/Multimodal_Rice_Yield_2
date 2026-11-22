@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import PredictPage from './pages/PredictPage';
 import AdvisoryPage from './pages/AdvisoryPage';
+import DashboardPage from './pages/DashboardPage';
 import BenchmarkPage from './pages/BenchmarkPage';
 import ExplainabilityPage from './pages/ExplainabilityPage';
 import MapPage from './pages/MapPage';
@@ -49,6 +50,9 @@ export default function App() {
         )}
         {activeTab === 'advisory' && (
           <AdvisoryPage onNavigate={(tab) => setActiveTab(tab)} />
+        )}
+        {activeTab === 'dashboard' && (
+          <DashboardPage />
         )}
         {activeTab === 'benchmark' && (
           <BenchmarkPage />

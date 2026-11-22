@@ -28,6 +28,7 @@ export default function Navbar({ activeTab, setActiveTab, healthInfo }) {
     { id: 'home', label: 'Home' },
     { id: 'predict', label: 'Predict' },
     { id: 'advisory', label: 'Advisory' },
+    { id: 'dashboard', label: 'Dashboard' },
     { id: 'benchmark', label: 'Benchmarks' },
     { id: 'explain', label: 'Explainability' },
     { id: 'map', label: 'Map' },
