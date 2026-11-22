@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layers, ShieldAlert, Cpu, Database, CheckCircle, ArrowRight, Github } from 'lucide-react';
+import { Layers, ShieldAlert, Cpu, Database, CheckCircle, ArrowRight, GitBranch } from 'lucide-react';
 
 export default function AboutPage({ onNavigate }) {
   const techStack = [
@@ -247,7 +247,7 @@ export default function AboutPage({ onNavigate }) {
           rel="noreferrer"
           className="inline-flex items-center space-x-2 bg-white hover:bg-stone-50 text-stone-800 font-semibold px-6 py-2.5 rounded-lg shadow-sm transition-colors text-sm border border-stone-300"
         >
-          <Github className="h-4 w-4" />
+          <GitBranch className="h-4 w-4" />
           <span>View Source on GitHub</span>
         </a>
       </div>
