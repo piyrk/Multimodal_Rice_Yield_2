@@ -140,7 +140,7 @@ export default function PredictPage({ locations = [] }) {
         provenanceCategory: 'Model Estimate — recorded yield for this year is not yet published (DES APY)',
         provenanceDetails: `${weather_provenance} | Lags: ${historical_provenance} | Satellite: ${satellite_provenance} | Precomputed estimate: ${precomputed_estimate_t_ha} t/ha [${precomputed_interval_low}, ${precomputed_interval_high}]`,
         isObservational: false,
-        availableYears: [2026, 2025, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2010, 2005],
+        availableYears: [2026, 2025, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000],
         zone: fields.agro_ecological_zone,
         irrigation: fields.irrigation_ratio,
       });
@@ -177,7 +177,7 @@ export default function PredictPage({ locations = [] }) {
         provenanceCategory: 'Category F (Calibrated Multi-Decadal Historical Panel)',
         provenanceDetails: `Centroid: (${localProfile.latitude || ''}, ${localProfile.longitude || ''}) | Zone: ${localProfile.agro_ecological_zone} | Irrigation: ${Math.round((localProfile.irrigation_ratio || 0.5) * 100)}%`,
         isObservational: true,
-        availableYears: [2026, 2025, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2010, 2005],
+        availableYears: [2026, 2025, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000],
         zone: localProfile.agro_ecological_zone,
         irrigation: localProfile.irrigation_ratio,
       });
@@ -794,9 +794,24 @@ export default function PredictPage({ locations = [] }) {
                     <option value={2016}>2016 (Calibrated Benchmark)</option>
                     <option value={2015}>2015 (Calibrated Benchmark)</option>
                     <option value={2014}>2014 (Calibrated Benchmark)</option>
+                    <option value={2013}>2013 (Calibrated Benchmark)</option>
+                    <option value={2012}>2012 (Calibrated Benchmark)</option>
+                    <option value={2011}>2011 (Calibrated Benchmark)</option>
                     <option value={2010}>2010 (Calibrated Benchmark)</option>
+                    <option value={2009}>2009 (Calibrated Benchmark)</option>
+                    <option value={2008}>2008 (Calibrated Benchmark)</option>
+                    <option value={2007}>2007 (Calibrated Benchmark)</option>
+                    <option value={2006}>2006 (Calibrated Benchmark)</option>
                     <option value={2005}>2005 (Calibrated Benchmark)</option>
+                    <option value={2004}>2004 (Calibrated Benchmark)</option>
+                    <option value={2003}>2003 (Calibrated Benchmark)</option>
+                    <option value={2002}>2002 (Calibrated Benchmark)</option>
+                    <option value={2001}>2001 (Calibrated Benchmark)</option>
+                    <option value={2000}>2000 (Calibrated Benchmark)</option>
                   </select>
+                  <span className="text-[10px] text-stone-500 block mt-0.5">
+                    Benchmark years 2000–2020 (2021 = baseline profile). Recorded yields to 2024 are evaluated on the Benchmarks page; 2025–2026 are labelled season estimates.
+                  </span>
                 </div>
               </div>
 
