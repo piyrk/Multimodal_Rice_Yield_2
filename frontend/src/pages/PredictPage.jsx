@@ -26,6 +26,8 @@ import {
 } from '../data/districtProfiles';
 import SEASON_ESTIMATES from '../data/seasonEstimates.json';
 
+const SEASON_META = SEASON_ESTIMATES?._meta || null;
+
 export default function PredictPage({ locations = [] }) {
   // Initial authentic profile based on representative baseline district (Burdwan, WB)
   const defaultDistrict = 'Burdwan';
@@ -641,6 +643,11 @@ export default function PredictPage({ locations = [] }) {
               Loads real NASA POWER season inputs for the selected district
             </span>
           </div>
+          {SEASON_META && (
+            <div className="text-[11px] text-amber-800">
+              Weather inputs: NASA POWER &bull; Data as of {SEASON_META.generated_on} &bull; Kharif 2025: {SEASON_META.days_observed['2025']}/{SEASON_META.season_days_total} days observed &bull; Kharif 2026: {SEASON_META.days_observed['2026']}/{SEASON_META.season_days_total} observed, {SEASON_META.tail_filled_days['2026']} days climatology-filled
+            </div>
+          )}
           <div className="grid grid-cols-2 gap-2">
             {[2025, 2026].map((year) => {
               const isActive = seasonEstimateYear === year;
@@ -661,7 +668,9 @@ export default function PredictPage({ locations = [] }) {
                   </div>
                   <div className="text-[11px] text-stone-500 line-clamp-1 mt-0.5">
                     {year === 2026
-                      ? 'Season in progress: observed days + climatology-filled tail'
+                      ? (SEASON_META
+                        ? `Season in progress: ${SEASON_META.days_observed['2026']}/${SEASON_META.season_days_total} days observed + climatology-filled tail`
+                        : 'Season in progress: observed days + climatology-filled tail')
                       : 'Completed season: 153/153 days observed'}
                   </div>
                 </button>

@@ -1,4 +1,12 @@
 {
+  "_meta": {
+    "source": "NASA POWER daily agro-climatology (built by scripts/build_season_2026.py)",
+    "generated_on": "27 Oct 2026",
+    "season_days_total": 153,
+    "days_observed": { "2025": 153, "2026": 143 },
+    "tail_filled_days": { "2025": 0, "2026": 10 },
+    "satellite_note": "Satellite features are district climatology carried forward, not current-season measurements"
+  },
   "2025": {
     "Ludhiana": {
       "rainfall_cumulative_mm": 1051.94,
