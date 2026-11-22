@@ -115,7 +115,7 @@ export default function VivaGuidePage() {
             <h2 className="text-base font-bold text-stone-900">
               B.Tech CSE Capstone Report Structure (Chapters 1–10)
             </h2>
-            <p className="text-xs text-stone-500">Mapped to verified documentation files in the repository `docs/` folder</p>
+            <p className="text-xs text-stone-500">Chapter outline of the college project report for Project 19</p>
           </div>
         </div>
 
@@ -124,7 +124,6 @@ export default function VivaGuidePage() {
             <div key={ch.num} className="p-3.5 rounded-xl bg-stone-50 border border-stone-200/70 space-y-1">
               <div className="flex justify-between items-center">
                 <span className="font-mono text-emerald-700 font-bold text-xs">{ch.num}</span>
-                <span className="text-[10px] font-mono text-stone-500">docs/*.md</span>
               </div>
               <h3 className="font-bold text-sm text-stone-900">{ch.title}</h3>
               <p className="text-xs text-stone-600 leading-relaxed">{ch.summary}</p>

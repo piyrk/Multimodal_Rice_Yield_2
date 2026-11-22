@@ -112,7 +112,7 @@ export default function MapPage({ locations, onSelectDistrict }) {
                 </div>
 
                 <div className="p-3 rounded-xl bg-stone-50 border border-stone-200/70 flex justify-between items-center">
-                  <span className="text-xs text-stone-600">Baseline Yield (APY DES)</span>
+                  <span className="text-xs text-stone-600">Recorded Baseline Yield (DES APY avg.)</span>
                   <span className="text-sm font-extrabold text-emerald-700 font-mono">{selectedDistrict.base_yield} t/ha</span>
                 </div>
 

@@ -112,7 +112,7 @@ export default function AboutPage({ onNavigate }) {
                 Yield (t/ha)
               </div>
               <div className="bg-white border border-stone-300 p-2 rounded-lg text-center text-[11px] text-stone-600 font-sans">
-                Predictive Interval (μ ± 1.05σ)
+                Predictive Interval (μ ± m·σ, m = 3.1339)
               </div>
               <div className="bg-white border border-stone-300 p-2 rounded-lg text-center text-[11px] text-stone-600 font-sans">
                 Attention Weights (α)
@@ -143,6 +143,10 @@ export default function AboutPage({ onNavigate }) {
             </p>
           </div>
         </div>
+
+        <p className="text-xs text-stone-600 leading-relaxed bg-stone-50 border border-stone-200 rounded-lg p-3.5">
+          <strong className="text-stone-800">Why three district counts?</strong> Each number belongs to a different dataset: the predictor serves <strong>25 districts</strong>; the calibrated benchmark panel covers <strong>24</strong> of them (2000–2020); and recorded DES yields through 2024 are published for <strong>12</strong> districts (the extended observational panel) — the Farmer Dashboard tracker compares estimates against actuals for those 12.
+        </p>
 
         <div className="p-3.5 bg-amber-50/80 border border-amber-200 rounded-lg space-y-1 text-xs text-amber-900">
           <span className="font-bold">Seasonal Scope &amp; Validation Status:</span>

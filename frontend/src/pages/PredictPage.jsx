@@ -731,7 +731,7 @@ export default function PredictPage({ locations = [] }) {
                 </h3>
                 <span className="text-[11px] text-stone-400 font-mono">Location &amp; Temporal</span>
               </div>
-              <div className="grid sm:grid-cols-5 gap-3 text-xs">
+              <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-3 text-xs">
                 <div>
                   <label className="block font-medium text-stone-700 mb-1">State / Province</label>
                   <select
@@ -766,23 +766,14 @@ export default function PredictPage({ locations = [] }) {
                   </select>
                 </div>
                 <div>
-                  <label className="block font-medium text-stone-700 mb-1">State Name</label>
-                  <input
-                    type="text"
-                    readOnly
-                    value={formData.state_name}
-                    className="w-full bg-stone-100 border border-stone-300 rounded-lg px-2.5 py-1.5 text-stone-900 font-semibold text-xs cursor-not-allowed"
-                  />
-                </div>
-                <div>
                   <label className="block font-medium text-stone-700 mb-1">Crop Season</label>
                   <select
                     value={formData.season}
                     onChange={(e) => handleSeasonChange(e.target.value)}
                     className="w-full bg-stone-50 border border-stone-300 rounded-lg px-2.5 py-1.5 text-stone-900 focus:bg-white focus:ring-2 focus:ring-emerald-600 text-xs font-medium cursor-pointer"
                   >
-                    <option value="Kharif">Kharif (Monsoon - Active Model)</option>
-                    <option value="Rabi">Rabi (Winter - Unsupported Checkpoint)</option>
+                    <option value="Kharif">Kharif (Monsoon)</option>
+                    <option value="Rabi">Rabi (Winter — Unsupported)</option>
                   </select>
                   <span className="text-[10px] text-amber-700 block mt-0.5">
                     *Kharif calibrated. Rabi disabled in prediction engine.
@@ -798,31 +789,31 @@ export default function PredictPage({ locations = [] }) {
                   >
                     <option value={2026}>2026 (Season Estimate)</option>
                     <option value={2025}>2025 (Season Estimate)</option>
-                    <option value={2024}>2024 (Recorded Season — Measured Inputs)</option>
-                    <option value={2023}>2023 (Recorded Season — Measured Inputs)</option>
-                    <option value={2022}>2022 (Recorded Season — Measured Inputs)</option>
-                    <option value={2021}>2021 (Calibrated Benchmark / Baseline)</option>
-                    <option value={2020}>2020 (Calibrated Benchmark)</option>
-                    <option value={2019}>2019 (Calibrated Benchmark)</option>
-                    <option value={2018}>2018 (Calibrated Benchmark)</option>
-                    <option value={2017}>2017 (Calibrated Benchmark)</option>
-                    <option value={2016}>2016 (Calibrated Benchmark)</option>
-                    <option value={2015}>2015 (Calibrated Benchmark)</option>
-                    <option value={2014}>2014 (Calibrated Benchmark)</option>
-                    <option value={2013}>2013 (Calibrated Benchmark)</option>
-                    <option value={2012}>2012 (Calibrated Benchmark)</option>
-                    <option value={2011}>2011 (Calibrated Benchmark)</option>
-                    <option value={2010}>2010 (Calibrated Benchmark)</option>
-                    <option value={2009}>2009 (Calibrated Benchmark)</option>
-                    <option value={2008}>2008 (Calibrated Benchmark)</option>
-                    <option value={2007}>2007 (Calibrated Benchmark)</option>
-                    <option value={2006}>2006 (Calibrated Benchmark)</option>
-                    <option value={2005}>2005 (Calibrated Benchmark)</option>
-                    <option value={2004}>2004 (Calibrated Benchmark)</option>
-                    <option value={2003}>2003 (Calibrated Benchmark)</option>
-                    <option value={2002}>2002 (Calibrated Benchmark)</option>
-                    <option value={2001}>2001 (Calibrated Benchmark)</option>
-                    <option value={2000}>2000 (Calibrated Benchmark)</option>
+                    <option value={2024}>2024 (Recorded Season)</option>
+                    <option value={2023}>2023 (Recorded Season)</option>
+                    <option value={2022}>2022 (Recorded Season)</option>
+                    <option value={2021}>2021 (Benchmark Baseline)</option>
+                    <option value={2020}>2020 (Benchmark)</option>
+                    <option value={2019}>2019 (Benchmark)</option>
+                    <option value={2018}>2018 (Benchmark)</option>
+                    <option value={2017}>2017 (Benchmark)</option>
+                    <option value={2016}>2016 (Benchmark)</option>
+                    <option value={2015}>2015 (Benchmark)</option>
+                    <option value={2014}>2014 (Benchmark)</option>
+                    <option value={2013}>2013 (Benchmark)</option>
+                    <option value={2012}>2012 (Benchmark)</option>
+                    <option value={2011}>2011 (Benchmark)</option>
+                    <option value={2010}>2010 (Benchmark)</option>
+                    <option value={2009}>2009 (Benchmark)</option>
+                    <option value={2008}>2008 (Benchmark)</option>
+                    <option value={2007}>2007 (Benchmark)</option>
+                    <option value={2006}>2006 (Benchmark)</option>
+                    <option value={2005}>2005 (Benchmark)</option>
+                    <option value={2004}>2004 (Benchmark)</option>
+                    <option value={2003}>2003 (Benchmark)</option>
+                    <option value={2002}>2002 (Benchmark)</option>
+                    <option value={2001}>2001 (Benchmark)</option>
+                    <option value={2000}>2000 (Benchmark)</option>
                   </select>
                   <span className="text-[10px] text-stone-500 block mt-0.5">
                     Measured seasons 2022–2026 use real NASA POWER weather + MODIS satellite inputs — 2022–2024 are completed recorded seasons (official yields compared on the Dashboard tracker); 2025–2026 are season estimates. Benchmark years 2000–2020 (2021 = baseline profile).

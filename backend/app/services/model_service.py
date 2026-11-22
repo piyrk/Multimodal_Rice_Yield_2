@@ -384,8 +384,10 @@ class ModelService:
         self, district_name: str, crop_year: Optional[int] = None, season: Optional[str] = "Kharif"
     ) -> Optional[Dict[str, Any]]:
         """Returns verified environmental feature profile for a district, season, and year."""
-        # Check if season estimates (2025/2026) are requested
-        if crop_year in [2025, 2026] and (not season or season.strip().lower() == "kharif") and getattr(self, "season_estimates", None):
+        # Measured-season rows (2022-2026) are served from the same
+        # season-estimates dataset the frontend ships, so the API and the
+        # site can never disagree about a season's inputs or estimate.
+        if crop_year in [2022, 2023, 2024, 2025, 2026] and (not season or season.strip().lower() == "kharif") and getattr(self, "season_estimates", None):
             year_str = str(crop_year)
             year_data = self.season_estimates.get(year_str, {})
             clean_name = district_name.strip().lower()
@@ -396,14 +398,14 @@ class ModelService:
                     break
             if matched_dist:
                 row = dict(year_data[matched_dist])
-                base_avail = [2026, 2025, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2010, 2005]
+                base_avail = [2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2010, 2005]
                 return {
                     "district_name": str(row["district_name"]),
                     "state_name": str(row["state_name"]),
                     "crop_year": int(crop_year),
                     "season": "Kharif",
-                    "data_source": f"Observed-Season Estimate Inputs — Kharif {crop_year} (NASA POWER)",
-                    "provenance_category": "Model Estimate — recorded yield for this year is not yet published (DES APY)",
+                    "data_source": f"Measured-Season Inputs — Kharif {crop_year} (NASA POWER + MODIS)" if crop_year <= 2024 else f"Observed-Season Estimate Inputs — Kharif {crop_year} (NASA POWER)",
+                    "provenance_category": "Model estimate from measured season inputs — the recorded yield for this year is published (DES APY); compare it on the Farmer Dashboard tracker" if crop_year <= 2024 else "Model Estimate — recorded yield for this year is not yet published (DES APY)",
                     "is_observational": False,
                     "provenance_details": f"{row.get('weather_provenance', '')} | Lags: {row.get('historical_provenance', '')} | Satellite: {row.get('satellite_provenance', '')} | Precomputed estimate: {row.get('precomputed_estimate_t_ha', '')} t/ha [{row.get('precomputed_interval_low', '')}, {row.get('precomputed_interval_high', '')}]",
                     "available_years": base_avail,

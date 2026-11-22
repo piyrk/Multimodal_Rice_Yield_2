@@ -55,13 +55,26 @@ export default function DashboardPage() {
       ? { key: 'moderate', label: 'Watch — moderate', action: 'Use controlled AWD: let water drop about 10 cm below the surface before re-flooding.', color: 'bg-amber-50 text-amber-800 border-amber-200' }
       : { key: 'comfortable', label: 'Comfortable', action: 'Rainfall has been sufficient. Keep drainage channels clear to avoid waterlogging.', color: 'bg-emerald-50 text-emerald-800 border-emerald-200' };
 
+  // Kharif runs Jun-Oct: once the selected season has ended, the water
+  // status is that season's record — it must not read as a live instruction
+  // ("Irrigate now" after harvest would be wrong advice).
+  const nowDate = new Date();
+  const seasonEnded = Number(selectedYear) < nowDate.getFullYear() ||
+    (Number(selectedYear) === nowDate.getFullYear() && nowDate.getMonth() > 9);
+  const seasonOverAction = 'Season complete — the status above is this season\'s water record, kept for review. No irrigation action applies after harvest.';
+  const seasonOverSpeech = {
+    en: seasonOverAction,
+    hi: 'Woh season pura ho chuka hai, isliye ye us season ke paani ka record hai, live salah nahi hai.',
+    te: 'ఆ సీజన్ పూర్తయిపోయింది, కాబట్టి ఇది ఆ సీజన్ నీటి రికార్డు మాత్రమే, ప్రత్యక్ష సూచన కాదు.',
+  };
+
   const handleListen = () => {
     if (speaking) {
       stopSpeech();
       setSpeaking(false);
       return;
     }
-    const actions = WATER_ACTIONS[water.key];
+    const actions = seasonEnded ? seasonOverSpeech : WATER_ACTIONS[water.key];
     const text = buildSummary(voiceLang, {
       district: selectedDistrict,
       year: selectedYear,
@@ -257,8 +270,8 @@ export default function DashboardPage() {
           <span className="text-xs font-bold uppercase tracking-wider text-stone-500 flex items-center space-x-1.5">
             <Droplets className="h-4 w-4 text-emerald-700" /> <span>Water Advice</span>
           </span>
-          <p><span className={`px-2 py-0.5 rounded-full text-[11px] font-bold border ${water.color}`}>{water.label}</span></p>
-          <p className="text-xs text-stone-700 leading-relaxed">{water.action}</p>
+          <p><span className={`px-2 py-0.5 rounded-full text-[11px] font-bold border ${water.color}`}>{water.label}{seasonEnded ? ' — season over' : ''}</span></p>
+          <p className="text-xs text-stone-700 leading-relaxed">{seasonEnded ? seasonOverAction : water.action}</p>
           <p className="text-[11px] text-stone-500">Full schedule: Advisory page → Water &amp; Irrigation.</p>
         </div>
 
