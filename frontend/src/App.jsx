@@ -15,6 +15,20 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('home');
   const [healthInfo, setHealthInfo] = useState(null);
   const [locations, setLocations] = useState([]);
+  // District handed from the Map's "Simulate in Yield Predictor" to Predict.
+  // Consumed once: navigating anywhere else clears it, so a later plain
+  // visit to Predict opens on the page default again.
+  const [predictDistrict, setPredictDistrict] = useState(null);
+  const goTo = (tab) => {
+    if (tab !== 'predict') setPredictDistrict(null);
+    setActiveTab(tab);
+  };
+
+  // Every page opens at the top — without this, the previous page's scroll
+  // position carries over and the sticky header clips the new page's heading.
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [activeTab]);
 
   useEffect(() => {
     // Initial health and location check
@@ -39,17 +53,17 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-stone-50 text-stone-900 flex flex-col font-sans selection:bg-emerald-200 selection:text-emerald-950">
-      <Navbar activeTab={activeTab} setActiveTab={setActiveTab} healthInfo={healthInfo} />
+      <Navbar activeTab={activeTab} setActiveTab={goTo} healthInfo={healthInfo} />
 
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6">
         {activeTab === 'home' && (
-          <HomePage onNavigate={(tab) => setActiveTab(tab)} />
+          <HomePage onNavigate={goTo} />
         )}
         {activeTab === 'predict' && (
-          <PredictPage locations={locations} />
+          <PredictPage locations={locations} initialDistrict={predictDistrict} />
         )}
         {activeTab === 'advisory' && (
-          <AdvisoryPage onNavigate={(tab) => setActiveTab(tab)} />
+          <AdvisoryPage onNavigate={goTo} />
         )}
         {activeTab === 'dashboard' && (
           <DashboardPage />
@@ -61,13 +75,19 @@ export default function App() {
           <ExplainabilityPage />
         )}
         {activeTab === 'map' && (
-          <MapPage locations={locations} />
+          <MapPage
+            locations={locations}
+            onSelectDistrict={(d) => {
+              setPredictDistrict(d);
+              goTo('predict');
+            }}
+          />
         )}
         {activeTab === 'viva' && (
-          <VivaGuidePage onNavigate={(tab) => setActiveTab(tab)} />
+          <VivaGuidePage onNavigate={goTo} />
         )}
         {activeTab === 'about' && (
-          <AboutPage onNavigate={(tab) => setActiveTab(tab)} />
+          <AboutPage onNavigate={goTo} />
         )}
       </main>
 

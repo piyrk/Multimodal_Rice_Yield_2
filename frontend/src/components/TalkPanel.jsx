@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Mic, MessageCircleQuestion, Volume2 } from 'lucide-react';
-import { startTalk, recognitionSupported } from '../utils/talk';
+import { Mic, MessageCircleQuestion, Volume2, Send } from 'lucide-react';
+import { startTalk, recognitionSupported, answerTextQuestion } from '../utils/talk';
 
 // Talk panel — Phase 1 conversational voice for the Farmer Dashboard.
 // Drop this component into DashboardPage.jsx, right under the existing
@@ -30,6 +30,27 @@ export default function TalkPanel({
   const [heard, setHeard] = useState('');
   const [answer, setAnswer] = useState('');
   const [note, setNote] = useState('');
+  const [typed, setTyped] = useState('');
+
+  // Typed path — same parser and answers as the voice path, for anyone
+  // without a microphone (or in a browser without speech recognition).
+  const handleAsk = (e) => {
+    e.preventDefault();
+    const q = typed.trim();
+    if (!q) return;
+    const { parsed, answer: a } = answerTextQuestion(q, {
+      districts,
+      district,
+      year,
+      data,
+      recordedActuals,
+    });
+    setHeard(q);
+    setAnswer(a);
+    setNote('');
+    if (parsed.district !== district) onDistrictChange(parsed.district);
+    if (parsed.year !== year) onYearChange(parsed.year);
+  };
 
   const handleTalk = () => {
     if (listening) return;
@@ -77,6 +98,22 @@ export default function TalkPanel({
             'Try: yield • barish • paani kab du? • keet ka khatra • 2024 me actual kitna tha? — English, Hindi ya Telugu me.'}
         </span>
       </div>
+      <form onSubmit={handleAsk} className="flex items-center gap-2">
+        <input
+          type="text"
+          value={typed}
+          onChange={(e) => setTyped(e.target.value)}
+          placeholder="Ya yahan likhkar puchein — e.g. Ludhiana me is saal kitni paidavaar hogi?"
+          className="flex-1 bg-stone-50 border border-stone-300 rounded-lg px-3 py-2 text-xs text-stone-900 focus:bg-white focus:ring-2 focus:ring-emerald-600"
+        />
+        <button
+          type="submit"
+          className="px-3 py-2 rounded-lg text-xs font-bold bg-emerald-700 text-white hover:bg-emerald-800 flex items-center space-x-1.5 shrink-0"
+        >
+          <Send className="h-3.5 w-3.5" />
+          <span>Puchein</span>
+        </button>
+      </form>
       {heard && (
         <p className="text-xs text-stone-700">
           <strong>You asked:</strong> “{heard}”

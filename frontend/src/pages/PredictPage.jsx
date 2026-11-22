@@ -28,7 +28,7 @@ import SEASON_ESTIMATES from '../data/seasonEstimates.json';
 
 const SEASON_META = SEASON_ESTIMATES?._meta || null;
 
-export default function PredictPage({ locations = [] }) {
+export default function PredictPage({ locations = [], initialDistrict = null }) {
   // Initial authentic profile based on representative baseline district (Burdwan, WB)
   const defaultDistrict = 'Burdwan';
   const initialProfile = getProfileForDistrict(defaultDistrict) || {
@@ -274,9 +274,15 @@ export default function PredictPage({ locations = [] }) {
     }
   };
 
-  // Initial load: synchronize default district with calibrated benchmark profile
+  // Initial load: synchronize default district with calibrated benchmark profile.
+  // If the Map handed over a district ("Simulate in Yield Predictor"), open
+  // with that district instead of the page default.
   useEffect(() => {
-    fetchProfile(formData.district_name, formData.crop_year, formData.season);
+    if (initialDistrict && initialDistrict !== formData.district_name) {
+      handleDistrictChange(initialDistrict);
+    } else {
+      fetchProfile(formData.district_name, formData.crop_year, formData.season);
+    }
     return () => {
       activeAbortRef.current?.abort();
     };
@@ -437,14 +443,16 @@ export default function PredictPage({ locations = [] }) {
     }
   };
 
-  // Reset form: invalidate prediction, clear errors, and reload authentic baseline for current district
-  const handleReset = () => {
+  // Reset form: invalidate prediction, clear errors, and restore the page's
+  // initial defaults (Burdwan, Kharif 2021 benchmark baseline) — a reset
+  // should mean the same thing regardless of the district currently shown.
+  const handleReset = (districtName = 'Burdwan') => {
     setResult(null);
     setError(null);
     setProfileError(null);
     setActivePresetName(null);
     setSeasonEstimateYear(null);
-    const p = getProfileForDistrict(formData.district_name) || getProfileForDistrict('Burdwan');
+    const p = getProfileForDistrict(districtName) || getProfileForDistrict('Burdwan');
     setFormData((prev) => ({
       ...prev,
       ...p,
@@ -462,7 +470,7 @@ export default function PredictPage({ locations = [] }) {
 
     if (preset.id === 'baseline') {
       setActivePresetName(null);
-      handleReset();
+      handleReset(formData.district_name);
       return;
     }
 
@@ -632,7 +640,7 @@ export default function PredictPage({ locations = [] }) {
                     <span>{preset.name}</span>
                     {isActive && <CheckCircle className="h-3 w-3 text-emerald-700 shrink-0" />}
                   </div>
-                  <div className="text-[11px] text-stone-500 line-clamp-1 mt-0.5">{preset.desc}</div>
+                  <div className="text-[11px] text-stone-500 line-clamp-2 mt-0.5">{preset.desc}</div>
                 </button>
               );
             })}
@@ -714,7 +722,7 @@ export default function PredictPage({ locations = [] }) {
             </div>
             <button
               type="button"
-              onClick={handleReset}
+              onClick={() => handleReset()}
               className="inline-flex items-center space-x-1 text-xs text-stone-600 hover:text-stone-900 px-2.5 py-1.5 rounded border border-stone-200 hover:bg-stone-50 cursor-pointer"
             >
               <RotateCcw className="h-3 w-3" />

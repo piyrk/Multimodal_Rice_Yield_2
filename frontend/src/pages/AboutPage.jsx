@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layers, ShieldAlert, Cpu, Database, CheckCircle, ArrowRight } from 'lucide-react';
+import { Layers, ShieldAlert, Cpu, Database, CheckCircle, ArrowRight, Github } from 'lucide-react';
 
 export default function AboutPage({ onNavigate }) {
   const techStack = [
@@ -233,7 +233,7 @@ export default function AboutPage({ onNavigate }) {
       </section>
 
       {/* Action Footer */}
-      <div className="text-center pt-2">
+      <div className="text-center pt-2 space-x-3">
         <button
           onClick={() => onNavigate('predict')}
           className="inline-flex items-center space-x-2 bg-emerald-700 hover:bg-emerald-800 text-white font-semibold px-6 py-2.5 rounded-lg shadow-sm transition-colors text-sm"
@@ -241,6 +241,15 @@ export default function AboutPage({ onNavigate }) {
           <span>Open Prediction Studio</span>
           <ArrowRight className="h-4 w-4" />
         </button>
+        <a
+          href="https://github.com/piyrk/Multimodal_Rice_Yield_2"
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center space-x-2 bg-white hover:bg-stone-50 text-stone-800 font-semibold px-6 py-2.5 rounded-lg shadow-sm transition-colors text-sm border border-stone-300"
+        >
+          <Github className="h-4 w-4" />
+          <span>View Source on GitHub</span>
+        </a>
       </div>
     </div>
   );

@@ -299,7 +299,45 @@ export function startTalk({ districts, district, year, data, recordedActuals, vo
     }
     onResult && onResult({ heard, parsed, answer, row: !!row });
   };
-  rec.onerror = () => onError && onError('Could not hear clearly — try again in a quiet place.');
+  rec.onerror = (e) => {
+    // Say what actually went wrong — one generic message misdiagnoses
+    // permission and hardware problems as background noise.
+    const msgs = {
+      'not-allowed': 'Microphone is blocked — allow mic access in the browser site settings, or type your question below.',
+      'service-not-allowed': 'Microphone is blocked — allow mic access in the browser site settings, or type your question below.',
+      'audio-capture': 'No microphone found on this device — you can type your question below instead.',
+      'no-speech': 'Could not hear clearly — try again in a quiet place, or type your question below.',
+      network: 'Speech service unreachable — check the connection, or type your question below.',
+    };
+    onError && onError(msgs[e?.error] || msgs['no-speech']);
+  };
   rec.start();
   return true;
+}
+
+// ---------------------------------------------------------------------------
+// Typed-question path: same parser and answers as the voice path, for
+// farmers without a microphone (and for anyone who prefers typing).
+// Returns { parsed, answer } and speaks the answer like the voice path.
+// ---------------------------------------------------------------------------
+export function answerTextQuestion(text, { districts, district, year, data, recordedActuals }) {
+  const parsed = parseQuestion(text, districts, district, year);
+  parsed.raw = text;
+  const row = data?.[parsed.year]?.[parsed.district];
+  const actual = recordedActuals?.[parsed.year]?.[parsed.district];
+  const answer = answerFor(parsed, { district: parsed.district, year: parsed.year, row, actual });
+  const speakLang = parsed.lang === 'hi' ? 'hi-IN' : parsed.lang === 'te' ? 'te-IN' : 'en-IN';
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(answer);
+    u.lang = speakLang;
+    u.rate = 0.95;
+    const voices = window.speechSynthesis.getVoices();
+    const match =
+      voices.find((v) => v.lang === speakLang) ||
+      voices.find((v) => v.lang && v.lang.startsWith(speakLang.slice(0, 2)));
+    if (match) u.voice = match;
+    window.speechSynthesis.speak(u);
+  }
+  return { parsed, answer };
 }
