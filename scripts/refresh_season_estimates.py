@@ -169,6 +169,39 @@ def pull_cached(dist, lat, lon, start, end):
     json.dump(data, open(path, "w"))
     return data
 
+def maybe_alert(data, old_est):
+    """Step G: one summary Telegram message when a refresh moves any
+    estimate by >= 0.25 t/ha or a current-season district is water-critical
+    (rainfall anomaly <= -20% or dry spell >= 12 days). Credentials come
+    only from the environment (GitHub Actions secrets); without them this
+    step silently skips."""
+    token = os.environ.get("TELEGRAM_BOT_TOKEN")
+    chat = os.environ.get("TELEGRAM_CHAT_ID")
+    if not token or not chat:
+        return "alerts skipped (Telegram env not set)"
+    lines = []
+    for (y, d), old in old_est.items():
+        new = data[y][d].get("precomputed_estimate_t_ha")
+        if old is not None and new is not None and abs(new - old) >= 0.25:
+            lines.append(f"{d} Kharif {y}: estimate {old} -> {new} t/ha")
+    for d, r in data.get("2026", {}).items():
+        if r["rainfall_anomaly_pct"] <= -20 or r["consecutive_dry_days"] >= 12:
+            lines.append(f"{d} Kharif 2026 water-critical: rainfall anomaly "
+                         f"{r['rainfall_anomaly_pct']}%, dry spell {r['consecutive_dry_days']} days")
+    if not lines:
+        return "no alert conditions met"
+    text = "ClimateRice-AI season refresh - changes worth knowing:\n" + "\n".join(lines[:20])
+    try:
+        req = urllib.request.Request(
+            f"https://api.telegram.org/bot{token}/sendMessage",
+            data=json.dumps({"chat_id": chat, "text": text}).encode(),
+            headers={"Content-Type": "application/json"})
+        urllib.request.urlopen(req, timeout=30).read()
+        return f"telegram alert sent ({len(lines)} lines)"
+    except Exception as e:
+        return f"telegram alert FAILED: {e}"
+
+
 def main():
     if len(sys.argv) >= 4:
         src, out_path, report_path = sys.argv[1], sys.argv[2], sys.argv[3]
@@ -176,6 +209,8 @@ def main():
         src = out_path = "frontend/src/data/seasonEstimates.json"
         report_path = "refresh-report.txt"
     data = json.load(open(src))
+    old_est = {(y, d): r.get("precomputed_estimate_t_ha")
+               for y in ("2025", "2026") for d, r in data.get(y, {}).items()}
     report = []
     districts = list(data["2025"].keys())
     obs_counts, fill_counts = {2025: [], 2026: []}, {2025: [], 2026: []}
@@ -254,16 +289,32 @@ def main():
             pending.remove((dist, year, payload))
     assert npred == 50 and not pending, f"only {npred}/50 predictions, pending: {pending}"
     today = date.today()
-    data["_meta"] = {
+    # Preserve the existing _meta (it also carries the 2022-2024 measured
+    # seasons) and update only this refresh's weather fields.
+    meta = dict(data.get("_meta", {}))
+    meta.update({
         "source": "NASA POWER daily (weather features, refreshed)",
         "generated_on": today.strftime("%d %b %Y"),
         "season_days_total": 153,
-        "days_observed": {str(y): min(obs_counts[y]) for y in (2025, 2026)},
-        "forecast_days": {str(y): max(fc_counts[y]) for y in (2025, 2026)},
-        "tail_filled_days": {str(y): max(fill_counts[y]) for y in (2025, 2026)},
-        "satellite_note": "Satellite features are district climatology carried forward, not measured for the season.",
-    }
+    })
+    for key, counts, fn in (("days_observed", obs_counts, min),
+                            ("forecast_days", fc_counts, max),
+                            ("tail_filled_days", fill_counts, max)):
+        merged = dict(meta.get(key, {}))
+        for y in (2025, 2026):
+            merged[str(y)] = fn(counts[y])
+        meta[key] = merged
+    meta["satellite_note"] = (
+        "Satellite inputs are MEASURED: MODIS MOD13Q1 NDVI/EVI from the NASA ORNL "
+        "DAAC subset service, computed over each district's cropland mask (pixels with 2000-2014 mean "
+        "Kharif NDVI >= 0.35 in a centroid window; Ludhiana uses a +/-5 km window because its +/-2 km "
+        "window is urban). NDVI anomaly is against the district's own masked 2000-2014 MODIS climatology. "
+        "NDWI is carried from the district baseline profile (MOD13Q1 carries no SWIR band). Measured "
+        "season-mean NDVI is lower than the semi-synthetic values the site carried before Nov 2026 - "
+        "expected: a season mean over real cropland pixels is not a peak-greenness figure.")
+    data["_meta"] = meta
     json.dump(data, open(out_path, "w"), indent=2)
+    report.append(maybe_alert(data, old_est))
     report.append(f"predictions ok: {npred}/50")
     report.append(f"2025 valid days per district: min {min(obs_counts[2025])}, max {max(obs_counts[2025])}")
     report.append(f"2026 valid days per district: min {min(obs_counts[2026])}, max {max(obs_counts[2026])}")
