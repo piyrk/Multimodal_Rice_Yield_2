@@ -386,6 +386,9 @@ export default function AdvisoryPage({ onNavigate }) {
                 </tbody>
               </table>
             </div>
+            <p className="text-[11px] text-stone-500 leading-relaxed">
+              Reading the depths: this table lists standing water <em>above</em> the soil surface. AWD drawdown is the opposite direction — under AWD the water table is allowed to fall 10–15 cm <em>below</em> the surface (measured in a perforated field tube) before re-flooding to the shallow depth shown for that stage.
+            </p>
           </div>
         </div>
       )}
@@ -401,6 +404,7 @@ export default function AdvisoryPage({ onNavigate }) {
             <p className="text-xs text-stone-600 leading-relaxed">
               Agronomic decision matrix compiled from official National Rice Research Institute (NRRI), 
               Acharya N.G. Ranga Agricultural University (ANGRAU), and Punjab Agricultural University (PAU) trial documentation.
+              Yield figures are trial-station potentials under recommended practice — district field averages (see the Dashboard tracker) are typically lower.
             </p>
           </div>
 

@@ -608,7 +608,7 @@ export default function PredictPage({ locations = [], initialDistrict = null }) 
             Yield Prediction Studio
           </h1>
           <p className="text-xs sm:text-sm text-stone-600 mt-1">
-            Configure climate, satellite, soil, and historical features to predict rice yield with dynamic multimodal attention.
+            Configure weather, soil, and historical features to predict rice yield with dynamic multimodal attention (satellite indices ride along as measured season context).
           </p>
         </div>
 
@@ -1561,7 +1561,7 @@ export default function PredictPage({ locations = [], initialDistrict = null }) 
                 <span>1. Multi-Decadal 10–20 Year Training Panel</span>
               </h4>
               <p className="text-stone-600 leading-relaxed">
-                Trained and validated on multi-decadal time-series records: <strong>15 years of genuine observational DES APY data (2000–2014, N=303)</strong> and <strong>21 years of multi-modal harmonized panel data (2000–2020, N=504)</strong> across 24 representative districts in 12 major Indian rice agro-ecological zones.
+                Trained and validated on multi-decadal time-series records across two tracks: <strong>genuine observational DES APY data (2000–2014, N=303; extended panel N=427, 2000–2024 — the deployed model's track)</strong> and the <strong>calibrated semi-synthetic benchmark panel (2000–2020, N=504)</strong>, spanning 24 representative districts in 12 major Indian rice agro-ecological zones.
               </p>
             </div>
 
@@ -1603,7 +1603,7 @@ export default function PredictPage({ locations = [], initialDistrict = null }) 
                 <span>5. Strict Chronological Holdout (Zero Leakage)</span>
               </h4>
               <p className="text-stone-600 leading-relaxed">
-                Scalers and imputers are strictly fit on historical training years (t &le; 2014). Future validation and test years are never seen during preprocessing, ensuring authentic out-of-sample temporal generalization.
+                Scalers and imputers are strictly fit on each track's training years only (benchmark track t &le; 2014; deployed observational model t &le; 2018). Future validation and test years are never seen during preprocessing, ensuring authentic out-of-sample temporal generalization.
               </p>
             </div>
 

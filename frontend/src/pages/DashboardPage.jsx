@@ -254,11 +254,11 @@ export default function DashboardPage() {
           </p>
           <p className="text-xs text-stone-600">
             Likely range: <strong>{row.precomputed_interval_low} – {row.precomputed_interval_high} t/ha</strong> (calibrated interval).
-            District's recorded baseline: {row.historical_yield_3yr_mean} t/ha (3-year mean).
+            District baseline: {Number(row.historical_yield_3yr_mean).toFixed(2)} t/ha (3-year mean of prior seasons).
           </p>
           <p className="text-[11px] text-amber-800 bg-amber-50 border border-amber-200 rounded-lg p-2">
             {selectedYear <= '2024'
-              ? <>A model <strong>estimate</strong> from that season's measured weather and satellite inputs. The official recorded yield for Kharif {selectedYear} is published — see the comparison in the tracker below.</>
+              ? <>A model <strong>estimate</strong> from that season's measured weather (satellite data is tracked alongside as season context). The official recorded yield for Kharif {selectedYear} is published — see the comparison in the tracker below.</>
               : <>This is a season <strong>estimate</strong> from measured weather — not a recorded official yield.</>}
           </p>
         </div>
