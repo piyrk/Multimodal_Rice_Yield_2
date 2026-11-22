@@ -50,4 +50,3 @@ jobs:
             git commit -m "Season estimates auto-refresh (NASA POWER, $(date -u +%d\ %b\ %Y))"
             git push
           fi
-
