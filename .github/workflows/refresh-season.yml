@@ -41,12 +41,12 @@ jobs:
       - name: Commit if changed
         if: env.SKIP != '1'
         run: |
-          if git diff --quiet -- frontend/src/data/seasonEstimates.json; then
+          if git diff --quiet -- frontend/src/data/seasonEstimates.json data/season_estimates.json; then
             echo "No changes."
           else
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add frontend/src/data/seasonEstimates.json
+            git add frontend/src/data/seasonEstimates.json data/season_estimates.json
             git commit -m "Season estimates auto-refresh (NASA POWER, $(date -u +%d\ %b\ %Y))"
             git push
           fi
