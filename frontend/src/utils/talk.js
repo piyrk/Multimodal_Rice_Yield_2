@@ -24,6 +24,8 @@ export function detectLang(text) {
   if (/[\u0C00-\u0C7F]/.test(text)) return 'te'; // Telugu script
   if (/[\u0900-\u097F]/.test(text)) return 'hi'; // Devanagari script
   const t = ' ' + text.toLowerCase().replace(/[^a-z\s]/g, ' ') + ' ';
+  // Roman Telugu (typed or transcribed in Latin script) -> Telugu answers.
+  if (/\b(neeru|nillu|varsham|digubadi|digubadulu|pantalu|vedi)\b/.test(t)) return 'te';
   if (
     /\b(paani|pani|barish|varsha|paidavaar|upaj|fasal|keet|rog|bimari|sukha|sookha|sinchai|kitni|kitna|kya|kab|kaisi|kaise|batao|bolo|madad)\b/.test(
       t
@@ -174,12 +176,19 @@ export function answerFor(parsed, ctx) {
         hi: `${district}, Kharif ${year}: kul varsha ${row.rainfall_cumulative_mm} millimeter rahi, jo aam se ${Math.abs(row.rainfall_anomaly_pct)} percent ${anomWord} hai.`,
         te: `${district}, ఖరీఫ్ ${year}: మొత్తం వర్షపాతం ${row.rainfall_cumulative_mm} మిల్లీమీటర్లు, ఇది సాధారణం కంటే ${Math.abs(row.rainfall_anomaly_pct)} శాతం ${anomWord}.`,
       }[lang];
-    case 'water':
+    case 'water': {
+      // Complete picture in one answer (Piyush, 2026-11-23): expected
+      // harvest first, then the irrigation situation — rainfall vs normal,
+      // dry spell, the advice, and how much of the cropped area actually
+      // has irrigation — so the farmer is never left guessing.
+      const anomAbs = Math.round(Math.abs(row.rainfall_anomaly_pct));
+      const irrPct = Math.round((row.irrigation_ratio ?? 0) * 100);
       return {
-        en: `${district}, Kharif ${year}: water advice — ${WATER_WORD.en[water]} Longest dry spell was ${row.consecutive_dry_days} days.`,
-        hi: `${district}, Kharif ${year}: paani ki salah — ${WATER_WORD.hi[water]} Sabse lamba sookha daur ${row.consecutive_dry_days} din raha.`,
-        te: `${district}, ఖరీఫ్ ${year}: నీటి సలహా — ${WATER_WORD.te[water]} అత్యంత పొడవైన వర్షాభావ కాలం ${row.consecutive_dry_days} రోజులు.`,
+        en: `${district}, Kharif ${year}: expected harvest about ${row.precomputed_estimate_t_ha} tonnes per hectare, likely between ${row.precomputed_interval_low} and ${row.precomputed_interval_high}. Irrigation: rainfall was ${row.rainfall_cumulative_mm} millimetres, about ${anomAbs} percent ${anomWord} than normal, and the longest dry spell was ${row.consecutive_dry_days} days. ${WATER_WORD.en[water]} About ${irrPct} percent of the cropped area here has irrigation.`,
+        hi: `${district}, Kharif ${year}: apekshit paidavaar lagbhag ${row.precomputed_estimate_t_ha} tonne prati hectare hai, sambhavit seema ${row.precomputed_interval_low} se ${row.precomputed_interval_high} tak. Sinchai: varsha ${row.rainfall_cumulative_mm} millimeter hui, aam se lagbhag ${anomAbs} percent ${anomWord}, aur sabse lamba sookha daur ${row.consecutive_dry_days} din raha. ${WATER_WORD.hi[water]} Is jile me lagbhag ${irrPct} percent fasal kshetra me sinchai ki suvidha hai.`,
+        te: `${district}, ఖరీఫ్ ${year}: ఆశించిన దిగుబడి హెక్టారుకు సుమారు ${row.precomputed_estimate_t_ha} టన్నులు, సంభావ్య పరిధి ${row.precomputed_interval_low} నుండి ${row.precomputed_interval_high} వరకు. నీటిపారుదల: వర్షపాతం ${row.rainfall_cumulative_mm} మిల్లీమీటర్లు, సాధారణం కంటే సుమారు ${anomAbs} శాతం ${anomWord}, అత్యంత పొడవైన వర్షాభావ కాలం ${row.consecutive_dry_days} రోజులు. ${WATER_WORD.te[water]} ఈ జిల్లాలో సుమారు ${irrPct} శాతం పంట భూమిలో నీటిపారుదల సదుపాయం ఉంది.`,
       }[lang];
+    }
     case 'pest': {
       const which = /blast/i.test(parsed.raw || '')
         ? 'blast'
