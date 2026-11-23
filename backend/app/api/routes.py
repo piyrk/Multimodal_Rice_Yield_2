@@ -45,8 +45,12 @@ def predict_yield(
     except HTTPException:
         raise
     except Exception as e:
+        # Log the real error server-side; never leak internals to clients.
         logger.error("Prediction failed: %s", e)
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(
+            status_code=500,
+            detail="Prediction failed on the server — please try again.",
+        )
 
 
 @router.post("/predict/explain", tags=["Explainability"])
@@ -72,7 +76,10 @@ def explain_prediction(
         }
     except Exception as e:
         logger.error("Explain prediction failed: %s", e)
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(
+            status_code=500,
+            detail="Explanation failed on the server — please try again.",
+        )
 
 
 @router.get("/locations", tags=["Spatial"])

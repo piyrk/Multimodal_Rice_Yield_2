@@ -733,11 +733,11 @@ export default function PredictPage({ locations = [], initialDistrict = null }) 
           <form onSubmit={handlePredict} className="space-y-6">
             {/* Location & Crop Context */}
             <div className="space-y-3">
-              <div className="flex items-center justify-between">
+              <div className="flex flex-wrap items-center justify-between gap-2">
                 <h3 className="text-xs font-bold uppercase tracking-wider text-emerald-800">
                   Administrative &amp; Target Context
                 </h3>
-                <span className="text-[11px] text-stone-400 font-mono">Location &amp; Temporal</span>
+                <span className="text-[11px] text-stone-400 font-mono whitespace-nowrap">Location &amp; Temporal</span>
               </div>
               <div className="grid sm:grid-cols-2 gap-3 text-xs">
                 <div>

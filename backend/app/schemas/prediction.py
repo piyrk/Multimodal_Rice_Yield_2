@@ -13,8 +13,8 @@ class CropSeasonEnum(str, Enum):
 
 class PredictionRequest(BaseModel):
     """Input payload containing district metadata and multimodal environmental features."""
-    district_name: str = Field(default="Burdwan", description="District name")
-    state_name: Optional[str] = Field(default="West Bengal", description="State name")
+    district_name: str = Field(default="Burdwan", max_length=100, description="District name")
+    state_name: Optional[str] = Field(default="West Bengal", max_length=100, description="State name")
     crop_year: Optional[int] = Field(default=2021, description="Crop year")
     season: CropSeasonEnum = Field(
         default=CropSeasonEnum.KHARIF,

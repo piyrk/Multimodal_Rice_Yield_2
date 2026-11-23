@@ -246,7 +246,7 @@ Experiments were conducted on both (1) authentic observational records from DES 
 ### 9.2 Python Environment Setup
 ```powershell
 # Clone repository
-git clone https://github.com/piyushkumar/ClimateRice-AI.git
+git clone https://github.com/piyrk/Multimodal_Rice_Yield_2.git
 cd ClimateRice-AI
 
 # Install backend dependencies
