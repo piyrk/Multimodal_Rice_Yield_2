@@ -369,6 +369,15 @@ def main():
         "predicts from weather, soil and historical inputs and does not consume satellite fields.")
     data["_meta"] = meta
     json.dump(data, open(out_path, "w"), indent=2)
+    if len(sys.argv) < 4:
+        # In-place mode: the backend /profile endpoint reads the repo-root
+        # copy (data/season_estimates.json). Mirror the same JSON there so a
+        # weekly refresh can never leave the two copies serving different
+        # season features (found in the 2026-11-23 audit).
+        mirror = "data/season_estimates.json"
+        if os.path.abspath(mirror) != os.path.abspath(out_path):
+            json.dump(data, open(mirror, "w"), indent=2)
+            report.append(f"mirrored to {mirror}")
     report.append(maybe_alert(data, old_est))
     report.append(f"predictions ok: {npred}/50")
     report.append(f"2025 valid days per district: min {min(obs_counts[2025])}, max {max(obs_counts[2025])}")
