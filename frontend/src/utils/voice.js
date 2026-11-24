@@ -104,6 +104,11 @@ export function buildSummary(langCode, ctx) {
 }
 
 export const WATER_ACTIONS = {
+  dryspell: {
+    en: 'Rainfall overall is near or above normal, but a long dry spell is stressing the crop. One light irrigation will help, especially at flowering.',
+    hi: 'Kul varsha theek hai, lekin beech mein lamba sukha pada hai. Ek halki sinchai faydemand rahegi, khaaskar phool aane par.',
+    te: 'మొత్తం వర్షపాతం సరిపడా ఉంది, కానీ మధ్యలో దీర్ఘ వర్షాభావం ఉంది. ఒక తేలికపాటి నీరు పెట్టడం మంచిది, ముఖ్యంగా పూత సమయంలో.',
+  },
   critical: {
     en: 'Irrigate now, especially at flowering. Do not let the field dry out.',
     hi: 'Turant sinchai karein, khaaskar phool aane ke samay par. Khet ko sookhne na dein.',

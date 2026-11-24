@@ -47,10 +47,15 @@ export default function DashboardPage() {
     anom <= -20 ? 'text-rose-700' :
     anom < 0 ? 'text-amber-700' : 'text-emerald-700';
 
-  // Same published thresholds as the Advisory page
+  // Same published thresholds as the Advisory page. 'critical' is reserved
+  // for a genuine rainfall deficit (anomaly <= -20%); a long dry spell inside
+  // an otherwise normal/wet season gets its own level instead of a critical
+  // alarm that contradicts the season's rainfall total.
   const water =
-    (row.consecutive_dry_days >= 12 || anom <= -20)
+    (anom <= -20)
       ? { key: 'critical', label: 'Needs water — critical', action: 'Irrigate now, especially at flowering. Do not let the field dry out.', color: 'bg-rose-50 text-rose-800 border-rose-200' }
+      : (row.consecutive_dry_days >= 12)
+      ? { key: 'dryspell', label: 'Long dry spell', action: 'Rainfall overall is near or above normal, but a long dry spell is stressing the crop — one light irrigation helps, especially at flowering.', color: 'bg-amber-50 text-amber-800 border-amber-200' }
       : (row.consecutive_dry_days >= 8 || anom < 0)
       ? { key: 'moderate', label: 'Watch — moderate', action: 'Use controlled AWD: let water drop about 10 cm below the surface before re-flooding.', color: 'bg-amber-50 text-amber-800 border-amber-200' }
       : { key: 'comfortable', label: 'Comfortable', action: 'Rainfall has been sufficient. Keep drainage channels clear to avoid waterlogging.', color: 'bg-emerald-50 text-emerald-800 border-emerald-200' };

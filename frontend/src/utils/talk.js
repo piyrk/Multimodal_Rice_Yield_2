@@ -41,7 +41,13 @@ export function detectLang(text) {
 // ---------------------------------------------------------------------------
 export function computeWater(row) {
   const anom = row.rainfall_anomaly_pct;
-  if (row.consecutive_dry_days >= 12 || anom <= -20) return 'critical';
+  // 'critical' is reserved for a genuine rainfall deficit (anomaly <= -20%),
+  // matching the Advisory page's water-critical definition. A long dry spell
+  // inside an otherwise normal/wet season is its own level — calling it
+  // critical contradicted the season's rainfall total (e.g. Ludhiana 2026:
+  // +37% rain, 16 dry days).
+  if (anom <= -20) return 'critical';
+  if (row.consecutive_dry_days >= 12) return 'dryspell';
   if (row.consecutive_dry_days >= 8 || anom < 0) return 'moderate';
   return 'comfortable';
 }
@@ -73,16 +79,19 @@ const RISK_WORD = {
 const WATER_WORD = {
   en: {
     critical: 'Needs water — critical. Irrigate now, especially at flowering.',
+    dryspell: 'Rainfall overall is near or above normal, but a long dry spell is stressing the crop — one light irrigation will help, especially at flowering.',
     moderate: 'Watch — moderate. Use controlled AWD.',
     comfortable: 'Comfortable. Rainfall has been sufficient.',
   },
   hi: {
     critical: 'Paani ki sakht zaroorat hai. Turant sinchai karein.',
+    dryspell: 'Kul varsha theek hai, lekin beech mein lamba sukha pada hai — ek halki sinchai faydemand rahegi, khaas taur par phool aane par.',
     moderate: 'Nigrani rakhein — madhyam sthiti. Niyantrit AWD apnayein.',
     comfortable: 'Paani ki sthiti aaramdayak hai. Varsha paryapt hui hai.',
   },
   te: {
     critical: 'నీరు తక్షణం అవసరం. వెంటనే నీరు పెట్టండి.',
+    dryspell: 'మొత్తం వర్షపాతం సరిపడా ఉంది, కానీ మధ్యలో దీర్ఘ వర్షాభావం పంటను ఒత్తిడికి గురిచేస్తోంది — ఒక తేలికపాటి నీరు పెట్టడం మంచిది, ముఖ్యంగా పూత సమయంలో.',
     moderate: 'గమనిస్తూ ఉండండి — మధ్యస్థ స్థితి. నియంత్రిత AWD వాడండి.',
     comfortable: 'నీటి పరిస్థితి సరిపడా ఉంది. వర్షపాతం సరిపడా కురిసింది.',
   },

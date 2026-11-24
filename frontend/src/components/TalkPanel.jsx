@@ -145,5 +145,5 @@ export default function TalkPanel({
 //      />
 // 3. No backend change, no new secret, no new dependency. Chrome works best;
 //    speech recognition needs Chrome; spoken answers work in any browser
-//    with speech synthesis. Viva line: "Phase 1 answers only from measured
+//    with speech synthesis. Design rule: "Answers come only from measured
 //    dashboard data — no model, no key, no hallucinated number."

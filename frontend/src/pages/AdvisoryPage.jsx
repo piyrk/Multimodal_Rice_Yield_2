@@ -128,18 +128,32 @@ export default function AdvisoryPage({ onNavigate }) {
     let urgencyColor = 'bg-emerald-50 text-emerald-800 border-emerald-200';
     let recommendations = [];
 
-    if (cdd >= 12 || rainAnom <= -20) {
+    if (rainAnom <= -20) {
+      // Genuine season deficit — the only case labelled critical, matching
+      // the Dashboard / Talk water-status definition.
       urgency = 'Critical Irrigation Recommended';
       urgencyColor = 'bg-rose-50 text-rose-800 border-rose-200';
       schedule = 'Immediate Supplementary Flooding (3–5 cm depth)';
-      if (cdd >= 12 && rainAnom > 0) {
-        // A wet season can still hurt: what matters is distribution, not
-        // the total. Say so instead of claiming a plain deficit.
-        recommendations.push(`Season rainfall was above normal (+${Math.round(rainAnom)}%), but unevenly distributed: the longest rainless spell ran ${cdd} days — long enough to stress the crop at flowering. Protective irrigation, not total rainfall, was the binding constraint.`);
-      } else if (cdd >= 12) {
-        recommendations.push(`Root-zone moisture deficit: a ${cdd}-day rainless spell${rainAnom <= -20 ? ` in a season ${Math.abs(Math.round(rainAnom))}% below normal rainfall` : ''} leaves the root zone dry at sensitive stages.`);
+      if (cdd >= 12) {
+        recommendations.push(`Root-zone moisture deficit: a ${cdd}-day rainless spell in a season ${Math.abs(Math.round(rainAnom))}% below normal rainfall leaves the root zone dry at sensitive stages.`);
       } else {
         recommendations.push(`Root-zone moisture deficit: season rainfall ${Math.abs(Math.round(rainAnom))}% below normal leaves the root zone dry at sensitive stages.`);
+      }
+      recommendations.push('Prioritize irrigation during anthesis (flowering) to prevent floret sterility.');
+      if (irrigRatio < 0.50) {
+        recommendations.push('Rainfed vulnerability is high: apply protective surface mulch to conserve capillary soil moisture.');
+      }
+    } else if (cdd >= 12) {
+      // A long dry spell inside a season whose total rainfall is near or
+      // above normal: distribution stress, not a season deficit — advise
+      // protective irrigation without the critical label.
+      urgency = 'Dry-Spell Advisory — Protective Irrigation';
+      urgencyColor = 'bg-amber-50 text-amber-800 border-amber-200';
+      schedule = 'Protective Supplementary Irrigation (light flooding at sensitive stages)';
+      if (rainAnom > 0) {
+        recommendations.push(`Season rainfall was above normal (+${Math.round(rainAnom)}%), but unevenly distributed: the longest rainless spell ran ${cdd} days — long enough to stress the crop at flowering. Protective irrigation, not total rainfall, was the binding constraint.`);
+      } else {
+        recommendations.push(`Root-zone moisture deficit: a ${cdd}-day rainless spell leaves the root zone dry at sensitive stages, even though the season's total rainfall is near normal.`);
       }
       recommendations.push('Prioritize irrigation during anthesis (flowering) to prevent floret sterility.');
       if (irrigRatio < 0.50) {

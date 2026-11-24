@@ -30,8 +30,10 @@ import PANEL_PROFILES from '../data/panelProfiles.json';
 const SEASON_META = SEASON_ESTIMATES?._meta || null;
 
 export default function PredictPage({ locations = [], initialDistrict = null }) {
-  // Initial authentic profile based on representative baseline district (Burdwan, WB)
-  const defaultDistrict = 'Burdwan';
+  // Page default: the project's home district (Krishna, AP) on the live
+  // season (Kharif 2026), matching the Dashboard/Advisory defaults — a first
+  // visit should show the current season, not a 2021 benchmark baseline.
+  const defaultDistrict = 'Krishna';
   const initialProfile = getProfileForDistrict(defaultDistrict) || {
     district_name: 'Burdwan',
     state_name: 'West Bengal',
@@ -67,7 +69,7 @@ export default function PredictPage({ locations = [], initialDistrict = null }) 
 
   const defaultParams = {
     ...initialProfile,
-    crop_year: 2021,
+    crop_year: 2026,
     season: 'Kharif',
   };
 
@@ -318,7 +320,7 @@ export default function PredictPage({ locations = [], initialDistrict = null }) 
     }
   };
 
-  // Initial load: synchronize default district with calibrated benchmark profile.
+  // Initial load: synchronize the page default (Krishna, Kharif 2026).
   // If the Map handed over a district ("Simulate in Yield Predictor"), open
   // with that district instead of the page default.
   useEffect(() => {
@@ -336,8 +338,8 @@ export default function PredictPage({ locations = [], initialDistrict = null }) 
   const presets = [
     {
       id: 'baseline',
-      name: 'Benchmark Climatology',
-      desc: 'Reload calibrated benchmark baseline for current district',
+      name: 'Live Season Profile',
+      desc: 'Reload the measured live-season profile for current district',
     },
     {
       id: 'drought',
@@ -488,23 +490,23 @@ export default function PredictPage({ locations = [], initialDistrict = null }) 
   };
 
   // Reset form: invalidate prediction, clear errors, and restore the page's
-  // initial defaults (Burdwan, Kharif 2021 benchmark baseline) — a reset
-  // should mean the same thing regardless of the district currently shown.
-  const handleReset = (districtName = 'Burdwan') => {
+  // initial defaults (Krishna, Kharif 2026 live season) — a reset should
+  // mean the same thing regardless of the district currently shown.
+  const handleReset = (districtName = 'Krishna') => {
     setResult(null);
     setError(null);
     setProfileError(null);
     setActivePresetName(null);
     setSeasonEstimateYear(null);
-    const p = getProfileForDistrict(districtName) || getProfileForDistrict('Burdwan');
+    const p = getProfileForDistrict(districtName) || getProfileForDistrict('Krishna');
     setFormData((prev) => ({
       ...prev,
       ...p,
-      crop_year: 2021,
+      crop_year: 2026,
       season: 'Kharif',
     }));
     setDataSourceType('benchmark');
-    fetchProfile(p.district_name, 2021, 'Kharif');
+    fetchProfile(p.district_name, 2026, 'Kharif');
   };
 
   // Apply scenario preset: update only intended stress fields without wiping district/soil context
@@ -1346,6 +1348,29 @@ export default function PredictPage({ locations = [], initialDistrict = null }) 
                   <span className="font-mono font-bold text-stone-900">
                     {result.predictive_interval?.[0]} — {result.predictive_interval?.[1]} t/ha
                   </span>
+                </div>
+                {/* Interval range bar: band = calibrated interval, tick = estimate (0–8 t/ha scale) */}
+                <div className="py-2.5">
+                  <div className="relative h-2.5 rounded-full bg-stone-200/80">
+                    <div
+                      className="absolute top-0 h-2.5 rounded-full bg-emerald-400/70"
+                      style={{
+                        left: `${Math.max(0, Math.min(100, (result.predictive_interval?.[0] / 8) * 100))}%`,
+                        width: `${Math.max(2, Math.min(100, ((result.predictive_interval?.[1] - result.predictive_interval?.[0]) / 8) * 100))}%`,
+                      }}
+                    />
+                    <div
+                      className="absolute -top-0.5 h-3.5 w-1 rounded bg-emerald-900"
+                      style={{
+                        left: `calc(${Math.max(0, Math.min(100, (result.predicted_yield_tonnes_per_hectare / 8) * 100))}% - 2px)`,
+                      }}
+                    />
+                  </div>
+                  <div className="flex justify-between text-[10px] text-stone-400 mt-1 font-mono">
+                    <span>0</span>
+                    <span>4</span>
+                    <span>8 t/ha</span>
+                  </div>
                 </div>
                 <div className="py-2.5 flex items-center justify-between">
                   <div>

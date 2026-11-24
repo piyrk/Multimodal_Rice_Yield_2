@@ -57,7 +57,7 @@ export default function HomePage({ onNavigate }) {
       {/* Hero Section */}
       <section className="text-center max-w-3xl mx-auto space-y-6">
         <div className="inline-flex items-center space-x-2 bg-emerald-50 text-emerald-800 border border-emerald-200/80 px-3 py-1 rounded-full text-xs font-semibold">
-          <span>Multimodal Deep Learning &amp; Gradient Boosting Benchmark</span>
+          <span>Live Season · Kharif 2026 — 25 Districts</span>
         </div>
 
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-stone-900 tracking-tight leading-tight">
@@ -84,6 +84,21 @@ export default function HomePage({ onNavigate }) {
           >
             <span>Learn About the Model</span>
           </button>
+        </div>
+
+        {/* Trust strip: the numbers a first-time visitor should see */}
+        <div className="flex flex-wrap items-stretch justify-center gap-y-3 pt-4 text-center">
+          {[
+            ['25', 'districts served'],
+            ['427', 'recorded panel records'],
+            ['85.42%', 'calibrated coverage'],
+            ['2024', 'recorded data through'],
+          ].map(([num, label], i) => (
+            <div key={label} className={`px-5 ${i > 0 ? 'border-l border-stone-200' : ''}`}>
+              <div className="text-xl sm:text-2xl font-extrabold text-emerald-800 font-mono">{num}</div>
+              <div className="text-[11px] uppercase tracking-wider text-stone-500 font-medium">{label}</div>
+            </div>
+          ))}
         </div>
       </section>
 

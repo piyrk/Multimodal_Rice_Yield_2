@@ -53,8 +53,9 @@ export default function Navbar({ activeTab, setActiveTab, healthInfo }) {
                 <span className="font-bold text-base sm:text-lg text-stone-900 tracking-tight">
                   ClimateRice<span className="text-emerald-700">-AI</span>
                 </span>
-                <span className="hidden lg:inline-block text-[11px] bg-emerald-50 text-emerald-800 border border-emerald-200 px-1.5 py-0.5 rounded font-medium">
-                  B.Tech Capstone
+                <span className="hidden lg:inline-flex items-center gap-1 text-[11px] bg-emerald-50 text-emerald-800 border border-emerald-200 px-1.5 py-0.5 rounded font-medium">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  Kharif 2026 · Live
                 </span>
               </div>
             </div>
