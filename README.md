@@ -10,7 +10,7 @@
 [![Observational: 427 Records](https://img.shields.io/badge/Observational_Data-427_Records-emerald.svg)](docs/observational_dataset_report.md)
 
 > **Project 19 — B.Tech CSE Final Year Capstone Project**  
-> **Student Team:** Piyush Kumar, Rajesh, Laxmi Pavani, Mullapudi Pravallika  
+> **Student Team:** Piyush Kumar, Rajesh, Lakshmi Pavani, Mullapudi Pravallika  
 > **Faculty Mentor / Supervisor:** Dr. E. Raveendra Reddy  
 > **Department:** Department of Computer Science and Engineering  
 > **Target:** Rice Yield Prediction in Metric Tonnes per Hectare ($t/ha$)  

@@ -193,7 +193,7 @@ export default function AboutPage({ onNavigate }) {
               </li>
               <li className="flex items-center space-x-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-700"></span>
-                <span><strong>Laxmi Pavani</strong> — Feature Engineering &amp; Statistical Evaluation</span>
+                <span><strong>Lakshmi Pavani</strong> — Feature Engineering &amp; Statistical Evaluation</span>
               </li>
               <li className="flex items-center space-x-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-700"></span>
