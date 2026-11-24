@@ -491,6 +491,15 @@ class ModelService:
                         exact = bsub[bsub["crop_year"] == 2020]
                     if not exact.empty:
                         brow = exact.iloc[-1]
+                if brow is None:
+                    # Districts with recorded panel rows but no benchmark row
+                    # (e.g. Krishna) are still served from the panel: their
+                    # satellite display values come from the panel row itself.
+                    prow = year_data[matched_dist]
+                    brow = {k: prow.get(k, 0.0) for k in ("ndvi_mean", "ndvi_peak", "evi_mean", "ndwi_mean", "ndvi_anomaly")}
+                    bsub_years = sorted(int(y) for y, yd in self.panel_profiles.items() if matched_dist in yd)
+                else:
+                    bsub_years = sorted(bsub["crop_year"].unique().tolist())
                 if brow is not None:
                     row = dict(year_data[matched_dist])
                     return {
@@ -502,7 +511,7 @@ class ModelService:
                         "provenance_category": "Recorded panel row — measured inputs; the recorded yield for this year is published (DES APY)",
                         "is_observational": True,
                         "provenance_details": f"{row.get('weather_provenance', '')} | Lags: {row.get('historical_provenance', '')} | Satellite: {row.get('satellite_provenance', '')}",
-                        "available_years": [2026, 2025] + sorted(bsub["crop_year"].unique().tolist()),
+                        "available_years": [2026, 2025] + bsub_years,
                         "latitude": round(float(row.get("latitude", 0.0)), 4),
                         "longitude": round(float(row.get("longitude", 0.0)), 4),
                         "agro_ecological_zone": str(row.get("agro_ecological_zone", "")),
