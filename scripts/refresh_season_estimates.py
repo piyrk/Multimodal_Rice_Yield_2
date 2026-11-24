@@ -255,6 +255,107 @@ def maybe_alert(data, old_est):
         return f"telegram alert FAILED: {e}"
 
 
+def validate_historical_chains(data):
+    """Data-quality gate for the recorded lag chains in the season file.
+
+    Added 2026-11-24 after the Kharif 2026 incident: the 12 panel
+    districts' 2026 rows silently carried baseline-profile lags and sown
+    area while their 2022-2025 rows used recorded DES APY data, which
+    crashed live estimates (Bilaspur 2.00, Raipur 1.93 t/ha). The refresh
+    carries historical fields unchanged, so a bad chain would persist
+    forever without this check. Rules:
+    (1) Recorded anchor — for districts in recorded_actuals, rows must
+        carry the recorded chain: 2023 lag1 = recorded 2022; 2024 lag1 =
+        recorded 2023, lag2 = recorded 2022; 2025 and 2026 lag1 =
+        recorded 2024, lag2 = recorded 2023, 3-yr mean = recorded
+        2022-2024 mean (Kharif 2025 APY is unpublished, so the 2026 row
+        keeps the through-2024 chain); 2025/2026 sown areas must match.
+    (2) Chain advance — where adjacent rows both carry recorded chains,
+        lag2(Y) = lag1(Y-1) and the 3-yr mean is the mean of the three
+        chain yields (checked for Y = 2024, 2025).
+    (3) Frozen chains — a row whose provenance says the chain runs
+        'through Kharif 2023' (later APY unpublished for that district)
+        must repeat the 2024 row's chain exactly, and every recorded
+        2026 row must repeat its 2025 chain (plus the same sown area).
+    Returns a list of violation strings; empty means pass.
+    """
+    violations = []
+    tol, mtol = 0.011, 0.02
+
+    def chain(row):
+        return (row.get("historical_yield_lag1"), row.get("historical_yield_lag2"),
+                row.get("historical_yield_3yr_mean"))
+
+    def is_recorded(row):
+        prov = (row.get("historical_provenance") or "").lower()
+        return "recorded" in prov and "baseline" not in prov
+
+    def is_frozen23(row):
+        return "through kharif 2023" in (row.get("historical_provenance") or "").lower()
+
+    def close(a, b, t):
+        return a is not None and b is not None and abs(a - b) <= t
+
+    years = sorted(y for y in data if y.isdigit())
+    actuals = data.get("recorded_actuals", {})
+
+    # (1) recorded anchor for the panel districts
+    for dist, y2022 in actuals.get("2022", {}).items():
+        a23 = actuals.get("2023", {}).get(dist)
+        a24 = actuals.get("2024", {}).get(dist)
+        if a23 is None or a24 is None:
+            continue
+        rows = {y: data.get(y, {}).get(dist) for y in ("2023", "2024", "2025", "2026")}
+        if rows["2023"] and not close(rows["2023"]["historical_yield_lag1"], y2022, tol):
+            violations.append(f"{dist} 2023 lag1 {rows['2023']['historical_yield_lag1']} != recorded 2022 {y2022}")
+        if rows["2024"]:
+            if not close(rows["2024"]["historical_yield_lag1"], a23, tol):
+                violations.append(f"{dist} 2024 lag1 {rows['2024']['historical_yield_lag1']} != recorded 2023 {a23}")
+            if not close(rows["2024"]["historical_yield_lag2"], y2022, tol):
+                violations.append(f"{dist} 2024 lag2 {rows['2024']['historical_yield_lag2']} != recorded 2022 {y2022}")
+        mean_rec = round((y2022 + a23 + a24) / 3.0, 4)
+        for y in ("2025", "2026"):
+            r = rows[y]
+            if not r:
+                continue
+            if not close(r["historical_yield_lag1"], a24, tol):
+                violations.append(f"{dist} {y} lag1 {r['historical_yield_lag1']} != recorded 2024 {a24}")
+            if not close(r["historical_yield_lag2"], a23, tol):
+                violations.append(f"{dist} {y} lag2 {r['historical_yield_lag2']} != recorded 2023 {a23}")
+            if not close(r["historical_yield_3yr_mean"], mean_rec, mtol):
+                violations.append(f"{dist} {y} 3yr mean {r['historical_yield_3yr_mean']} != recorded 2022-2024 mean {mean_rec}")
+        r25, r26 = rows["2025"], rows["2026"]
+        if r25 and r26 and not close(r25.get("sown_area_ha"), r26.get("sown_area_ha"), 0.1):
+            violations.append(f"{dist} sown area differs 2025 vs 2026 ({r25.get('sown_area_ha')} vs {r26.get('sown_area_ha')})")
+
+    # (2) + (3) chain structure for every district
+    districts = set()
+    for y in years:
+        districts.update(data[y].keys())
+    for dist in sorted(districts):
+        rows = {y: data.get(y, {}).get(dist) for y in years}
+        for y in ("2024", "2025"):
+            cur, prev = rows.get(y), rows.get(str(int(y) - 1))
+            if not cur or not prev or not (is_recorded(cur) and is_recorded(prev)):
+                continue
+            if is_frozen23(cur):
+                if chain(cur) != chain(rows.get("2024")) and y != "2024":
+                    violations.append(f"{dist} {y} frozen chain {chain(cur)} != 2024 chain {chain(rows.get('2024'))}")
+                continue
+            if not close(cur["historical_yield_lag2"], prev["historical_yield_lag1"], tol):
+                violations.append(f"{dist} {y} lag2 {cur['historical_yield_lag2']} != {int(y)-1} lag1 {prev['historical_yield_lag1']}")
+            expect_mean = round((cur["historical_yield_lag1"] + cur["historical_yield_lag2"] + prev["historical_yield_lag2"]) / 3.0, 4)
+            if not close(cur["historical_yield_3yr_mean"], expect_mean, mtol):
+                violations.append(f"{dist} {y} 3yr mean {cur['historical_yield_3yr_mean']} != chain mean {expect_mean}")
+        r25, r26 = rows.get("2025"), rows.get("2026")
+        if r25 and r26 and is_recorded(r25) and is_recorded(r26):
+            if any(not close(a, b, tol) for a, b in zip(chain(r26), chain(r25))):
+                violations.append(f"{dist} 2026 chain {chain(r26)} != 2025 chain {chain(r25)} (2025 APY unpublished, chain must carry)")
+            if not close(r25.get("sown_area_ha"), r26.get("sown_area_ha"), 0.1):
+                violations.append(f"{dist} sown area differs 2025 vs 2026 ({r25.get('sown_area_ha')} vs {r26.get('sown_area_ha')})")
+    return violations
+
+
 def main():
     if len(sys.argv) >= 4:
         src, out_path, report_path = sys.argv[1], sys.argv[2], sys.argv[3]
@@ -368,6 +469,12 @@ def main():
         "Satellite data is season context for this dashboard; the deployed observational model "
         "predicts from weather, soil and historical inputs and does not consume satellite fields.")
     data["_meta"] = meta
+    violations = validate_historical_chains(data)
+    if violations:
+        print(f"DATA-QUALITY GATE FAILED: {len(violations)} historical-chain violation(s); refusing to write output")
+        for v in violations:
+            print("  -", v)
+        sys.exit(1)
     json.dump(data, open(out_path, "w"), indent=2)
     if len(sys.argv) < 4:
         # In-place mode: the backend /profile endpoint reads the repo-root
@@ -390,4 +497,14 @@ def main():
     print("DONE", flush=True)
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) >= 2 and sys.argv[1] == "--validate-only":
+        _path = sys.argv[2] if len(sys.argv) >= 3 else "frontend/src/data/seasonEstimates.json"
+        _violations = validate_historical_chains(json.load(open(_path)))
+        if _violations:
+            print(f"DATA-QUALITY GATE: {len(_violations)} violation(s) in {_path}")
+            for _v in _violations:
+                print("  -", _v)
+            sys.exit(1)
+        print(f"DATA-QUALITY GATE: PASS ({_path})")
+    else:
+        main()
