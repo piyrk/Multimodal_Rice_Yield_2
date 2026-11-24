@@ -52,7 +52,7 @@ export default function DashboardPage() {
   // an otherwise normal/wet season gets its own level instead of a critical
   // alarm that contradicts the season's rainfall total.
   const water =
-    (anom <= -20)
+    (anom <= -20 || (row.consecutive_dry_days >= 12 && anom < 0))
       ? { key: 'critical', label: 'Needs water — critical', action: 'Irrigate now, especially at flowering. Do not let the field dry out.', color: 'bg-rose-50 text-rose-800 border-rose-200' }
       : (row.consecutive_dry_days >= 12)
       ? { key: 'dryspell', label: 'Long dry spell', action: 'Rainfall overall is near or above normal, but a long dry spell is stressing the crop — one light irrigation helps, especially at flowering.', color: 'bg-amber-50 text-amber-800 border-amber-200' }

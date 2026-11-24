@@ -41,12 +41,12 @@ export function detectLang(text) {
 // ---------------------------------------------------------------------------
 export function computeWater(row) {
   const anom = row.rainfall_anomaly_pct;
-  // 'critical' is reserved for a genuine rainfall deficit (anomaly <= -20%),
-  // matching the Advisory page's water-critical definition. A long dry spell
-  // inside an otherwise normal/wet season is its own level — calling it
-  // critical contradicted the season's rainfall total (e.g. Ludhiana 2026:
-  // +37% rain, 16 dry days).
-  if (anom <= -20) return 'critical';
+  // 'critical' = a genuine water deficit: season rainfall <= -20%, or a
+  // long dry spell (>= 12 days) in a below-normal season. A long dry spell
+  // inside a normal/wet season is its own level — calling Ludhiana 2026
+  // (+37% rain, 16 dry days) critical contradicted its rainfall total,
+  // while Patna 2026 (-17%, 18 dry days) is a real deficit case.
+  if (anom <= -20 || (row.consecutive_dry_days >= 12 && anom < 0)) return 'critical';
   if (row.consecutive_dry_days >= 12) return 'dryspell';
   if (row.consecutive_dry_days >= 8 || anom < 0) return 'moderate';
   return 'comfortable';

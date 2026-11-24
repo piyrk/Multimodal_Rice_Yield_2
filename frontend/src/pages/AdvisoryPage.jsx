@@ -128,9 +128,10 @@ export default function AdvisoryPage({ onNavigate }) {
     let urgencyColor = 'bg-emerald-50 text-emerald-800 border-emerald-200';
     let recommendations = [];
 
-    if (rainAnom <= -20) {
-      // Genuine season deficit — the only case labelled critical, matching
-      // the Dashboard / Talk water-status definition.
+    if (rainAnom <= -20 || (cdd >= 12 && rainAnom < 0)) {
+      // Genuine water deficit — the only cases labelled critical, matching
+      // the Dashboard / Talk water-status definition: a season <= -20%, or
+      // a long dry spell in a below-normal season.
       urgency = 'Critical Irrigation Recommended';
       urgencyColor = 'bg-rose-50 text-rose-800 border-rose-200';
       schedule = 'Immediate Supplementary Flooding (3–5 cm depth)';
