@@ -31,7 +31,6 @@ export default function Navbar({ activeTab, setActiveTab, healthInfo }) {
     { id: 'benchmark', label: 'Benchmarks' },
     { id: 'explain', label: 'Explainability' },
     { id: 'map', label: 'Map' },
-    { id: 'viva', label: 'Viva Guide' },
     { id: 'about', label: 'About' },
   ];
 

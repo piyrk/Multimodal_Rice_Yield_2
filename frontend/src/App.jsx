@@ -7,7 +7,6 @@ import DashboardPage from './pages/DashboardPage';
 import BenchmarkPage from './pages/BenchmarkPage';
 import ExplainabilityPage from './pages/ExplainabilityPage';
 import MapPage from './pages/MapPage';
-import VivaGuidePage from './pages/VivaGuidePage';
 import AboutPage from './pages/AboutPage';
 import { checkHealth, getLocations } from './api/client';
 
@@ -82,9 +81,6 @@ export default function App() {
               goTo('predict');
             }}
           />
-        )}
-        {activeTab === 'viva' && (
-          <VivaGuidePage onNavigate={goTo} />
         )}
         {activeTab === 'about' && (
           <AboutPage onNavigate={goTo} />
