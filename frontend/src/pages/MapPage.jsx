@@ -29,7 +29,7 @@ export default function MapPage({ locations, onSelectDistrict }) {
 
       <div className="grid lg:grid-cols-12 gap-6">
         {/* Map Container (8 cols) */}
-        <div className="lg:col-span-8 bg-white border border-stone-200 rounded-2xl p-4 shadow-sm h-[580px] flex flex-col">
+        <div className="lg:col-span-8 bg-white border border-stone-200 rounded-2xl p-4 shadow-sm h-[420px] sm:h-[580px] flex flex-col">
           <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2 mb-3 px-1">
             <span className="text-xs font-bold text-stone-700 uppercase tracking-wider flex items-center gap-1.5">
               <MapPin className="h-4 w-4 text-emerald-700" />

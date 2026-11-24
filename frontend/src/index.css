@@ -25,3 +25,18 @@ code, pre {
 ::-webkit-scrollbar-thumb:hover {
   background: #a8a29e;
 }
+
+/* Hide the scrollbar on horizontally scrolling tab bars (Navbar) */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Never let a stray wide element scroll the whole page sideways on
+   phones. 'clip' (unlike 'hidden') keeps position: sticky working. */
+body {
+  overflow-x: clip;
+}
