@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Sprout } from 'lucide-react';
 
 export default function Navbar({ activeTab, setActiveTab, healthInfo }) {
   const isOnline = healthInfo?.status === 'healthy';
@@ -45,9 +44,11 @@ export default function Navbar({ activeTab, setActiveTab, healthInfo }) {
             className="flex items-center space-x-2.5 cursor-pointer select-none shrink-0"
             onClick={() => setActiveTab('home')}
           >
-            <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-lg bg-emerald-700 flex items-center justify-center text-white shadow-sm">
-              <Sprout className="h-4 w-4 sm:h-5 sm:w-5" />
-            </div>
+            <img
+              src="/logo.svg"
+              alt="ClimateRice-AI logo"
+              className="h-8 w-8 sm:h-9 sm:w-9 rounded-lg shadow-sm"
+            />
             <div>
               <div className="flex items-center space-x-1.5">
                 <span className="font-bold text-base sm:text-lg text-stone-900 tracking-tight">
