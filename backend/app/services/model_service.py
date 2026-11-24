@@ -153,6 +153,15 @@ class ModelService:
                     logger.info("Loaded season estimates from %s", se_path)
                     break
 
+            # Load recorded panel profiles (2000-2021) if available
+            self.panel_profiles = {}
+            for pp_path in ["data/panel_profiles.json", "frontend/src/data/panelProfiles.json"]:
+                if os.path.exists(pp_path):
+                    with open(pp_path, "r", encoding="utf-8") as f_pp:
+                        self.panel_profiles = json.load(f_pp)
+                    logger.info("Loaded panel profiles from %s", pp_path)
+                    break
+
             # Flag-gated observational backend (runs last so its calibration
             # constants override the benchmark C1 values when active)
             if self.model_backend == "observational":
@@ -453,6 +462,78 @@ class ModelService:
                     "historical_yield_3yr_mean": round(float(row["historical_yield_3yr_mean"]), 2),
                     "sown_area_ha": round(float(row["sown_area_ha"]), 1),
                 }
+        # Recorded panel rows (2000-2021) are served from the observational
+        # panel dataset (427 district-years: DES APY recorded yields, NASA
+        # POWER weather, recorded lag chains), so historical-year profiles
+        # carry measured inputs instead of the semi-synthetic benchmark row.
+        # Satellite fields come from the benchmark row for the same
+        # district-year: they are display context only — the deployed
+        # observational model does not use satellite inputs.
+        if crop_year is not None and 2000 <= crop_year <= 2021 and (not season or season.strip().lower() == "kharif") and getattr(self, "panel_profiles", None):
+            year_data = self.panel_profiles.get(str(crop_year), {})
+            clean_name = district_name.strip().lower()
+            matched_dist = None
+            for d in year_data:
+                if d.strip().lower() == clean_name:
+                    matched_dist = d
+                    break
+            if matched_dist:
+                if self.historical_df is None:
+                    raw_csv = "data/raw/harmonized_rice_multimodal.csv"
+                    if os.path.exists(raw_csv):
+                        self.historical_df = pd.read_csv(raw_csv)
+                brow = None
+                bsub = None
+                if self.historical_df is not None:
+                    bsub = self.historical_df[self.historical_df["district_name"].str.strip().str.lower() == clean_name]
+                    exact = bsub[bsub["crop_year"] == crop_year]
+                    if exact.empty and crop_year == 2021:
+                        exact = bsub[bsub["crop_year"] == 2020]
+                    if not exact.empty:
+                        brow = exact.iloc[-1]
+                if brow is not None:
+                    row = dict(year_data[matched_dist])
+                    return {
+                        "district_name": str(row["district_name"]),
+                        "state_name": str(row["state_name"]),
+                        "crop_year": int(crop_year),
+                        "season": "Kharif",
+                        "data_source": f"Recorded Panel Inputs — Kharif {crop_year} (NASA POWER + DES APY)",
+                        "provenance_category": "Recorded panel row — measured inputs; the recorded yield for this year is published (DES APY)",
+                        "is_observational": True,
+                        "provenance_details": f"{row.get('weather_provenance', '')} | Lags: {row.get('historical_provenance', '')} | Satellite: {row.get('satellite_provenance', '')}",
+                        "available_years": [2026, 2025] + sorted(bsub["crop_year"].unique().tolist()),
+                        "latitude": round(float(row.get("latitude", 0.0)), 4),
+                        "longitude": round(float(row.get("longitude", 0.0)), 4),
+                        "agro_ecological_zone": str(row.get("agro_ecological_zone", "")),
+                        "irrigation_ratio": round(float(row.get("irrigation_ratio", 0.0)), 2),
+                        "ndvi_mean": round(float(brow["ndvi_mean"]), 4),
+                        "ndvi_peak": round(float(brow["ndvi_peak"]), 4),
+                        "evi_mean": round(float(brow["evi_mean"]), 4),
+                        "ndwi_mean": round(float(brow["ndwi_mean"]), 4),
+                        "ndvi_anomaly": round(float(brow["ndvi_anomaly"]), 4),
+                        "rainfall_cumulative_mm": round(float(row["rainfall_cumulative_mm"]), 1),
+                        "rainfall_anomaly_pct": round(float(row["rainfall_anomaly_pct"]), 1),
+                        "temp_min_deg_c": round(float(row["temp_min_deg_c"]), 2),
+                        "temp_max_deg_c": round(float(row["temp_max_deg_c"]), 2),
+                        "temp_mean_deg_c": round(float(row["temp_mean_deg_c"]), 2),
+                        "temp_anomaly_deg_c": round(float(row["temp_anomaly_deg_c"]), 2),
+                        "extreme_heat_days": int(row["extreme_heat_days"]),
+                        "consecutive_dry_days": int(row["consecutive_dry_days"]),
+                        "relative_humidity_pct": round(float(row["relative_humidity_pct"]), 1),
+                        "solar_radiation_mj_m2": round(float(row["solar_radiation_mj_m2"]), 2),
+                        "soil_ph": round(float(row["soil_ph"]), 2),
+                        "soil_organic_carbon_g_kg": round(float(row["soil_organic_carbon_g_kg"]), 2),
+                        "soil_nitrogen_g_kg": round(float(row["soil_nitrogen_g_kg"]), 2),
+                        "soil_clay_pct": round(float(row["soil_clay_pct"]), 1),
+                        "soil_sand_pct": round(float(row["soil_sand_pct"]), 1),
+                        "soil_available_water_capacity": round(float(row["soil_available_water_capacity"]), 3),
+                        "soil_cation_exchange_capacity": round(float(row["soil_cation_exchange_capacity"]), 2),
+                        "historical_yield_lag1": round(float(row["historical_yield_lag1"]), 2),
+                        "historical_yield_lag2": round(float(row["historical_yield_lag2"]), 2),
+                        "historical_yield_3yr_mean": round(float(row["historical_yield_3yr_mean"]), 2),
+                        "sown_area_ha": round(float(row["sown_area_ha"]), 1),
+                    }
         if self.historical_df is None:
             raw_csv = "data/raw/harmonized_rice_multimodal.csv"
             if os.path.exists(raw_csv):

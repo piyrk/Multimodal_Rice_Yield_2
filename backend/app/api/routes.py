@@ -106,7 +106,7 @@ def get_district_profile(
     season: str = "Kharif",
     service: ModelService = Depends(get_model_service),
 ):
-    """Returns multimodal feature profile from the calibrated semi-synthetic benchmark for a district, crop season, and year."""
+    """Returns the district feature profile for a crop season and year: measured-season inputs (2022-2026), recorded observational-panel inputs (2000-2021 where a panel row exists), or the calibrated semi-synthetic benchmark profile."""
     profile = service.get_district_profile(district_name, crop_year=crop_year, season=season)
     if not profile:
         raise HTTPException(

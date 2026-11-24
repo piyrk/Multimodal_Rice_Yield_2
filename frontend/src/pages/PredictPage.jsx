@@ -25,6 +25,7 @@ import {
   getDistrictsForState,
 } from '../data/districtProfiles';
 import SEASON_ESTIMATES from '../data/seasonEstimates.json';
+import PANEL_PROFILES from '../data/panelProfiles.json';
 
 const SEASON_META = SEASON_ESTIMATES?._meta || null;
 
@@ -145,6 +146,49 @@ export default function PredictPage({ locations = [], initialDistrict = null }) 
         provenanceCategory: targetYear <= 2024 ? 'Model estimate from measured season inputs — the recorded yield for this year is published (DES APY); compare it on the Farmer Dashboard tracker' : 'Model Estimate — recorded yield for this year is not yet published (DES APY)',
         provenanceDetails: `${weather_provenance} | Lags: ${historical_provenance} | Satellite: ${satellite_provenance} | Precomputed estimate: ${precomputed_estimate_t_ha} t/ha [${precomputed_interval_low}, ${precomputed_interval_high}]`,
         isObservational: false,
+        availableYears: [2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000],
+        zone: fields.agro_ecological_zone,
+        irrigation: fields.irrigation_ratio,
+      });
+      return;
+    }
+
+    // Recorded panel rows (2000-2021): measured NASA POWER weather and
+    // recorded DES APY lag chains from the observational panel, so a
+    // historical year loads that year's real inputs instead of the single
+    // static district baseline below.
+    const panelRow = PANEL_PROFILES?.[String(targetYear)]?.[distName];
+    if (panelRow) {
+      if (activeAbortRef.current) {
+        activeAbortRef.current.abort();
+      }
+      fetchSequenceRef.current += 1;
+      setProfileLoading(false);
+      setProfileError(null);
+
+      const {
+        weather_provenance,
+        satellite_provenance,
+        soil_provenance,
+        historical_provenance,
+        ...fields
+      } = panelRow;
+
+      const merged = { ...fields, crop_year: targetYear, season: 'Kharif' };
+      if (postTransform) {
+        setFormData(postTransform(merged));
+        setDataSourceType('preset');
+      } else {
+        setFormData((prev) => ({ ...prev, ...merged }));
+        setDataSourceType('preset');
+      }
+      setActivePresetName(`Kharif ${targetYear} Recorded Panel (Measured Inputs)`);
+      setSeasonEstimateYear(null);
+      setProfileMetadata({
+        dataSource: `Recorded Panel Inputs — Kharif ${targetYear} (NASA POWER + DES APY)`,
+        provenanceCategory: 'Recorded panel row — measured inputs; the recorded yield for this year is published (DES APY)',
+        provenanceDetails: `${weather_provenance} | Lags: ${historical_provenance} | Satellite: ${satellite_provenance}`,
+        isObservational: true,
         availableYears: [2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000],
         zone: fields.agro_ecological_zone,
         irrigation: fields.irrigation_ratio,
